@@ -30,7 +30,7 @@ jobs:
         - name: Deploy
           uses: reggionick/s3-deploy@v3
           with:
-            folder: dist
+            folder: public
             bucket: ${{ secrets.AWS_S3_BUCKET }}
             bucket-region: ${{ secrets.REGION }}
             dist-id: ${{ secrets.DISTRIBUTION }}
