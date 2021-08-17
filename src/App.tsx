@@ -1,25 +1,52 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react';
+import { 
+  BrowserRouter as Router, 
+  Route, 
+  Switch, 
+  Link,  
+  Redirect
+} from "react-router-dom";
+import Signup from './components/Signup/Signup.tsx';
+import Login from './components/Login';
+import LandingPage from './components/LandingPage';
+import CandidateOnboarding from './components/Onboarding/CandidateOnboarding.tsx';
+import RecruiterOnboarding from './components/Onboarding/RecruiterOnboarding.tsx';
+import JobPostingForm from './components/JobPostingForm';
+import './App.scss';
 
 function App() {
+
+  useEffect(() => {
+    if (!localStorage.getItem('token')) {
+      // history.push("/Login")
+    }
+    else localStorage.setItem('token', 'abc');
+    console.log(localStorage)
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Switch>
+        <Route path="/login">
+          <Login />
+        </Route>
+        <Route path="/signup">
+          <Signup />
+        </Route>
+        <Route path="/Landing">
+          <LandingPage />
+        </Route>
+        <Route path="/candidate/onboarding">
+          <CandidateOnboarding />
+        </Route>
+        <Route path="/recruiter/onboarding">
+          <RecruiterOnboarding />
+        </Route>
+        <Route path="/recruiter/postjob">
+          <JobPostingForm />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 
