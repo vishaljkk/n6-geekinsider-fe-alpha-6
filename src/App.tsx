@@ -45,6 +45,9 @@ function App() {
         <Route path="/recruiter/postjob">
           <JobPostingForm />
         </Route>
+        <Route path="/">
+          <LandingPage />
+        </Route>
       </Switch>
     </Router>
   );
