@@ -36,9 +36,25 @@ const RecruiterOnboarding = () => {
                 <Form.Item
                     label="Industry"
                     name="industry"
-                    rules={[{ required: true, message: 'Please input your password!' }]}
+                    rules={[{ required: true, message: 'Please enter the company name!' }]}
                 >
-                    <Input placeholder="Please enter your current job title" />
+                    <Select
+                        showSearch
+                        // style={{ width: 200 }}
+                        placeholder="Please select your current location"
+                        optionFilterProp="children"
+                        // onChange={onChange}
+                        // onFocus={onFocus}
+                        // onBlur={onBlur}
+                        // onSearch={onSearch}
+                        filterOption={(input, option) =>
+                            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                        }
+                    >
+                        <Option value="jack">Jack</Option>
+                        <Option value="lucy">Lucy</Option>
+                        <Option value="tom">Tom</Option>
+                    </Select>
                 </Form.Item>
 
                 <Form.Item

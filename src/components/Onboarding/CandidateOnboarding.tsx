@@ -28,7 +28,7 @@ const CandidateOnboarding = () => {
                 <Form.Item
                     label="Full name"
                     name="fullName"
-                    rules={[{ required: true, message: 'Please input your username!' }]}
+                    rules={[{ required: true, message: 'Please enter your full name!' }]}
                 >
                     <Input placeholder="Please enter your full name" />
                 </Form.Item>
@@ -36,7 +36,7 @@ const CandidateOnboarding = () => {
                 <Form.Item
                     label="Job title"
                     name="jobTitle"
-                    rules={[{ required: true, message: 'Please input your password!' }]}
+                    rules={[{ required: true, message: 'Please enter your current job title!' }]}
                 >
                     <Input placeholder="Please enter your current job title" />
                 </Form.Item>
@@ -44,7 +44,7 @@ const CandidateOnboarding = () => {
                 <Form.Item
                     label="Location"
                     name="location"
-                    rules={[{ required: true, message: 'Please input your password!' }]}
+                    rules={[{ required: true, message: 'Please select your current location!' }]}
                 >
                     <Select
                         showSearch
@@ -68,7 +68,7 @@ const CandidateOnboarding = () => {
                 <Form.Item
                     label="Whatsapp number"
                     name="whatsappNumber"
-                    rules={[{ required: true, message: 'Please input your password!' }]}
+                    rules={[{ required: true, message: 'Please add your whatsapp number!' }]}
                 >
                     <Input placeholder="Please add your whatsapp number" />
                 </Form.Item>
@@ -76,7 +76,7 @@ const CandidateOnboarding = () => {
                 <Form.Item
                     label="Email"
                     name="email"
-                    rules={[{ required: true, message: 'Please input your password!' }]}
+                    rules={[{ required: true, message: 'Please enter an email address!' }]}
                 >
                     <Input placeholder="Please enter an email address" />
                 </Form.Item>
@@ -84,7 +84,7 @@ const CandidateOnboarding = () => {
                 <Form.Item
                     label="Years of experience"
                     name="yearsOfExperience"
-                    rules={[{ required: true, message: 'Please input your password!' }]}
+                    rules={[{ required: true, message: 'Please select years of experience!' }]}
                 >
                     <Input placeholder="Please select years of experience" />
                 </Form.Item>
@@ -92,7 +92,7 @@ const CandidateOnboarding = () => {
                 <Form.Item
                     label="Skills"
                     name="skills"
-                    rules={[{ required: true, message: 'Please input your password!' }]}
+                    rules={[{ required: true, message: 'Please select atleast three skills!' }]}
                 >
                     <Select
                         mode="multiple"
@@ -109,7 +109,7 @@ const CandidateOnboarding = () => {
                 <Form.Item
                     label="Current ctc"
                     name="currentCtc"
-                    rules={[{ required: true, message: 'Please input your password!' }]}
+                    rules={[{ required: true, message: 'Please add current ctc!' }]}
                 >
                     <Input placeholder="Please add current ctc" />
                 </Form.Item>
@@ -117,17 +117,17 @@ const CandidateOnboarding = () => {
                 <Form.Item
                     label="Introduction"
                     name="introduction"
-                    rules={[{ required: true, message: 'Please input your password!' }]}
+                    rules={[{ required: true, message: 'Please enter a brief introduction about yourself!' }]}
                 >
-                    <Input.TextArea placeholder="Email" />
+                    <Input.TextArea placeholder="Please enter a brief introduction about yourself" />
                 </Form.Item>
 
                 <Form.Item
                     label="Github"
                     name="github"
-                    rules={[{ required: true, message: 'Please input your password!' }]}
+                    rules={[{ required: true, message: 'Please enter your github profile link!' }]}
                 >
-                    <Input placeholder="Email" />
+                    <Input placeholder="Please enter your github profile link" />
                 </Form.Item>
 
                 <Form.Item wrapperCol={{ offset: 8, span: 12 }}>
