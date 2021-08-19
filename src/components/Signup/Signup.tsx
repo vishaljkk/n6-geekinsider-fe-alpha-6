@@ -2,10 +2,18 @@ import React, { useState } from 'react';
 import { Form, Input, Button, Alert, Modal, Tabs } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
+import { StateUITypes } from '../../types';
 
 const { TabPane } = Tabs;
 
-const Signup = () => {
+interface SignupTypes {
+	// setUiState?: StateUITypes,
+	setUiState?: any,
+	onChange?: any,
+	signUp?: any
+}
+
+const Signup = (props: SignupTypes) => {
 	const [visible, setVisible] = useState(true);
 	const onFinish = (values: any) => {
 		console.log('Success:', values);

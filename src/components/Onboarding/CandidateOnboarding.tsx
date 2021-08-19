@@ -56,7 +56,7 @@ const CandidateOnboarding = () => {
                         // onBlur={onBlur}
                         // onSearch={onSearch}
                         filterOption={(input, option) =>
-                            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                            option?.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                         }
                     >
                         <Option value="jack">Jack</Option>
@@ -131,7 +131,8 @@ const CandidateOnboarding = () => {
                 </Form.Item>
 
                 <Form.Item wrapperCol={{ offset: 8, span: 12 }}>
-                    <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                    {/*<div style={{ display: 'flex', justifyContent: 'flex-end' }}>*/}
+                    <div>
                         <Button type="primary" htmlType="submit">
                             Submit details
                         </Button>

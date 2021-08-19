@@ -1,11 +1,21 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Form, Input, Button, Checkbox, Modal, Tabs } from 'antd';
+import { Auth } from 'aws-amplify'
+import { CognitoHostedUIIdentityProvider } from "@aws-amplify/auth/lib/types";
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
+import { StateUITypes } from '../../types';
 
 const { TabPane } = Tabs;
 
-const Signup = () => {
+interface LoginPropsTypes {
+	// setUiState?: StateUITypes,
+	setUiState?: any,
+	onChange?: any,
+	signIn?: any
+}
+
+const Login: React.FC<LoginPropsTypes> = (props: LoginPropsTypes) => {
 	const [visible, setVisible] = useState(true);
 	const onFinish = (values: any) => {
 		console.log('Success:', values);
@@ -78,7 +88,7 @@ const Signup = () => {
 							</Button>
 						</Form.Item>
 						<Form.Item>
-							<Button htmlType="submit" block>
+							<Button htmlType="submit" block onClick={() => Auth.federatedSignIn({ provider: CognitoHostedUIIdentityProvider.Google })}>
 								Sign in with Google
 							</Button>
 						</Form.Item>
@@ -99,4 +109,4 @@ const Signup = () => {
 	);
 }
 
-export default Signup;
+export default Login;

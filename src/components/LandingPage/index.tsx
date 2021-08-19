@@ -1,6 +1,6 @@
 import React from 'react';
 
-const LandingPage = () => {
+const LandingPage: React.FC = () => {
     return (
         <div className="App">
             <header className="App-header">

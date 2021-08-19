@@ -21,7 +21,7 @@ const JobPostingForm = () => {
                 name="Add a job"
                 labelCol={{ span: 8 }}
                 wrapperCol={{ span: 12 }}
-                initialValues={{ remember: true }}x
+                initialValues={{ remember: true }}
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
             >

@@ -1,0 +1,1 @@
+export type StateUITypes = 'loading' | 'signedIn' | 'signIn' | 'confirmSignUp' | 'forgotPasswordSubmit' | 'signUp' | null;

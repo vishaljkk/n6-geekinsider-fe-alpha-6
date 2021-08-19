@@ -28,9 +28,9 @@ const RecruiterOnboarding = () => {
                 <Form.Item
                     label="Company name"
                     name="companyName"
-                    rules={[{ required: true, message: 'Please input your username!' }]}
+                    rules={[{ required: true, message: 'Please enter the company name!' }]}
                 >
-                    <Input placeholder="Please enter your full name" />
+                    <Input placeholder="Please enter the company name" />
                 </Form.Item>
 
                 <Form.Item
@@ -48,7 +48,7 @@ const RecruiterOnboarding = () => {
                         // onBlur={onBlur}
                         // onSearch={onSearch}
                         filterOption={(input, option) =>
-                            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                            option?.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                         }
                     >
                         <Option value="jack">Jack</Option>
@@ -72,7 +72,7 @@ const RecruiterOnboarding = () => {
                         // onBlur={onBlur}
                         // onSearch={onSearch}
                         filterOption={(input, option) =>
-                            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                            option?.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                         }
                     >
                         <Option value="jack">Jack</Option>
@@ -139,7 +139,8 @@ const RecruiterOnboarding = () => {
                 </Form.Item>
 
                 <Form.Item wrapperCol={{ offset: 8, span: 12 }}>
-                    <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                    {/*<div style={{ display: 'flex', justifyContent: 'flex-end' }}>*/}
+                    <div>
                         <Button type="primary" htmlType="submit">
                             Submit details
                         </Button>
