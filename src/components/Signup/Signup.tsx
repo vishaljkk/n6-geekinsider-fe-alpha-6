@@ -1,23 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Input, Button, Alert, Modal, Tabs } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import { Link } from 'react-router-dom';
-import { StateUITypes } from '../../types';
+import { SignupTypes, SignupTabsType } from './types';
 
 const { TabPane } = Tabs;
 
-interface SignupTypes {
-	// setUiState?: StateUITypes,
-	setUiState?: any,
-	onChange?: any,
-	signUp?: any
-}
+const Signup: React.FC<SignupTypes> = (props: SignupTypes) => {
+	const { formType, signUp, confirmSignUp } = props;
+	const [activeTab, setActiveTab] = useState<SignupTabsType>('candidate');
 
-const Signup = (props: SignupTypes) => {
-	const [visible, setVisible] = useState(true);
-	const onFinish = (values: any) => {
-		console.log('Success:', values);
-	};
+	useEffect(() => {
+		if (formType === 'confirmSignUp') {
+			setActiveTab('emailVerification');
+		}
+	}, [formType])
 
 	const onFinishFailed = (errorInfo: any) => {
 		console.log('Failed:', errorInfo);
@@ -25,46 +21,32 @@ const Signup = (props: SignupTypes) => {
 
 	return (
 		<Modal 
-			visible={visible}
-			// title="Sign up"
-			centered
-			// destroyOnClose
+			visible={true}
 			maskClosable={false}
-			// bodyStyle={{height:'500px'}}
+			closable={false}
 			bodyStyle={{ padding: '40px' }}
 			width='420px'
-			// onOk={handleSubmit}
-			// okText={'Save'}
-			// cancelText={'Cancel'}
 			footer={null}
-			onCancel={() => {
-				setVisible(false)
-			}}
+			centered
 		>
-			<Tabs defaultActiveKey="Recruiter" onChange={(val: any) => console.log(val)} centered>
-				<TabPane tab="Employee" key="Employee">
-					Form hai
-				</TabPane>
-				<TabPane tab="Recruiter" key="Recruiter">
+			<Tabs activeKey={activeTab} onChange={(val: any) => setActiveTab(val)} centered>
+				<TabPane tab="Employee" key="candidate">
 					<Form
-						// {...layout}
 						name="basic"
-						// labelCol={{ span: 4 }}
-						// wrapperCol={{ span: 16 }}
-						initialValues={{ remember: true }}
-						onFinish={onFinish}
+						onFinish={val => {
+							signUp(val);
+							localStorage.setItem('email', val.email);
+						}}
 						onFinishFailed={onFinishFailed}
 					>
 						<Form.Item
-							// label="Username"
-							name="username"
+							name="email"
 							rules={[{ required: true, message: 'Please input your username!' }]}
 						>
 							<Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Email" />
 						</Form.Item>
 
 						<Form.Item
-							// label="Password"
 							name="password"
 							rules={[{ required: true, message: 'Please input your password!' }]}
 						>
@@ -78,29 +60,64 @@ const Signup = (props: SignupTypes) => {
 						</Form.Item>
 						<Form.Item>
 							<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-								<Link to="/login">
+								<Button type="link">
 									Sign in
-								</Link>
+								</Button>
 							</div>
 						</Form.Item>
 					</Form>
 				</TabPane>
-				<TabPane tab="Verify Email" key="emailverification">
+				<TabPane tab="Recruiter" key="recruiter">
 					<Form
-						// {...layout}
+						name="basic"
+						onFinish={val => {
+							signUp(val);
+							localStorage.setItem('email', val.email);
+						}}
+						onFinishFailed={onFinishFailed}
+					>
+						<Form.Item
+							name="email"
+							rules={[{ required: true, message: 'Please input your username!' }]}
+						>
+							<Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Email" />
+						</Form.Item>
+
+						<Form.Item
+							name="password"
+							rules={[{ required: true, message: 'Please input your password!' }]}
+						>
+							<Input.Password prefix={<LockOutlined className="site-form-item-icon" />} placeholder="Password" />
+						</Form.Item>
+
+						<Form.Item>
+							<Button type="primary" htmlType="submit" block>
+								Sign up
+							</Button>
+						</Form.Item>
+						<Form.Item>
+							<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+								<Button type="link">
+									Sign in
+								</Button>
+							</div>
+						</Form.Item>
+					</Form>
+				</TabPane>
+				<TabPane key="emailVerification">
+					<Form
 						name="Email verification"
-						// labelCol={{ span: 4 }}
-						// wrapperCol={{ span: 16 }}
-						initialValues={{ remember: true }}
-						onFinish={onFinish}
+						onFinish={val => {
+							const email = localStorage.getItem('email');
+							confirmSignUp({ ...val, email }); 
+						}}
 						onFinishFailed={onFinishFailed}
 					>
 						<Form.Item>
 							<Alert message="Verification pin successfully sent to your email" type="success" showIcon />
 						</Form.Item>
 						<Form.Item
-							// label="Username"
-							name="pin"
+							name="authCode"
 							rules={[{ required: true, message: 'Please input pin sent on your email!' }]}
 						>
 							<Input prefix={<UserOutlined />} placeholder="PIN" />

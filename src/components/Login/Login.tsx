@@ -1,24 +1,21 @@
 import { useState } from 'react';
-import { Form, Input, Button, Checkbox, Modal, Tabs } from 'antd';
+import { Form, Input, Button, Modal, Tabs } from 'antd';
 import { Auth } from 'aws-amplify'
 import { CognitoHostedUIIdentityProvider } from "@aws-amplify/auth/lib/types";
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
-import { StateUITypes } from '../../types';
+import { LoginPropsTypes } from './types';
 
 const { TabPane } = Tabs;
 
-interface LoginPropsTypes {
-	// setUiState?: StateUITypes,
-	setUiState?: any,
-	onChange?: any,
-	signIn?: any
-}
-
 const Login: React.FC<LoginPropsTypes> = (props: LoginPropsTypes) => {
-	const [visible, setVisible] = useState(true);
+
+	const { signUp } = props;
+	const [visible, setVisible] = useState<boolean>(true);
+	
 	const onFinish = (values: any) => {
-		console.log('Success:', values);
+		console.log(values)
+		props.signIn(values);
 	};
 
 	const onFinishFailed = (errorInfo: any) => {
@@ -53,8 +50,53 @@ const Login: React.FC<LoginPropsTypes> = (props: LoginPropsTypes) => {
 			}}
 		>
 			<Tabs defaultActiveKey="1" onChange={(val: any) => console.log(val)} centered>
-				<TabPane tab="Employee" key="Employee">
-					FOrm hai
+				<TabPane tab="Candidate" key="Candidate">
+					<Form
+						// {...layout}
+						name="basic"
+						// labelCol={{ span: 4 }}
+						// wrapperCol={{ span: 16 }}
+						initialValues={{ remember: true }}
+						onFinish={onFinish}
+						onFinishFailed={onFinishFailed}
+					>
+						<Form.Item
+							// label="Username"
+							name="username"
+							rules={[{ required: true, message: 'Please input your username!' }]}
+						>
+							<Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Email" />
+						</Form.Item>
+
+						<Form.Item
+							// label="Password"
+							name="password"
+							rules={[{ required: true, message: 'Please input your password!' }]}
+						>
+							<Input.Password prefix={<LockOutlined className="site-form-item-icon" />} placeholder="Password" />
+						</Form.Item>
+
+						<Form.Item>
+							<Button type="primary" htmlType="submit" block>
+								Login
+							</Button>
+						</Form.Item>
+						<Form.Item>
+							<Button htmlType="submit" block onClick={() => Auth.federatedSignIn({ provider: CognitoHostedUIIdentityProvider.Google })}>
+								Sign in with Google
+							</Button>
+						</Form.Item>
+						<Form.Item>
+							<div style={{ display: 'flex', justifyContent: 'space-between' }}>
+								<Button type="link">
+									Forgot password?
+								</Button>
+								<Button type="link" onClick={signUp}>
+									Register
+								</Button>
+							</div>
+						</Form.Item>
+					</Form>
 				</TabPane>
 				<TabPane tab="Recruiter" key="Recruiter">
 					<Form
@@ -94,12 +136,12 @@ const Login: React.FC<LoginPropsTypes> = (props: LoginPropsTypes) => {
 						</Form.Item>
 						<Form.Item>
 							<div style={{ display: 'flex', justifyContent: 'space-between' }}>
-								<a className="login-form-forgot" href="">
+								<Button type="link">
 									Forgot password?
-								</a>
-								<Link to="/signup">
+								</Button>
+								<Button type="link" onClick={signUp}>
 									Register
-								</Link>
+								</Button>
 							</div>
 						</Form.Item>
 					</Form>

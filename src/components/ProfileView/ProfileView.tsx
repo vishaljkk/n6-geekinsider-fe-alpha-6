@@ -1,8 +1,17 @@
 import React from 'react';
+import { Button } from 'antd';
 
-const ProfileView: React.FC = () => {
+interface ProfileViewProps {
+    signOut?: any
+}
+
+const ProfileView: React.FC<ProfileViewProps> = (props: ProfileViewProps) => {
+    const { signOut } = props;
     return (
-        <>Hello Profile</>
+        <div>
+            Hello Profile
+            <Button onClick={signOut}>SignOut</Button>
+        </div>
     )
 }
 
