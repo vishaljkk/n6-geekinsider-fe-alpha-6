@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Input, Button, Alert, Modal, Tabs } from 'antd';
+import { Form, Input, Button, Alert, Modal, Tabs, notification } from 'antd';
+import { Auth } from 'aws-amplify';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { SignupTypes, SignupTabsType } from './types';
 
 const { TabPane } = Tabs;
 
 const Signup: React.FC<SignupTypes> = (props: SignupTypes) => {
-	const { formType, signUp, confirmSignUp } = props;
+	const { formType, updateFormState, confirmSignUp, userType, setUserType } = props;
 	const [activeTab, setActiveTab] = useState<SignupTabsType>('candidate');
+	const [loading, setLoading] = useState<boolean>(false);
 
 	useEffect(() => {
 		if (formType === 'confirmSignUp') {
@@ -15,9 +17,33 @@ const Signup: React.FC<SignupTypes> = (props: SignupTypes) => {
 		}
 	}, [formType])
 
+	const signUp = async (values: any) => {
+		const { email, password } = values;
+		try {
+			setLoading(true);
+			await Auth.signUp({ username: email, password, attributes: { email } });
+			updateFormState((prevState: any) => ({ ...prevState, formType: "confirmSignUp" }));
+		}
+		catch(error){
+			setLoading(false);
+			if (error?.code === 'AliasExistsException') {
+				notification.error({
+					message: error?.message
+				})
+			}
+			console.log(error)
+		}
+	};
+
 	const onFinishFailed = (errorInfo: any) => {
 		console.log('Failed:', errorInfo);
 	};
+
+	const onActiveKeyChange = (val: any) => setActiveTab(val)
+
+	const openSignInModal = () => {
+		updateFormState((prevState: any) => ({ ...prevState, formType: "signIn" }))
+	}
 
 	return (
 		<Modal 
@@ -29,13 +55,14 @@ const Signup: React.FC<SignupTypes> = (props: SignupTypes) => {
 			footer={null}
 			centered
 		>
-			<Tabs activeKey={activeTab} onChange={(val: any) => setActiveTab(val)} centered>
-				<TabPane tab="Employee" key="candidate">
+			<Tabs activeKey={activeTab} onChange={onActiveKeyChange} centered>
+				<TabPane tab="Candidate" key="candidate">
 					<Form
 						name="basic"
 						onFinish={val => {
 							signUp(val);
 							localStorage.setItem('email', val.email);
+							setUserType('candidate');
 						}}
 						onFinishFailed={onFinishFailed}
 					>
@@ -54,13 +81,13 @@ const Signup: React.FC<SignupTypes> = (props: SignupTypes) => {
 						</Form.Item>
 
 						<Form.Item>
-							<Button type="primary" htmlType="submit" block>
+							<Button type="primary" htmlType="submit" block loading={loading}>
 								Sign up
 							</Button>
 						</Form.Item>
 						<Form.Item>
 							<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-								<Button type="link">
+								<Button type="link" onClick={openSignInModal}>
 									Sign in
 								</Button>
 							</div>
@@ -73,6 +100,7 @@ const Signup: React.FC<SignupTypes> = (props: SignupTypes) => {
 						onFinish={val => {
 							signUp(val);
 							localStorage.setItem('email', val.email);
+							setUserType('recruiter');
 						}}
 						onFinishFailed={onFinishFailed}
 					>
@@ -91,13 +119,13 @@ const Signup: React.FC<SignupTypes> = (props: SignupTypes) => {
 						</Form.Item>
 
 						<Form.Item>
-							<Button type="primary" htmlType="submit" block>
+							<Button type="primary" htmlType="submit" block loading={loading}>
 								Sign up
 							</Button>
 						</Form.Item>
 						<Form.Item>
 							<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-								<Button type="link">
+								<Button type="link" onClick={openSignInModal}>
 									Sign in
 								</Button>
 							</div>
@@ -123,7 +151,7 @@ const Signup: React.FC<SignupTypes> = (props: SignupTypes) => {
 							<Input prefix={<UserOutlined />} placeholder="PIN" />
 						</Form.Item>
 						<Form.Item>
-							<Button type="primary" htmlType="submit" block>
+							<Button type="primary" htmlType="submit" block loading={loading}>
 								Confirm sign up
 							</Button>
 						</Form.Item>

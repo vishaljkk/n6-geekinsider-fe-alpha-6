@@ -3,13 +3,15 @@
 // }
 
 const initialState: any = {
-    userType: 'candidate'
+    userType: ''
 };
 
 const rootReducer = (state=initialState, action: any) => {
     switch(action.type) {
-        case '1':
-            return {};
+        case 'SET_USER_TYPE':
+            return { ...state, userType: action.payload };
+        default:
+            return { ...state };
     }
 }
 

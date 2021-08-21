@@ -1,11 +1,12 @@
 import { StateUITypes } from '../../types';
 
 export interface SignupTypes {
-	setUiState?: StateUITypes,
 	onChange?: any,
-	signUp?: any,
 	formType?: StateUITypes,
-	confirmSignUp?: any
+	confirmSignUp?: any,
+	userType?: any, 
+	setUserType?: any,
+	updateFormState?: any
 }
 
 export type SignupTabsType = 'candidate' | 'recruiter' | 'emailVerification' | '';

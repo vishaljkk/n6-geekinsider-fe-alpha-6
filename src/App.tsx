@@ -1,7 +1,8 @@
 import './configureAmplify';
 import { useState, useEffect } from 'react';
 import { Auth, Hub, API } from "aws-amplify";
-import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux'; 
 import { 
   BrowserRouter as Router, 
   Route, 
@@ -17,10 +18,10 @@ import RecruiterOnboarding from './components/Onboarding/RecruiterOnboarding';
 import JobPostingForm from './components/JobPostingForm';
 import Messages from './components/Messages';
 import ProfileView from './components/ProfileView';
-import { StateUITypes } from './types';
 import './App.scss';
 
-import { setSignIn, setSignOut } from './redux/actions';
+import { setSignIn, setSignOut, setUserType } from './redux/actions';
+import { notification } from 'antd';
 
 const initialFormState = {
   username: "",
@@ -134,9 +135,9 @@ const initialFormState = {
 // export default connect(null,{setSignIn, setSignOut})(App);
 
  
-function App(props: {setSignIn: any, setSignOut: any}) {
+function App(props: any) {
   
-  const {setSignIn, setSignOut} = props;
+  const { setSignIn, setSignOut, userType, setUserType } = props;
   const [formState, updateFormState] = useState(initialFormState);
 
   const [user, updateUser] = useState(null);
@@ -196,16 +197,21 @@ function App(props: {setSignIn: any, setSignOut: any}) {
 
   const { formType } = formState;
 
-  const signUp = async (values: any) => {
-    const { email, password } = values;
-    try {
-      await Auth.signUp({ username: email, password, attributes: { email } });
-      updateFormState(() => ({ ...formState, formType: "confirmSignUp" }));
-    }
-    catch(e){
-      console.log(e)
-    }
-  };
+  // const signUp = async (values: any) => {
+  //   const { email, password } = values;
+  //   try {
+  //     await Auth.signUp({ username: email, password, attributes: { email } });
+  //     updateFormState(() => ({ ...formState, formType: "confirmSignUp" }));
+  //   }
+  //   catch(error){
+  //     if (error?.code === 'AliasExistsException') {
+  //       notification.error({
+  //         message: error?.message
+  //       })
+  //     }
+  //     console.log(error)
+  //   }
+  // };
 
   const confirmSignUp = async (values: any) => {
     console.log(values)
@@ -227,91 +233,45 @@ function App(props: {setSignIn: any, setSignOut: any}) {
 
   return (
     <Router>
-      <h1>App</h1>
-
-      {formType === "signUp" && (
-        <div>
-          {/* <input name="username" onChange={onChange} placeholder="username" />
-          <input
-            name="password"
-            type="password"
-            onChange={onChange}
-            placeholder="password"
-          />
-          <input name="email" onChange={onChange} placeholder="email" />
-
-          <button onClick={signUp}>Sign Up</button>
-
-          <p>Already signed up?</p>
-
-          <button
-            onClick={() =>
-              updateFormState(() => ({
-                ...formState,
-                formType: "signIn",
-              }))
-            }
-          >
-            Sign In instead
-          </button> */}
-          <Signup
-            // setUiState={setUiState}
-            onChange={onChange}
-            signUp={signUp}
-          />
-        </div>
-      )}
-
-      {formType === "confirmSignUp" && (
+      {/* {formType === "signUp" && (
         <Signup
-          // setUiState={setUiState}
           onChange={onChange}
-          signUp={signUp}
+          userType={userType}
+          setUserType={setUserType}
+          updateFormState={updateFormState}
+        />
+      )} */}
+
+      {formType === 'confirmSignUp' || formType === 'signUp' && (
+        <Signup
+          onChange={onChange}
           formType={formType}
           confirmSignUp={confirmSignUp}
+          userType={userType}
+          setUserType={setUserType}
+          updateFormState={updateFormState}
         />
       )}
 
       {formType === "signIn" && (
-        // <div>
-        //   <input name="username" onChange={onChange} placeholder="username" />
-        //   <input
-        //     name="password"
-        //     type="password"
-        //     onChange={onChange}
-        //     placeholder="password"
-        //   />
-        //   <button onClick={signIn}>Sign In</button>
-
-        //   <p>No account yet?</p>
-
-        //   <button
-        //     onClick={() =>
-        //       updateFormState(() => ({
-        //         ...formState,
-        //         formType: "signUp",
-        //       }))
-        //     }
-        //   >
-        //     Sign Up now
-        //   </button>
-        // </div>
-        // <Link to="/login">
-          <Login
-            // setUiState={setUiState}
-            onChange={onChange}
-            signIn={signIn}
-            formType={formType}
-            signUp={() => updateFormState(() => ({
-              ...formState,
-              formType: "signUp",
-            }))}
-          />
-        // </Link>
+        <Login
+          onChange={onChange}
+          signIn={signIn}
+          formType={formType}
+          signUp={() => updateFormState(() => ({
+            ...formState,
+            formType: "signUp",
+          }))}
+          userType={userType}
+          setUserType={setUserType}
+        />
       )}
 
       {formType === "signedIn" && (
-        <ProfileView signOut={() => Auth.signOut()}/>
+        <>
+          <ProfileView signOut={() => Auth.signOut()}/>
+          <LandingPage />
+        </>
         // <div>
         //   <h2>
         //     Welcome to the app 
@@ -359,4 +319,17 @@ function App(props: {setSignIn: any, setSignOut: any}) {
   );
 }
 
-export default connect(null,{setSignIn, setSignOut})(App);
+const mapStateToProps = (state: any) => ({
+  userType: state.userType
+});
+
+const mapDispatchToProps = (dispatch: any) => {
+  return bindActionCreators({
+    setSignIn, 
+    setSignOut, 
+    setUserType
+  }, dispatch)
+};
+
+// export default connect(null,{setSignIn, setSignOut})(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

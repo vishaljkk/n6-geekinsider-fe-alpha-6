@@ -14,3 +14,14 @@ export const setSignOut = () => {
         })
     }
 }
+
+type userTypeTypes = 'candidate' | 'recruiter';
+
+export const setUserType = (userType: userTypeTypes) => {
+    return (dispatch: any) => {
+        dispatch({
+            type: 'SET_USER_TYPE',
+            payload: userType
+        })
+    }
+}

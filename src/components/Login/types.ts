@@ -6,5 +6,7 @@ export interface LoginPropsTypes {
 	onChange?: any,
 	signIn?: any,
 	formType?: string,
-	signUp?: any
+	signUp?: any,
+	userType?: any, 
+	setUserType?: any
 }
