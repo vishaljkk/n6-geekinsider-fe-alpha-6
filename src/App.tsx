@@ -195,41 +195,24 @@ function App(props: any) {
     updateFormState(() => ({ ...formState, [e.target.name]: e.target.value }));
   };
 
-  const { formType } = formState;
-
-  // const signUp = async (values: any) => {
-  //   const { email, password } = values;
+  
+  // const signIn = async (obj: any) => {
+  //   const { username, password } = obj;
   //   try {
-  //     await Auth.signUp({ username: email, password, attributes: { email } });
-  //     updateFormState(() => ({ ...formState, formType: "confirmSignUp" }));
+  //     await Auth.signIn(username, password);
+  //     updateFormState(() => ({ ...formState, formType: "signedIn" }));
   //   }
-  //   catch(error){
-  //     if (error?.code === 'AliasExistsException') {
+  //   catch (e) {
+  //     if (e?.code === 'UserNotFoundException') {
   //       notification.error({
-  //         message: error?.message
+  //         message: e?.message
   //       })
   //     }
-  //     console.log(error)
+  //     console.error(e)
   //   }
   // };
-
-  const confirmSignUp = async (values: any) => {
-    console.log(values)
-    const { email, authCode } = values;
-    try {
-      await Auth.confirmSignUp(email, authCode);
-      updateFormState(() => ({ ...formState, formType: "signIn" }));
-    }
-    catch(e) {
-      console.log(e);
-    }
-  };
-
-  const signIn = async (obj: any) => {
-    const { username, password } = obj;
-    await Auth.signIn(username, password);
-    updateFormState(() => ({ ...formState, formType: "signedIn" }));
-  };
+  
+  const { formType } = formState;
 
   return (
     <Router>
@@ -246,7 +229,7 @@ function App(props: any) {
         <Signup
           onChange={onChange}
           formType={formType}
-          confirmSignUp={confirmSignUp}
+          // confirmSignUp={confirmSignUp}
           userType={userType}
           setUserType={setUserType}
           updateFormState={updateFormState}
@@ -256,12 +239,8 @@ function App(props: any) {
       {formType === "signIn" && (
         <Login
           onChange={onChange}
-          signIn={signIn}
           formType={formType}
-          signUp={() => updateFormState(() => ({
-            ...formState,
-            formType: "signUp",
-          }))}
+          updateFormState={updateFormState}
           userType={userType}
           setUserType={setUserType}
         />

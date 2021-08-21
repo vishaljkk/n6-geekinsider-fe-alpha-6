@@ -1,10 +1,9 @@
-import { StateUITypes } from '../../types';
+import { userTypeTypes, StateUITypes } from '../../types';
 
 export interface SignupTypes {
-	onChange?: any,
+	onChange?: (e: any) => void,
 	formType?: StateUITypes,
-	confirmSignUp?: any,
-	userType?: any, 
+	userType?: userTypeTypes, 
 	setUserType?: any,
 	updateFormState?: any
 }

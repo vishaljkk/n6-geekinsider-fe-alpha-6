@@ -7,7 +7,7 @@ import { SignupTypes, SignupTabsType } from './types';
 const { TabPane } = Tabs;
 
 const Signup: React.FC<SignupTypes> = (props: SignupTypes) => {
-	const { formType, updateFormState, confirmSignUp, userType, setUserType } = props;
+	const { formType, updateFormState, userType, setUserType } = props;
 	const [activeTab, setActiveTab] = useState<SignupTabsType>('candidate');
 	const [loading, setLoading] = useState<boolean>(false);
 
@@ -32,6 +32,18 @@ const Signup: React.FC<SignupTypes> = (props: SignupTypes) => {
 				})
 			}
 			console.log(error)
+		}
+	};
+
+	const confirmSignup = async (values: any) => {
+		console.log(values)
+		const { email, authCode } = values;
+		try {
+		  await Auth.confirmSignUp(email, authCode);
+		  updateFormState((prevState: any) => ({ ...prevState, formType: "signIn" }));
+		}
+		catch(e) {
+		  console.log(e);
 		}
 	};
 
@@ -137,7 +149,7 @@ const Signup: React.FC<SignupTypes> = (props: SignupTypes) => {
 						name="Email verification"
 						onFinish={val => {
 							const email = localStorage.getItem('email');
-							confirmSignUp({ ...val, email }); 
+							confirmSignup({ ...val, email }); 
 						}}
 						onFinishFailed={onFinishFailed}
 					>

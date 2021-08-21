@@ -1,12 +1,9 @@
 import { StateUITypes } from '../../types';
 
 export interface LoginPropsTypes {
-	// setUiState?: StateUITypes,
-	setUiState?: any,
-	onChange?: any,
-	signIn?: any,
+	onChange?: (e: any) => void,
 	formType?: string,
-	signUp?: any,
 	userType?: any, 
-	setUserType?: any
+	setUserType?: any,
+	updateFormState: any
 }

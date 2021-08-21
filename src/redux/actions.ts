@@ -1,3 +1,5 @@
+import { userTypeTypes } from '../types';
+
 export const setSignIn = (data: any) => {
     return (dispatch: any) => {
         dispatch({
@@ -14,8 +16,6 @@ export const setSignOut = () => {
         })
     }
 }
-
-type userTypeTypes = 'candidate' | 'recruiter';
 
 export const setUserType = (userType: userTypeTypes) => {
     return (dispatch: any) => {
