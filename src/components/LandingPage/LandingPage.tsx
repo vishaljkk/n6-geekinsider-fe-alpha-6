@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Col } from 'antd';
 import RecentChatWidget from './RecentChatWidget';
-import RecommCandidateWidget from './RecommCandidateWidget';
+import RecommCandidateWidget from './RecomendedJobsWidget';
 import QuickProfileWidget from './QuickProfileWidget';
 
 const LandingPage: React.FC = () => {
