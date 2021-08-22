@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Input, Button, Alert, Modal, Tabs, notification } from 'antd';
-import { Auth } from 'aws-amplify';
+import { Auth, API } from 'aws-amplify';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import { SignupTypes, SignupTabsType } from './types';
+import { SignupTypes, SignupTabsType, confirmSignInFormValueTypes } from './types';
+import { initialFormStateTypes, userTypeTypes } from '../../types';
 
 const { TabPane } = Tabs;
 
@@ -22,11 +23,12 @@ const Signup: React.FC<SignupTypes> = (props: SignupTypes) => {
 		try {
 			setLoading(true);
 			await Auth.signUp({ username: email, password, attributes: { email } });
-			updateFormState((prevState: any) => ({ ...prevState, formType: "confirmSignUp" }));
+			updateFormState((prevState: initialFormStateTypes) => ({ ...prevState, formType: "confirmSignUp" }));
+			setLoading(false);
 		}
 		catch(error){
 			setLoading(false);
-			if (error?.code === 'AliasExistsException') {
+			if (error?.code === 'UsernameExistsException') {
 				notification.error({
 					message: error?.message
 				})
@@ -39,11 +41,20 @@ const Signup: React.FC<SignupTypes> = (props: SignupTypes) => {
 		console.log(values)
 		const { email, authCode } = values;
 		try {
-		  await Auth.confirmSignUp(email, authCode);
-		  updateFormState((prevState: any) => ({ ...prevState, formType: "signIn" }));
+			setLoading(true);
+			await Auth.confirmSignUp(email, authCode);
+			updateFormState((prevState: initialFormStateTypes) => ({ ...prevState, formType: "signIn" }));
+			setLoading(false);
+			localStorage.setItem('newlyCreatedUser', email)
 		}
 		catch(e) {
-		  console.log(e);
+			if (e?.code === 'CodeMismatchException') {
+				notification.error({
+					message: e?.message
+				})
+			}
+			setLoading(false);
+		  	console.log(e);
 		}
 	};
 
@@ -54,7 +65,30 @@ const Signup: React.FC<SignupTypes> = (props: SignupTypes) => {
 	const onActiveKeyChange = (val: any) => setActiveTab(val)
 
 	const openSignInModal = () => {
-		updateFormState((prevState: any) => ({ ...prevState, formType: "signIn" }))
+		updateFormState((prevState: initialFormStateTypes) => ({ ...prevState, formType: "signIn" }))
+	}
+
+	// const addToGroup = async () => {
+	// 	const email = localStorage.getItem('email');
+	// 	const apiName = 'AdminQueries';
+	// 	const path = '/addUserToGroup';
+	// 	const myInit = {
+	// 		body: {
+	// 		  "username" : email,
+	// 		  "groupname": 'recruiter'
+	// 		},
+	// 		headers: {
+	// 		  'Content-Type' : 'application/json',
+	// 		  Authorization: `${(await Auth.currentSession()).getAccessToken().getJwtToken()}`
+	// 		}
+	// 	}
+	// 	return await API.post(apiName, path, myInit);
+	// }
+
+	const handleConfirmSignup = (val: confirmSignInFormValueTypes) => {
+		const email = localStorage.getItem('email');
+		confirmSignup({ ...val, email }); 
+		// if (userType === 'recruiter') addToGroup();
 	}
 
 	return (
@@ -147,10 +181,7 @@ const Signup: React.FC<SignupTypes> = (props: SignupTypes) => {
 				<TabPane key="emailVerification">
 					<Form
 						name="Email verification"
-						onFinish={val => {
-							const email = localStorage.getItem('email');
-							confirmSignup({ ...val, email }); 
-						}}
+						onFinish={handleConfirmSignup}
 						onFinishFailed={onFinishFailed}
 					>
 						<Form.Item>

@@ -1,9 +1,14 @@
-import { StateUITypes } from '../../types';
+import { userTypeTypes, StateUITypes } from '../../types';
 
 export interface LoginPropsTypes {
 	onChange?: (e: any) => void,
-	formType?: string,
-	userType?: any, 
+	formType?: StateUITypes,
+	userType?: userTypeTypes, 
 	setUserType?: any,
 	updateFormState: any
+}
+
+export interface LoginFormSubmitTypes {
+	username: string, 
+	password: string
 }

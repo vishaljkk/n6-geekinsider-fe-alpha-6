@@ -18,128 +18,22 @@ import RecruiterOnboarding from './components/Onboarding/RecruiterOnboarding';
 import JobPostingForm from './components/JobPostingForm';
 import Messages from './components/Messages';
 import ProfileView from './components/ProfileView';
+import { setSignIn, setSignOut, setUserType } from './redux/actions';
+import { initialFormStateTypes } from './types';
 import './App.scss';
 
-import { setSignIn, setSignOut, setUserType } from './redux/actions';
-import { notification } from 'antd';
-
-const initialFormState = {
+const initialFormState: initialFormStateTypes = {
   username: "",
   password: "",
   email: "",
   authCode: "",
   formType: "signIn",
 };
-
-// const App: React.FC = () => {
-
-//   return (
-//       <Router>
-//         <Switch>
-//           {/* <Route path="/login">
-//             <Login />
-//           </Route> */}
-//           <Route path="/signup">
-//             <Signup />
-//           </Route>
-//           <Route path="/Landing">
-//             <LandingPage />
-//           </Route>
-//           <Route path="/candidate/onboarding">
-//             <CandidateOnboarding />
-//           </Route>
-//           <Route path="/recruiter/onboarding">
-//             <RecruiterOnboarding />
-//           </Route>
-//           <Route path="/recruiter/postjob">
-//             <JobPostingForm />
-//           </Route>
-//           <Route path="/messages">
-//             <Messages />
-//           </Route>
-//           <Route path="/profile">
-//             <ProfileView />
-//           </Route>
-//           <Route path="/">
-//             <LandingPage />
-//           </Route>
-//         </Switch>
-//         <div>
-//           {
-//             !uiState || uiState === 'loading' && <p className="font-bold">Loading ...</p>
-//           }
-//           {
-//             uiState === 'signedIn' && (
-//               <Link to="/profile">
-//                 <ProfileView
-//                   // setUiState={setUiState}
-//                   // onChange={onChange}
-//                 />
-//               </Link>
-//             )
-//           }
-//           {
-//             uiState === 'signUp' && (
-//               <Link to="/signup">
-//                 <Signup
-//                   // setUiState={setUiState}
-//                   // onChange={onChange}
-//                   // signUp={signUp}
-//                 />
-//               </Link>
-//             )
-//           }
-//           {
-//             uiState === 'confirmSignUp' && (
-//               <Signup
-//                 // setUiState={setUiState}
-//                 // onChange={onChange}
-//                 // confirmSignUp={confirmSignUp}
-//               />
-//             )
-//           }
-//           {
-//             uiState === 'signIn' && (
-//               <Link to="/login">
-//                 <Login
-//                   setUiState={setUiState}
-//                   onChange={onChange}
-//                   signIn={signIn}
-//                 />
-//               </Link>
-//             )
-//           }
-//           {
-//             // uiState === 'forgotPassword' && (
-//             //   <ForgotPassword 
-//             //     setUiState={setUiState}
-//             //     onChange={onChange}
-//             //     forgotPassword={forgotPassword}
-//             //   />
-//             // )
-//           }
-//           {/* {
-//             uiState === 'forgotPasswordSubmit' && (
-//               <ForgotPasswordSubmit
-//                 setUiState={setUiState}
-//                 onChange={onChange}
-//                 forgotPasswordSubmit={forgotPasswordSubmit}
-//               />
-//             )
-//           } */}
-//         </div>
-//       </Router>
-//   );
-// }
-
-// export default connect(null,{setSignIn, setSignOut})(App);
-
  
 function App(props: any) {
   
   const { setSignIn, setSignOut, userType, setUserType } = props;
   const [formState, updateFormState] = useState(initialFormState);
-
   const [user, updateUser] = useState(null);
 
   const checkUser = async () => {
@@ -147,14 +41,7 @@ function App(props: any) {
       const user = await Auth.currentAuthenticatedUser();
       setSignIn(user);
       // const token = user.signInUserSession.idToken.jwtToken;
-      // console.log({token})
-      // const requestInfo = {headers :  {
-      //   'Authorization' : token,
-      //   "Access-Control-Allow-Origin":"*",
-      //   "Access-Control-Allow-Headers":"*"
-      // }}
-      // const data = await API.get('testdb','/testdb', requestInfo)
-      // console.log(data);  
+      // console.log({token})  
       updateUser(user);
       updateFormState(() => ({ ...formState, formType: "signedIn" }));
     } 
@@ -195,22 +82,13 @@ function App(props: any) {
     updateFormState(() => ({ ...formState, [e.target.name]: e.target.value }));
   };
 
-  
-  // const signIn = async (obj: any) => {
-  //   const { username, password } = obj;
-  //   try {
-  //     await Auth.signIn(username, password);
-  //     updateFormState(() => ({ ...formState, formType: "signedIn" }));
-  //   }
-  //   catch (e) {
-  //     if (e?.code === 'UserNotFoundException') {
-  //       notification.error({
-  //         message: e?.message
-  //       })
-  //     }
-  //     console.error(e)
-  //   }
-  // };
+  const getUserInfo = () => {
+    return Auth.currentSession()
+      .then(resp => {
+        return resp
+      })
+      .catch(error => console.log(error))
+  }
   
   const { formType } = formState;
 
@@ -225,7 +103,7 @@ function App(props: any) {
         />
       )} */}
 
-      {formType === 'confirmSignUp' || formType === 'signUp' && (
+      {formType === 'confirmSignUp' || formType === 'signUp' ? (
         <Signup
           onChange={onChange}
           formType={formType}
@@ -234,7 +112,7 @@ function App(props: any) {
           setUserType={setUserType}
           updateFormState={updateFormState}
         />
-      )}
+      ) : null}
 
       {formType === "signIn" && (
         <Login
@@ -250,6 +128,10 @@ function App(props: any) {
         <>
           <ProfileView signOut={() => Auth.signOut()}/>
           <LandingPage />
+          {/* {userType === 'recruiter' ? 
+            <RecruiterOnboarding formState={formState} getUserInfo={getUserInfo}/> : 
+            <CandidateOnboarding formState={formState} getUserInfo={getUserInfo}/>
+          } */}
         </>
         // <div>
         //   <h2>
@@ -310,5 +192,5 @@ const mapDispatchToProps = (dispatch: any) => {
   }, dispatch)
 };
 
-// export default connect(null,{setSignIn, setSignOut})(App);
+{/* // export default connect(null,{setSignIn, setSignOut})(App); */}
 export default connect(mapStateToProps, mapDispatchToProps)(App);

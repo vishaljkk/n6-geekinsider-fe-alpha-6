@@ -1,48 +1,69 @@
 import { useState } from 'react';
 import { Form, Input, Button, Modal, Tabs, notification } from 'antd';
-import { Auth } from 'aws-amplify'
+import { Auth, API } from 'aws-amplify'
 import { CognitoHostedUIIdentityProvider } from "@aws-amplify/auth/lib/types";
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import { LoginPropsTypes } from './types';
+import { LoginPropsTypes, LoginFormSubmitTypes } from './types';
+import { initialFormStateTypes } from '../../types';
 
 const { TabPane } = Tabs;
 
 const Login: React.FC<LoginPropsTypes> = (props: LoginPropsTypes) => {
 
 	const { userType, setUserType, updateFormState } = props;
-	const [visible, setVisible] = useState<boolean>(true);
+	const [loginLoading, setLoginLoading] = useState<boolean>(false);
 
 	const onFinishFailed = (errorInfo: any) => {
 		console.log('Failed:', errorInfo);
 	};
 
-	const signInFunc = async (obj: any) => {
-		const { username, password } = obj;
+	// const addToGroup = async (newlyCreatedUser: string | null) => {
+	// 	const apiName = 'AdminQueries';
+	// 	const path = '/addUserToGroup';
+	// 	const myInit = {
+	// 		body: {
+	// 		  "username" : newlyCreatedUser,
+	// 		  "groupname": 'recruiter'
+	// 		},
+	// 		headers: {
+	// 		  'Content-Type' : 'application/json',
+	// 		  Authorization: `${(await Auth.currentSession()).getAccessToken().getJwtToken()}`
+	// 		}
+	// 	}
+	// 	return await API.post(apiName, path, myInit);
+	// }
+
+	const signInFunc = async (values: LoginFormSubmitTypes) => {
+		const { username, password } = values;
 		try {
-		  await Auth.signIn(username, password);
-		  updateFormState((prevState: any) => ({ ...prevState, formType: "signedIn" }));
+			setLoginLoading(true);
+			await Auth.signIn(username, password);
+			updateFormState((prevState: initialFormStateTypes) => ({ ...prevState, formType: "signedIn" }));
+			setLoginLoading(false);
+			// userType === 'recruiter' && localStorage.getItem('newlyCreatedUser') && addToGroup(localStorage.getItem('newlyCreatedUser')).then((resp) => console.log(resp));
 		}
 		catch (e) {
-		  if (e?.code === 'UserNotFoundException') {
-			notification.error({
-			  message: e?.message
-			})
-		  }
-		  console.error(e)
+			setLoginLoading(false);
+			if (e?.code === 'UserNotFoundException') {
+				notification.error({
+					message: e?.message
+				})
+			}
+			console.error(e)
 		}
 	};
 
-	const setSignUpModalVisible = () => updateFormState((prevState: any) => ({ ...prevState, formType: "signUp" }))
+	const setSignUpModalVisible = () => updateFormState((prevState: initialFormStateTypes) => ({ ...prevState, formType: "signUp" }))
 
 	const signInWithGoogle = () => Auth.federatedSignIn({ provider: CognitoHostedUIIdentityProvider.Google });
 
-	const handleRecruiterSubmit = (values: any) => {
+	const handleRecruiterSubmit = (values: LoginFormSubmitTypes) => {
 		console.log(values)
 		signInFunc(values);
 		setUserType('recruiter');
 	}
 
-	const handleCandidateSubmit = (values: any) => {
+	const handleCandidateSubmit = (values: LoginFormSubmitTypes) => {
 		signInFunc(values);
 		setUserType('candidate');
 	}
@@ -51,7 +72,7 @@ const Login: React.FC<LoginPropsTypes> = (props: LoginPropsTypes) => {
 
 	return (
 		<Modal 
-			visible={visible}
+			visible={true}
 			maskClosable={false}
 			closable={false}
 			bodyStyle={{ padding: '40px' }}
@@ -85,7 +106,7 @@ const Login: React.FC<LoginPropsTypes> = (props: LoginPropsTypes) => {
 							<Input.Password prefix={<LockOutlined className="site-form-item-icon" />} placeholder="Password" />
 						</Form.Item>
 						<Form.Item>
-							<Button type="primary" htmlType="submit" block>
+							<Button type="primary" htmlType="submit" block loading={loginLoading}>
 								Login
 							</Button>
 						</Form.Item>
@@ -125,7 +146,7 @@ const Login: React.FC<LoginPropsTypes> = (props: LoginPropsTypes) => {
 							<Input.Password prefix={<LockOutlined className="site-form-item-icon" />} placeholder="Password" />
 						</Form.Item>
 						<Form.Item>
-							<Button type="primary" htmlType="submit" block>
+							<Button type="primary" htmlType="submit" block loading={loginLoading}>
 								Login
 							</Button>
 						</Form.Item>

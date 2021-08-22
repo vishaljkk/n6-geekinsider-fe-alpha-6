@@ -5,7 +5,11 @@ export interface SignupTypes {
 	formType?: StateUITypes,
 	userType?: userTypeTypes, 
 	setUserType?: any,
-	updateFormState?: any
+	updateFormState: any
 }
 
 export type SignupTabsType = 'candidate' | 'recruiter' | 'emailVerification' | '';
+
+export interface confirmSignInFormValueTypes {
+	authCode: string
+}

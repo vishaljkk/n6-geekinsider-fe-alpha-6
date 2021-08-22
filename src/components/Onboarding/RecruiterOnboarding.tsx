@@ -1,13 +1,24 @@
 import React, { useState } from 'react';
 import { Form, Input, Button, Select, InputNumber, Tabs } from 'antd';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import { Link } from 'react-router-dom';
+import apiCaller from '../../utils/makeRequest';
 
 const { Option } = Select;
 
-const RecruiterOnboarding = () => {
+const RecruiterOnboarding = (props: any) => {
+    const { formState, getUserInfo } = props;
+    const industryTypes = ['Information Technology & Services', 'Hospital & Health Care', 'Construction', 'Retail', 'Education Management', 'Financial Services', 'Accounting', 'Computer Software', 'Higher Education', 'Automotive'];
+    const cities = ['Banglore', 'Pune', 'Chennai', 'Kolkata', 'Mumbai', 'Delhi', 'Indore', 'Vadodara'];
+    const skills = ['React', 'Angular', 'Vue', 'Ember', 'NodeJS', 'JavaScript', 'HTML', 'CSS', 'SASS']
+
+    console.log(formState);
 	const onFinish = (values: any) => {
-		console.log('Success:', values);
+		apiCaller.post('/recruiter/onboard', values)
+            .then(data => {
+                console.log('Success:', data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
 	};
 
 	const onFinishFailed = (errorInfo: any) => {
@@ -16,7 +27,7 @@ const RecruiterOnboarding = () => {
 
 	return (
         <div className="onboarding">
-            <header className="App-header">Create your profile</header>
+            <header className="App-header">Create your Recruiter profile</header>
             <Form
                 name="Candidate onboarding"
                 labelCol={{ span: 8 }}
@@ -41,26 +52,24 @@ const RecruiterOnboarding = () => {
                     <Select
                         showSearch
                         // style={{ width: 200 }}
-                        placeholder="Please select your current location"
+                        placeholder="Select your current industry type"
                         optionFilterProp="children"
                         // onChange={onChange}
                         // onFocus={onFocus}
                         // onBlur={onBlur}
                         // onSearch={onSearch}
                         filterOption={(input, option) =>
-                            option?.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                            option?.children.toLowerCase().includes(input.toLowerCase())
                         }
                     >
-                        <Option value="jack">Jack</Option>
-                        <Option value="lucy">Lucy</Option>
-                        <Option value="tom">Tom</Option>
+                        {industryTypes.map(itm => <Option value={itm}>{itm}</Option>)}
                     </Select>
                 </Form.Item>
 
                 <Form.Item
                     label="Location"
                     name="location"
-                    rules={[{ required: true, message: 'Please input your password!' }]}
+                    rules={[{ required: true, message: 'Please select atleast one location!' }]}
                 >
                     <Select
                         showSearch
@@ -72,60 +81,78 @@ const RecruiterOnboarding = () => {
                         // onBlur={onBlur}
                         // onSearch={onSearch}
                         filterOption={(input, option) =>
-                            option?.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                            option?.children.toLowerCase().includes(input.toLowerCase())
                         }
                     >
-                        <Option value="jack">Jack</Option>
-                        <Option value="lucy">Lucy</Option>
-                        <Option value="tom">Tom</Option>
+                        {cities.map(itm => <Option value={itm}>{itm}</Option>)}
                     </Select>
                 </Form.Item>
 
                 <Form.Item
                     label="Whatsapp number"
                     name="whatsappNumber"
-                    rules={[{ required: true, message: 'Please input your password!' }]}
+                    rules={[
+                        { 
+                            required: true, 
+                            message: 'Please add a valid whatsapp number!',
+                            validator(_, value) {
+                                if (value && value.length === 10) {
+                                    return Promise.resolve();
+                                }
+                                return Promise.reject(new Error('The two passwords that you entered do not match!'));
+                            },
+                        }
+                    ]}
                 >
                     <Input placeholder="Please add your whatsapp number" />
                 </Form.Item>
 
-                <Form.Item
+                {/* <Form.Item
                     label="Email"
                     name="email"
                     rules={[{ required: true, message: 'Please input your password!' }]}
                 >
                     <Input placeholder="Please enter an email address" />
-                </Form.Item>
+                </Form.Item> */}
 
                 <Form.Item
                     label="Employee size"
                     name="numberOfEmployees"
                     rules={[{ required: true, message: 'Please input your password!' }]}
                 >
-                    <Input placeholder="Please select years of experience" />
+                    <Input placeholder="e.g 10-1000 format" />
                 </Form.Item>
 
                 <Form.Item
                     label="Skills"
                     name="skills"
-                    rules={[{ required: true, message: 'Please input your password!' }]}
+                    rules={[
+                        { 
+                            required: true, 
+                            message: 'Please select atleast three skills!',
+                            validator(_, value) {
+                                console.log(value)
+                                if (value && value.length>=3) {
+                                    return Promise.resolve();
+                                }
+                                return Promise.reject(new Error('The two passwords that you entered do not match!'));
+                            },
+                        }
+                    ]}
                 >
                     <Select
                         mode="multiple"
                         allowClear
-                        // style={{ width: '100%' }}
                         placeholder="Please select atleast three skills"
-                        // defaultValue={['a10', 'c12']}
-                        // onChange={handleChange}
                     >
-                        {['React', 'JavaScript', 'HTML', 'CSS'].map(itm => <Option value={itm}>{itm}</Option>)}
+                        {skills.map(itm => <Option value={itm}>{itm}</Option>)}
                     </Select>
                 </Form.Item>
 
                 <Form.Item
                     label="About"
                     name="about"
-                    rules={[{ required: true, message: 'Please input your password!' }]}
+                    rules={[{ required: false, message: 'Please input your password!' }]}
                 >
                     <Input.TextArea placeholder="about" />
                 </Form.Item>
@@ -133,7 +160,7 @@ const RecruiterOnboarding = () => {
                 <Form.Item
                     label="Website"
                     name="website"
-                    rules={[{ required: true, message: 'Please input your password!' }]}
+                    rules={[{ required: false, message: 'Please input your password!', type: 'url' }]}
                 >
                     <Input placeholder="website" />
                 </Form.Item>
