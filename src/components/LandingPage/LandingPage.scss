@@ -1,9 +1,69 @@
+.tags {
+    width: fit-content;
+    background-color: lightgrey;
+    border-radius: 10px;
+    padding: 2px 6px;
+    margin: 0 3px;
+}
 
 .recent-chat-widget {
-    .ant-card {
-        margin: 3px;
-        .ant-card-body {
-            padding: 0px!important;
+    .recent-chat-widget-container {
+        padding: 5px 20px 0px 15px;
+        margin: 10px 0;
+        border: 1px solid #dcdcdc;
+        border-radius: 5px;
+        .each-chat {
+            cursor: pointer;
+            padding: 10px 0;
+            .each-chat-image {
+                padding: 5px;
+            }
+            .message-glimpse {
+                width: 93%;
+                padding: 0px 4px;
+                border-radius: 2px;
+                background-color: #f4f0ec;
+                border-bottom:2px solid #dcdcdc;
+            }
+            .each-chat-post-desc {
+                h3 {
+                    margin-bottom: 2px;
+                }
+                text-align: center;
+                .each-chat-post-link {
+                    width: 100%;
+                    padding: 0px 4px 6px 4px;
+                    border-radius: 2px;
+                    border-bottom: 2px solid #dcdcdc;
+                    &:hover {
+                        cursor: pointer;
+                        color: #1890ff;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.recommended-job-widget {
+    .recommended-job-widget-container {
+        display: flex;
+        flex-wrap: wrap;
+        .ant-card {
+            margin: 5px;
+        }
+        .each-widget {
+            min-width: 250px;
+            display: grid;
+            grid-template-columns: 35% 65%;
+        }
+        .footer-section {
+            margin: 15px 0;
+            .numbers-applied {
+                position: absolute;
+                right: 10px;
+                bottom: 5px;
+            }
         }
     }
 }

@@ -1,24 +1,24 @@
 import { useState } from 'react';
-import { Row, Col, Button, Card } from 'antd';
+import { Row, Col, Button, Card, Avatar } from 'antd';
 import './LandingPage.scss';
 
 const demoData = [
     {
-        image: 'imageinbase64',
+        image: 'https://media-exp1.licdn.com/dms/image/C560BAQF6H8gAs-JyFg/company-logo_200_200/0/1627543110554?e=1637798400&v=beta&t=PwAcQBk0CKYnt8DW1ftjJVqkHWlct1UCyvb7AtTUYCU',
         messageTitle: 'Flipkart',
         message: 'Interested in you',
         jobTitle: 'Full stack developer',
         jobPostId: 'some id here'
     },
     {
-        image: 'imageinbase64',
+        image: 'https://media-exp1.licdn.com/dms/image/C560BAQF6H8gAs-JyFg/company-logo_200_200/0/1627543110554?e=1637798400&v=beta&t=PwAcQBk0CKYnt8DW1ftjJVqkHWlct1UCyvb7AtTUYCU',
         messageTitle: 'Flipkart',
         message: 'Interested in you',
         jobTitle: 'Full stack developer',
         jobPostId: 'some id here'
     },
     {
-        image: 'imageinbase64',
+        image: 'https://media-exp1.licdn.com/dms/image/C560BAQF6H8gAs-JyFg/company-logo_200_200/0/1627543110554?e=1637798400&v=beta&t=PwAcQBk0CKYnt8DW1ftjJVqkHWlct1UCyvb7AtTUYCU',
         messageTitle: 'Flipkart',
         message: 'Interested in you',
         jobTitle: 'Full stack developer',
@@ -32,19 +32,22 @@ const SingleWidget = (props: any) => {
         console.log(postId);
     }
     return (
-        <Card hoverable>
+        <div className="each-chat">
             <Row>
-                <Col span={6}><img src={image} alt="" /></Col>
-                <Col span={12}>
-                    <h3>{messageTitle}</h3>
-                    <p>{message}</p>
+                <Col span={3} className="each-chat-image">
+                    <Avatar size={55} src={image} />
+                    {/* <img src={image} alt="" height="55px" /> */}
                 </Col>
-                <Col span={6}>
+                <Col span={13}>
+                    <h3><strong>{messageTitle}</strong></h3>
+                    <p className="message-glimpse">{message}</p>
+                </Col>
+                <Col span={8} className="each-chat-post-desc">
                     <h3>{jobTitle}</h3>
-                    <Button size="small" type="link" onClick={() => handlePostVisible(jobPostId)}>See post</Button>
+                    <p onClick={() => handlePostVisible(jobPostId)} className="each-chat-post-link">See post</p>
                 </Col>
             </Row>
-        </Card>
+        </div>
     )
 }
 
@@ -53,9 +56,9 @@ const RecentChatWidget: React.FC<any> = () => {
     return (
         <div className="recent-chat-widget">
             <h2>Recent Chats</h2>
-            <Card>
+            <div className="recent-chat-widget-container">
                 {data.map(itm => <SingleWidget itm={itm}/>)}
-            </Card>
+            </div>
             <div className="see-more-container">
                 <Button>See more...</Button>
             </div>
