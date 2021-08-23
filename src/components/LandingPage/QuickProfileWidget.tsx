@@ -8,7 +8,9 @@ const QuickProfileWidget = () => {
                 cover={
                     <img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />
                 }
-                
+                style={{
+                    width: '100%'
+                }}
             >
                 <div className="quick-profile-content">
                     <h3><strong>Coder Jackson</strong></h3>

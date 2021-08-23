@@ -4,14 +4,16 @@ import RecentChatWidget from './RecentChatWidget';
 import RecommCandidateWidget from './RecomendedJobsWidget';
 import QuickProfileWidget from './QuickProfileWidget';
 import TopTrending from './TopTrending';
+import RecommenededCandidatesWidget from './RecommenededCandidatesWidget';
 
 const LandingPage: React.FC = () => {
     return (
         <Row>
-            <Col span={8}>
+            <Col span={6} offset={1}>
                 <QuickProfileWidget />
+                <RecommenededCandidatesWidget />
             </Col>
-            <Col span={14}>
+            <Col span={15} offset={1}>
                 <RecentChatWidget />
                 <RecommCandidateWidget />
                 <TopTrending />
