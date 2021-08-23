@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Tooltip, Button, Card, Tag, Avatar } from 'antd';
-import { DollarCircleOutlined, HistoryOutlined } from '@ant-design/icons';
+import { MdLocationOn, MdMonetizationOn, MdHistory } from "react-icons/md";
+import { iconStyles } from '../../utils';
 import './LandingPage.scss';
 
 const demoData = [
@@ -48,13 +49,13 @@ const SingleWidget = (props: any) => {
                 <div className="right-section">
                     <span>{company}</span>
                     <h3>{jobTitle}</h3>
-                    {skills.map((itm:any) => <span className="tags">{itm}</span>)}
+                    {skills.map((itm:string) => <span className="tags">{itm}</span>)}
                 </div>
             </section>
             <section className="footer-section">
-                <div>{location}</div>
-                <div><DollarCircleOutlined />{ctc}</div>
-                <div><HistoryOutlined />{experience}</div>
+                <div><MdLocationOn style={iconStyles} />{location}</div>
+                <div><MdMonetizationOn style={iconStyles} />{ctc}</div>
+                <div><MdHistory style={iconStyles} />{experience}</div>
                 <Tooltip title={`${numberOfApplications} already applied`} placement="topRight"><span className="numbers-applied">{numberOfApplications}+</span></Tooltip>
             </section>
         </Card>

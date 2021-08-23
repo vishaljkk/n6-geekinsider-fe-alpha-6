@@ -59,6 +59,13 @@
         }
         .footer-section {
             margin: 15px 0;
+            .icon {
+                width: 17px;
+                height: 17px;
+                top: 3px;
+                position: relative;
+                margin-right: 5px;
+            }
             .numbers-applied {
                 position: absolute;
                 right: 10px;

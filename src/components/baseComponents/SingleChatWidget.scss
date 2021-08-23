@@ -1,0 +1,30 @@
+.each-chat {
+    cursor: pointer;
+    padding: 10px 0;
+    .each-chat-image {
+        padding: 5px;
+    }
+    .message-glimpse {
+        width: 93%;
+        padding: 0px 4px;
+        border-radius: 2px;
+        background-color: #f4f0ec;
+        border-bottom:2px solid #dcdcdc;
+    }
+    .each-chat-post-desc {
+        h3 {
+            margin-bottom: 2px;
+        }
+        text-align: center;
+        .each-chat-post-link {
+            width: 100%;
+            padding: 0px 4px 6px 4px;
+            border-radius: 2px;
+            border-bottom: 2px solid #dcdcdc;
+            &:hover {
+                cursor: pointer;
+                color: #1890ff;
+            }
+        }
+    }
+}

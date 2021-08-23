@@ -1,24 +1,6 @@
-.single-msg {
-    display: flex;
-    justify-content: center;
-    .msg-brief {
-        border: 1px solid #939393;
-        margin: 5px;
-        padding: 5px;
-        border-radius: 2px;
-        min-width: 30%;
-        width: auto;
-    }
-    .job-brief {
-        border: 1px solid #939393;
-        margin: 5px;
-        padding: 5px;
-        border-radius: 2px;
-    }
-    .connect {
-        border: 1px solid #939393;
-        margin: 5px;
-        padding: 5px;
-        border-radius: 2px;
-    }
+.recent-chat-widget-container {
+    margin: 0 5%;
+    border: 1px solid #dcdcdc;
+    padding: 20px;
+    border-radius: 5px;
 }

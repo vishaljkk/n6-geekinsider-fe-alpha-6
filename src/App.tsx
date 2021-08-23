@@ -18,6 +18,8 @@ import RecruiterOnboarding from './components/Onboarding/RecruiterOnboarding';
 import JobPostingForm from './components/JobPostingForm';
 import Messages from './components/Messages';
 import ProfileView from './components/ProfileView';
+import SearchResult from './components/SearchAndFilters';
+
 import { setSignIn, setSignOut, setUserType } from './redux/actions';
 import { initialFormStateTypes } from './types';
 import './App.scss';
@@ -127,7 +129,9 @@ function App(props: any) {
       {formType === "signedIn" && (
         <>
           <ProfileView signOut={() => Auth.signOut()}/>
-          <LandingPage />
+          {/* <SearchResult /> */}
+          {/* <LandingPage /> */}
+          <Messages/>
           {/* {userType === 'recruiter' ? 
             <RecruiterOnboarding formState={formState} getUserInfo={getUserInfo}/> : 
             <CandidateOnboarding formState={formState} getUserInfo={getUserInfo}/>

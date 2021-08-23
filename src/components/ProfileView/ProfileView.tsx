@@ -3,7 +3,7 @@ import { Row, Col, AutoComplete, Dropdown, Menu, Button } from 'antd';
 import { UserOutlined, BellOutlined } from '@ant-design/icons';
 import { ProfileViewProps } from './types';
 
-const ProfileView: React.FC<ProfileViewProps> = (props: ProfileViewProps) => {
+const ProfileView: React.FC<ProfileViewProps> = (props) => {
     const { signOut } = props;
     return (
         <div>
@@ -37,10 +37,8 @@ const ProfileView: React.FC<ProfileViewProps> = (props: ProfileViewProps) => {
                                                 <span>some description that you've notified for something</span>
                                             </Menu.Item>
                                             <Menu.Item>
-                                                Account Settings
-                                            </Menu.Item>
-                                            <Menu.Item onClick={signOut}>
-                                                Logout
+                                                <h2>Success</h2>
+                                                <span>some description that you've notified for something</span>
                                             </Menu.Item>
                                         </Menu>
                                     } 

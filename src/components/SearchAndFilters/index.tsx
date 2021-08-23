@@ -1,2 +1,2 @@
-export { default } from './SearchAndFilters';
+export { default } from './SearchResults';
 export * from './types';
