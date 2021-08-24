@@ -2,6 +2,7 @@ import React from 'react';
 import { Row, Col, AutoComplete, Dropdown, Menu, Button } from 'antd';
 import { UserOutlined, BellOutlined } from '@ant-design/icons';
 import { ProfileViewProps } from './types';
+import './ProfileView.scss';
 
 const ProfileView: React.FC<ProfileViewProps> = (props) => {
     const { signOut } = props;

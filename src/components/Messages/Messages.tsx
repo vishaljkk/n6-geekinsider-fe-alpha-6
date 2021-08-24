@@ -1,6 +1,7 @@
 import React from 'react';
 import { Tabs } from 'antd';
 import MessageTab from './MessageTab';
+import './messages.scss';
 
 const { TabPane } = Tabs;
 

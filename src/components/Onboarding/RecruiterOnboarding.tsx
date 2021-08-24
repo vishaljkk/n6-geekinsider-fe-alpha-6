@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Input, Button, Select, InputNumber, Tabs } from 'antd';
 import apiCaller from '../../utils/makeRequest';
+import './onboarding.scss';
 
 const { Option } = Select;
 
