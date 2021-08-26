@@ -5,7 +5,8 @@ export interface LoginPropsTypes {
 	formType?: StateUITypes,
 	userType?: userTypeTypes, 
 	setUserType?: any,
-	updateFormState: any
+	updateFormState: any,
+	history: any,
 }
 
 export interface LoginFormSubmitTypes {

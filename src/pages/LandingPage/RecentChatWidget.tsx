@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Row, Col, Button, Card, Avatar } from 'antd';
-import { SingleChatWidget } from '../baseComponents';
+import { SingleChatWidget } from '../../components/SingleChatWidget';
 import './LandingPage.scss';
+import { HistoryContext } from '../../routes/Routes';
 
 const demoData = [
     {
@@ -61,7 +62,9 @@ const RecentChatWidget: React.FC<any> = () => {
                 {data.map(itm => <SingleChatWidget itm={itm}/>)}
             </div>
             <div className="see-more-container">
-                <Button>See more...</Button>
+                <HistoryContext.Consumer>
+                    {(history: any) => <Button onClick={() => history.push('/messages')}>See more...</Button>}
+                </HistoryContext.Consumer>
             </div>
         </div>
     )

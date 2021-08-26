@@ -1,9 +1,9 @@
-import React from 'react';
-import { Tooltip, Row, Card, Col, Avatar, Button } from 'antd';
+import { useState } from 'react';
+import { Tooltip, Row, Card, Col, Avatar } from 'antd';
 import { MdLocationOn, MdMonetizationOn, MdHistory } from "react-icons/md";
 import { iconStyles } from '../../utils';
+import JobPostDetailWidget from '../../components/JobPostDetailWidget';
 import './SearchResult.scss';
-import { useState } from 'react';
 
 const demoData = [
     {
@@ -114,60 +114,62 @@ const SingleWidget = (props: any) => {
     )
 }
 
-const DescriptionWidget = (props: any) => {
-    const { image, company, jobTitle, skills, location, ctc, experience, numberOfApplications, description, jobPostId } = props.itm;
-    return (
-        <Card>
-            <section className="each-widget">
-                <Avatar size={75} src={image} />
-                <div className="right-section">
-                    <span>{company}</span>
-                    <h3>{jobTitle}</h3>
-                    <a>{numberOfApplications} applicants</a>
-                </div>
-                <div className="action-buttons">
-                    <Button type="primary">Apply</Button>
-                    <Button type="primary">Company details</Button>
-                </div>
-            </section>
-            <section className="tags-section">
-                {skills.map((itm:any) => <span className="tags">{itm}</span>)}
-            </section>
-            <section className="footer-section">
-                <div><MdLocationOn style={iconStyles} />{location}</div>
-                <div><MdMonetizationOn style={iconStyles} />{ctc}</div>
-                <div><MdHistory style={iconStyles} />{experience}</div>
-            </section>
-            <Card>
-                {description}
-            </Card>
-        </Card>
-    )
-}
+// const DescriptionWidget = (props: any) => {
+//     const { image, company, jobTitle, skills, location, ctc, experience, numberOfApplications, description, jobPostId } = props.itm;
+//     return (
+//         <Card>
+//             <section className="each-widget">
+//                 <Avatar size={75} src={image} />
+//                 <div className="right-section">
+//                     <span>{company}</span>
+//                     <h3>{jobTitle}</h3>
+//                     <a>{numberOfApplications} applicants</a>
+//                 </div>
+//                 <div className="action-buttons">
+//                     <Button type="primary">Apply</Button>
+//                     <Button type="primary">Company details</Button>
+//                 </div>
+//             </section>
+//             <section className="tags-section">
+//                 {skills.map((itm:any) => <span className="tags">{itm}</span>)}
+//             </section>
+//             <section className="footer-section">
+//                 <div><MdLocationOn style={iconStyles} />{location}</div>
+//                 <div><MdMonetizationOn style={iconStyles} />{ctc}</div>
+//                 <div><MdHistory style={iconStyles} />{experience}</div>
+//             </section>
+//             <Card>
+//                 {description}
+//             </Card>
+//         </Card>
+//     )
+// }
 
 const SearchAndFilters: React.FC = () => {
     const [data, setData] = useState(demoData);
     const [selectedData, setSelectedData] = useState(demoData[0]);
     return (
-        <Row>
-            <Col span={6} offset={1}>
-                <div className="search-result-widget-container">
-                    {data.map((itm, index) => 
-                        <SingleWidget 
-                            itm={itm} 
-                            index={index} 
-                            selectedData={selectedData}
-                            setSelectedData={setSelectedData}
-                        />
-                    )}
-                </div>
-            </Col>
-            <Col span={16}>
-                <div className="search-result-selected-widget-container">
-                    <DescriptionWidget itm={selectedData} />
-                </div>
-            </Col>
-        </Row>
+        <div className="search-and-filter-container">
+            <Row>
+                <Col span={6} offset={1}>
+                    <div className="search-result-widget-container">
+                        {data.map((itm, index) => 
+                            <SingleWidget 
+                                itm={itm} 
+                                index={index} 
+                                selectedData={selectedData}
+                                setSelectedData={setSelectedData}
+                            />
+                        )}
+                    </div>
+                </Col>
+                <Col span={15} offset={1}>
+                    <div className="search-result-selected-widget-container">
+                        <JobPostDetailWidget itm={selectedData} />
+                    </div>
+                </Col>
+            </Row>
+        </div>
     )
 }
 

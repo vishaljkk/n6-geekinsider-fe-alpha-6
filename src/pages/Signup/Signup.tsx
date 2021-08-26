@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Input, Button, Alert, Modal, Tabs, notification } from 'antd';
-import { Auth, API } from 'aws-amplify';
+import { Auth } from 'aws-amplify';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { SignupTypes, SignupTabsType, confirmSignInFormValueTypes } from './types';
-import { initialFormStateTypes } from '../../routes/types';
 
 const { TabPane } = Tabs;
 
 const Signup: React.FC<SignupTypes> = (props: SignupTypes) => {
-	const { formType, updateFormState, userType, setUserType } = props;
+
+	const { formType, updateFormState, userType, setUserType, history } = props;
 	const [activeTab, setActiveTab] = useState<SignupTabsType>('candidate');
 	const [loading, setLoading] = useState<boolean>(false);
 
@@ -23,7 +23,8 @@ const Signup: React.FC<SignupTypes> = (props: SignupTypes) => {
 		try {
 			setLoading(true);
 			await Auth.signUp({ username: email, password, attributes: { email } });
-			updateFormState((prevState: initialFormStateTypes) => ({ ...prevState, formType: "confirmSignUp" }));
+			// updateFormState((prevState: initialFormStateTypes) => ({ ...prevState, formType: "confirmSignUp" }));
+			setActiveTab('emailVerification');
 			setLoading(false);
 		}
 		catch(error){
@@ -33,17 +34,20 @@ const Signup: React.FC<SignupTypes> = (props: SignupTypes) => {
 					message: error?.message
 				})
 			}
-			console.log(error)
+			console.error(error)
 		}
 	};
 
 	const confirmSignup = async (values: any) => {
-		console.log(values)
 		const { email, authCode } = values;
 		try {
 			setLoading(true);
 			await Auth.confirmSignUp(email, authCode);
-			updateFormState((prevState: initialFormStateTypes) => ({ ...prevState, formType: "signIn" }));
+			notification.success({
+				message: 'Successfully created account',
+				description: email
+			})
+			history.push('/login');
 			setLoading(false);
 			localStorage.setItem('newlyCreatedUser', email)
 		}
@@ -54,19 +58,17 @@ const Signup: React.FC<SignupTypes> = (props: SignupTypes) => {
 				})
 			}
 			setLoading(false);
-		  	console.log(e);
+		  	console.error(e);
 		}
 	};
 
 	const onFinishFailed = (errorInfo: any) => {
-		console.log('Failed:', errorInfo);
+		console.error('Failed:', errorInfo);
 	};
 
 	const onActiveKeyChange = (val: any) => setActiveTab(val)
 
-	const openSignInModal = () => {
-		updateFormState((prevState: initialFormStateTypes) => ({ ...prevState, formType: "signIn" }))
-	}
+	const openSignInModal = () => history.push('/login');
 
 	// const addToGroup = async () => {
 	// 	const email = localStorage.getItem('email');

@@ -3,7 +3,8 @@
 // }
 
 const initialState: any = {
-    userType: ''
+    userType: '',
+    currentRoute: '/'
 };
 
 const rootReducer = (state=initialState, action: any) => {

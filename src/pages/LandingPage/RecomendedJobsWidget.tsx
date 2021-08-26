@@ -3,6 +3,7 @@ import { Tooltip, Button, Card, Tag, Avatar } from 'antd';
 import { MdLocationOn, MdMonetizationOn, MdHistory } from "react-icons/md";
 import { iconStyles } from '../../utils';
 import './LandingPage.scss';
+import { HistoryContext } from '../../routes/Routes';
 
 const demoData = [
     {
@@ -72,7 +73,9 @@ const RecommCandidateWidget: React.FC<any> = () => {
             </div>
             {/* <SingleWidget itm={data[0]} /> */}
             <div className="see-more-container">
-                <Button>See more...</Button>
+                <HistoryContext.Consumer>
+                    {(history: any) => <Button onClick={() => history.push('/search')}>See more...</Button>}
+                </HistoryContext.Consumer>
             </div>
         </div>
     )

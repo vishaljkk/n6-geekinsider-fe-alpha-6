@@ -14,5 +14,6 @@ export interface AppTypes {
     setSignIn: (e: userTypeTypes) => void,
     setSignOut: () => void,
     setUserType: (e: userTypeTypes) => void,
-    userType: userTypeTypes
+    userType: userTypeTypes,
+    history?: any
   }

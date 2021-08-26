@@ -10,7 +10,7 @@ const { TabPane } = Tabs;
 
 const Login: React.FC<LoginPropsTypes> = (props: LoginPropsTypes) => {
 
-	const { userType, setUserType, updateFormState } = props;
+	const { userType, setUserType, updateFormState, history } = props;
 	const [loginLoading, setLoginLoading] = useState<boolean>(false);
 
 	const onFinishFailed = (errorInfo: any) => {
@@ -37,10 +37,9 @@ const Login: React.FC<LoginPropsTypes> = (props: LoginPropsTypes) => {
 		const { username, password } = values;
 		try {
 			setLoginLoading(true);
-			await Auth.signIn(username, password);
-			updateFormState((prevState: initialFormStateTypes) => ({ ...prevState, formType: "signedIn" }));
+			await Auth.signIn(username, password).then(e => console.log(e));
 			setLoginLoading(false);
-			// userType === 'recruiter' && localStorage.getItem('newlyCreatedUser') && addToGroup(localStorage.getItem('newlyCreatedUser')).then((resp) => console.log(resp));
+			history.push('/home');
 		}
 		catch (e) {
 			setLoginLoading(false);
@@ -53,12 +52,11 @@ const Login: React.FC<LoginPropsTypes> = (props: LoginPropsTypes) => {
 		}
 	};
 
-	const setSignUpModalVisible = () => updateFormState((prevState: initialFormStateTypes) => ({ ...prevState, formType: "signUp" }))
+	const setSignUpModalVisible = () => history.push('/signup');
 
 	const signInWithGoogle = () => Auth.federatedSignIn({ provider: CognitoHostedUIIdentityProvider.Google });
 
 	const handleRecruiterSubmit = (values: LoginFormSubmitTypes) => {
-		console.log(values)
 		signInFunc(values);
 		setUserType('recruiter');
 	}

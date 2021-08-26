@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { SingleChatWidget } from '../baseComponents';
+import { SingleChatWidget } from '../../components/SingleChatWidget';
 import { MessageTabProps } from './types';
 
 const demoData = [
@@ -29,7 +29,6 @@ const demoData = [
 const MessageTab: React.FC<MessageTabProps> = (props) => {
 	const [data, setData] = useState(demoData);
 	const { type } = props;
-	const messages = ['one', 'two'];
 	return (
 		<div className="recent-chat-widget-container">
 			{data.map(itm => <SingleChatWidget itm={itm} type={type} />)}

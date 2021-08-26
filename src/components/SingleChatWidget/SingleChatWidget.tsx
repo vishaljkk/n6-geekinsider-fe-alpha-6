@@ -1,14 +1,15 @@
 import { Row, Col, Avatar } from 'antd';
 import { FaWhatsapp } from 'react-icons/fa';
-import { MessageTabProps } from '../Messages/types';
 import './SingleChatWidget.scss';
 
 export const SingleChatWidget = (props: { itm: any, type?: string }) => {
     const { type, itm } = props;
     const { image, messageTitle, message, jobTitle, jobPostId } = itm;
+
     const handlePostVisible = (postId: string) => {
         console.log(postId);
     }
+
     return (
         <div className="each-chat">
             <Row>
