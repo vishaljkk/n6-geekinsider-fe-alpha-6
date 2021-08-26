@@ -1,4 +1,4 @@
-import { userTypeTypes } from '../types';
+import { userTypeTypes } from '../routes/types';
 
 export const setSignIn = (data: any) => {
     return (dispatch: any) => {

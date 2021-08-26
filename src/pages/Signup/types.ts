@@ -1,4 +1,4 @@
-import { userTypeTypes, StateUITypes } from '../../types';
+import { userTypeTypes, StateUITypes } from '../../routes/types';
 
 export interface SignupTypes {
 	onChange?: (e: any) => void,

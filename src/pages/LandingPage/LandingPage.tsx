@@ -13,7 +13,7 @@ const LandingPage: React.FC = () => {
                 <QuickProfileWidget />
                 <RecommenededCandidatesWidget />
             </Col>
-            <Col span={15} offset={1}>
+            <Col span={15} offset={1} style={{ marginTop: '30px' }}>
                 <RecentChatWidget />
                 <RecommCandidateWidget />
                 <TopTrending />

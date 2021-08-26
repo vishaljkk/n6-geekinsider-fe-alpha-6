@@ -4,7 +4,7 @@ import { Auth, API } from 'aws-amplify'
 import { CognitoHostedUIIdentityProvider } from "@aws-amplify/auth/lib/types";
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { LoginPropsTypes, LoginFormSubmitTypes } from './types';
-import { initialFormStateTypes } from '../../types';
+import { initialFormStateTypes } from '../../routes/types';
 
 const { TabPane } = Tabs;
 

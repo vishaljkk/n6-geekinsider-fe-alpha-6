@@ -9,3 +9,10 @@ export interface initialFormStateTypes {
     authCode: string,
     formType: string
 }
+
+export interface AppTypes {
+    setSignIn: (e: userTypeTypes) => void,
+    setSignOut: () => void,
+    setUserType: (e: userTypeTypes) => void,
+    userType: userTypeTypes
+  }

@@ -3,7 +3,7 @@ import { Form, Input, Button, Alert, Modal, Tabs, notification } from 'antd';
 import { Auth, API } from 'aws-amplify';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { SignupTypes, SignupTabsType, confirmSignInFormValueTypes } from './types';
-import { initialFormStateTypes, userTypeTypes } from '../../types';
+import { initialFormStateTypes } from '../../routes/types';
 
 const { TabPane } = Tabs;
 

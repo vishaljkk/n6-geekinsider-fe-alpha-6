@@ -88,3 +88,33 @@
     margin: 7px 0;
     text-align: center;
 }
+
+.recommended-candidates-widget {
+    .recommended-candidates-widget-container {
+        display: flex;
+        flex-wrap: wrap;
+        .ant-card {
+            margin: 5px;
+        }
+        .each-widget {
+            // width: 250px;
+            display: grid;
+            grid-template-columns: 35% 65%;
+        }
+        .footer-section {
+            margin: 15px 0;
+            .icon {
+                width: 17px;
+                height: 17px;
+                top: 3px;
+                position: relative;
+                margin-right: 5px;
+            }
+            .numbers-applied {
+                position: absolute;
+                right: 10px;
+                bottom: 5px;
+            }
+        }
+    }
+}

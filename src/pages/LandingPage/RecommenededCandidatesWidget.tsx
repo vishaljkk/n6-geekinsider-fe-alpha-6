@@ -43,7 +43,7 @@ const SingleWidget = (props: any) => {
         console.log(postId);
     }
     return (
-        <Card hoverable>
+        <Card hoverable style={{ width:'100%' }}>
             <section className="each-widget">
                 <Avatar size={55} src={image} />
                 <div className="right-section">
@@ -59,9 +59,9 @@ const SingleWidget = (props: any) => {
 const RecommenededCandidatesWidget: React.FC<any> = () => {
     const [data, setData] = useState(demoData);
     return (
-        <div className="recommended-job-widget">
+        <div className="recommended-candidates-widget">
             <h2>Recommended candidates</h2>
-            <div className="recommended-job-widget-container">
+            <div className="recommended-candidates-widget-container">
                 {data.map(itm => <SingleWidget itm={itm}/>)}
             </div>
             {/* <SingleWidget itm={data[0]} /> */}
