@@ -1,4 +1,4 @@
-import { StateTypes } from './types';
+import { StateTypes, actionTypes } from './types';
 
 const initialState: StateTypes = {
     userType: '',
@@ -9,7 +9,7 @@ const initialState: StateTypes = {
     searchData: []
 };
 
-const rootReducer = (state=initialState, action: any) => {
+const rootReducer = (state: StateTypes = initialState, action: actionTypes) => {
     switch(action.type) {
         case 'SET_AUTH':
             return { ...state, isAuth: action.payload };

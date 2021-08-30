@@ -18,17 +18,19 @@ const LandingPage: React.FC = (props: any) => {
     }, [])
     
     return (
-        <Row>
-            <Col span={6} offset={1}>
-                <QuickProfileWidget />
-                <RecommenededCandidatesWidget />
-            </Col>
-            <Col span={15} offset={1} style={{ marginTop: '30px' }}>
-                <RecentChatWidget />
-                <RecommCandidateWidget />
-                <TopTrending />
-            </Col>
-        </Row>
+        <div className="landing-page-container">
+            <Row>
+                <Col span={6} offset={1}>
+                    <QuickProfileWidget />
+                    <RecommenededCandidatesWidget />
+                </Col>
+                <Col span={15} offset={1} className="landing-right-column">
+                    <RecentChatWidget />
+                    <RecommCandidateWidget />
+                    <TopTrending />
+                </Col>
+            </Row>
+        </div>
     )
 }
 

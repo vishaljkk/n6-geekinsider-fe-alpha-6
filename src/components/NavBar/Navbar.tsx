@@ -4,8 +4,9 @@ import { Row, Col, AutoComplete, Dropdown, Menu, Button } from 'antd';
 import { UserOutlined, BellOutlined } from '@ant-design/icons';
 import './Navbar.scss';
 import { HistoryContext } from '../../routes/Routes';
+import { NavBarPropTypes } from './types';
 
-const NavBar: React.FC<{ history: any }> = (props) => {
+const NavBar: React.FC<NavBarPropTypes> = (props) => {
 
     const { history } = props;
     const signOut = async () => {

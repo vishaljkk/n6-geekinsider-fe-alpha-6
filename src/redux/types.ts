@@ -6,3 +6,8 @@ export interface StateTypes {
     landingData: object,
     searchData: []
 }
+
+export interface actionTypes {
+    type: string,
+    payload: any
+}

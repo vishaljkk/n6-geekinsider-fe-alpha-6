@@ -1,8 +1,9 @@
 import { Row, Col, Avatar } from 'antd';
 import { FaWhatsapp } from 'react-icons/fa';
+import { SingleChatWidgetPropTypes } from './types';
 import './SingleChatWidget.scss';
 
-export const SingleChatWidget = (props: { itm: { image: string, messageTitle: string, message: string, jobTitle: string, jobPostId: string }, type?: string }) => {
+export const SingleChatWidget: React.FC<SingleChatWidgetPropTypes> = (props) => {
     const { type, itm } = props;
     const { image, messageTitle, message, jobTitle, jobPostId } = itm;
 

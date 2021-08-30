@@ -1,3 +1,3 @@
-export interface ProfileViewProps {
-    signOut?: any
+export interface NavBarPropTypes { 
+    history: any 
 }

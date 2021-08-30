@@ -7,7 +7,7 @@ export const iconStyles: CSS.Properties<string | number> = {
     marginRight: '5px',
 }
 
-export const isAuthenticated = () => {
+export const isAuthenticated = async () => {
     return Auth.currentAuthenticatedUser()
         .then(e => {
             return true;
