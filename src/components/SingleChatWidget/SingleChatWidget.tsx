@@ -2,7 +2,7 @@ import { Row, Col, Avatar } from 'antd';
 import { FaWhatsapp } from 'react-icons/fa';
 import './SingleChatWidget.scss';
 
-export const SingleChatWidget = (props: { itm: any, type?: string }) => {
+export const SingleChatWidget = (props: { itm: { image: string, messageTitle: string, message: string, jobTitle: string, jobPostId: string }, type?: string }) => {
     const { type, itm } = props;
     const { image, messageTitle, message, jobTitle, jobPostId } = itm;
 
@@ -17,16 +17,16 @@ export const SingleChatWidget = (props: { itm: any, type?: string }) => {
                     <Avatar size={55} src={image} />
                     {/* <img src={image} alt="" height="55px" /> */}
                 </Col>
-                <Col span={13}>
+                <Col span={type === 'closed' ? 20 : 12}>
                     <h3><strong>{messageTitle}</strong></h3>
                     <p className="message-glimpse">{message}</p>
                 </Col>
-                <Col span={type === 'openThread' ? 4 : 8} className="each-chat-post-desc" style={{ borderBottom: '' }}>
+                {type !== 'closed' && <Col span={type === 'openThread' ? 4 : 8} offset={1} className="each-chat-post-desc">
                     <h3>{jobTitle}</h3>
                     <div onClick={() => handlePostVisible(jobPostId)} className="each-chat-post-link">See post</div>
-                </Col>
+                </Col>}
                 {type === 'openThread' && <Col span={4} className="each-chat-post-desc">
-                    <div style={{ display: 'flex', border: '1px solid #dcdcdc', height: '56px', justifyContent: 'center' }}>
+                    <div className="each-chat-post-whatsapp">
                         <span><FaWhatsapp style={{ height: '30px', width: '30px' }} /></span>
                         <h3>Open Chat</h3>
                     </div>

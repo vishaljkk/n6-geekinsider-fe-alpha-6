@@ -1,4 +1,4 @@
-header {
+.navbar-container {
     background-color: #282c34;
     min-height: 9vh;
     display: flex;
@@ -9,5 +9,8 @@ header {
     
     h2 {
         color: white;
+    }
+    .geekinsider-logo {
+        cursor: pointer;
     }
 }

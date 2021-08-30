@@ -13,25 +13,30 @@ const NavBar: React.FC<{ history: any }> = (props) => {
         history.push('/login');
     }
 
+    const handleSelect = (val: string) => {
+        history.push(`/search?query=${val}`)
+    }
+
     return (
         <>
-            <header>
+            <header className="navbar-container">
                 <Row>
-                    <Col xs={{ span: 5 }} lg={{ span: 4 }} flex='none'>
+                    <Col xs={{ span: 5 }} lg={{ span: 4 }} flex='none' className="geekinsider-logo" onClick={() => history.push('/home')}>
                         <h2 style={{ margin: '0 50px' }}>Geekinsider</h2>
                     </Col>
                     <Col xs={{ span: 12, offset: 1 }} lg={{ span: 15, offset: 1 }}>
                         <AutoComplete
                             style={{ width: '100%' }}
                             options={[
-                                { value: 'Burns Bay Road' },
-                                { value: 'Downing Street' },
-                                { value: 'Wall Street' },
+                                { value: 'React' },
+                                { value: 'JavaScript' },
+                                { value: 'TypeScript' },
                             ]}
-                            placeholder="Search tech stack, company"
+                            placeholder="Search jobs"
                             filterOption={(inputValue, option) =>
                                 option!.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
                             }
+                            onSelect={handleSelect}
                         />
                     </Col>
                     <Col xs={{ span: 3, offset: 1 }} lg={{ span: 3, offset: 1 }}>

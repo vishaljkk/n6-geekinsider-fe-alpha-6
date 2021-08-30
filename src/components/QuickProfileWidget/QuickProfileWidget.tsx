@@ -1,5 +1,6 @@
 import { Card, Avatar } from 'antd';
 import { HistoryContext } from '../../routes/Routes';
+import './QuickProfileWidget.scss';
 
 const QuickProfileWidget = () => {
     return (

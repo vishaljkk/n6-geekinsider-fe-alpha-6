@@ -15,5 +15,6 @@ export interface AppTypes {
     setSignOut: () => void,
     setUserType: (e: userTypeTypes) => void,
     userType: userTypeTypes,
-    history?: any
+    history?: any,
+    location?: any
   }

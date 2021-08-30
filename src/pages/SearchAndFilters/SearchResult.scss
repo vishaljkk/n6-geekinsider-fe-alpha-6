@@ -1,44 +1,10 @@
 .search-and-filter-container {
     height: 100%;
-    .ant-row, .ant-col {
-        height: 100%;
+    .ant-row {
+        height: 90%;
     }
-    .search-result-selected-widget-container {
-        margin: 20px 0;
-        display: flex;
-        flex-wrap: wrap;
-        border: transparent;
-        box-shadow: 0 1px 2px -2px #00000029, 0 3px 6px 0 #0000001f, 0 5px 12px 4px #00000017;
-        .ant-card {
-            // margin: 5px;
-            width: 100%;
-        }
-        .each-widget {
-            display: grid;
-            grid-template-columns: 20% 50% 30%;
-            .action-buttons {
-                display: flex;
-                flex-direction: column;
-                gap: 10px;
-                .ant-btn-primary {
-                    max-width: 150px;
-                }
-            }
-        }
-        .tags-section {
-            margin: 20px 0;
-        }
-        .footer-section {
-            display: flex;
-            justify-content: flex-start;
-            gap: 25px;
-            margin: 20px 0;
-            .numbers-applied {
-                position: absolute;
-                right: 10px;
-                bottom: 5px;
-            }
-        }
+    .ant-col {
+        height: 100%;
     }
     
     .search-result-widget-container {
@@ -55,9 +21,10 @@
             }
         }
         .each-widget {
-            width: 250px;
+            // width: 250px;
+            min-width: 200px;
             display: grid;
-            grid-template-columns: 35% 65%;
+            grid-template-columns: 35% auto;
         }
         .footer-section {
             margin: 15px 0;

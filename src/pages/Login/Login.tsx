@@ -39,6 +39,7 @@ const Login: React.FC<LoginPropsTypes> = (props: LoginPropsTypes) => {
 			setLoginLoading(true);
 			await Auth.signIn(username, password).then(e => console.log(e));
 			setLoginLoading(false);
+			// call user role service
 			history.push('/home');
 		}
 		catch (e) {
