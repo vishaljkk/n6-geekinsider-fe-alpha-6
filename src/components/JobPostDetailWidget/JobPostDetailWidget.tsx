@@ -1,9 +1,10 @@
 import { Card, Button, Avatar } from 'antd';
 import { MdLocationOn, MdMonetizationOn, MdHistory } from "react-icons/md";
 import { iconStyles } from '../../utils';
+import { JobPostDetailWidgetPropTypes } from './types';
 import './JobPostDetailWidget.scss';
 
-const JobPostDetailWidget = (props: any) => {
+const JobPostDetailWidget: React.FC<JobPostDetailWidgetPropTypes> = (props) => {
     const { image, company, jobTitle, skills, location, ctc, experience, numberOfApplications, description, jobPostId } = props.itm;
     return (
         <div className="job-posting-detail-widget">

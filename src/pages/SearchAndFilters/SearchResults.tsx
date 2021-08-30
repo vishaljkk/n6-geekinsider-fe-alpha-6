@@ -101,12 +101,11 @@ const SingleWidget = (props: any) => {
     )
 }
 
-const SearchAndFilters: React.FC = (props: any) => {
-    // console.log(props.location.search)
-    // const query = props.location.search.replace('search?query=', '')
-    // console.log()
+const SearchAndFilters: React.FC<any> = (props) => {
+
     const [data, setData] = useState(demoData);
     const [selectedData, setSelectedData] = useState(demoData[0]);
+    
     return (
         <div className="search-and-filter-container">
             <Row>
