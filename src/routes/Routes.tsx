@@ -1,11 +1,12 @@
-import { useState, Suspense, lazy, useEffect, createContext } from 'react';
+import { Suspense, lazy, useEffect, createContext, useState } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'; 
 
-import { setSignIn, setSignOut, setUserType } from '../redux/actions';
-import { initialFormStateTypes, AppTypes } from './types';
+import { setIsAuth, setUserType } from '../redux/actions';
+import { AppTypes } from './types';
 import { isAuthenticated } from '../utils';
+import { Hub } from 'aws-amplify';
 
 const Signup = lazy(() => import('../pages/Signup'));
 const Login = lazy(() => import('../pages/Login'));
@@ -75,36 +76,52 @@ const pages = [
     }
 ];
 
-const initialFormState: initialFormStateTypes = {
-    username: "",
-    password: "",
-    email: "",
-    authCode: "",
-    formType: "signIn",
-};
-
 export const HistoryContext = createContext({});
 
 const Routes: React.FC<AppTypes> = (props) => {
 
-    const { setSignIn, setSignOut, userType, setUserType, history } = props;
-    const [formState, updateFormState] = useState(initialFormState);
-    const [user, updateUser] = useState(null);
-    const { formType } = formState;
+    const { history, location } = props;
+    const [isAuth, setIsAuth] = useState<boolean>(false);
+    const invalidLocations = ['', '/', '/login', '/signup'];
 
+    useEffect(() => {
+        setAuthListener();
+    }, [])
+    
     useEffect(() => {
         isAuthenticated().then(resp => {
             if (resp) {
-                history.push('/home');
+                setIsAuth(true);
+                // redirecting to home is these invalid urls will be requested
+                if (location?.pathname && invalidLocations.includes(location.pathname)) {
+                    history.push('/home')
+                }
             }
             else {
+                // redirecting to login when user is not authenticated
                 history.push('/login');
             }
         })
-    }, [])
+    }, [isAuth])
+
+    function setAuthListener() {
+        Hub.listen("auth", (data) => {
+            switch (data.payload.event) {
+                case "signOut":
+                    setIsAuth(false);
+                    break;
+                case "signIn":
+                    setIsAuth(true);
+                    break;
+            }
+        });
+    };
 
     return (
         <HistoryContext.Provider value={history}>
+            {isAuth && <Suspense fallback={<div/>}>
+                <NavBar history={history}/>
+            </Suspense>}
             <Switch>
                 {pages.map((page, index) => {
                     return (
@@ -123,47 +140,13 @@ const Routes: React.FC<AppTypes> = (props) => {
 }
 
 const mapStateToProps = (state: any) => ({
-    userType: state.userType
+    userType: state.userType,
+    isAuth: state.isAuth
 });
   
 const mapDispatchToProps = (dispatch: any) => bindActionCreators({
-    setSignIn, 
-    setSignOut, 
+    setIsAuth, 
     setUserType
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Routes);
-
-// backup junk code(will be deleted after successfull flow implementation)
-{/* {formType === 'confirmSignUp' || formType === 'signUp' ? (
-        <Signup
-          onChange={onChange}
-          formType={formType}
-          userType={userType}
-          setUserType={setUserType}
-          updateFormState={updateFormState}
-        />
-      ) : null} */}
-
-      {/* {formType === "signIn" && (
-        <Login
-          onChange={onChange}
-          formType={formType}
-          updateFormState={updateFormState}
-          userType={userType}
-          setUserType={setUserType}
-        />
-      )} */}
-
-      {/* {formType === "signedIn" && (
-        <>
-          <NavBar signOut={() => Auth.signOut()}/>
-          <SearchResult />
-          <LandingPage />
-          <Messages/>
-          {userType === 'recruiter' ? 
-            <RecruiterOnboarding formState={formState} getUserInfo={getUserInfo}/> : 
-            <CandidateOnboarding formState={formState} getUserInfo={getUserInfo}/>
-          }
-        </>
-      )} */}

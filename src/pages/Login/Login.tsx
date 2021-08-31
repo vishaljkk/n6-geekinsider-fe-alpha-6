@@ -4,13 +4,12 @@ import { Auth, API } from 'aws-amplify'
 import { CognitoHostedUIIdentityProvider } from "@aws-amplify/auth/lib/types";
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { LoginPropsTypes, LoginFormSubmitTypes } from './types';
-import { initialFormStateTypes } from '../../routes/types';
 
 const { TabPane } = Tabs;
 
-const Login: React.FC<LoginPropsTypes> = (props: LoginPropsTypes) => {
+const Login: React.FC<LoginPropsTypes> = (props) => {
 
-	const { userType, setUserType, updateFormState, history } = props;
+	const { setUserType, history } = props;
 	const [loginLoading, setLoginLoading] = useState<boolean>(false);
 
 	const onFinishFailed = (errorInfo: any) => {
@@ -39,6 +38,7 @@ const Login: React.FC<LoginPropsTypes> = (props: LoginPropsTypes) => {
 			setLoginLoading(true);
 			await Auth.signIn(username, password).then(e => console.log(e));
 			setLoginLoading(false);
+			// call user role service
 			history.push('/home');
 		}
 		catch (e) {
@@ -155,9 +155,10 @@ const Login: React.FC<LoginPropsTypes> = (props: LoginPropsTypes) => {
 						</Form.Item>
 						<Form.Item>
 							<div style={{ display: 'flex', justifyContent: 'space-between' }}>
-								<Button type="link">
+								{/* <Button type="link">
 									Forgot password?
-								</Button>
+								</Button> */}
+								<div/>
 								<Button type="link" onClick={setSignUpModalVisible}>
 									Register
 								</Button>

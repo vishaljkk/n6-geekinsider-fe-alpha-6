@@ -1,6 +1,7 @@
 import { Auth } from 'aws-amplify';
 
-const baseUrl = 'http://localhost:3005';
+const baseUrl = process.env.REACT_APP_BASE_URL || 'http://localhost:3005';
+
 export default {
     getJwtToken() {
         let tokenObj;

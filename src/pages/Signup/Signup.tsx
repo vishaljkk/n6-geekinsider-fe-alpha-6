@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Form, Input, Button, Alert, Modal, Tabs, notification } from 'antd';
 import { Auth } from 'aws-amplify';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import { SignupTypes, SignupTabsType, confirmSignInFormValueTypes } from './types';
+import { SignupTypes, SignupTabsType, confirmSignInFormValueTypes, confirmSignUpTypes } from './types';
 
 const { TabPane } = Tabs;
 
-const Signup: React.FC<SignupTypes> = (props: SignupTypes) => {
+const Signup: React.FC<SignupTypes> = (props) => {
 
-	const { formType, updateFormState, userType, setUserType, history } = props;
+	const { formType, setUserType, history } = props;
 	const [activeTab, setActiveTab] = useState<SignupTabsType>('candidate');
 	const [loading, setLoading] = useState<boolean>(false);
 
@@ -38,7 +38,7 @@ const Signup: React.FC<SignupTypes> = (props: SignupTypes) => {
 		}
 	};
 
-	const confirmSignup = async (values: any) => {
+	const confirmSignup = async (values: confirmSignUpTypes) => {
 		const { email, authCode } = values;
 		try {
 			setLoading(true);

@@ -1,10 +1,10 @@
-import './configureAmplify';
-import './App.scss';
-import Routes from './routes';
 import { Suspense } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import Routes from './routes';
 import { store } from './redux/store';
+import './configureAmplify';
+import './App.scss';
  
 const App: React.FC = () => {
   return (
@@ -14,7 +14,7 @@ const App: React.FC = () => {
           <Route path="/" render={(props: any) => <Routes {...props} />} />
         </BrowserRouter>
       </Provider>
-      </Suspense>
+    </Suspense>
   );
 }
 

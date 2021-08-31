@@ -6,6 +6,12 @@
     margin: 0 3px;
 }
 
+.landing-page-container {
+    .landing-right-column {
+        margin-top: 20px;
+    }
+}
+
 .recent-chat-widget {
     .recent-chat-widget-container {
         padding: 5px 20px 0px 15px;
@@ -71,15 +77,6 @@
                 right: 10px;
                 bottom: 5px;
             }
-        }
-    }
-}
-
-.quick-profile {
-    .ant-card {
-        margin: 40px 0;
-        .quick-profile-content {
-            text-align: center;
         }
     }
 }

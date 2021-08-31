@@ -1,11 +1,7 @@
 import { userTypeTypes, StateUITypes } from '../../routes/types';
 
 export interface LoginPropsTypes {
-	onChange?: (e: any) => void,
-	formType?: StateUITypes,
-	userType?: userTypeTypes, 
-	setUserType?: any,
-	updateFormState: any,
+	setUserType: (e: userTypeTypes) => void,
 	history: any,
 }
 
