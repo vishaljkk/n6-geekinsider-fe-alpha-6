@@ -1,0 +1,38 @@
+.search-and-filter-container {
+    height: 100%;
+    .ant-row {
+        height: 90%;
+    }
+    .ant-col {
+        height: 100%;
+    }
+    
+    .search-result-widget-container {
+        // display: flex;
+        flex-wrap: wrap;
+        height: 98%;
+        overflow: auto;
+        margin-top: 20px;
+        .ant-card {
+            margin: 5px;
+            // width: 100%;
+            &:first-child {
+                margin: 0 5px 5px 5px;
+            }
+        }
+        .each-widget {
+            // width: 250px;
+            min-width: 200px;
+            display: grid;
+            grid-template-columns: 35% auto;
+        }
+        .footer-section {
+            margin: 15px 0;
+            .numbers-applied {
+                position: absolute;
+                right: 10px;
+                bottom: 5px;
+            }
+        }
+    }
+}
