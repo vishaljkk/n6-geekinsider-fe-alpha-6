@@ -1,8 +1,8 @@
-import { userTypeTypes } from "../../routes/types";
+import { UserTypeTypes } from "../../routes/types";
 
 export interface NavBarPropTypes { 
     history: any ,
     setIsAuth: (e: boolean) => void,
-    userType?: any
-    setUserType: (e: userTypeTypes) => void
+    userType?: UserTypeTypes,
+    setUserType: (e: UserTypeTypes) => void
 }

@@ -2,12 +2,13 @@ import React from 'react';
 import { Spin } from 'antd';
 import { LoaderPropTypes } from './types';
 import { LoadingOutlined } from '@ant-design/icons';
+import './Loader.scss';
 
 const Loader: React.FC<LoaderPropTypes> = (props) => {
-    const { fontSize } = props;
+    const { fontSize, text } = props;
     return (
         <div className='loader--generic'>
-            <Spin indicator={<LoadingOutlined style={{ fontSize: fontSize || 24 }} spin />} />
+            <Spin indicator={<LoadingOutlined style={{ fontSize: fontSize || 24 }} spin/>} tip={text} />
         </div>
     );
 }

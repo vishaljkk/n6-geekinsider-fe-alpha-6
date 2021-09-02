@@ -1,21 +1,20 @@
-import { Form, Input, Button, Select, InputNumber, Tabs } from 'antd';
+import { Form, Input, Button, Select } from 'antd';
+import { CandidateOnboardingPropTypes, CandidateSubmitTypes } from './types';
 import makeRequest from '../../utils/makeRequest';
 import './onboarding.scss';
 
 const { Option } = Select;
 
-const CandidateOnboarding: React.FC<any> = (props) => {
+const CandidateOnboarding: React.FC<CandidateOnboardingPropTypes> = (props) => {
     const { history } = props;
 
     const cities = ['Banglore', 'Pune', 'Chennai', 'Kolkata', 'Mumbai', 'Delhi', 'Indore', 'Vadodara'];
     const skills = ['React', 'Angular', 'Vue', 'Ember', 'NodeJS', 'JavaScript', 'HTML', 'CSS', 'SASS'];
 
-	const onFinish = (values: any) => {
-        // console.log('Success:', values);
+	const onFinish = (values: CandidateSubmitTypes) => {
         const tempValues = Object.assign({}, values);
         const skillsString = Object.assign([], tempValues.skills);
         tempValues.skills = skillsString.join(',');
-        console.log(tempValues)
         makeRequest.post('/api/users/user', tempValues)
             .then(data => {
                 console.log('Success:', data);
@@ -26,8 +25,8 @@ const CandidateOnboarding: React.FC<any> = (props) => {
             });
 	};
 
-	const onFinishFailed = (errorInfo: any) => {
-		console.log('Failed:', errorInfo);
+	const onFinishFailed = (errorInfo: object) => {
+		// console.log('Failed:', errorInfo);
 	};
 
 	return (
@@ -64,13 +63,8 @@ const CandidateOnboarding: React.FC<any> = (props) => {
                 >
                     <Select
                         showSearch
-                        // style={{ width: 200 }}
                         placeholder="Please select your current location"
                         optionFilterProp="children"
-                        // onChange={onChange}
-                        // onFocus={onFocus}
-                        // onBlur={onBlur}
-                        // onSearch={onSearch}
                         filterOption={(input, option) =>
                             option?.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                         }
@@ -122,7 +116,6 @@ const CandidateOnboarding: React.FC<any> = (props) => {
                             required: true, 
                             message: 'Please select atleast three skills!',
                             validator(_, value) {
-                                console.log(value)
                                 if (value && value.length>=3) {
                                     return Promise.resolve();
                                 }
@@ -165,15 +158,9 @@ const CandidateOnboarding: React.FC<any> = (props) => {
                 </Form.Item>
 
                 <Form.Item wrapperCol={{ offset: 8, span: 12 }}>
-                    {/*<div style={{ display: 'flex', justifyContent: 'flex-end' }}>*/}
-                    <div>
-                        <Button type="primary" htmlType="submit">
-                            Submit details
-                        </Button>
-                        {/* <Button style={{ marginLeft: '10px' }}>
-                            Skip
-                        </Button> */}
-                    </div>
+                    <Button type="primary" htmlType="submit">
+                        Submit details
+                    </Button>
                 </Form.Item>
             </Form>
 		</div>

@@ -1,7 +1,11 @@
 .quick-profile {
     .ant-card {
-        margin: 40px 0;
-        .quick-profile-content {
+        margin: 20px 0;
+        .quick-profile__avatar {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .quick-profile__content {
             text-align: center;
         }
     }

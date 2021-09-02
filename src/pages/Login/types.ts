@@ -1,7 +1,7 @@
-import { userTypeTypes, StateUITypes } from '../../routes/types';
+import { UserTypeTypes } from '../../routes/types';
 
 export interface LoginPropsTypes {
-	setUserType: (e: userTypeTypes) => void,
+	setUserType: (e: UserTypeTypes) => void,
 	history: any,
 	setIsAuth: (e: boolean) => void
 }

@@ -5,10 +5,10 @@ import { connect } from 'react-redux';
 
 import QuickProfileWidget from '../../components/QuickProfileWidget';
 import CandidateDetails from './CandidateDetails';
-import { StateTypes } from '../../redux/types';
-import { fetchProfileDetails } from '../../redux/actions';
-import { ProfilePropsTypes } from './types';
 import Loader from '../../components/Loader';
+import { fetchProfileDetails } from '../../redux/actions';
+import { StateTypes } from '../../redux/types';
+import { ProfilePropsTypes } from './types';
 
 import './Profile.scss';
 

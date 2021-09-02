@@ -1,14 +1,14 @@
 import { Card, Button, Avatar, Tooltip } from 'antd';
-import { MdLocationOn, MdMonetizationOn, MdHistory, MdAccountCircle } from "react-icons/md";
 import { useHistory } from 'react-router-dom';
+import { MdLocationOn, MdMonetizationOn, MdHistory, MdAccountCircle } from "react-icons/md";
 import { iconStyles } from '../../utils';
 
 import './RecruiterDetails.scss';
 
-const SingleWidget = (props: any) => {
+const SingleWidget: React.FC<any> = (props) => {
     const { image, company, jobTitle, skills, location, ctc, experience, numberOfApplications } = props.itm;
     const handlePostVisible = (postId: string) => {
-        console.log(postId);
+        // console.log(postId);
     }
     return (
         <Card hoverable>
@@ -30,13 +30,13 @@ const SingleWidget = (props: any) => {
     )
 }
 
-const RecruiterDetails = (props: any) => {
+const RecruiterDetails: React.FC<any> = (props) => {
 
     const { about, empSize, skills, location, name, site, numberOfApplications, whatsappNumber } = props.itm;
     const history = useHistory();
 
     return (
-        <div className="job-posting-detail-widget">
+        <div className="recruiter__profile__right">
             <Card>
                 <section className="each-widget">
                     <div className="right-section">

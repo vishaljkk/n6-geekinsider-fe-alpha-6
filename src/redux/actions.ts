@@ -1,25 +1,18 @@
-import { userTypeTypes } from '../routes/types';
+import { UserTypeTypes } from '../routes/types';
 import makeRequest from '../utils/makeRequest';
+import { DispatchType } from './types';
 
 export const setIsAuth = (data: boolean) => {
-    return (dispatch: any) => {
+    return (dispatch: DispatchType) => {
         dispatch({
             type:"SET_AUTH",
             payload: data
         })
     }
 }
-// export const setSignOut = () => {
-//     return (dispatch: any) => {
-//         dispatch({
-//             type:"LOGGEDOUT",
-//             payload: null
-//         })
-//     }
-// }
 
-export const setUserType = (userType: userTypeTypes) => {
-    return (dispatch: any) => {
+export const setUserType = (userType: UserTypeTypes) => {
+    return (dispatch: DispatchType) => {
         dispatch({
             type: 'SET_USER_TYPE',
             payload: userType
@@ -28,7 +21,7 @@ export const setUserType = (userType: userTypeTypes) => {
 }
 
 export const fetchProfileDetails = () => {
-    return (dispatch: any) => {
+    return (dispatch: DispatchType) => {
         makeRequest.get('/api/users/user')
             .then(data => {
                 dispatch({
@@ -43,7 +36,7 @@ export const fetchProfileDetails = () => {
 }
 
 export const fetchMessages = (section: string, id: string) => {
-    return (dispatch: any) => {
+    return (dispatch: DispatchType) => {
         makeRequest.get('/api/message')
             .then(resp => {
                 console.log(resp)
@@ -59,7 +52,7 @@ export const fetchMessages = (section: string, id: string) => {
 }
 
 export const getJobDetails = (section: string, id: string) => {
-    return (dispatch: any) => {
+    return (dispatch: DispatchType) => {
         // makeRequest.post()
         //     .then(resp => {
         //         console.log(resp)
@@ -67,15 +60,15 @@ export const getJobDetails = (section: string, id: string) => {
         //     .catch(err => {
         //         console.error(err)
         //     })
-        dispatch({
-            type: 'SET_LANDING_DATA',
-            // payload: data
-        })
+        // dispatch({
+        //     type: 'SET_LANDING_DATA',
+        //     payload: data
+        // })
     }
 }
 
 export const fetchLandingPageData = () => {
-    return (dispatch: any) => {
+    return (dispatch: DispatchType) => {
         // makeRequest.post()
         //     .then(resp => {
         //         console.log(resp)
@@ -83,15 +76,15 @@ export const fetchLandingPageData = () => {
         //     .catch(err => {
         //         console.error(err)
         //     })
-        dispatch({
-            type: 'SET_LANDING_DATA',
-            // payload: data
-        })
+        // dispatch({
+        //     type: 'SET_LANDING_DATA',
+        //     payload: data
+        // })
     }
 }
 
 export const getLandingPageData = () => {
-    return (dispatch: any) => {
+    return (dispatch: DispatchType) => {
         // makeRequest.post()
         //     .then(resp => {
         //         console.log(resp)
@@ -99,10 +92,10 @@ export const getLandingPageData = () => {
         //     .catch(err => {
         //         console.error(err)
         //     })
-        dispatch({
-            type: 'SET_LANDING_DATA',
-            // payload: data
-        })
+        // dispatch({
+        //     type: 'SET_LANDING_DATA',
+        //     payload: data
+        // })
     }
 }
 
@@ -110,11 +103,10 @@ interface RecruiterOnBoardingDataTypes {
     name: string,
     preferredIndustry: string,
     location: string,
-
 }
 
 export const saveRecruiterData = (values: RecruiterOnBoardingDataTypes) => {
-    return (dispatch: any) => {
+    return (dispatch: DispatchType) => {
         makeRequest.post('/api/users/user', values)
             .then(data => {
                 console.log('Success:', data);
@@ -131,7 +123,7 @@ export const saveRecruiterData = (values: RecruiterOnBoardingDataTypes) => {
 }
 
 export const setLoading = (value: boolean) => {
-    return (dispatch: (e: { type: string, payload: any }) => void) => {
+    return (dispatch: DispatchType) => {
         dispatch({
             type: 'SET_LOADING',
             payload: value

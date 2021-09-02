@@ -1,7 +1,7 @@
-import { userTypeTypes } from "../routes/types";
+import { UserTypeTypes } from "../routes/types";
 
 export interface StateTypes {
-    userType: userTypeTypes | '',
+    userType: UserTypeTypes | '',
     isAuth: boolean,
     profileDetails: object,
     messages: object,
@@ -14,3 +14,5 @@ export interface actionTypes {
     type: string,
     payload: any
 }
+
+export type DispatchType = (e: actionTypes) => void;

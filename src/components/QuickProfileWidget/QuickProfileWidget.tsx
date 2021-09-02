@@ -1,25 +1,17 @@
 import { Card, Avatar } from 'antd';
-import { useHistory } from 'react-router-dom';
+import { QuickProfilePropTypes } from './types';
 import './QuickProfileWidget.scss';
 
-const QuickProfileWidget = (props: any) => {
-    const history = useHistory();
+const QuickProfileWidget: React.FC<QuickProfilePropTypes> = (props) => {
     const { title, subtitle } = props;
     return (
         <div className="quick-profile">
-            <Card
-                hoverable
-                onClick={() => history.push('/profile')}
-            >
-                <div style={{ textAlign: 'center', marginBottom: '15px' }}>
+            <Card hoverable>
+                <div className="quick-profile__avatar">
                     <Avatar size={55}>A</Avatar>
                 </div>
-                <div className="quick-profile-content">
-                    <h3>
-                        <strong title={title}>
-                            {title}
-                        </strong>
-                    </h3>
+                <div className="quick-profile__content">
+                    <h3><strong title={title}>{title}</strong></h3>
                     <p>{subtitle}</p>
                     <a>Update profile</a>
                 </div>
