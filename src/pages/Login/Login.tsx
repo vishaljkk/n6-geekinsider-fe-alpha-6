@@ -3,13 +3,18 @@ import { Form, Input, Button, Modal, Tabs, notification } from 'antd';
 import { Auth, API } from 'aws-amplify'
 import { CognitoHostedUIIdentityProvider } from "@aws-amplify/auth/lib/types";
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux'; 
+
+import { setUserType } from '../../redux/actions';
+import { StateTypes } from '../../redux/types';
 import { LoginPropsTypes, LoginFormSubmitTypes } from './types';
 
 const { TabPane } = Tabs;
 
 const Login: React.FC<LoginPropsTypes> = (props) => {
 
-	const { setUserType, history } = props;
+	const { setUserType, history, setIsAuth } = props;
 	const [loginLoading, setLoginLoading] = useState<boolean>(false);
 
 	const onFinishFailed = (errorInfo: any) => {
@@ -36,7 +41,13 @@ const Login: React.FC<LoginPropsTypes> = (props) => {
 		const { username, password } = values;
 		try {
 			setLoginLoading(true);
-			await Auth.signIn(username, password).then(e => console.log(e));
+			const resp = await Auth.signIn(username, password);
+
+			const type = resp.signInUserSession.accessToken.payload["cognito:groups"][0] === 'userCandidate' ? 'candidate' : 'recruiter'
+			console.log(type)
+			setUserType(type);
+
+			setIsAuth(true);
 			setLoginLoading(false);
 			// call user role service
 			history.push('/home');
@@ -171,4 +182,12 @@ const Login: React.FC<LoginPropsTypes> = (props) => {
 	);
 }
 
-export default Login;
+const mapStateToProps = (state: StateTypes) => ({
+    userType: state.userType
+});
+
+const mapDispatchToProps = (dispatch: any) => bindActionCreators({
+    setUserType
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

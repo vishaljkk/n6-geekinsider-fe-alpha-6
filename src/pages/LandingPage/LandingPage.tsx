@@ -1,41 +1,30 @@
 import { useEffect } from 'react';
-import { Row, Col } from 'antd';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import RecentChatWidget from './RecentChatWidget';
-import RecommCandidateWidget from './RecomendedJobsWidget';
-import QuickProfileWidget from '../../components/QuickProfileWidget/QuickProfileWidget';
-import TopTrending from './TopTrending';
-import RecommenededCandidatesWidget from './RecommenededCandidatesWidget';
+
 import { fetchLandingPageData } from '../../redux/actions';
+import { StateTypes } from '../../redux/types';
+import CandidateLanding from './Candidate';
+import RecruiterLanding from './Recruiter';
 
 const LandingPage: React.FC = (props: any) => {
-    const { landingPageData, fetchLandingPageData } = props;
+    const { landingData, fetchLandingPageData, userType } = props;
 
     useEffect(() => {
-        console.log(landingPageData);
         fetchLandingPageData()
     }, [])
     
+    console.log(userType)
     return (
         <div className="landing-page-container">
-            <Row>
-                <Col span={6} offset={1}>
-                    <QuickProfileWidget />
-                    <RecommenededCandidatesWidget />
-                </Col>
-                <Col span={15} offset={1} className="landing-right-column">
-                    <RecentChatWidget />
-                    <RecommCandidateWidget />
-                    <TopTrending />
-                </Col>
-            </Row>
+            {userType === 'candidate' ? <CandidateLanding /> : <RecruiterLanding />}
         </div>
     )
 }
 
-const mapStateToProps = (state: any) => ({
-    landingPageData: state.landingPageData
+const mapStateToProps = (state: StateTypes) => ({
+    landingData: state.landingData,
+    userType: state.userType
 });
 
 const mapDispatchToProps = (dispatch: any) => bindActionCreators({

@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { Tooltip, Button, Card, Tag, Avatar } from 'antd';
+import { useHistory } from 'react-router-dom';
 import { MdLocationOn, MdMonetizationOn, MdHistory } from "react-icons/md";
+
 import { iconStyles } from '../../utils';
 import './LandingPage.scss';
-import { HistoryContext } from '../../routes/Routes';
+// import { HistoryContext } from '../../routes/Routes';
 
 const demoData = [
     {
@@ -65,6 +67,7 @@ const SingleWidget = (props: any) => {
 
 const RecommCandidateWidget: React.FC<any> = () => {
     const [data, setData] = useState(demoData);
+    const history = useHistory();
     return (
         <div className="recommended-job-widget">
             <h2>Recommended jobs for you</h2>
@@ -73,9 +76,7 @@ const RecommCandidateWidget: React.FC<any> = () => {
             </div>
             {/* <SingleWidget itm={data[0]} /> */}
             <div className="see-more-container">
-                <HistoryContext.Consumer>
-                    {(history: any) => <Button onClick={() => history.push('/search')}>See more...</Button>}
-                </HistoryContext.Consumer>
+                <Button onClick={() => history.push('/search')}>See more...</Button>
             </div>
         </div>
     )

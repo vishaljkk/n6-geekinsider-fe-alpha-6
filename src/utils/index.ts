@@ -10,9 +10,15 @@ export const iconStyles: CSS.Properties<string | number> = {
 export const isAuthenticated = async () => {
     return Auth.currentAuthenticatedUser()
         .then(e => {
-            return true;
+            return {
+                result: true,
+                ...e
+            };
         })
         .catch(err => {
-            return false;
+            return {
+                result: false,
+                ...err
+            }
         })
 }

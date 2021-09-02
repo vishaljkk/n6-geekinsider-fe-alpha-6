@@ -1,12 +1,4 @@
 @import 'antd/dist/antd.css';
-// @import './components/Onboarding/onboarding.scss';
-// @import './components/Messages/messages.scss';
-// @import './components/ProfileView/ProfileView.scss';
-// @import './components/LandingPage/LandingPage.scss';
-
-// .App {
-//   text-align: center;
-// }
 
 .tags {
   width: fit-content;
@@ -25,4 +17,18 @@
   justify-content: center;
   //font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.loader--global {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: "10px";
+  z-index: 999;
 }

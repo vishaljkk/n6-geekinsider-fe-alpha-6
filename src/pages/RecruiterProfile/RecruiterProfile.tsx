@@ -4,44 +4,32 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import QuickProfileWidget from '../../components/QuickProfileWidget';
-import CandidateDetails from './CandidateDetails';
+import CandidateDetails from './RecruiterDetails';
 import { StateTypes } from '../../redux/types';
 import { fetchProfileDetails } from '../../redux/actions';
 import { ProfilePropsTypes } from './types';
 import Loader from '../../components/Loader';
+import './RecruiterProfile.scss';
 
-import './Profile.scss';
-
-const demoData = {
-    jobPostId: 'id5',
-    image: 'https://media-exp1.licdn.com/dms/image/C560BAQF6H8gAs-JyFg/company-logo_200_200/0/1627543110554?e=1637798400&v=beta&t=PwAcQBk0CKYnt8DW1ftjJVqkHWlct1UCyvb7AtTUYCU',
-    company: 'Ron',
-    jobTitle: 'Full stack developer',
-    skills: ['React', 'JavaScript'],
-    location: 'Mumbai',
-    ctc: '12L - 15L/yr',
-    experience: '3-5 years',
-    companyId: 'some id',
-    description: "As a Frontend Developer with a passion for building great products, you'll be a part of the team that works on building our ads platform. Our current customers include top public listed companies across FMCG, Healthcare, Food, Technology, BFSI & more."
-}
-
-const Profile: React.FC<ProfilePropsTypes> = (props) => {
+const RecruiterProfile: React.FC<ProfilePropsTypes> = (props) => {
 
     const { profileDetails, fetchProfileDetails } = props;
+    const { name, preferredIndustry } = profileDetails;
 
     useEffect(() => {
         fetchProfileDetails();
     }, [])
+
 
     return (
         <div className="profile">
             {Object.keys(profileDetails).length ? 
                 <Row>
                     <Col span={6} offset={1}>
-                        <QuickProfileWidget />
+                        <QuickProfileWidget title={name} subtitle={preferredIndustry}/>
                     </Col>
                     <Col span={15} offset={1}>
-                        <CandidateDetails itm={demoData} />
+                        <CandidateDetails itm={profileDetails} />
                     </Col>
                 </Row>
                 :
@@ -59,4 +47,4 @@ const mapDispatchToProps = (dispatch: any) => bindActionCreators({
     fetchProfileDetails
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Profile);
+export default connect(mapStateToProps, mapDispatchToProps)(RecruiterProfile);

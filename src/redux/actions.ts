@@ -27,35 +27,34 @@ export const setUserType = (userType: userTypeTypes) => {
     }
 }
 
-export const getProfileDetails = (id: string) => {
+export const fetchProfileDetails = () => {
     return (dispatch: any) => {
-        // makeRequest.post({ id })
-        //     .then(resp => {
-        //         console.log(resp)
-        //     })
-        //     .catch(err => {
-        //         console.error(err)
-        //     })
-        dispatch({
-            type: 'SET_PROFILE_DETAIL',
-            // payload: userType
-        })
+        makeRequest.get('/api/users/user')
+            .then(data => {
+                dispatch({
+                    type: 'SET_PROFILE_DETAIL',
+                    payload: data.user
+                })
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
     }
 }
 
-export const getMessages = (section: string, id: string) => {
+export const fetchMessages = (section: string, id: string) => {
     return (dispatch: any) => {
-        // makeRequest.post()
-        //     .then(resp => {
-        //         console.log(resp)
-        //     })
-        //     .catch(err => {
-        //         console.error(err)
-        //     })
-        dispatch({
-            type: 'SET_MESSAGES',
-            // payload: userType
-        })
+        makeRequest.get('/api/message')
+            .then(resp => {
+                console.log(resp)
+                // dispatch({
+                //     type: 'SET_MESSAGES',
+                //     // payload: userType
+                // })
+            })
+            .catch(err => {
+                console.error(err)
+            })
     }
 }
 
@@ -103,6 +102,39 @@ export const getLandingPageData = () => {
         dispatch({
             type: 'SET_LANDING_DATA',
             // payload: data
+        })
+    }
+}
+
+interface RecruiterOnBoardingDataTypes {
+    name: string,
+    preferredIndustry: string,
+    location: string,
+
+}
+
+export const saveRecruiterData = (values: RecruiterOnBoardingDataTypes) => {
+    return (dispatch: any) => {
+        makeRequest.post('/api/users/user', values)
+            .then(data => {
+                console.log('Success:', data);
+                // dispatch({
+                //     type: 'SET_LANDING_DATA',
+                //     // payload: data
+                // })
+                // history.push('/home');
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }
+}
+
+export const setLoading = (value: boolean) => {
+    return (dispatch: (e: { type: string, payload: any }) => void) => {
+        dispatch({
+            type: 'SET_LOADING',
+            payload: value
         })
     }
 }

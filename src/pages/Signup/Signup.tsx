@@ -2,28 +2,32 @@ import React, { useState, useEffect } from 'react';
 import { Form, Input, Button, Alert, Modal, Tabs, notification } from 'antd';
 import { Auth } from 'aws-amplify';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux'; 
+
+import { setIsAuth, setUserType } from '../../redux/actions';
 import { SignupTypes, SignupTabsType, confirmSignInFormValueTypes, confirmSignUpTypes } from './types';
+import makeRequest from '../../utils/makeRequest';
+import { StateTypes } from '../../redux/types';
 
 const { TabPane } = Tabs;
+interface UserDetailTypes {
+	email: string,
+	password: string
+}
 
 const Signup: React.FC<SignupTypes> = (props) => {
 
-	const { formType, setUserType, history } = props;
+	const { userType, setUserType, history, setIsAuth } = props;
 	const [activeTab, setActiveTab] = useState<SignupTabsType>('candidate');
 	const [loading, setLoading] = useState<boolean>(false);
-
-	useEffect(() => {
-		if (formType === 'confirmSignUp') {
-			setActiveTab('emailVerification');
-		}
-	}, [formType])
+	const [userDetail, setUserDetail] = useState<UserDetailTypes>({ email: '', password: '`' })
 
 	const signUp = async (values: any) => {
 		const { email, password } = values;
 		try {
 			setLoading(true);
 			await Auth.signUp({ username: email, password, attributes: { email } });
-			// updateFormState((prevState: initialFormStateTypes) => ({ ...prevState, formType: "confirmSignUp" }));
 			setActiveTab('emailVerification');
 			setLoading(false);
 		}
@@ -43,13 +47,17 @@ const Signup: React.FC<SignupTypes> = (props) => {
 		try {
 			setLoading(true);
 			await Auth.confirmSignUp(email, authCode);
+			await Auth.signIn(userDetail.email, userDetail.password);
+			await makeRequest.post('/api/users/auth', { groupName: getCandidateNamesForApi(userType) })
+			await Auth.signOut();
+			await Auth.signIn(userDetail.email, userDetail.password)
 			notification.success({
 				message: 'Successfully created account',
 				description: email
 			})
-			history.push('/login');
+			setIsAuth(true);
+			history.push(`/${userType}/onboarding`);
 			setLoading(false);
-			localStorage.setItem('newlyCreatedUser', email)
 		}
 		catch(e) {
 			if (e?.code === 'CodeMismatchException') {
@@ -57,6 +65,7 @@ const Signup: React.FC<SignupTypes> = (props) => {
 					message: e?.message
 				})
 			}
+			setIsAuth(false);
 			setLoading(false);
 		  	console.error(e);
 		}
@@ -70,27 +79,19 @@ const Signup: React.FC<SignupTypes> = (props) => {
 
 	const openSignInModal = () => history.push('/login');
 
-	// const addToGroup = async () => {
-	// 	const email = localStorage.getItem('email');
-	// 	const apiName = 'AdminQueries';
-	// 	const path = '/addUserToGroup';
-	// 	const myInit = {
-	// 		body: {
-	// 		  "username" : email,
-	// 		  "groupname": 'recruiter'
-	// 		},
-	// 		headers: {
-	// 		  'Content-Type' : 'application/json',
-	// 		  Authorization: `${(await Auth.currentSession()).getAccessToken().getJwtToken()}`
-	// 		}
-	// 	}
-	// 	return await API.post(apiName, path, myInit);
-	// }
+	const handleConfirmSignup = async (val: confirmSignInFormValueTypes) => {
+		confirmSignup({ ...val, email: userDetail.email });
+	}
 
-	const handleConfirmSignup = (val: confirmSignInFormValueTypes) => {
-		const email = localStorage.getItem('email');
-		confirmSignup({ ...val, email }); 
-		// if (userType === 'recruiter') addToGroup();
+	const getCandidateNamesForApi = (type: any) => {
+		switch(type) {
+			case 'candidate':
+				return 'userCandidate';
+			case 'recruiter':
+				return 'userRecruiter';
+			default:
+				return 'userCandidate';
+		}
 	}
 
 	return (
@@ -109,7 +110,7 @@ const Signup: React.FC<SignupTypes> = (props) => {
 						name="basic"
 						onFinish={val => {
 							signUp(val);
-							localStorage.setItem('email', val.email);
+							setUserDetail({ ...val });
 							setUserType('candidate');
 						}}
 						onFinishFailed={onFinishFailed}
@@ -147,7 +148,7 @@ const Signup: React.FC<SignupTypes> = (props) => {
 						name="basic"
 						onFinish={val => {
 							signUp(val);
-							localStorage.setItem('email', val.email);
+							setUserDetail({ ...val });
 							setUserType('recruiter');
 						}}
 						onFinishFailed={onFinishFailed}
@@ -172,11 +173,9 @@ const Signup: React.FC<SignupTypes> = (props) => {
 							</Button>
 						</Form.Item>
 						<Form.Item>
-							<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-								<Button type="link" onClick={openSignInModal}>
-									Sign in
-								</Button>
-							</div>
+							<Button type="link" onClick={openSignInModal}>
+								Sign in
+							</Button>
 						</Form.Item>
 					</Form>
 				</TabPane>
@@ -207,4 +206,12 @@ const Signup: React.FC<SignupTypes> = (props) => {
 	);
 }
 
-export default Signup;
+const mapStateToProps = (state: StateTypes) => ({
+    userType: state.userType
+});
+  
+const mapDispatchToProps = (dispatch: any) => bindActionCreators({
+    setUserType
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);

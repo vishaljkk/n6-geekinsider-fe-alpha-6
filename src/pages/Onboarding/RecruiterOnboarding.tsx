@@ -1,25 +1,21 @@
 import React, { useState } from 'react';
 import { Form, Input, Button, Select, InputNumber, Tabs } from 'antd';
-import apiCaller from '../../utils/makeRequest';
+import makeRequest from '../../utils/makeRequest';
 import './onboarding.scss';
 
 const { Option } = Select;
 
 const RecruiterOnboarding = (props: any) => {
-    const { formState, getUserInfo } = props;
+    const { history, setIsAuth, isAuth } = props;
     const industryTypes = ['Information Technology & Services', 'Hospital & Health Care', 'Construction', 'Retail', 'Education Management', 'Financial Services', 'Accounting', 'Computer Software', 'Higher Education', 'Automotive'];
     const cities = ['Banglore', 'Pune', 'Chennai', 'Kolkata', 'Mumbai', 'Delhi', 'Indore', 'Vadodara'];
     const skills = ['React', 'Angular', 'Vue', 'Ember', 'NodeJS', 'JavaScript', 'HTML', 'CSS', 'SASS']
 
-    console.log(formState);
 	const onFinish = (values: any) => {
-		apiCaller.post('/recruiter/onboard', values)
-            .then(data => {
-                console.log('Success:', data);
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
+		const tempValues = Object.assign({}, values);
+        const skillsString = Object.assign([], tempValues.skills);
+        tempValues.skills = skillsString.join(',');
+        // saveRecruiterData(tempValues);
 	};
 
 	const onFinishFailed = (errorInfo: any) => {
@@ -28,7 +24,8 @@ const RecruiterOnboarding = (props: any) => {
 
 	return (
         <div className="onboarding">
-            <header className="App-header">Create your Recruiter profile</header>
+            {/* <header className="App-header">Create your Recruiter profile</header> */}
+            {/* <h2>Create your Recruiter profile</h2> */}
             <Form
                 name="Candidate onboarding"
                 labelCol={{ span: 8 }}
@@ -38,8 +35,8 @@ const RecruiterOnboarding = (props: any) => {
                 onFinishFailed={onFinishFailed}
             >
                 <Form.Item
-                    label="Company name"
-                    name="companyName"
+                    label="Company/Name"
+                    name="name"
                     rules={[{ required: true, message: 'Please enter the company name!' }]}
                 >
                     <Input placeholder="Please enter the company name" />
@@ -47,18 +44,13 @@ const RecruiterOnboarding = (props: any) => {
 
                 <Form.Item
                     label="Industry"
-                    name="industry"
+                    name="preferredIndustry"
                     rules={[{ required: true, message: 'Please enter the company name!' }]}
                 >
                     <Select
                         showSearch
-                        // style={{ width: 200 }}
                         placeholder="Select your current industry type"
                         optionFilterProp="children"
-                        // onChange={onChange}
-                        // onFocus={onFocus}
-                        // onBlur={onBlur}
-                        // onSearch={onSearch}
                         filterOption={(input, option) =>
                             option?.children.toLowerCase().includes(input.toLowerCase())
                         }
@@ -74,13 +66,8 @@ const RecruiterOnboarding = (props: any) => {
                 >
                     <Select
                         showSearch
-                        // style={{ width: 200 }}
                         placeholder="Please select your current location"
                         optionFilterProp="children"
-                        // onChange={onChange}
-                        // onFocus={onFocus}
-                        // onBlur={onBlur}
-                        // onSearch={onSearch}
                         filterOption={(input, option) =>
                             option?.children.toLowerCase().includes(input.toLowerCase())
                         }
@@ -108,17 +95,9 @@ const RecruiterOnboarding = (props: any) => {
                     <Input placeholder="Please add your whatsapp number" />
                 </Form.Item>
 
-                {/* <Form.Item
-                    label="Email"
-                    name="email"
-                    rules={[{ required: true, message: 'Please input your password!' }]}
-                >
-                    <Input placeholder="Please enter an email address" />
-                </Form.Item> */}
-
                 <Form.Item
-                    label="Employee size"
-                    name="numberOfEmployees"
+                    label="Number of employees"
+                    name="empSize"
                     rules={[{ required: true, message: 'Please input your password!' }]}
                 >
                     <Input placeholder="e.g 10-1000 format" />
@@ -160,20 +139,16 @@ const RecruiterOnboarding = (props: any) => {
 
                 <Form.Item
                     label="Website"
-                    name="website"
+                    name="site"
                     rules={[{ required: false, message: 'Please input your password!', type: 'url' }]}
                 >
                     <Input placeholder="website" />
                 </Form.Item>
 
                 <Form.Item wrapperCol={{ offset: 8, span: 12 }}>
-                    {/*<div style={{ display: 'flex', justifyContent: 'flex-end' }}>*/}
                     <div>
                         <Button type="primary" htmlType="submit">
                             Submit details
-                        </Button>
-                        <Button style={{ marginLeft: '10px' }}>
-                            Skip
                         </Button>
                     </div>
                 </Form.Item>

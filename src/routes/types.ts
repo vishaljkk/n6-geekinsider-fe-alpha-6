@@ -1,6 +1,6 @@
 export type StateUITypes = 'loading' | 'signedIn' | 'signIn' | 'confirmSignUp' | 'forgotPasswordSubmit' | 'signUp' | null;
 
-export type userTypeTypes = 'candidate' | 'recruiter';
+export type userTypeTypes = 'candidate' | 'recruiter' | '';
 
 export interface initialFormStateTypes {
     username: string,
@@ -11,10 +11,10 @@ export interface initialFormStateTypes {
 }
 
 export interface AppTypes {
-    setSignIn: (e: userTypeTypes) => void,
-    setSignOut: () => void,
-    setUserType: (e: userTypeTypes) => void,
     userType: userTypeTypes,
-    history?: any,
-    location?: any
+    history: any,
+    location: any,
+    isAuth: boolean,
+    setIsAuth: (e: boolean) => void,
+    loading: boolean
   }

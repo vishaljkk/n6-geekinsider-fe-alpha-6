@@ -1,25 +1,25 @@
-import { Auth } from 'aws-amplify';
 import { Form, Input, Button, Select, InputNumber, Tabs } from 'antd';
-import apiCaller from '../../utils/makeRequest';
+import makeRequest from '../../utils/makeRequest';
 import './onboarding.scss';
 
 const { Option } = Select;
 
-const CandidateOnboarding = (props: any) => {
-    const { formState, getUserInfo } = props;
+const CandidateOnboarding: React.FC<any> = (props) => {
+    const { history } = props;
+
     const cities = ['Banglore', 'Pune', 'Chennai', 'Kolkata', 'Mumbai', 'Delhi', 'Indore', 'Vadodara'];
     const skills = ['React', 'Angular', 'Vue', 'Ember', 'NodeJS', 'JavaScript', 'HTML', 'CSS', 'SASS'];
-    console.log(formState)
-
-    getUserInfo().then((resp:any) => {
-        console.log(resp.idToken.jwtToken)
-    }).catch((error: any) => console.log(error))
 
 	const onFinish = (values: any) => {
-        console.log('Success:', values);
-        apiCaller.post('/candidate/onboard', values)
+        // console.log('Success:', values);
+        const tempValues = Object.assign({}, values);
+        const skillsString = Object.assign([], tempValues.skills);
+        tempValues.skills = skillsString.join(',');
+        console.log(tempValues)
+        makeRequest.post('/api/users/user', tempValues)
             .then(data => {
                 console.log('Success:', data);
+                history.push('/home');
             })
             .catch((error) => {
                 console.error('Error:', error);
@@ -32,7 +32,7 @@ const CandidateOnboarding = (props: any) => {
 
 	return (
         <div className="onboarding">
-            <header className="App-header">Create your Candidate profile</header>
+            {/* <header className="App-header">Create your Candidate profile</header> */}
             <Form
                 name="Candidate onboarding"
                 labelCol={{ span: 8 }}
@@ -43,7 +43,7 @@ const CandidateOnboarding = (props: any) => {
             >
                 <Form.Item
                     label="Full name"
-                    name="fullName"
+                    name="name"
                     rules={[{ required: true, message: 'Please enter your full name!' }]}
                 >
                     <Input placeholder="Please enter your full name" />
@@ -75,7 +75,7 @@ const CandidateOnboarding = (props: any) => {
                             option?.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                         }
                     >
-                        {cities.map(itm => <Option value={itm}>{itm}</Option>)}
+                        {cities.map(itm => <Option value={itm} key={itm}>{itm}</Option>)}
                     </Select>
                 </Form.Item>
 
@@ -98,17 +98,17 @@ const CandidateOnboarding = (props: any) => {
                     <Input placeholder="Please add your whatsapp number" />
                 </Form.Item>
 
-                {/* <Form.Item
+                <Form.Item
                     label="Email"
                     name="email"
                     rules={[{ required: true, message: 'Please enter an email address!' }]}
                 >
                     <Input placeholder="Please enter an email address" />
-                </Form.Item> */}
+                </Form.Item>
 
                 <Form.Item
                     label="Years of experience"
-                    name="yearsOfExperience"
+                    name="exp"
                     rules={[{ required: true, message: 'Please select years of experience!' }]}
                 >
                     <Input placeholder="i.e 3.5 years" />
@@ -136,21 +136,21 @@ const CandidateOnboarding = (props: any) => {
                         allowClear
                         placeholder="Please select atleast three skills"
                     >
-                        {skills.map(itm => <Option value={itm}>{itm}</Option>)}
+                        {skills.map(itm => <Option value={itm} key={itm}>{itm}</Option>)}
                     </Select>
                 </Form.Item>
 
                 <Form.Item
                     label="Current ctc"
-                    name="currentCtc"
+                    name="ctc"
                     rules={[{ required: true, message: 'Please add current ctc!' }]}
                 >
                     <Input placeholder="i.e 4.5Lac" />
                 </Form.Item>
 
                 <Form.Item
-                    label="Introduction"
-                    name="introduction"
+                    label="About"
+                    name="about"
                     rules={[{ required: false, message: 'Please enter a brief introduction about yourself!' }]}
                 >
                     <Input.TextArea placeholder="A brief introduction about yourself" />
@@ -158,7 +158,7 @@ const CandidateOnboarding = (props: any) => {
 
                 <Form.Item
                     label="Github"
-                    name="github"
+                    name="githubUrl"
                     rules={[{ required: false, message: 'Please enter your github profile link!', type: 'url' }]}
                 >
                     <Input placeholder="Github profile link" />

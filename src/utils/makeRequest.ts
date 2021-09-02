@@ -1,6 +1,7 @@
 import { Auth } from 'aws-amplify';
 
 const baseUrl = process.env.REACT_APP_BASE_URL || 'http://localhost:3005';
+// const baseUrl = 'http://4786-2405-201-3-6087-da1-d05c-87bc-7fd3.ngrok.io/';
 
 export default {
     getJwtToken() {
@@ -15,7 +16,7 @@ export default {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `${(await Auth.currentSession()).getAccessToken().getJwtToken()}`
+                'Authorization': `${(await Auth.currentSession()).getIdToken().getJwtToken()}`
             }
         }).then(response => response.json())
     },
@@ -24,7 +25,7 @@ export default {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `${(await Auth.currentSession()).getAccessToken().getJwtToken()}`
+                'Authorization': `${(await Auth.currentSession()).getIdToken().getJwtToken()}`
             },
             body: JSON.stringify(values),
         }).then(response => response.json())
@@ -34,7 +35,7 @@ export default {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `${(await Auth.currentSession()).getAccessToken().getJwtToken()}`
+                'Authorization': `${(await Auth.currentSession()).getIdToken().getJwtToken()}`
             },
             body: JSON.stringify(values),
         }).then(response => response.json())
@@ -44,7 +45,7 @@ export default {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `${(await Auth.currentSession()).getAccessToken().getJwtToken()}`
+                'Authorization': `${(await Auth.currentSession()).getIdToken().getJwtToken()}`
             },
             body: JSON.stringify(values),
         }).then(response => response.json())

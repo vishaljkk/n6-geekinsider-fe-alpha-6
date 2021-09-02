@@ -6,7 +6,8 @@ const initialState: StateTypes = {
     profileDetails: {},
     messages: {},
     landingData: {},
-    searchData: []
+    searchData: [],
+    loading: false
 };
 
 const rootReducer = (state: StateTypes = initialState, action: actionTypes) => {
@@ -23,6 +24,8 @@ const rootReducer = (state: StateTypes = initialState, action: actionTypes) => {
             return { ...state, landingData: action.payload };
         case 'SET_SEARCH_DATA':
             return { ...state, searchData: action.payload };
+        case 'SET_LOADING':
+            return { ...state, loading: action.payload };
         default:
             return { ...state };
     }

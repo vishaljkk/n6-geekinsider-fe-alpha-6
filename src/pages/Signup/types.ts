@@ -1,11 +1,10 @@
 import { userTypeTypes, StateUITypes } from '../../routes/types';
 
 export interface SignupTypes {
-	onChange?: (e: any) => void,
+	setIsAuth: (e: boolean) => void,
 	formType?: StateUITypes,
 	userType?: userTypeTypes, 
 	setUserType?: any,
-	updateFormState: any,
 	history?: any
 }
 
