@@ -1,32 +1,42 @@
+import { useState, useEffect } from 'react';
 import { Card, Button, Progress } from 'antd';
 import { MdLocationOn, MdMonetizationOn, MdHistory } from "react-icons/md";
+import { FaGithub } from 'react-icons/fa';
+import { CandidateSubmitTypes } from '../Onboarding/types';
 import { iconStyles } from '../../utils';
 import './CandidateDetails.scss';
 
-const CandidateDetails: React.FC<any> = (props) => {
-    const { company, jobTitle, skills, location, ctc, experience, numberOfApplications, description, jobPostId } = props.itm;
+const CandidateDetails: React.FC<CandidateSubmitTypes> = (props) => {
+    const [mappableSkills, setMappableSkills] = useState<string[]>([]);
+    const { about, name, skills, location, ctc, exp, githubUrl, whatsappNumber } = props;
+
+    useEffect(() => {
+        if (skills) setMappableSkills(typeof skills === 'string' ? skills.split(',') : skills);
+    }, [skills])
+
     return (
         <div className="candidate__profile__right">
             <Card>
                 <section className="each-widget">
                     <div className="right-section">
-                        <h2>{company}</h2>
-                        <span>{jobTitle}</span>
+                        <h2>{name}</h2>
+                        {/* <span>{jobTitle}</span> */}
                     </div>
                     <div className="action-buttons">
                         <Button type="primary">Apply</Button>
                     </div>
                 </section>
                 <section className="tags-section">
-                    {skills.map((itm:any) => <span className="tags">{itm}</span>)}
+                    {mappableSkills.map((itm: string) => <span className="tags" key={itm}>{itm}</span>)}
                 </section>
                 <section className="footer-section">
                     <div><MdLocationOn style={iconStyles} />{location}</div>
                     <div><MdMonetizationOn style={iconStyles} />{ctc}</div>
-                    <div><MdHistory style={iconStyles} />{experience}</div>
+                    <div><MdHistory style={iconStyles} />{exp}</div>
+                    <div><FaGithub style={iconStyles} />{githubUrl}</div>
                 </section>
                 <Card>
-                    {description}
+                    {about}
                 </Card>
                 <br/>
                 <Card>

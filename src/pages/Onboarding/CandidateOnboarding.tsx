@@ -1,12 +1,16 @@
 import { Form, Input, Button, Select } from 'antd';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux'; 
+
+import { saveCandidateData } from '../../redux/actions';
 import { CandidateOnboardingPropTypes, CandidateSubmitTypes } from './types';
-import makeRequest from '../../utils/makeRequest';
+import { StateTypes } from '../../redux/types';
 import './onboarding.scss';
 
 const { Option } = Select;
 
 const CandidateOnboarding: React.FC<CandidateOnboardingPropTypes> = (props) => {
-    const { history } = props;
+    const { history, saveCandidateData } = props;
 
     const cities = ['Banglore', 'Pune', 'Chennai', 'Kolkata', 'Mumbai', 'Delhi', 'Indore', 'Vadodara'];
     const skills = ['React', 'Angular', 'Vue', 'Ember', 'NodeJS', 'JavaScript', 'HTML', 'CSS', 'SASS'];
@@ -15,14 +19,7 @@ const CandidateOnboarding: React.FC<CandidateOnboardingPropTypes> = (props) => {
         const tempValues = Object.assign({}, values);
         const skillsString = Object.assign([], tempValues.skills);
         tempValues.skills = skillsString.join(',');
-        makeRequest.post('/api/users/user', tempValues)
-            .then(data => {
-                console.log('Success:', data);
-                history.push('/home');
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
+        saveCandidateData(tempValues, history);
 	};
 
 	const onFinishFailed = (errorInfo: object) => {
@@ -167,4 +164,12 @@ const CandidateOnboarding: React.FC<CandidateOnboardingPropTypes> = (props) => {
 	);
 }
 
-export default CandidateOnboarding;
+const mapStateToProps = (state: StateTypes) => ({
+    userType: state.userType
+});
+
+const mapDispatchToProps = (dispatch: any) => bindActionCreators({
+    saveCandidateData
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(CandidateOnboarding);
