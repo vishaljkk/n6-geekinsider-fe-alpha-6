@@ -1,11 +1,32 @@
 import { Form, Input, Button, Select } from 'antd';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux'; 
+import { useHistory } from 'react-router';
+
+import { JobPostingFormPropTypes } from './types';
+import { StateTypes } from '../../redux/types';
+import { createJobPost } from '../../redux/actions';
+import { skills, cities, jobTypes } from '../../utils';
 
 const { Option } = Select;
 
-const JobPostingForm = () => {
+const JobPostingForm: React.FC<JobPostingFormPropTypes> = (props) => {
+    const { createJobPost } = props;
+    const history = useHistory();
+    const [form] = Form.useForm();
+
 	const onFinish = (values: any) => {
 		// console.log('Success:', values);
+        const tempValues = Object.assign({}, values);
+        tempValues.skills = tempValues.skills.join(',');
+        tempValues.officeLocations = tempValues.officeLocations.join(',');
+        createJobPost(tempValues, afterSuccessfullFinish);
 	};
+
+    const afterSuccessfullFinish = () => {
+        history.push('/home');
+        form.resetFields();
+    }
 
 	const onFinishFailed = (errorInfo: any) => {
 		// console.log('Failed:', errorInfo);
@@ -13,8 +34,9 @@ const JobPostingForm = () => {
 
 	return (
         <div className="onboarding">
-            <header className="App-header">Add a job</header>
+            {/* <header>Add a job</header> */}
             <Form
+                form={form}
                 name="Add a job"
                 labelCol={{ span: 8 }}
                 wrapperCol={{ span: 12 }}
@@ -25,84 +47,106 @@ const JobPostingForm = () => {
                 <Form.Item
                     label="Job title"
                     name="jobTitle"
-                    rules={[{ required: true, message: 'Please input your username!' }]}
+                    rules={[{ required: true, message: 'Please enter the title of job!' }]}
                 >
-                    <Input placeholder="Please enter your full name" />
+                    <Input placeholder="Please enter the title of job" />
                 </Form.Item>
 
                 <Form.Item
                     label="Type of job position"
                     name="typeOfPosition"
-                    rules={[{ required: true, message: 'Please input your password!' }]}
+                    rules={[{ required: true, message: 'Please select the type of position!' }]}
                 >
-                    <Input placeholder="Please enter your current job title" />
+                    <Select
+                        allowClear
+                        placeholder="Please select the type of position"
+                    >
+                        {jobTypes.map((itm: string) => <Option value={itm} key={itm}>{itm}</Option>)}
+                    </Select>
                 </Form.Item>
 
                 <Form.Item
                     label="Desired skills"
-                    name="desiredSkills"
-                    rules={[{ required: true, message: 'Please input your password!' }]}
+                    name="skills"
+                    rules={[{ 
+                        required: true, 
+                        message: 'Please select atleast three skills!',
+                        validator(_, value) {
+                            if (value && value.length>=3) {
+                                return Promise.resolve();
+                            }
+                            return Promise.reject(new Error('Please select atleast three skills!'));
+                        },
+                    }]}
                 >
                     <Select
                         mode="multiple"
                         allowClear
                         placeholder="Please select atleast three skills"
                     >
-                        {['React', 'JavaScript', 'HTML', 'CSS'].map(itm => <Option value={itm}>{itm}</Option>)}
+                        {skills.map((itm: string) => <Option value={itm} key={itm}>{itm}</Option>)}
                     </Select>
                 </Form.Item>
 
                 <Form.Item
                     label="Office locations"
                     name="officeLocations"
-                    rules={[{ required: true, message: 'Please input your password!' }]}
+                    rules={[{ required: true, message: 'Please select job locations!' }]}
                 >
                     <Select
                         mode="multiple"
                         allowClear
-                        placeholder="Please select atleast three skills"
+                        placeholder="Please select job locations"
                     >
-                        {['React', 'JavaScript', 'HTML', 'CSS'].map(itm => <Option value={itm}>{itm}</Option>)}
+                        {cities.map((itm: string) => <Option value={itm} key={itm}>{itm}</Option>)}
                     </Select>
                 </Form.Item>
 
                 <Form.Item
                     label="Experience range"
                     name="experienceRange"
-                    rules={[{ required: true, message: 'Please input your password!' }]}
+                    rules={[{ required: true, message: 'Please enter the experience range!' }]}
                 >
-                    <Input placeholder="Please select years of experience" />
+                    <Input placeholder="Please enter the experience range" />
                 </Form.Item>
 
                 <Form.Item
                     label="Annual salary"
                     name="annualSalary"
-                    rules={[{ required: true, message: 'Please input your password!' }]}
+                    rules={[{ required: true, message: 'Please enter the annual salary range!' }]}
                 >
-                    <Input placeholder="Please select years of experience" />
+                    <Input placeholder="Please enter the annual salary range" />
                 </Form.Item>
 
                 <Form.Item
                     label="Job description"
                     name="jobDescription"
-                    rules={[{ required: true, message: 'Please input your password!' }]}
+                    rules={[{ required: true, message: 'Please enter a brief discription about the job!' }]}
                 >
-                    <Input.TextArea placeholder="about" />
+                    <Input.TextArea placeholder="Please enter a brief discription about the job" />
                 </Form.Item>
 
                 <Form.Item wrapperCol={{ offset: 8, span: 12 }}>
-                    <div>
+                    <>
                         <Button type="primary" htmlType="submit">
                             Create job
                         </Button>
                         <Button style={{ marginLeft: '10px' }}>
                             Cancel
                         </Button>
-                    </div>
+                    </>
                 </Form.Item>
             </Form>
 		</div>
 	);
 }
 
-export default JobPostingForm;
+const mapStateToProps = (state: StateTypes) => ({
+    recentJobs: state.recentJobs
+});
+  
+const mapDispatchToProps = (dispatch: any) => bindActionCreators({
+    createJobPost
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(JobPostingForm);

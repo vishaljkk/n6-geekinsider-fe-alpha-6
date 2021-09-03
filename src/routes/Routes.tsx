@@ -26,61 +26,61 @@ const pages = [
         pageLink: '/home',
         view: LandingPage,
         displayName: 'Landing',
-        showInNavbar: true,
+        showNavbar: true,
     },
     {
         pageLink: '/messages',
         view: Messages,
         displayName: 'Messages',
-        showInNavbar: true,
+        showNavbar: true,
     },
     {
         pageLink: '/recruiter/postjob',
         view: JobPostingForm,
         displayName: 'Job Posting Form',
-        showInNavbar: true,
+        showNavbar: true,
     },
     {
         pageLink: '/candidate/onboarding',
         view: CandidateOnboarding,
         displayName: 'Candidate Onboarding',
-        showInNavbar: true,
+        showNavbar: false,
     },
     {
         pageLink: '/recruiter/onboarding',
         view: RecruiterOnboarding,
         displayName: 'Recruiter Onboarding',
-        showInNavbar: false,
+        showNavbar: false,
     },
     {
         pageLink: '/search',
         view: SearchResult,
         displayName: 'Search Result',
-        showInNavbar: false,
+        showNavbar: true,
     },
     {
         pageLink: '/login',
         view: Login,
         displayName: 'Login',
-        showInNavbar: true,
+        showNavbar: false,
     },
     {
         pageLink: '/signup',
         view: Signup,
         displayName: 'Signup',
-        showInNavbar: true,
+        showNavbar: false,
     },
     {
         pageLink: '/candidate/profile',
         view: CandidateProfile,
         displayName: 'Candidate Profile',
-        showInNavbar: true,
+        showNavbar: true,
     },
     {
         pageLink: '/recruiter/profile',
         view: RecruiterProfile,
         displayName: 'Recruiter profile',
-        showInNavbar: true,
+        showNavbar: true,
     }
 ];
 
@@ -129,23 +129,31 @@ const Routes: React.FC<AppTypes> = (props) => {
 
     return (
         <>
-            {loading && <div className="loader--global">
+            {/* {loading && <div className="loader--global">
                 <Loader />
-            </div>}
-            {isAuth && <Suspense fallback={<div/>}>
+            </div>} */}
+            {/* {isAuth && <Suspense fallback={<div/>}>
                 <NavBar history={history} setIsAuth={setIsAuth}/>
-            </Suspense>}
+            </Suspense>} */}
             <Switch>
-                {pages.map((page, index) => {
-                    return (
-                        <Route
-                            exact
-                            path={page.pageLink}
-                            render={(props: any) => <page.view {...{...props}} setIsAuth={setIsAuth} isAuth={isAuth}/>}
-                            key={index}
-                        />
-                    );
-                })}
+                {pages.map((page, index) => 
+                    <Route
+                        exact
+                        path={page.pageLink}
+                        render={(props: any) => 
+                            <>
+                                {isAuth && page.showNavbar && <Suspense fallback={<div/>}>
+                                    <NavBar history={history} setIsAuth={setIsAuth}/>
+                                </Suspense>}
+                                {loading && <div className="loader--global">
+                                    <Loader />
+                                </div>}
+                                <page.view {...{...props}} setIsAuth={setIsAuth} isAuth={isAuth}/>
+                            </>
+                        }
+                        key={index}
+                    />
+                )}
                 <Redirect to="/" />
             </Switch>
         </>

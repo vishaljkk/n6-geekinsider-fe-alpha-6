@@ -23,7 +23,7 @@ const CandidateDetails: React.FC<CandidateSubmitTypes> = (props) => {
                         {/* <span>{jobTitle}</span> */}
                     </div>
                     <div className="action-buttons">
-                        <Button type="primary">Apply</Button>
+                        <Button type="primary">Update</Button>
                     </div>
                 </section>
                 <section className="tags-section">

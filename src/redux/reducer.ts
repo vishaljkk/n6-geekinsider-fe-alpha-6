@@ -7,7 +7,8 @@ const initialState: StateTypes = {
     messages: {},
     landingData: {},
     searchData: [],
-    loading: false
+    loading: false,
+    recentJobs: []
 };
 
 const rootReducer = (state: StateTypes = initialState, action: actionTypes) => {
@@ -26,6 +27,8 @@ const rootReducer = (state: StateTypes = initialState, action: actionTypes) => {
             return { ...state, searchData: action.payload };
         case 'SET_LOADING':
             return { ...state, loading: action.payload };
+        case 'ADD_JOB_POST':
+            return { ...state, recentJobs: [ action.payload, ...state.recentJobs ] }
         default:
             return { ...state };
     }
