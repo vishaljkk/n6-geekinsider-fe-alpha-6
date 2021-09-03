@@ -1,7 +1,2 @@
-import CandidateOnboarding from './CandidateOnboarding';
-import RecruiterOnboarding from './RecruiterOnboarding';
-
-export {
-    CandidateOnboarding,
-    RecruiterOnboarding
-}
+export * as CandidateOnboarding from './CandidateOnboarding'
+export * as RecruiterOnboarding from './RecruiterOnboarding'
