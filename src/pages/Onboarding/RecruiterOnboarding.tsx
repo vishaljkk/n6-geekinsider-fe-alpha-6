@@ -1,31 +1,30 @@
-import React, { useState } from 'react';
-import { Form, Input, Button, Select, InputNumber, Tabs } from 'antd';
-import makeRequest from '../../utils/makeRequest';
+import React from 'react';
+import { Form, Input, Button, Select } from 'antd';
+import { RecruitereSubmitTypes, RecruiterOnboardingPropTypes } from './types';
 import './onboarding.scss';
 
 const { Option } = Select;
 
-const RecruiterOnboarding = (props: any) => {
+const RecruiterOnboarding: React.FC<RecruiterOnboardingPropTypes> = (props) => {
     const { history, setIsAuth, isAuth } = props;
     const industryTypes = ['Information Technology & Services', 'Hospital & Health Care', 'Construction', 'Retail', 'Education Management', 'Financial Services', 'Accounting', 'Computer Software', 'Higher Education', 'Automotive'];
     const cities = ['Banglore', 'Pune', 'Chennai', 'Kolkata', 'Mumbai', 'Delhi', 'Indore', 'Vadodara'];
     const skills = ['React', 'Angular', 'Vue', 'Ember', 'NodeJS', 'JavaScript', 'HTML', 'CSS', 'SASS']
 
-	const onFinish = (values: any) => {
+	const onFinish = (values: RecruitereSubmitTypes) => {
 		const tempValues = Object.assign({}, values);
         const skillsString = Object.assign([], tempValues.skills);
         tempValues.skills = skillsString.join(',');
         // saveRecruiterData(tempValues);
 	};
 
-	const onFinishFailed = (errorInfo: any) => {
-		console.log('Failed:', errorInfo);
+	const onFinishFailed = (errorInfo: object) => {
+		// console.log('Failed:', errorInfo);
 	};
 
 	return (
         <div className="onboarding">
-            {/* <header className="App-header">Create your Recruiter profile</header> */}
-            {/* <h2>Create your Recruiter profile</h2> */}
+            <header className="App-header">Create your Recruiter profile</header>
             <Form
                 name="Candidate onboarding"
                 labelCol={{ span: 8 }}
@@ -72,7 +71,7 @@ const RecruiterOnboarding = (props: any) => {
                             option?.children.toLowerCase().includes(input.toLowerCase())
                         }
                     >
-                        {cities.map(itm => <Option value={itm}>{itm}</Option>)}
+                        {cities.map(itm => <Option value={itm} key={itm}>{itm}</Option>)}
                     </Select>
                 </Form.Item>
 
@@ -111,7 +110,6 @@ const RecruiterOnboarding = (props: any) => {
                             required: true, 
                             message: 'Please select atleast three skills!',
                             validator(_, value) {
-                                console.log(value)
                                 if (value && value.length>=3) {
                                     return Promise.resolve();
                                 }
@@ -125,7 +123,7 @@ const RecruiterOnboarding = (props: any) => {
                         allowClear
                         placeholder="Please select atleast three skills"
                     >
-                        {skills.map(itm => <Option value={itm}>{itm}</Option>)}
+                        {skills.map(itm => <Option value={itm} key={itm}>{itm}</Option>)}
                     </Select>
                 </Form.Item>
 
@@ -146,11 +144,9 @@ const RecruiterOnboarding = (props: any) => {
                 </Form.Item>
 
                 <Form.Item wrapperCol={{ offset: 8, span: 12 }}>
-                    <div>
-                        <Button type="primary" htmlType="submit">
-                            Submit details
-                        </Button>
-                    </div>
+                    <Button type="primary" htmlType="submit">
+                        Submit details
+                    </Button>
                 </Form.Item>
             </Form>
 		</div>

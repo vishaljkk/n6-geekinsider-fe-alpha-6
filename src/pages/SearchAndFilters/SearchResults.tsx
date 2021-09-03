@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Tooltip, Row, Card, Col, Avatar } from 'antd';
 import { MdLocationOn, MdMonetizationOn, MdHistory } from "react-icons/md";
+
 import { iconStyles } from '../../utils';
 import JobPostDetailWidget from '../../components/JobPostDetailWidget';
 import './SearchResult.scss';
@@ -75,7 +76,7 @@ const SingleWidget = (props: any) => {
     const { itm, setSelectedData, selectedData } = props;
     const { image, company, jobTitle, skills, location, ctc, experience, numberOfApplications, description, jobPostId } = itm;
     const handlePostVisible = (postId: string) => {
-        console.log(postId);
+        // console.log(postId);
     }
     return (
         <Card 

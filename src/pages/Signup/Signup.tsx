@@ -1,20 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Form, Input, Button, Alert, Modal, Tabs, notification } from 'antd';
 import { Auth } from 'aws-amplify';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'; 
 
-import { setIsAuth, setUserType } from '../../redux/actions';
-import { SignupTypes, SignupTabsType, confirmSignInFormValueTypes, confirmSignUpTypes } from './types';
 import makeRequest from '../../utils/makeRequest';
+import { setUserType } from '../../redux/actions';
+
+import { SignupTypes, SignupTabsType, ConfirmSignInFormValueTypes, ConfirmSignUpTypes } from './types';
 import { StateTypes } from '../../redux/types';
+import { UserDetailTypes } from './types';
+import { UserTypeTypes } from '../../routes/types';
+
+import './Signup.scss';
 
 const { TabPane } = Tabs;
-interface UserDetailTypes {
-	email: string,
-	password: string
-}
 
 const Signup: React.FC<SignupTypes> = (props) => {
 
@@ -23,7 +24,7 @@ const Signup: React.FC<SignupTypes> = (props) => {
 	const [loading, setLoading] = useState<boolean>(false);
 	const [userDetail, setUserDetail] = useState<UserDetailTypes>({ email: '', password: '`' })
 
-	const signUp = async (values: any) => {
+	const signUp = async (values: UserDetailTypes) => {
 		const { email, password } = values;
 		try {
 			setLoading(true);
@@ -38,11 +39,10 @@ const Signup: React.FC<SignupTypes> = (props) => {
 					message: error?.message
 				})
 			}
-			console.error(error)
 		}
 	};
 
-	const confirmSignup = async (values: confirmSignUpTypes) => {
+	const confirmSignup = async (values: ConfirmSignUpTypes) => {
 		const { email, authCode } = values;
 		try {
 			setLoading(true);
@@ -67,23 +67,22 @@ const Signup: React.FC<SignupTypes> = (props) => {
 			}
 			setIsAuth(false);
 			setLoading(false);
-		  	console.error(e);
 		}
 	};
 
-	const onFinishFailed = (errorInfo: any) => {
-		console.error('Failed:', errorInfo);
+	const onFinishFailed = (errorInfo: object) => {
+		// console.error('Failed:', errorInfo);
 	};
 
 	const onActiveKeyChange = (val: any) => setActiveTab(val)
 
 	const openSignInModal = () => history.push('/login');
 
-	const handleConfirmSignup = async (val: confirmSignInFormValueTypes) => {
+	const handleConfirmSignup = async (val: ConfirmSignInFormValueTypes) => {
 		confirmSignup({ ...val, email: userDetail.email });
 	}
 
-	const getCandidateNamesForApi = (type: any) => {
+	const getCandidateNamesForApi = (type: UserTypeTypes | undefined) => {
 		switch(type) {
 			case 'candidate':
 				return 'userCandidate';
@@ -135,7 +134,7 @@ const Signup: React.FC<SignupTypes> = (props) => {
 							</Button>
 						</Form.Item>
 						<Form.Item>
-							<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+							<div className="signup__otherlinks">
 								<Button type="link" onClick={openSignInModal}>
 									Sign in
 								</Button>

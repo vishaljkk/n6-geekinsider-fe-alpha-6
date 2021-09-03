@@ -8,7 +8,7 @@ export const SingleChatWidget: React.FC<SingleChatWidgetPropTypes> = (props) => 
     const { image, messageTitle, message, jobTitle, jobPostId } = itm;
 
     const handlePostVisible = (postId: string) => {
-        console.log(postId);
+        // console.log(postId);
     }
 
     return (
@@ -16,7 +16,6 @@ export const SingleChatWidget: React.FC<SingleChatWidgetPropTypes> = (props) => 
             <Row>
                 <Col span={3} className="each-chat-image">
                     <Avatar size={55} src={image} />
-                    {/* <img src={image} alt="" height="55px" /> */}
                 </Col>
                 <Col span={type === 'closed' ? 20 : 12}>
                     <h3><strong>{messageTitle}</strong></h3>
@@ -28,7 +27,7 @@ export const SingleChatWidget: React.FC<SingleChatWidgetPropTypes> = (props) => 
                 </Col>}
                 {type === 'openThread' && <Col span={4} className="each-chat-post-desc">
                     <div className="each-chat-post-whatsapp">
-                        <span><FaWhatsapp style={{ height: '30px', width: '30px' }} /></span>
+                        <span><FaWhatsapp className="whatsapp-icon" /></span>
                         <h3>Open Chat</h3>
                     </div>
                 </Col>}

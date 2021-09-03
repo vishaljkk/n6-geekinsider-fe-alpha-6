@@ -1,17 +1,14 @@
-import React, { useState } from 'react';
-import { Form, Input, Button, Select, InputNumber, Tabs } from 'antd';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import { Link } from 'react-router-dom';
+import { Form, Input, Button, Select } from 'antd';
 
 const { Option } = Select;
 
 const JobPostingForm = () => {
 	const onFinish = (values: any) => {
-		console.log('Success:', values);
+		// console.log('Success:', values);
 	};
 
 	const onFinishFailed = (errorInfo: any) => {
-		console.log('Failed:', errorInfo);
+		// console.log('Failed:', errorInfo);
 	};
 
 	return (
@@ -49,10 +46,7 @@ const JobPostingForm = () => {
                     <Select
                         mode="multiple"
                         allowClear
-                        // style={{ width: '100%' }}
                         placeholder="Please select atleast three skills"
-                        // defaultValue={['a10', 'c12']}
-                        // onChange={handleChange}
                     >
                         {['React', 'JavaScript', 'HTML', 'CSS'].map(itm => <Option value={itm}>{itm}</Option>)}
                     </Select>
@@ -66,10 +60,7 @@ const JobPostingForm = () => {
                     <Select
                         mode="multiple"
                         allowClear
-                        // style={{ width: '100%' }}
                         placeholder="Please select atleast three skills"
-                        // defaultValue={['a10', 'c12']}
-                        // onChange={handleChange}
                     >
                         {['React', 'JavaScript', 'HTML', 'CSS'].map(itm => <Option value={itm}>{itm}</Option>)}
                     </Select>
@@ -100,9 +91,7 @@ const JobPostingForm = () => {
                 </Form.Item>
 
                 <Form.Item wrapperCol={{ offset: 8, span: 12 }}>
-                    <div
-                        // style={{ display: 'flex', justifyContent: 'flex-end' }}
-                    >
+                    <div>
                         <Button type="primary" htmlType="submit">
                             Create job
                         </Button>

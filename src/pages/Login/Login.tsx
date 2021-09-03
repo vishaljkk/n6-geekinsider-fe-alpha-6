@@ -1,14 +1,15 @@
 import { useState } from 'react';
 import { Form, Input, Button, Modal, Tabs, notification } from 'antd';
-import { Auth, API } from 'aws-amplify'
-import { CognitoHostedUIIdentityProvider } from "@aws-amplify/auth/lib/types";
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { Auth } from 'aws-amplify'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'; 
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { CognitoHostedUIIdentityProvider } from "@aws-amplify/auth/lib/types";
 
 import { setUserType } from '../../redux/actions';
 import { StateTypes } from '../../redux/types';
 import { LoginPropsTypes, LoginFormSubmitTypes } from './types';
+import './Login.scss';
 
 const { TabPane } = Tabs;
 
@@ -17,39 +18,19 @@ const Login: React.FC<LoginPropsTypes> = (props) => {
 	const { setUserType, history, setIsAuth } = props;
 	const [loginLoading, setLoginLoading] = useState<boolean>(false);
 
-	const onFinishFailed = (errorInfo: any) => {
-		console.log('Failed:', errorInfo);
+	const onFinishFailed = (errorInfo: object) => {
+		// console.log('Failed:', errorInfo);
 	};
-
-	// const addToGroup = async (newlyCreatedUser: string | null) => {
-	// 	const apiName = 'AdminQueries';
-	// 	const path = '/addUserToGroup';
-	// 	const myInit = {
-	// 		body: {
-	// 		  "username" : newlyCreatedUser,
-	// 		  "groupname": 'recruiter'
-	// 		},
-	// 		headers: {
-	// 		  'Content-Type' : 'application/json',
-	// 		  Authorization: `${(await Auth.currentSession()).getAccessToken().getJwtToken()}`
-	// 		}
-	// 	}
-	// 	return await API.post(apiName, path, myInit);
-	// }
 
 	const signInFunc = async (values: LoginFormSubmitTypes) => {
 		const { username, password } = values;
 		try {
 			setLoginLoading(true);
 			const resp = await Auth.signIn(username, password);
-
 			const type = resp.signInUserSession.accessToken.payload["cognito:groups"][0] === 'userCandidate' ? 'candidate' : 'recruiter'
-			console.log(type)
 			setUserType(type);
-
 			setIsAuth(true);
 			setLoginLoading(false);
-			// call user role service
 			history.push('/home');
 		}
 		catch (e) {
@@ -59,7 +40,6 @@ const Login: React.FC<LoginPropsTypes> = (props) => {
 					message: e?.message
 				})
 			}
-			console.error(e)
 		}
 	};
 
@@ -77,8 +57,6 @@ const Login: React.FC<LoginPropsTypes> = (props) => {
 		setUserType('candidate');
 	}
 
-	const handleTabChange = (val: any) => console.log(val)
-
 	return (
 		<Modal 
 			visible={true}
@@ -91,7 +69,6 @@ const Login: React.FC<LoginPropsTypes> = (props) => {
 		>
 			<Tabs 
 				defaultActiveKey="Candidate" 
-				onChange={handleTabChange} 
 				centered
 			>
 				<TabPane tab="Candidate" key="Candidate">
@@ -125,10 +102,7 @@ const Login: React.FC<LoginPropsTypes> = (props) => {
 							</Button>
 						</Form.Item>
 						<Form.Item>
-							<div style={{ display: 'flex', justifyContent: 'space-between' }}>
-								<Button type="link">
-									Forgot password?
-								</Button>
+							<div className="login__otherlinks">
 								<Button type="link" onClick={setSignUpModalVisible}>
 									Register
 								</Button>
@@ -165,11 +139,7 @@ const Login: React.FC<LoginPropsTypes> = (props) => {
 							</Button>
 						</Form.Item>
 						<Form.Item>
-							<div style={{ display: 'flex', justifyContent: 'space-between' }}>
-								{/* <Button type="link">
-									Forgot password?
-								</Button> */}
-								<div/>
+							<div className="login__otherlinks">
 								<Button type="link" onClick={setSignUpModalVisible}>
 									Register
 								</Button>

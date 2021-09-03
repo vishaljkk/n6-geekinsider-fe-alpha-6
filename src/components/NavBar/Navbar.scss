@@ -10,7 +10,10 @@
     h2 {
         color: white;
     }
-    .geekinsider-logo {
+    .geekinsider__logo {
         cursor: pointer;
+        h2 {
+            margin: 0 40px;
+        }
     }
 }

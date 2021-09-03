@@ -1,3 +1,5 @@
 export interface LoaderPropTypes { 
-    fontSize?: number 
+    fontSize?: number,
+    className?: 'loader--global' | 'loader--generic',
+    text?: string
 }

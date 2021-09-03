@@ -1,4 +1,4 @@
-import { Suspense, lazy, useEffect, createContext, useState } from 'react';
+import { Suspense, lazy, useEffect } from 'react';
 import { Switch, Route, Redirect, useHistory } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'; 
@@ -15,7 +15,7 @@ const LandingPage = lazy(() => import('../pages/LandingPage'));
 const NavBar = lazy(() => import('../components/NavBar'));
 const SearchResult = lazy(() => import('../pages/SearchAndFilters'));
 const Messages = lazy(() => import('../pages/Messages'));
-const CandidateProfile = lazy(() => import('../pages/Profile'));
+const CandidateProfile = lazy(() => import('../pages/CandidateProfile'));
 const RecruiterProfile = lazy(() => import('../pages/RecruiterProfile'));
 const JobPostingForm = lazy(() => import('../pages/JobPostingForm'));
 const CandidateOnboarding = lazy(() => import('../pages/Onboarding/CandidateOnboarding'));
@@ -84,8 +84,6 @@ const pages = [
     }
 ];
 
-// export const HistoryContext = createContext({});
-
 const Routes: React.FC<AppTypes> = (props) => {
 
     const { isAuth, userType, location, setIsAuth, loading } = props;
@@ -134,24 +132,22 @@ const Routes: React.FC<AppTypes> = (props) => {
             {loading && <div className="loader--global">
                 <Loader />
             </div>}
-            <>
-                {isAuth && <Suspense fallback={<div/>}>
-                    <NavBar history={history} setIsAuth={setIsAuth}/>
-                </Suspense>}
-                <Switch>
-                    {pages.map((page, index) => {
-                        return (
-                            <Route
-                                exact
-                                path={page.pageLink}
-                                render={(props: any) => <page.view {...{...props}} setIsAuth={setIsAuth} isAuth={isAuth}/>}
-                                key={index}
-                            />
-                        );
-                    })}
-                    <Redirect to="/" />
-                </Switch>
-            </>
+            {isAuth && <Suspense fallback={<div/>}>
+                <NavBar history={history} setIsAuth={setIsAuth}/>
+            </Suspense>}
+            <Switch>
+                {pages.map((page, index) => {
+                    return (
+                        <Route
+                            exact
+                            path={page.pageLink}
+                            render={(props: any) => <page.view {...{...props}} setIsAuth={setIsAuth} isAuth={isAuth}/>}
+                            key={index}
+                        />
+                    );
+                })}
+                <Redirect to="/" />
+            </Switch>
         </>
     )
 }

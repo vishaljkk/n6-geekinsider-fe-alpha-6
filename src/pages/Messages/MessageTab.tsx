@@ -30,7 +30,7 @@ const MessageTab: React.FC<MessageTabProps> = (props) => {
 	const [data, setData] = useState(demoData);
 	const { type } = props;
 	return (
-		<div className="recent-chat-widget-container">
+		<div className="message__tab">
 			{data.map(itm => <SingleChatWidget itm={itm} type={type} />)}
 		</div>
 	)

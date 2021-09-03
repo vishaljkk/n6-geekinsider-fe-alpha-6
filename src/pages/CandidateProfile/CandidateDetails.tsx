@@ -3,10 +3,10 @@ import { MdLocationOn, MdMonetizationOn, MdHistory } from "react-icons/md";
 import { iconStyles } from '../../utils';
 import './CandidateDetails.scss';
 
-const CandidateDetails = (props: any) => {
+const CandidateDetails: React.FC<any> = (props) => {
     const { company, jobTitle, skills, location, ctc, experience, numberOfApplications, description, jobPostId } = props.itm;
     return (
-        <div className="job-posting-detail-widget">
+        <div className="candidate__profile__right">
             <Card>
                 <section className="each-widget">
                     <div className="right-section">
