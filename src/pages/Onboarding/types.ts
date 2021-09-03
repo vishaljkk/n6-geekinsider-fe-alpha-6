@@ -29,7 +29,7 @@ export interface RecruitereSubmitTypes {
     name: string,
     skills?: string[] | string,
     whatsappNumber: string,
-    empSize: string,
+    empSize: number,
     preferredIndustry: string,
     site: string
 }

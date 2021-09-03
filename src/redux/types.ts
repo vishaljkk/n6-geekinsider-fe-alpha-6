@@ -6,8 +6,9 @@ export interface StateTypes {
     profileDetails: object,
     messages: object,
     landingData: object,
-    searchData: [],
-    loading: boolean
+    searchData: any,
+    loading: boolean,
+    recentJobs: any
 }
 
 export interface actionTypes {

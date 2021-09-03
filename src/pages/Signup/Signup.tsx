@@ -172,9 +172,11 @@ const Signup: React.FC<SignupTypes> = (props) => {
 							</Button>
 						</Form.Item>
 						<Form.Item>
-							<Button type="link" onClick={openSignInModal}>
-								Sign in
-							</Button>
+							<div className="signup__otherlinks">
+								<Button type="link" onClick={openSignInModal}>
+									Sign in
+								</Button>
+							</div>
 						</Form.Item>
 					</Form>
 				</TabPane>

@@ -41,6 +41,10 @@ const RecruiterDetails: React.FC<RecruitereSubmitTypes> = (props) => {
         if (skills) setMappableSkills(typeof skills === 'string' ? skills.split(',') : skills);
     }, [skills])
 
+    const handleJobPost = () => {
+        history.push('/recruiter/postjob')
+    }
+
     return (
         <div className="recruiter__profile__right">
             <Card>
@@ -51,6 +55,7 @@ const RecruiterDetails: React.FC<RecruitereSubmitTypes> = (props) => {
                     </div>
                     <div className="action-buttons">
                         <Button type="primary">Update</Button>
+                        <Button type="primary" onClick={handleJobPost}>Post a job</Button>
                     </div>
                 </section>
                 <section className="tags-section">

@@ -2,6 +2,7 @@ import { Form, Input, Button, Select } from 'antd';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'; 
 
+import { skills, cities } from '../../utils';
 import { saveCandidateData } from '../../redux/actions';
 import { CandidateOnboardingPropTypes, CandidateSubmitTypes } from './types';
 import { StateTypes } from '../../redux/types';
@@ -11,9 +12,6 @@ const { Option } = Select;
 
 const CandidateOnboarding: React.FC<CandidateOnboardingPropTypes> = (props) => {
     const { history, saveCandidateData } = props;
-
-    const cities = ['Banglore', 'Pune', 'Chennai', 'Kolkata', 'Mumbai', 'Delhi', 'Indore', 'Vadodara'];
-    const skills = ['React', 'Angular', 'Vue', 'Ember', 'NodeJS', 'JavaScript', 'HTML', 'CSS', 'SASS'];
 
 	const onFinish = (values: CandidateSubmitTypes) => {
         const tempValues = Object.assign({}, values);
@@ -116,7 +114,7 @@ const CandidateOnboarding: React.FC<CandidateOnboardingPropTypes> = (props) => {
                                 if (value && value.length>=3) {
                                     return Promise.resolve();
                                 }
-                                return Promise.reject(new Error('The two passwords that you entered do not match!'));
+                                return Promise.reject(new Error('Please select atleast three skills!'));
                             },
                         }
                     ]}

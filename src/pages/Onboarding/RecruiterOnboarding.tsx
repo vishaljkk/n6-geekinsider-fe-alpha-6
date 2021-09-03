@@ -1,8 +1,9 @@
 import React from 'react';
-import { Form, Input, Button, Select } from 'antd';
+import { Form, Input, Button, Select, InputNumber } from 'antd';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'; 
 
+import { skills, cities, industryTypes } from '../../utils';
 import { saveRecruiterData } from '../../redux/actions';
 import { RecruitereSubmitTypes, RecruiterOnboardingPropTypes } from './types';
 import { StateTypes } from '../../redux/types';
@@ -12,9 +13,6 @@ const { Option } = Select;
 
 const RecruiterOnboarding: React.FC<RecruiterOnboardingPropTypes> = (props) => {
     const { history, setIsAuth, isAuth, saveRecruiterData } = props;
-    const industryTypes = ['Information Technology & Services', 'Hospital & Health Care', 'Construction', 'Retail', 'Education Management', 'Financial Services', 'Accounting', 'Computer Software', 'Higher Education', 'Automotive'];
-    const cities = ['Banglore', 'Pune', 'Chennai', 'Kolkata', 'Mumbai', 'Delhi', 'Indore', 'Vadodara'];
-    const skills = ['React', 'Angular', 'Vue', 'Ember', 'NodeJS', 'JavaScript', 'HTML', 'CSS', 'SASS']
 
 	const onFinish = (values: RecruitereSubmitTypes) => {
 		const tempValues = Object.assign({}, values);
@@ -59,14 +57,14 @@ const RecruiterOnboarding: React.FC<RecruiterOnboardingPropTypes> = (props) => {
                             option?.children.toLowerCase().includes(input.toLowerCase())
                         }
                     >
-                        {industryTypes.map(itm => <Option value={itm}>{itm}</Option>)}
+                        {industryTypes.map((itm: string) => <Option value={itm} key={itm}>{itm}</Option>)}
                     </Select>
                 </Form.Item>
 
                 <Form.Item
                     label="Location"
                     name="location"
-                    rules={[{ required: true, message: 'Please select atleast one location!' }]}
+                    rules={[{ required: true, message: 'Please select a location!' }]}
                 >
                     <Select
                         showSearch
@@ -76,7 +74,7 @@ const RecruiterOnboarding: React.FC<RecruiterOnboardingPropTypes> = (props) => {
                             option?.children.toLowerCase().includes(input.toLowerCase())
                         }
                     >
-                        {cities.map(itm => <Option value={itm} key={itm}>{itm}</Option>)}
+                        {cities.map((itm: string) => <Option value={itm} key={itm}>{itm}</Option>)}
                     </Select>
                 </Form.Item>
 
@@ -91,7 +89,7 @@ const RecruiterOnboarding: React.FC<RecruiterOnboardingPropTypes> = (props) => {
                                 if (value && value.length === 10) {
                                     return Promise.resolve();
                                 }
-                                return Promise.reject(new Error('The two passwords that you entered do not match!'));
+                                return Promise.reject(new Error('Please enter a valid whatsapp number!'));
                             },
                         }
                     ]}
@@ -102,9 +100,9 @@ const RecruiterOnboarding: React.FC<RecruiterOnboardingPropTypes> = (props) => {
                 <Form.Item
                     label="Number of employees"
                     name="empSize"
-                    rules={[{ required: true, message: 'Please input your password!' }]}
+                    rules={[{ required: true, message: 'Please enter valid number of employees!', type: "number" }]}
                 >
-                    <Input placeholder="e.g 10-1000 format" />
+                    <InputNumber placeholder="e.g 100" min={1}/>
                 </Form.Item>
 
                 <Form.Item
@@ -118,7 +116,7 @@ const RecruiterOnboarding: React.FC<RecruiterOnboardingPropTypes> = (props) => {
                                 if (value && value.length>=3) {
                                     return Promise.resolve();
                                 }
-                                return Promise.reject(new Error('The two passwords that you entered do not match!'));
+                                return Promise.reject(new Error('Please select atleast three skills!'));
                             },
                         }
                     ]}
@@ -128,14 +126,14 @@ const RecruiterOnboarding: React.FC<RecruiterOnboardingPropTypes> = (props) => {
                         allowClear
                         placeholder="Please select atleast three skills"
                     >
-                        {skills.map(itm => <Option value={itm} key={itm}>{itm}</Option>)}
+                        {skills.map((itm: string) => <Option value={itm} key={itm}>{itm}</Option>)}
                     </Select>
                 </Form.Item>
 
                 <Form.Item
                     label="About"
                     name="about"
-                    rules={[{ required: false, message: 'Please input your password!' }]}
+                    rules={[{ required: false, message: 'Please enter a brief introduction!' }]}
                 >
                     <Input.TextArea placeholder="about" />
                 </Form.Item>
@@ -143,7 +141,7 @@ const RecruiterOnboarding: React.FC<RecruiterOnboardingPropTypes> = (props) => {
                 <Form.Item
                     label="Website"
                     name="site"
-                    rules={[{ required: false, message: 'Please input your password!', type: 'url' }]}
+                    rules={[{ required: false, message: 'Please enter a valid url!', type: 'url' }]}
                 >
                     <Input placeholder="website" />
                 </Form.Item>
