@@ -17,6 +17,7 @@ const SearchResult = lazy(() => import('../pages/SearchAndFilters'));
 const Messages = lazy(() => import('../pages/Messages'));
 const CandidateProfile = lazy(() => import('../pages/CandidateProfile'));
 const RecruiterProfile = lazy(() => import('../pages/RecruiterProfile'));
+const RecruiterPostManager = lazy(() => import('../pages/RecruiterPostManager'));
 const JobPostingForm = lazy(() => import('../pages/JobPostingForm'));
 const CandidateOnboarding = lazy(() => import('../pages/Onboarding/CandidateOnboarding'));
 const RecruiterOnboarding = lazy(() => import('../pages/Onboarding/RecruiterOnboarding'));
@@ -25,61 +26,56 @@ const pages = [
     {
         pageLink: '/home',
         view: LandingPage,
-        displayName: 'Landing',
         showNavbar: true,
     },
     {
         pageLink: '/messages',
         view: Messages,
-        displayName: 'Messages',
         showNavbar: true,
     },
     {
         pageLink: '/recruiter/postjob',
         view: JobPostingForm,
-        displayName: 'Job Posting Form',
         showNavbar: true,
     },
     {
         pageLink: '/candidate/onboarding',
         view: CandidateOnboarding,
-        displayName: 'Candidate Onboarding',
         showNavbar: false,
     },
     {
         pageLink: '/recruiter/onboarding',
         view: RecruiterOnboarding,
-        displayName: 'Recruiter Onboarding',
         showNavbar: false,
     },
     {
         pageLink: '/search',
         view: SearchResult,
-        displayName: 'Search Result',
         showNavbar: true,
     },
     {
         pageLink: '/login',
         view: Login,
-        displayName: 'Login',
         showNavbar: false,
     },
     {
         pageLink: '/signup',
         view: Signup,
-        displayName: 'Signup',
         showNavbar: false,
     },
     {
         pageLink: '/candidate/profile',
         view: CandidateProfile,
-        displayName: 'Candidate Profile',
         showNavbar: true,
     },
     {
         pageLink: '/recruiter/profile',
         view: RecruiterProfile,
-        displayName: 'Recruiter profile',
+        showNavbar: true,
+    },
+    {
+        pageLink: '/recruiter/managepost',
+        view: RecruiterPostManager,
         showNavbar: true,
     }
 ];
@@ -129,12 +125,6 @@ const Routes: React.FC<AppTypes> = (props) => {
 
     return (
         <>
-            {/* {loading && <div className="loader--global">
-                <Loader />
-            </div>} */}
-            {/* {isAuth && <Suspense fallback={<div/>}>
-                <NavBar history={history} setIsAuth={setIsAuth}/>
-            </Suspense>} */}
             <Switch>
                 {pages.map((page, index) => 
                     <Route

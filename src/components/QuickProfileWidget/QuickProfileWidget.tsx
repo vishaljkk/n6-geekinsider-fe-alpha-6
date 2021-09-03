@@ -3,9 +3,9 @@ import { QuickProfilePropTypes } from './types';
 import './QuickProfileWidget.scss';
 
 const QuickProfileWidget: React.FC<QuickProfilePropTypes> = (props) => {
-    const { title, subtitle } = props;
+    const { title, subtitle, onClick } = props;
     return (
-        <div className="quick-profile">
+        <div className="quick-profile" onClick={onClick}>
             <Card hoverable>
                 <div className="quick-profile__avatar">
                     <Avatar size={55}>A</Avatar>
