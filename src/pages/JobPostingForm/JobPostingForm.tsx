@@ -13,11 +13,20 @@ const { Option } = Select;
 const JobPostingForm: React.FC<JobPostingFormPropTypes> = (props) => {
     const { createJobPost } = props;
     const history = useHistory();
+    const [form] = Form.useForm();
 
 	const onFinish = (values: any) => {
 		// console.log('Success:', values);
-        createJobPost(values, history);
+        const tempValues = Object.assign({}, values);
+        tempValues.skills = tempValues.skills.join(',');
+        tempValues.officeLocations = tempValues.officeLocations.join(',');
+        createJobPost(tempValues, afterSuccessfullFinish);
 	};
+
+    const afterSuccessfullFinish = () => {
+        history.push('/home');
+        form.resetFields();
+    }
 
 	const onFinishFailed = (errorInfo: any) => {
 		// console.log('Failed:', errorInfo);
@@ -27,6 +36,7 @@ const JobPostingForm: React.FC<JobPostingFormPropTypes> = (props) => {
         <div className="onboarding">
             {/* <header>Add a job</header> */}
             <Form
+                form={form}
                 name="Add a job"
                 labelCol={{ span: 8 }}
                 wrapperCol={{ span: 12 }}
@@ -57,7 +67,7 @@ const JobPostingForm: React.FC<JobPostingFormPropTypes> = (props) => {
 
                 <Form.Item
                     label="Desired skills"
-                    name="desiredSkills"
+                    name="skills"
                     rules={[{ 
                         required: true, 
                         message: 'Please select atleast three skills!',

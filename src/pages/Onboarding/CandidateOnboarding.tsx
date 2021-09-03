@@ -12,13 +12,19 @@ const { Option } = Select;
 
 const CandidateOnboarding: React.FC<CandidateOnboardingPropTypes> = (props) => {
     const { history, saveCandidateData } = props;
+    const [form] = Form.useForm();
 
 	const onFinish = (values: CandidateSubmitTypes) => {
         const tempValues = Object.assign({}, values);
         const skillsString = Object.assign([], tempValues.skills);
         tempValues.skills = skillsString.join(',');
-        saveCandidateData(tempValues, history);
+        saveCandidateData(tempValues, afterSuccessfullFinish);
 	};
+
+    const afterSuccessfullFinish = () => {
+        history.push('/home');
+        form.resetFields();
+    }
 
 	const onFinishFailed = (errorInfo: object) => {
 		// console.log('Failed:', errorInfo);
@@ -28,6 +34,7 @@ const CandidateOnboarding: React.FC<CandidateOnboardingPropTypes> = (props) => {
         <div className="onboarding">
             {/* <header className="App-header">Create your Candidate profile</header> */}
             <Form
+                form={form}
                 name="Candidate onboarding"
                 labelCol={{ span: 8 }}
                 wrapperCol={{ span: 12 }}

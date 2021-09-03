@@ -13,13 +13,19 @@ const { Option } = Select;
 
 const RecruiterOnboarding: React.FC<RecruiterOnboardingPropTypes> = (props) => {
     const { history, setIsAuth, isAuth, saveRecruiterData } = props;
+    const [form] = Form.useForm();
 
 	const onFinish = (values: RecruitereSubmitTypes) => {
 		const tempValues = Object.assign({}, values);
         const skillsString = Object.assign([], tempValues.skills);
         tempValues.skills = skillsString.join(',');
-        saveRecruiterData(tempValues, history);
+        saveRecruiterData(tempValues, afterSuccessfullFinish);
 	};
+
+    const afterSuccessfullFinish = () => {
+        history.push('/home');
+        form.resetFields();
+    }
 
 	const onFinishFailed = (errorInfo: object) => {
 		// console.log('Failed:', errorInfo);
@@ -29,6 +35,7 @@ const RecruiterOnboarding: React.FC<RecruiterOnboardingPropTypes> = (props) => {
         <div className="onboarding">
             <header className="App-header">Create your Recruiter profile</header>
             <Form
+                form={form}
                 name="Candidate onboarding"
                 labelCol={{ span: 8 }}
                 wrapperCol={{ span: 12 }}

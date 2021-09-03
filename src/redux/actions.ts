@@ -101,13 +101,13 @@ export const getLandingPageData = () => {
     }
 }
 
-export const saveCandidateData = (values: CandidateSubmitTypes, history: any) => {
+export const saveCandidateData = (values: CandidateSubmitTypes, callback: any) => {
     return (dispatch: DispatchType) => {
         dispatch({ type: 'SET_LOADING', payload: true })
         makeRequest.post('/api/users/user', values)
             .then(data => {
                 dispatch({ type: 'SET_PROFILE_DETAIL', payload: values })
-                history.push('/home');
+                callback();
                 dispatch({ type: 'SET_LOADING', payload: false })
             })
             .catch((error) => {
@@ -117,13 +117,13 @@ export const saveCandidateData = (values: CandidateSubmitTypes, history: any) =>
     }
 }
 
-export const saveRecruiterData = (values: RecruitereSubmitTypes, history: any) => {
+export const saveRecruiterData = (values: RecruitereSubmitTypes, callback: any) => {
     return (dispatch: DispatchType) => {
         dispatch({ type: 'SET_LOADING', payload: true })
         makeRequest.post('/api/users/user', values)
             .then(data => {
                 dispatch({ type: 'SET_PROFILE_DETAIL', payload: values })
-                history.push('/home');
+                callback();
                 dispatch({ type: 'SET_LOADING', payload: false })
             })
             .catch((error) => {
@@ -133,7 +133,7 @@ export const saveRecruiterData = (values: RecruitereSubmitTypes, history: any) =
     }
 }
 
-export const createJobPost = (values: RecruitereSubmitTypes, history: any) => {
+export const createJobPost = (values: RecruitereSubmitTypes, callback: any) => {
     return (dispatch: DispatchType) => {
         dispatch({ type: 'SET_LOADING', payload: true })
         makeRequest.post('/api/jobs/job', values)
@@ -143,7 +143,7 @@ export const createJobPost = (values: RecruitereSubmitTypes, history: any) => {
                     message: 'Job posted successfully',
                     description: 'Please visit the recent jobs posted section to get updates!'
                 })
-                history.push('/home');
+                callback();
                 dispatch({ type: 'SET_LOADING', payload: false })
             })
             .catch((error) => {
