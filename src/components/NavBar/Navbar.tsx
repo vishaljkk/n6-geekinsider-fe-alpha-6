@@ -7,15 +7,17 @@ import { UserOutlined } from '@ant-design/icons';
 
 import { NavBarPropTypes } from './types';
 import { StateTypes } from '../../redux/types';
-import { setUserType } from '../../redux/actions';
+import { setLoading, setUserType } from '../../redux/actions';
 import './Navbar.scss';
 
 const NavBar: React.FC<NavBarPropTypes> = (props) => {
-    const { history, setIsAuth, userType, setUserType } = props;
+    const { history, setIsAuth, userType, setUserType, setLoading } = props;
     const signOut = async () => {
+        setLoading(true);
         await Auth.signOut();
-        setIsAuth(false)
+        setIsAuth(false);
         history.push('/login');
+        setLoading(false);
     }
 
     const handleSelect = (val: string) => {
@@ -79,6 +81,6 @@ const mapStateToProps = (state: StateTypes) => ({
     userType: state.userType,
 });
   
-const mapDispatchToProps = (dispatch: any) => bindActionCreators({ setUserType }, dispatch);
+const mapDispatchToProps = (dispatch: any) => bindActionCreators({ setUserType, setLoading }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
