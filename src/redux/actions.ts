@@ -1,3 +1,4 @@
+import { CandidateSubmitTypes, RecruitereSubmitTypes } from '../pages/Onboarding/types';
 import { UserTypeTypes } from '../routes/types';
 import makeRequest from '../utils/makeRequest';
 import { DispatchType } from './types';
@@ -99,22 +100,31 @@ export const getLandingPageData = () => {
     }
 }
 
-interface RecruiterOnBoardingDataTypes {
-    name: string,
-    preferredIndustry: string,
-    location: string,
-}
-
-export const saveRecruiterData = (values: RecruiterOnBoardingDataTypes) => {
+export const saveCandidateData = (values: CandidateSubmitTypes, history: any) => {
     return (dispatch: DispatchType) => {
+        dispatch({ type: 'SET_LOADING', payload: true })
         makeRequest.post('/api/users/user', values)
             .then(data => {
                 console.log('Success:', data);
-                // dispatch({
-                //     type: 'SET_LANDING_DATA',
-                //     // payload: data
-                // })
-                // history.push('/home');
+                dispatch({ type: 'SET_PROFILE_DETAIL', payload: values })
+                history.push('/home');
+                dispatch({ type: 'SET_LOADING', payload: true })
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }
+}
+
+export const saveRecruiterData = (values: RecruitereSubmitTypes, history: any) => {
+    return (dispatch: DispatchType) => {
+        dispatch({ type: 'SET_LOADING', payload: true })
+        makeRequest.post('/api/users/user', values)
+            .then(data => {
+                console.log('Success:', data);
+                dispatch({ type: 'SET_PROFILE_DETAIL', payload: values })
+                history.push('/home');
+                dispatch({ type: 'SET_LOADING', payload: true })
             })
             .catch((error) => {
                 console.error('Error:', error);

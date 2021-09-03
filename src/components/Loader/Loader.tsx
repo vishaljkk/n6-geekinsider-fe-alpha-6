@@ -8,7 +8,7 @@ const Loader: React.FC<LoaderPropTypes> = (props) => {
     const { fontSize, text } = props;
     return (
         <div className='loader--generic'>
-            <Spin indicator={<LoadingOutlined style={{ fontSize: fontSize || 24 }} spin/>} tip={text} />
+            <Spin indicator={<LoadingOutlined style={{ fontSize: fontSize || 30 }} spin/>} tip={text} />
         </div>
     );
 }

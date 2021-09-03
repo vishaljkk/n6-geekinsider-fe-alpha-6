@@ -29,11 +29,13 @@ const RecruiterProfile: React.FC<ProfilePropsTypes> = (props) => {
                         <QuickProfileWidget title={name} subtitle={preferredIndustry}/>
                     </Col>
                     <Col span={15} offset={1}>
-                        <CandidateDetails itm={profileDetails} />
+                        <CandidateDetails {...{...profileDetails}} />
                     </Col>
                 </Row>
                 :
-                <Loader fontSize={30}/>
+                <div className="loader--global">
+                    <Loader text="Loading profile..."/>
+                </div>
             }
         </div>
     )

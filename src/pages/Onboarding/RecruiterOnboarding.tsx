@@ -1,12 +1,17 @@
 import React from 'react';
 import { Form, Input, Button, Select } from 'antd';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux'; 
+
+import { saveRecruiterData } from '../../redux/actions';
 import { RecruitereSubmitTypes, RecruiterOnboardingPropTypes } from './types';
+import { StateTypes } from '../../redux/types';
 import './onboarding.scss';
 
 const { Option } = Select;
 
 const RecruiterOnboarding: React.FC<RecruiterOnboardingPropTypes> = (props) => {
-    const { history, setIsAuth, isAuth } = props;
+    const { history, setIsAuth, isAuth, saveRecruiterData } = props;
     const industryTypes = ['Information Technology & Services', 'Hospital & Health Care', 'Construction', 'Retail', 'Education Management', 'Financial Services', 'Accounting', 'Computer Software', 'Higher Education', 'Automotive'];
     const cities = ['Banglore', 'Pune', 'Chennai', 'Kolkata', 'Mumbai', 'Delhi', 'Indore', 'Vadodara'];
     const skills = ['React', 'Angular', 'Vue', 'Ember', 'NodeJS', 'JavaScript', 'HTML', 'CSS', 'SASS']
@@ -15,7 +20,7 @@ const RecruiterOnboarding: React.FC<RecruiterOnboardingPropTypes> = (props) => {
 		const tempValues = Object.assign({}, values);
         const skillsString = Object.assign([], tempValues.skills);
         tempValues.skills = skillsString.join(',');
-        // saveRecruiterData(tempValues);
+        saveRecruiterData(tempValues, history);
 	};
 
 	const onFinishFailed = (errorInfo: object) => {
@@ -153,4 +158,12 @@ const RecruiterOnboarding: React.FC<RecruiterOnboardingPropTypes> = (props) => {
 	);
 }
 
-export default RecruiterOnboarding;
+const mapStateToProps = (state: StateTypes) => ({
+    userType: state.userType
+});
+
+const mapDispatchToProps = (dispatch: any) => bindActionCreators({
+    saveRecruiterData
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(RecruiterOnboarding);
