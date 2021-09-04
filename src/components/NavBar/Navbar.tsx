@@ -5,12 +5,14 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { UserOutlined } from '@ant-design/icons';
 
+import RecruiterSkillSearch from './RecruiterSkillSearch';
 import { NavBarPropTypes } from './types';
 import { StateTypes } from '../../redux/types';
 import { setLoading, setUserType } from '../../redux/actions';
 import './Navbar.scss';
 
 const NavBar: React.FC<NavBarPropTypes> = (props) => {
+    
     const { history, setIsAuth, userType, setUserType, setLoading } = props;
     const signOut = async () => {
         setLoading(true);
@@ -19,6 +21,11 @@ const NavBar: React.FC<NavBarPropTypes> = (props) => {
         history.push('/login');
         setLoading(false);
     }
+
+    const autoCompleteStyles = ({
+        width: '50%', 
+        marginRight: '10px'
+    })
 
     const handleSelect = (val: string) => {
         history.push(`/search?query=${val}`)
@@ -42,7 +49,7 @@ const NavBar: React.FC<NavBarPropTypes> = (props) => {
                     </Col>
                     <Col xs={{ span: 12, offset: 1 }} lg={{ span: 15, offset: 1 }}>
                         <AutoComplete
-                            style={{ width: '100%' }}   
+                            style={autoCompleteStyles}   
                             options={[
                                 { value: 'React' },
                                 { value: 'JavaScript' },
@@ -51,6 +58,7 @@ const NavBar: React.FC<NavBarPropTypes> = (props) => {
                             placeholder="Search jobs"
                             onSelect={handleSelect}
                         />
+                        <RecruiterSkillSearch />
                     </Col>
                     <Col xs={{ span: 3, offset: 1 }} lg={{ span: 3, offset: 1 }}>
                         <Dropdown 

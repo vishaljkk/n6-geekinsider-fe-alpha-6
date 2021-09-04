@@ -5,16 +5,19 @@ import { JobPostDetailWidgetPropTypes } from './types';
 import './JobPostDetailWidget.scss';
 
 const JobPostDetailWidget: React.FC<JobPostDetailWidgetPropTypes> = (props) => {
-    const { image, company, jobTitle, skills, location, ctc, experience, numberOfApplications, description, jobPostId } = props.itm;
+    const { typeOfPosition, jobTitle, skills, officeLocations, annualSalary, experienceRange, numberOfApplications, jobDescription, companyName } = props;
+    const mappableSkills = typeof skills === 'string' ? skills.split(',') : skills;
+    
     return (
         <div className="job-posting-detail-widget">
             <Card>
                 <section className="each-widget">
-                    <Avatar size={75} src={image} />
+                    <Avatar size={75}>{jobTitle[0]}</Avatar>
                     <div className="right-section">
-                        <span>{company}</span>
+                        <span>{companyName}</span>
                         <h3>{jobTitle}</h3>
-                        <a>{numberOfApplications} applicants</a>
+                        <span>{typeOfPosition}</span>
+                        {/* <a>{numberOfApplications} applicants</a> */}
                     </div>
                     <div className="action-buttons">
                         <Button type="primary">Apply</Button>
@@ -22,15 +25,15 @@ const JobPostDetailWidget: React.FC<JobPostDetailWidgetPropTypes> = (props) => {
                     </div>
                 </section>
                 <section className="tags-section">
-                    {skills.map((itm:any) => <span className="tags">{itm}</span>)}
+                    {mappableSkills.map((itm: string) => <span className="tags">{itm}</span>)}
                 </section>
                 <section className="footer-section">
-                    <div><MdLocationOn style={iconStyles} />{location}</div>
-                    <div><MdMonetizationOn style={iconStyles} />{ctc}</div>
-                    <div><MdHistory style={iconStyles} />{experience}</div>
+                    <div><MdLocationOn style={iconStyles} />{officeLocations}</div>
+                    <div><MdMonetizationOn style={iconStyles} />{annualSalary}</div>
+                    <div><MdHistory style={iconStyles} />{experienceRange}</div>
                 </section>
                 <Card>
-                    {description}
+                    {jobDescription}
                 </Card>
             </Card>
         </div>

@@ -9,6 +9,7 @@ import QuickProfileWidget from '../../../components/QuickProfileWidget/QuickProf
 import RecommenededCandidatesWidget from '../RecommenededCandidatesWidget';
 import { fetchLandingPageData } from '../../../redux/actions';
 import { StateTypes } from '../../../redux/types';
+import JobsPosted from './components/JobsPosted';
 
 const RecruiterLanding: React.FC = (props: any) => {
     const { landingData, fetchLandingPageData, userType, handleProfileClick } = props;
@@ -27,7 +28,7 @@ const RecruiterLanding: React.FC = (props: any) => {
                 </Col>
                 <Col span={15} offset={1} className="landing-right-column">
                     <RecentChatWidget />
-                    <RecommCandidateWidget />
+                    <JobsPosted />
                 </Col>
             </Row>
         </div>

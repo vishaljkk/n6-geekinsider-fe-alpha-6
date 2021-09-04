@@ -8,7 +8,8 @@ export interface StateTypes {
     landingData: object,
     searchData: any,
     loading: boolean,
-    recentJobs: any
+    recentJobs: any,
+    skillSearch: any
 }
 
 export interface actionTypes {

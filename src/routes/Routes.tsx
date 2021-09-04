@@ -94,7 +94,7 @@ const Routes: React.FC<AppTypes> = (props) => {
         isAuthenticated().then(resp => {
             if (resp?.result) {
                 setIsAuth(true);
-                const type = resp.signInUserSession.accessToken.payload['cognito:groups'][0] === 'userRecruiter' ? 'recruiter' : 'candidate';
+                const type = resp.signInUserSession.idToken.payload['cognito:groups'][0] === 'userRecruiter' ? 'recruiter' : 'candidate';
                 setUserType(type);
                 // redirecting to home is these invalid urls will be requested
                 if (location?.pathname && invalidLocations.includes(location.pathname)) {

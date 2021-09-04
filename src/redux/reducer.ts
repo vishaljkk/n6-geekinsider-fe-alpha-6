@@ -8,7 +8,8 @@ const initialState: StateTypes = {
     landingData: {},
     searchData: [],
     loading: false,
-    recentJobs: []
+    recentJobs: [],
+    skillSearch: []
 };
 
 const rootReducer = (state: StateTypes = initialState, action: actionTypes) => {
@@ -28,7 +29,11 @@ const rootReducer = (state: StateTypes = initialState, action: actionTypes) => {
         case 'SET_LOADING':
             return { ...state, loading: action.payload };
         case 'ADD_JOB_POST':
-            return { ...state, recentJobs: [ action.payload, ...state.recentJobs ] }
+            return { ...state, recentJobs: [ action.payload, ...state.recentJobs ] };
+        case 'SET_POSTED_JOBS':
+            return { ...state, recentJobs: action.payload };
+        case 'SET_SKILL_SEARCH_RESULT':
+            return { ...state, skillSearch: action.payload };
         default:
             return { ...state };
     }

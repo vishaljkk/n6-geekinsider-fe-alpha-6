@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import QuickProfileWidget from '../../components/QuickProfileWidget';
-import CandidateDetails from './RecruiterDetails';
+import RecruiterDetails from './RecruiterDetails';
 import { StateTypes } from '../../redux/types';
 import { fetchProfileDetails } from '../../redux/actions';
 import { ProfilePropsTypes } from './types';
@@ -29,7 +29,7 @@ const RecruiterProfile: React.FC<ProfilePropsTypes> = (props) => {
                         <QuickProfileWidget title={name} subtitle={preferredIndustry}/>
                     </Col>
                     <Col span={15} offset={1}>
-                        <CandidateDetails {...{...profileDetails}} />
+                        <RecruiterDetails {...{...profileDetails}} />
                     </Col>
                 </Row>
                 :

@@ -32,7 +32,6 @@ export const fetchProfileDetails = () => {
                 })
             })
             .catch((error) => {
-                console.error('Error:', error);
             });
     }
 }
@@ -48,7 +47,6 @@ export const fetchMessages = (section: string, id: string) => {
                 // })
             })
             .catch(err => {
-                console.error(err)
             })
     }
 }
@@ -112,7 +110,6 @@ export const saveCandidateData = (values: CandidateSubmitTypes, callback: any) =
             })
             .catch((error) => {
                 dispatch({ type: 'SET_LOADING', payload: false })
-                console.error('Error:', error);
             });
     }
 }
@@ -128,7 +125,6 @@ export const saveRecruiterData = (values: RecruitereSubmitTypes, callback: any) 
             })
             .catch((error) => {
                 dispatch({ type: 'SET_LOADING', payload: false })
-                console.error('Error:', error);
             });
     }
 }
@@ -148,7 +144,34 @@ export const createJobPost = (values: RecruitereSubmitTypes, callback: any) => {
             })
             .catch((error) => {
                 dispatch({ type: 'SET_LOADING', payload: false })
-                console.error('Error:', error);
+            });
+    }
+}
+
+export const fetchPostedJobs = () => {
+    return (dispatch: DispatchType) => {
+        dispatch({ type: 'SET_LOADING', payload: true })
+        makeRequest.get('/api/jobs/job')
+            .then(data => {
+                dispatch({ type: 'SET_POSTED_JOBS', payload: data.jobRecord });
+                dispatch({ type: 'SET_LOADING', payload: false })
+            })
+            .catch((error) => {
+                dispatch({ type: 'SET_LOADING', payload: false })
+            });
+    }
+}
+
+export const fetchSkillSearch = (skills: string[]) => {
+    return (dispatch: DispatchType) => {
+        dispatch({ type: 'SET_LOADING', payload: true })
+        makeRequest.get(`/api/jobs/job?skills=${skills.join(',')}`)
+            .then(data => {
+                dispatch({ type: 'SET_SKILL_SEARCH_RESULT', payload: data.jobRecord });
+                dispatch({ type: 'SET_LOADING', payload: false })
+            })
+            .catch((error) => {
+                dispatch({ type: 'SET_LOADING', payload: false })
             });
     }
 }
