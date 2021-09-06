@@ -27,7 +27,7 @@ const Login: React.FC<LoginPropsTypes> = (props) => {
 		try {
 			setLoginLoading(true);
 			const resp = await Auth.signIn(username, password);
-			const type = resp.signInUserSession.accessToken.payload["cognito:groups"][0] === 'userCandidate' ? 'candidate' : 'recruiter'
+			const type = resp.signInUserSession.idToken.payload["cognito:groups"][0] === 'userCandidate' ? 'candidate' : 'recruiter'
 			setUserType(type);
 			setIsAuth(true);
 			setLoginLoading(false);

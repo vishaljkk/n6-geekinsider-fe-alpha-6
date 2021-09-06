@@ -24,13 +24,18 @@ const JobPostingForm: React.FC<JobPostingFormPropTypes> = (props) => {
 	};
 
     const afterSuccessfullFinish = () => {
-        history.push('/home');
         form.resetFields();
+        history.push('/recruiter/profile');
     }
 
 	const onFinishFailed = (errorInfo: any) => {
 		// console.log('Failed:', errorInfo);
 	};
+
+    const handleCancel = () => {
+        form.resetFields();
+        history.push('/recruiter/profile');
+    }
 
 	return (
         <div className="onboarding">
@@ -131,7 +136,7 @@ const JobPostingForm: React.FC<JobPostingFormPropTypes> = (props) => {
                         <Button type="primary" htmlType="submit">
                             Create job
                         </Button>
-                        <Button style={{ marginLeft: '10px' }}>
+                        <Button style={{ marginLeft: '10px' }} onClick={handleCancel}>
                             Cancel
                         </Button>
                     </>

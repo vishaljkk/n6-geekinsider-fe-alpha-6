@@ -10,8 +10,8 @@ import TopTrending from '../TopTrending';
 import { fetchLandingPageData } from '../../../redux/actions';
 import { StateTypes } from '../../../redux/types';
 
-const CandidateLandingPage: React.FC = (props: any) => {
-    const { landingData, fetchLandingPageData, userType } = props;
+const CandidateLandingPage: React.FC<any> = (props) => {
+    const { landingData, fetchLandingPageData, userType, handleProfileClick } = props;
 
     useEffect(() => {
         console.log(landingData);
@@ -22,7 +22,7 @@ const CandidateLandingPage: React.FC = (props: any) => {
         <div className="landing-page-container">
             <Row>
                 <Col span={6} offset={1}>
-                    <QuickProfileWidget />
+                    <QuickProfileWidget onClick={handleProfileClick}/>
                 </Col>
                 <Col span={15} offset={1} className="landing-right-column">
                     <RecentChatWidget />

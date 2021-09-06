@@ -1,41 +1,30 @@
 import { useState, useEffect } from 'react';
-import { Card, Button, Avatar, Tooltip } from 'antd';
+import { Card, Button, Avatar, Tooltip, Empty } from 'antd';
 import { useHistory } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import { MdLocationOn, MdMonetizationOn, MdHistory, MdAccountCircle, MdHome } from "react-icons/md";
 import { iconStyles } from '../../utils';
 
-import './RecruiterDetails.scss';
 import { RecruitereSubmitTypes } from '../Onboarding/types';
+import { StateTypes } from '../../redux/types';
+import { fetchPostedJobs } from '../../redux/actions';
+import JobWidget from '../../components/JobWidget';
+import './RecruiterDetails.scss';
 
-const SingleWidget: React.FC<any> = (props) => {
-    const { image, company, jobTitle, skills, location, ctc, experience, numberOfApplications } = props.itm;
-    const handlePostVisible = (postId: string) => {
-        // console.log(postId);
-    }
-    return (
-        <Card hoverable>
-            <section className="each-widget">
-                <Avatar size={55} src={image} />
-                <div className="right-section">
-                    <span>{company}</span>
-                    <h3>{jobTitle}</h3>
-                    {skills.map((itm:string) => <span className="tags">{itm}</span>)}
-                </div>
-            </section>
-            <section className="footer-section">
-                <div><MdLocationOn style={iconStyles} />{location}</div>
-                <div><MdMonetizationOn style={iconStyles} />{ctc}</div>
-                <div><MdHistory style={iconStyles} />{experience}</div>
-                <Tooltip title={`${numberOfApplications} already applied`} placement="topRight"><span className="numbers-applied">{numberOfApplications}+</span></Tooltip>
-            </section>
-        </Card>
-    )
+interface RecruiterProfilePropTypes extends RecruitereSubmitTypes {
+    recentJobs: any,
+    fetchPostedJobs: () => void
 }
 
-const RecruiterDetails: React.FC<RecruitereSubmitTypes> = (props) => {
+const RecruiterDetails: React.FC<RecruiterProfilePropTypes> = (props) => {
     const [mappableSkills, setMappableSkills] = useState<string[]>([]);
-    const { about, empSize, skills, location, name, site, whatsappNumber, preferredIndustry } = props;
+    const { about, empSize, skills, location, name, site, whatsappNumber, preferredIndustry, recentJobs, fetchPostedJobs } = props;
     const history = useHistory();
+
+    useEffect(() => {
+        if (recentJobs.length === 0) fetchPostedJobs();
+    }, [])
 
     useEffect(() => {
         if (skills) setMappableSkills(typeof skills === 'string' ? skills.split(',') : skills);
@@ -54,7 +43,7 @@ const RecruiterDetails: React.FC<RecruitereSubmitTypes> = (props) => {
                         <span>{preferredIndustry}</span>
                     </div>
                     <div className="action-buttons">
-                        <Button type="primary">Update</Button>
+                        {/* <Button type="primary">Update</Button> */}
                         <Button type="primary" onClick={handleJobPost}>Post a job</Button>
                     </div>
                 </section>
@@ -69,11 +58,14 @@ const RecruiterDetails: React.FC<RecruitereSubmitTypes> = (props) => {
                 <Card>
                     {about}
                 </Card>
+            </Card>
+            <Card>
                 <div className="recommended-job-widget">
                     <h2>Jobs posted by {name}</h2>
                     <div className="recommended-job-widget-container">
-                        {[].map(itm => <SingleWidget itm={itm}/>)}
+                        {recentJobs.length ? recentJobs.map((itm: any) => <JobWidget {...{...itm}}/>) : <Empty description="Please post a job to manage here"/>}
                     </div>
+                    <br/>
                     <div className="see-more-container">
                         <Button onClick={() => history.push('/search')}>See more...</Button>
                     </div>
@@ -83,4 +75,12 @@ const RecruiterDetails: React.FC<RecruitereSubmitTypes> = (props) => {
     )
 }
 
-export default RecruiterDetails;
+const mapStateToProps = (state: StateTypes) => ({
+    recentJobs: state.recentJobs
+});
+
+const mapDispatchToProps = (dispatch: any) => bindActionCreators({
+    fetchPostedJobs
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(RecruiterDetails);

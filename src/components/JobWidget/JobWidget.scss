@@ -1,0 +1,30 @@
+.single-widget {
+    display: flex;
+        flex-wrap: wrap;
+        .ant-card {
+            margin: 5px;
+        }
+        .single-widget__each-widget {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            .single-widget__right-section {
+
+            }
+        }
+        .single-widget__footer-section {
+            margin: 15px 0;
+            .icon {
+                width: 17px;
+                height: 17px;
+                top: 3px;
+                position: relative;
+                margin-right: 5px;
+            }
+            .numbers-applied {
+                position: absolute;
+                right: 10px;
+                bottom: 5px;
+            }
+        }
+}
