@@ -2,8 +2,13 @@ import { useState, useEffect } from 'react';
 import { Card, Button, Progress } from 'antd';
 import { MdLocationOn, MdMonetizationOn, MdHistory } from "react-icons/md";
 import { FaGithub } from 'react-icons/fa';
-import { CandidateSubmitTypes } from '../Onboarding/types';
-import { iconStyles } from '../../utils';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
+import { StateTypes } from '../../../redux/types';
+import { fetchProfileDetails } from '../../../redux/actions';
+import { CandidateSubmitTypes } from '../../Onboarding/types';
+import { iconStyles } from '../../../utils';
 import './CandidateDetails.scss';
 
 const CandidateDetails: React.FC<CandidateSubmitTypes> = (props) => {
@@ -22,9 +27,9 @@ const CandidateDetails: React.FC<CandidateSubmitTypes> = (props) => {
                         <h2>{name}</h2>
                         {/* <span>{jobTitle}</span> */}
                     </div>
-                    <div className="action-buttons">
+                    {/* <div className="action-buttons">
                         <Button type="primary">Update</Button>
-                    </div>
+                    </div> */}
                 </section>
                 <section className="tags-section">
                     {mappableSkills.map((itm: string) => <span className="tags" key={itm}>{itm}</span>)}
@@ -58,4 +63,12 @@ const CandidateDetails: React.FC<CandidateSubmitTypes> = (props) => {
     )
 }
 
-export default CandidateDetails;
+const mapStateToProps = (state: StateTypes) => ({
+    profileDetails: state.profileDetails
+});
+
+const mapDispatchToProps = (dispatch: any) => bindActionCreators({
+    fetchProfileDetails
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(CandidateDetails);

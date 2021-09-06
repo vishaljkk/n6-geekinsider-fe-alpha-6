@@ -1,5 +1,5 @@
 .search-and-filter-container {
-    height: 100%;
+    height: 90%;
     .ant-row {
         height: 90%;
     }
@@ -16,23 +16,42 @@
         .ant-card {
             margin: 5px;
             // width: 100%;
+            .ant-card-body {
+                padding: 12px;
+            }
             &:first-child {
                 margin: 0 5px 5px 5px;
             }
         }
         .each-widget {
-            // width: 250px;
-            min-width: 200px;
-            display: grid;
-            grid-template-columns: 35% auto;
+            // width: auto;
+            // max-width: 250px;
+            display: flex;
+            gap: 10px;
+            .right-section {
+                flex-grow: 1;
+            }
+        }
+        .tags-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
         }
         .footer-section {
-            margin: 15px 0;
+            margin: 15px 0 0 0;
+            display: flex;
+            // justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 15px;
             .numbers-applied {
                 position: absolute;
                 right: 10px;
                 bottom: 5px;
             }
         }
+    }
+    .search-footer {
+        display: flex;
+        justify-content: center;
     }
 }

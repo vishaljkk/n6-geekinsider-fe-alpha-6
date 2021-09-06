@@ -3,35 +3,39 @@ import { Row, Col } from 'antd';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import QuickProfileWidget from '../../components/QuickProfileWidget';
-import CandidateDetails from './CandidateDetails';
-import Loader from '../../components/Loader';
-import { fetchProfileDetails } from '../../redux/actions';
-import { StateTypes } from '../../redux/types';
+import QuickProfileWidget from '../../../components/QuickProfileWidget';
+import RecruiterDetails from './RecruiterDetails';
+import { StateTypes } from '../../../redux/types';
+import { fetchProfileDetails } from '../../../redux/actions';
 import { ProfilePropsTypes } from './types';
-import './Profile.scss';
+import Loader from '../../../components/Loader';
+import './RecruiterProfile.scss';
 
-const Profile: React.FC<ProfilePropsTypes> = (props) => {
+const RecruiterProfile: React.FC<ProfilePropsTypes> = (props) => {
 
     const { profileDetails, fetchProfileDetails } = props;
+    const { name, preferredIndustry } = profileDetails;
 
     useEffect(() => {
         fetchProfileDetails();
     }, [])
+
 
     return (
         <div className="profile">
             {Object.keys(profileDetails).length ? 
                 <Row>
                     <Col span={6} offset={1}>
-                        <QuickProfileWidget title={profileDetails.name} />
+                        <QuickProfileWidget title={name} subtitle={preferredIndustry}/>
                     </Col>
                     <Col span={15} offset={1}>
-                        <CandidateDetails {...{...profileDetails}} />
+                        <RecruiterDetails {...{...profileDetails}} />
                     </Col>
                 </Row>
                 :
-                <div className="loader---global"><Loader text="Loading profile..."/></div>
+                <div className="loader--global">
+                    <Loader text="Loading profile..."/>
+                </div>
             }
         </div>
     )
@@ -45,4 +49,4 @@ const mapDispatchToProps = (dispatch: any) => bindActionCreators({
     fetchProfileDetails
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Profile);
+export default connect(mapStateToProps, mapDispatchToProps)(RecruiterProfile);

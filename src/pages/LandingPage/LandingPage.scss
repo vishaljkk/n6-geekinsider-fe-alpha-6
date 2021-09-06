@@ -1,8 +1,11 @@
+.ant-card-body {
+    padding: 12px;
+}
 .tags {
     width: fit-content;
     background-color: lightgrey;
     border-radius: 10px;
-    padding: 2px 6px;
+    padding: 0 6px;
     margin: 0 3px;
 }
 
@@ -59,12 +62,16 @@
             margin: 5px;
         }
         .each-widget {
-            width: 250px;
+            max-width: 250px;
+            width: auto;
             display: grid;
             grid-template-columns: 35% 65%;
         }
         .footer-section {
             margin: 15px 0;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
             .icon {
                 width: 17px;
                 height: 17px;
@@ -77,6 +84,11 @@
                 right: 10px;
                 bottom: 5px;
             }
+        }
+        .tag-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
         }
     }
 }
@@ -97,6 +109,11 @@
             // width: 250px;
             display: grid;
             grid-template-columns: 35% 65%;
+        }
+        .tag-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
         }
         .footer-section {
             margin: 15px 0;

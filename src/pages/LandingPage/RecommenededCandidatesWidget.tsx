@@ -1,70 +1,69 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
 import { Tooltip, Button, Card, Tag, Avatar } from 'antd';
-import { DollarCircleOutlined, HistoryOutlined } from '@ant-design/icons';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
+import { fetchRecommendedCandidates, setRecruiterCandidateDetails } from '../../redux/actions';
+import { StateTypes } from '../../redux/types';
 import './LandingPage.scss';
-import RecommCandidateWidget from './RecomendedJobsWidget';
 
-const demoData = [
-    {
-        image: 'https://media-exp1.licdn.com/dms/image/C560BAQF6H8gAs-JyFg/company-logo_200_200/0/1627543110554?e=1637798400&v=beta&t=PwAcQBk0CKYnt8DW1ftjJVqkHWlct1UCyvb7AtTUYCU',
-        company: 'Flipkart',
-        jobTitle: 'Full stack developer',
-        skills: ['React', 'JavaScript'],
-        location: 'some location',
-        ctc: '12L - 15L/yr',
-        experience: '3-5 years',
-        numberOfApplications: 233
-    },
-    {
-        image: 'https://media-exp1.licdn.com/dms/image/C560BAQF6H8gAs-JyFg/company-logo_200_200/0/1627543110554?e=1637798400&v=beta&t=PwAcQBk0CKYnt8DW1ftjJVqkHWlct1UCyvb7AtTUYCU',
-        company: 'Flipkart',
-        jobTitle: 'Full stack developer',
-        skills: ['React', 'JavaScript'],
-        location: 'some location',
-        ctc: '12L - 15L/yr',
-        experience: '3-5 years',
-        numberOfApplications: 2
-    },
-    {
-        image: 'https://media-exp1.licdn.com/dms/image/C560BAQF6H8gAs-JyFg/company-logo_200_200/0/1627543110554?e=1637798400&v=beta&t=PwAcQBk0CKYnt8DW1ftjJVqkHWlct1UCyvb7AtTUYCU',
-        company: 'Flipkart',
-        jobTitle: 'Full stack developer',
-        skills: ['React', 'JavaScript'],
-        location: 'some location',
-        ctc: '12L - 15L/yr',
-        experience: '3-5 years',
-        numberOfApplications: 10
-    }
-]
+interface SingleWidgetTypes {
+    aboutid: string,
+    ctc: string,
+    exp: string,
+    githubUrl: string,
+    jobTitle: string,
+    location: string,
+    name: string,
+    skills: string[],
+    whatsappNumber: string,
+    __v: number,
+    _id: string,
+    handleClick: (e: SingleWidgetTypes) => void
+}
 
-const SingleWidget = (props: any) => {
-    const { image, company, jobTitle, skills, location, ctc, experience, numberOfApplications } = props.itm;
-    const handlePostVisible = (postId: string) => {
-        console.log(postId);
-    }
+interface RecommenededCandidatesWidgetTypes {
+    recommendedCandidates: SingleWidgetTypes[], 
+    fetchRecommendedCandidates: () => void,
+    setVisible: (e: boolean) => void,
+    setRecruiterCandidateDetails: (e: SingleWidgetTypes) => any
+}
+
+const SingleWidget = (props: SingleWidgetTypes) => {
+    const { skills, jobTitle, name, handleClick } = props;
+
     return (
-        <Card hoverable style={{ width:'100%' }}>
+        <Card hoverable style={{ width:'100%' }} onClick={() => handleClick(props)}>
             <section className="each-widget">
-                <Avatar size={55} src={image} />
+                <Avatar size={55}>{}</Avatar>
                 <div className="right-section">
-                    <span>{company}</span>
-                    <h3>{jobTitle}</h3>
-                    {skills.map((itm:any) => <span className="tags">{itm}</span>)}
+                    <span>{jobTitle}</span>
+                    <h3>{name}</h3>
+                    <div className="tag-section">{skills.map((itm: string) => <span className="tags" key={itm}>{itm}</span>)}</div>
                 </div>
             </section>
         </Card>
     )
 }
 
-const RecommenededCandidatesWidget: React.FC<any> = () => {
-    const [data, setData] = useState(demoData);
+const RecommenededCandidatesWidget: React.FC<RecommenededCandidatesWidgetTypes> = (props) => {
+    const { recommendedCandidates, fetchRecommendedCandidates, setVisible, setRecruiterCandidateDetails } = props;
+
+    useEffect(() => {
+        fetchRecommendedCandidates();
+    }, [])
+
+    const handleClick = (values: SingleWidgetTypes) => {
+        setRecruiterCandidateDetails(values);
+        setVisible(true);
+    }
+
     return (
         <div className="recommended-candidates-widget">
             <h2>Recommended candidates</h2>
             <div className="recommended-candidates-widget-container">
-                {data.map(itm => <SingleWidget itm={itm}/>)}
+                {recommendedCandidates.slice(0, 3).map((itm: any) => <SingleWidget key={itm} {...{...itm, handleClick}}/>)}
             </div>
-            {/* <SingleWidget itm={data[0]} /> */}
             <div className="see-more-container">
                 <Button>See more...</Button>
             </div>
@@ -72,4 +71,13 @@ const RecommenededCandidatesWidget: React.FC<any> = () => {
     )
 }
 
-export default RecommenededCandidatesWidget;
+const mapStateToProps = (state: StateTypes) => ({
+    recommendedCandidates: state.recommendedCandidates,
+});
+
+const mapDispatchToProps = (dispatch: any) => bindActionCreators({
+    fetchRecommendedCandidates,
+    setRecruiterCandidateDetails
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(RecommenededCandidatesWidget);

@@ -1,12 +1,12 @@
-import { Form, Input, Button, Select } from 'antd';
+import { Form, Input, Button, Select, InputNumber } from 'antd';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'; 
 import { useHistory } from 'react-router';
 
 import { JobPostingFormPropTypes } from './types';
-import { StateTypes } from '../../redux/types';
-import { createJobPost } from '../../redux/actions';
-import { skills, cities, jobTypes } from '../../utils';
+import { StateTypes } from '../../../redux/types';
+import { createJobPost } from '../../../redux/actions';
+import { skills, cities, jobTypes } from '../../../utils';
 
 const { Option } = Select;
 
@@ -16,10 +16,9 @@ const JobPostingForm: React.FC<JobPostingFormPropTypes> = (props) => {
     const [form] = Form.useForm();
 
 	const onFinish = (values: any) => {
-		// console.log('Success:', values);
         const tempValues = Object.assign({}, values);
         tempValues.skills = tempValues.skills.join(',');
-        tempValues.officeLocations = tempValues.officeLocations.join(',');
+        tempValues.jobLocation = tempValues.jobLocation.join(',');
         createJobPost(tempValues, afterSuccessfullFinish);
 	};
 
@@ -40,6 +39,7 @@ const JobPostingForm: React.FC<JobPostingFormPropTypes> = (props) => {
 	return (
         <div className="onboarding">
             {/* <header>Add a job</header> */}
+            <br/>
             <Form
                 form={form}
                 name="Add a job"
@@ -57,7 +57,7 @@ const JobPostingForm: React.FC<JobPostingFormPropTypes> = (props) => {
                     <Input placeholder="Please enter the title of job" />
                 </Form.Item>
 
-                <Form.Item
+                {/* <Form.Item
                     label="Type of job position"
                     name="typeOfPosition"
                     rules={[{ required: true, message: 'Please select the type of position!' }]}
@@ -68,7 +68,7 @@ const JobPostingForm: React.FC<JobPostingFormPropTypes> = (props) => {
                     >
                         {jobTypes.map((itm: string) => <Option value={itm} key={itm}>{itm}</Option>)}
                     </Select>
-                </Form.Item>
+                </Form.Item> */}
 
                 <Form.Item
                     label="Desired skills"
@@ -95,7 +95,7 @@ const JobPostingForm: React.FC<JobPostingFormPropTypes> = (props) => {
 
                 <Form.Item
                     label="Office locations"
-                    name="officeLocations"
+                    name="jobLocation"
                     rules={[{ required: true, message: 'Please select job locations!' }]}
                 >
                     <Select
@@ -108,19 +108,19 @@ const JobPostingForm: React.FC<JobPostingFormPropTypes> = (props) => {
                 </Form.Item>
 
                 <Form.Item
-                    label="Experience range"
-                    name="experienceRange"
-                    rules={[{ required: true, message: 'Please enter the experience range!' }]}
+                    label="Experience"
+                    name="exp"
+                    rules={[{ required: true, message: 'Please enter the experience range!', type: 'number' }]}
                 >
-                    <Input placeholder="Please enter the experience range" />
+                    <InputNumber placeholder="Please enter the experience range" />
                 </Form.Item>
 
                 <Form.Item
                     label="Annual salary"
-                    name="annualSalary"
-                    rules={[{ required: true, message: 'Please enter the annual salary range!' }]}
+                    name="ctc"
+                    rules={[{ required: true, message: 'Please enter the annual salary range!', type: 'number' }]}
                 >
-                    <Input placeholder="Please enter the annual salary range" />
+                    <InputNumber placeholder="Please enter the annual salary range" />
                 </Form.Item>
 
                 <Form.Item

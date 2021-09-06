@@ -1,85 +1,54 @@
-import { useState } from 'react';
-import { Tooltip, Button, Card, Tag, Avatar } from 'antd';
+import { useEffect } from 'react';
+import { Button } from 'antd';
 import { useHistory } from 'react-router-dom';
-import { MdLocationOn, MdMonetizationOn, MdHistory } from "react-icons/md";
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
-import { iconStyles } from '../../utils';
+import JobWidget from '../../components/JobWidget';
+import { StateTypes } from '../../redux/types';
+import { fetchRecommendedJobs, fetchJobDetail } from '../../redux/actions';
 import './LandingPage.scss';
-// import { HistoryContext } from '../../routes/Routes';
 
-const demoData = [
-    {
-        image: 'https://media-exp1.licdn.com/dms/image/C560BAQF6H8gAs-JyFg/company-logo_200_200/0/1627543110554?e=1637798400&v=beta&t=PwAcQBk0CKYnt8DW1ftjJVqkHWlct1UCyvb7AtTUYCU',
-        company: 'Flipkart',
-        jobTitle: 'Full stack developer',
-        skills: ['React', 'JavaScript'],
-        location: 'some location',
-        ctc: '12L - 15L/yr',
-        experience: '3-5 years',
-        numberOfApplications: 233
-    },
-    {
-        image: 'https://media-exp1.licdn.com/dms/image/C560BAQF6H8gAs-JyFg/company-logo_200_200/0/1627543110554?e=1637798400&v=beta&t=PwAcQBk0CKYnt8DW1ftjJVqkHWlct1UCyvb7AtTUYCU',
-        company: 'Flipkart',
-        jobTitle: 'Full stack developer',
-        skills: ['React', 'JavaScript'],
-        location: 'some location',
-        ctc: '12L - 15L/yr',
-        experience: '3-5 years',
-        numberOfApplications: 2
-    },
-    {
-        image: 'https://media-exp1.licdn.com/dms/image/C560BAQF6H8gAs-JyFg/company-logo_200_200/0/1627543110554?e=1637798400&v=beta&t=PwAcQBk0CKYnt8DW1ftjJVqkHWlct1UCyvb7AtTUYCU',
-        company: 'Flipkart',
-        jobTitle: 'Full stack developer',
-        skills: ['React', 'JavaScript'],
-        location: 'some location',
-        ctc: '12L - 15L/yr',
-        experience: '3-5 years',
-        numberOfApplications: 10
-    }
-]
-
-const SingleWidget = (props: any) => {
-    const { image, company, jobTitle, skills, location, ctc, experience, numberOfApplications } = props.itm;
-    const handlePostVisible = (postId: string) => {
-        console.log(postId);
-    }
-    return (
-        <Card hoverable>
-            <section className="each-widget">
-                <Avatar size={55} src={image} />
-                <div className="right-section">
-                    <span>{company}</span>
-                    <h3>{jobTitle}</h3>
-                    {skills.map((itm:string) => <span className="tags">{itm}</span>)}
-                </div>
-            </section>
-            <section className="footer-section">
-                <div><MdLocationOn style={iconStyles} />{location}</div>
-                <div><MdMonetizationOn style={iconStyles} />{ctc}</div>
-                <div><MdHistory style={iconStyles} />{experience}</div>
-                <Tooltip title={`${numberOfApplications} already applied`} placement="topRight"><span className="numbers-applied">{numberOfApplications}+</span></Tooltip>
-            </section>
-        </Card>
-    )
+interface RecommCandidateWidgetPropTypes {
+    recommendedJobs: any, 
+    fetchRecommendedJobs: () => void, 
+    fetchJobDetail: (id: string) => void, 
+    setVisible: (e: boolean) => void
 }
 
-const RecommCandidateWidget: React.FC<any> = () => {
-    const [data, setData] = useState(demoData);
+const RecommCandidateWidget: React.FC<RecommCandidateWidgetPropTypes> = (props) => {
+    const { recommendedJobs, fetchRecommendedJobs, fetchJobDetail, setVisible } = props;
     const history = useHistory();
+
+    useEffect(() => {
+        fetchRecommendedJobs();
+    }, [])
+
+    const handleCardClick = (jobslug: string) => {
+        fetchJobDetail(jobslug);
+        setVisible(true);
+    }
+
     return (
         <div className="recommended-job-widget">
             <h2>Recommended jobs for you</h2>
             <div className="recommended-job-widget-container">
-                {data.map(itm => <SingleWidget itm={itm}/>)}
+                {recommendedJobs.map((itm: any) => <JobWidget key={itm} {...{...itm, onClick: handleCardClick}}/>)}
             </div>
-            {/* <SingleWidget itm={data[0]} /> */}
             <div className="see-more-container">
-                <Button onClick={() => history.push('/search')}>See more...</Button>
+                <Button onClick={() => history.push('/search?q=recommended')}>See more...</Button>
             </div>
         </div>
     )
 }
 
-export default RecommCandidateWidget;
+const mapStateToProps = (state: StateTypes) => ({
+    recommendedJobs: state.recommendedJobs
+});
+
+const mapDispatchToProps = (dispatch: any) => bindActionCreators({
+    fetchRecommendedJobs,
+    fetchJobDetail
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(RecommCandidateWidget);

@@ -26,10 +26,14 @@
     }
     .tags-section {
         margin: 20px 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
     }
     .footer-section {
         display: flex;
         justify-content: flex-start;
+        flex-wrap: wrap;
         gap: 25px;
         margin: 20px 0;
         .numbers-applied {

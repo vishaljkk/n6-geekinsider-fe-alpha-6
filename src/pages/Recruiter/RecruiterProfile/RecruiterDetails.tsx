@@ -4,12 +4,12 @@ import { useHistory } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { MdLocationOn, MdMonetizationOn, MdHistory, MdAccountCircle, MdHome } from "react-icons/md";
-import { iconStyles } from '../../utils';
+import { iconStyles } from '../../../utils';
 
-import { RecruitereSubmitTypes } from '../Onboarding/types';
-import { StateTypes } from '../../redux/types';
-import { fetchPostedJobs } from '../../redux/actions';
-import JobWidget from '../../components/JobWidget';
+import { RecruitereSubmitTypes } from '../../Onboarding/types';
+import { StateTypes } from '../../../redux/types';
+import { fetchPostedJobs } from '../../../redux/actions';
+import JobWidget from '../../../components/JobWidget';
 import './RecruiterDetails.scss';
 
 interface RecruiterProfilePropTypes extends RecruitereSubmitTypes {

@@ -9,7 +9,13 @@ export interface StateTypes {
     searchData: any,
     loading: boolean,
     recentJobs: any,
-    skillSearch: any
+    skillSearch: any,
+    trendingJobs: any,
+    recommendedJobs: any,
+    activeJob: any,
+    jobDetailModalVisible: boolean,
+    recommendedCandidates: any,
+    recruiterCandidateDetails: any
 }
 
 export interface actionTypes {
