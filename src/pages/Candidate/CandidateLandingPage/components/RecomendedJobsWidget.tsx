@@ -4,10 +4,9 @@ import { useHistory } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import JobWidget from '../../components/JobWidget';
-import { StateTypes } from '../../redux/types';
-import { fetchRecommendedJobs, fetchJobDetail } from '../../redux/actions';
-import './LandingPage.scss';
+import JobWidget from '../../../../components/JobWidget';
+import { fetchRecommendedJobs, fetchJobDetail, StateTypes } from '../../../../redux';
+import '../CandidateLandingPage.scss';
 
 interface RecommCandidateWidgetPropTypes {
     recommendedJobs: any, 

@@ -1,4 +1,4 @@
-import { UserTypeTypes } from '../../routes/types';
+import { UserTypeTypes } from '../../routes';
 
 export interface LoginPropsTypes {
 	setUserType: (e: UserTypeTypes) => void,

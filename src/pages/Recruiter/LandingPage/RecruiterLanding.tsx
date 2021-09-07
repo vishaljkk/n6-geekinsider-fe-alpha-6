@@ -3,16 +3,18 @@ import { Row, Col } from 'antd';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import RecentChatWidget from '../RecentChatWidget';
+import RecentChatWidget from '../../LandingPage/RecentChatWidget';
 import QuickProfileWidget from '../../../components/QuickProfileWidget/QuickProfileWidget';
-import RecommenededCandidatesWidget from '../RecommenededCandidatesWidget';
+import RecommenededCandidatesWidget from './components/RecommenededCandidatesWidget';
 import JobsPosted from './components/JobsPosted';
-import RecruiterCandidateDetails from '../../Recruiter/RecruiterCandidateDetails/RecruiterCandidateDetails';
-import ApplicationManager from '../../Recruiter/ApplicationManager';
-import { fetchLandingPageData, fetchProfileDetails, setRecruiterCandidateDetails } from '../../../redux/actions';
-import { StateTypes } from '../../../redux/types';
+import RecruiterCandidateDetails from '../RecruiterCandidateDetails/RecruiterCandidateDetails';
+import ApplicationManager from '../ApplicationManager';
+import { fetchProfileDetails, setRecruiterCandidateDetails } from '../../../redux/actions';
+import { StateTypes } from '../../../redux';
+import { RecruiterLandingPropTypes } from './types';
+import './RecruiterLanding.scss';
 
-const RecruiterLanding: React.FC<any> = (props) => {
+const RecruiterLanding: React.FC<RecruiterLandingPropTypes> = (props) => {
     const { fetchProfileDetails, handleProfileClick, profileDetails } = props;
     const [visible, setVisible] = useState<boolean>(false);
     const [candidateProfileVisible, setCandidateProfileVisible] = useState<boolean>(false);
@@ -25,7 +27,7 @@ const RecruiterLanding: React.FC<any> = (props) => {
         <div className="landing-page-container">
             <Row>
                 <Col span={6} offset={1}>
-                    <QuickProfileWidget onClick={handleProfileClick} title={profileDetails.name} subtitle={profileDetails.preferredIndustry}/>
+                    <QuickProfileWidget onClick={handleProfileClick} title={profileDetails.name} subtitle={profileDetails.location}/>
                     <RecommenededCandidatesWidget setVisible={setCandidateProfileVisible}/>
                 </Col>
                 <Col span={15} offset={1} className="landing-right-column">
@@ -40,13 +42,11 @@ const RecruiterLanding: React.FC<any> = (props) => {
 }
 
 const mapStateToProps = (state: StateTypes) => ({
-    landingData: state.landingData,
     userType: state.userType,
     profileDetails: state.profileDetails
 });
 
 const mapDispatchToProps = (dispatch: any) => bindActionCreators({
-    fetchLandingPageData,
     fetchProfileDetails,
     setRecruiterCandidateDetails
 }, dispatch);

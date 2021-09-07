@@ -1,6 +1,6 @@
 import { notification } from 'antd';
 import { CandidateSubmitTypes, RecruitereSubmitTypes } from '../pages/Onboarding/types';
-import { UserTypeTypes } from '../routes/types';
+import { UserTypeTypes } from '../routes';
 import makeRequest from '../utils/makeRequest';
 import { DispatchType } from './types';
 
@@ -51,17 +51,17 @@ export const setActiveJobModalVisible = (data: boolean) => {
 
 export const fetchProfileDetails = () => {
     return (dispatch: DispatchType) => {
-        setLoading(true)
+        dispatch({ type: 'SET_LOADING', payload: true })
         makeRequest.get('/api/users/user')
             .then(data => {
                 dispatch({
                     type: 'SET_PROFILE_DETAIL',
                     payload: data.user
                 })
-                setLoading(false)
+                dispatch({ type: 'SET_LOADING', payload: false })
             })
             .catch((error) => {
-                setLoading(false)
+                dispatch({ type: 'SET_LOADING', payload: false })
             });
     }
 }
@@ -115,30 +115,30 @@ export const getLandingPageData = () => {
 
 export const saveCandidateData = (values: CandidateSubmitTypes, callback: any) => {
     return (dispatch: DispatchType) => {
-        setLoading(true)
+        dispatch({ type: 'SET_LOADING', payload: true })
         makeRequest.post('/api/users/user', values)
             .then(data => {
                 dispatch({ type: 'SET_PROFILE_DETAIL', payload: values })
                 callback();
-                setLoading(false)
+                dispatch({ type: 'SET_LOADING', payload: false })
             })
             .catch((error) => {
-                setLoading(false)
+                dispatch({ type: 'SET_LOADING', payload: false })
             });
     }
 }
 
 export const saveRecruiterData = (values: RecruitereSubmitTypes, callback: any) => {
     return (dispatch: DispatchType) => {
-        setLoading(true)
+        dispatch({ type: 'SET_LOADING', payload: true })
         makeRequest.post('/api/users/user', values)
             .then(data => {
                 dispatch({ type: 'SET_PROFILE_DETAIL', payload: values })
                 callback();
-                setLoading(false)
+                dispatch({ type: 'SET_LOADING', payload: false })
             })
             .catch((error) => {
-                setLoading(false)
+                dispatch({ type: 'SET_LOADING', payload: false })
             });
     }
 }
@@ -164,14 +164,14 @@ export const createJobPost = (values: RecruitereSubmitTypes, callback: any) => {
 
 export const fetchPostedJobs = () => {
     return (dispatch: DispatchType) => {
-        setLoading(true)
+        dispatch({ type: 'SET_LOADING', payload: true })
         makeRequest.get('/api/jobs/job')
             .then(data => {
                 dispatch({ type: 'SET_POSTED_JOBS', payload: data.jobRecord });
-                setLoading(false)
+                dispatch({ type: 'SET_LOADING', payload: false })
             })
             .catch((error) => {
-                setLoading(false)
+                dispatch({ type: 'SET_LOADING', payload: false })
             });
     }
 }
@@ -195,7 +195,6 @@ export const applyForJob = (id: string) => {
         dispatch({ type: 'SET_LOADING', payload: true });
         makeRequest.post(`/api/users/apply?jobid=${id}`, {})
             .then(data => {
-                // dispatch({ type: 'SET_SKILL_SEARCH_RESULT', payload: data.jobRecord });
                 dispatch({ type: 'SET_LOADING', payload: false });
             })
             .catch((error) => {

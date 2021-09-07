@@ -3,9 +3,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'; 
 
 import { skills, cities } from '../../utils';
-import { saveCandidateData } from '../../redux/actions';
+import { saveCandidateData, StateTypes } from '../../redux';
 import { CandidateOnboardingPropTypes, CandidateSubmitTypes } from './types';
-import { StateTypes } from '../../redux/types';
 import './onboarding.scss';
 
 const { Option } = Select;

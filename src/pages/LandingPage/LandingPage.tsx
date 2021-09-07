@@ -4,12 +4,11 @@ import { connect } from 'react-redux';
 import { useHistory } from 'react-router';
 import { Auth } from 'aws-amplify';
 
-import CandidateLanding from './Candidate';
-import RecruiterLanding from './Recruiter';
+import CandidateLanding from '../Candidate/CandidateLandingPage';
+import RecruiterLanding from '../Recruiter/LandingPage';
 import Loader from '../../components/Loader';
-import { setUserType } from '../../redux/actions';
-import { StateTypes } from '../../redux/types';
-import { UserTypeTypes } from '../../routes/types';
+import { setUserType, StateTypes } from '../../redux';
+import { UserTypeTypes } from '../../routes';
 import { LandingPagePropTypes } from './types';
 
 const LandingPage: React.FC<LandingPagePropTypes> = (props) => {

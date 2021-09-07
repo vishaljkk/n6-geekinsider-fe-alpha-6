@@ -5,8 +5,7 @@ import { connect } from 'react-redux';
 
 import QuickProfileWidget from '../../../components/QuickProfileWidget';
 import RecruiterDetails from './RecruiterDetails';
-import { StateTypes } from '../../../redux/types';
-import { fetchProfileDetails } from '../../../redux/actions';
+import { fetchProfileDetails, StateTypes } from '../../../redux';
 import { ProfilePropsTypes } from './types';
 import Loader from '../../../components/Loader';
 import './RecruiterProfile.scss';

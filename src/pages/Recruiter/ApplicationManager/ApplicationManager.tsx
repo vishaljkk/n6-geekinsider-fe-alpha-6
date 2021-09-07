@@ -3,12 +3,12 @@ import { Modal, Card } from 'antd'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
+import Loader from '../../../components/Loader';
 import { MdLocationOn, MdMonetizationOn, MdHistory, MdAccountCircle, MdHome } from "react-icons/md";
 import { iconStyles } from '../../../utils';
 import { ApplicationManagerTypes } from './types';
-import { StateTypes } from '../../../redux/types';
+import { StateTypes } from '../../../redux';
 import './ApplicationManager.scss';
-import Loader from '../../../components/Loader';
 
 const ApplicationManager: React.FC<ApplicationManagerTypes> = (props) => {
     const { visible, setVisible, activeJob } = props;

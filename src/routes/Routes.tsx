@@ -3,11 +3,10 @@ import { Switch, Route, Redirect, useHistory } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'; 
 
-import { setIsAuth, setUserType } from '../redux/actions';
+import { setIsAuth, setUserType, StateTypes } from '../redux';
 import { AppTypes } from './types';
 import { isAuthenticated } from '../utils';
 import Loader from '../components/Loader';
-import { StateTypes } from '../redux/types';
 
 const Signup = lazy(() => import('../pages/Signup'));
 const Login = lazy(() => import('../pages/Login'));

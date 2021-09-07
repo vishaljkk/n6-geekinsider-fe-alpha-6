@@ -7,8 +7,7 @@ import { MdLocationOn, MdMonetizationOn, MdHistory, MdAccountCircle, MdHome } fr
 import { iconStyles } from '../../../utils';
 
 import { RecruitereSubmitTypes } from '../../Onboarding/types';
-import { StateTypes } from '../../../redux/types';
-import { fetchPostedJobs } from '../../../redux/actions';
+import { fetchPostedJobs, StateTypes } from '../../../redux';
 import JobWidget from '../../../components/JobWidget';
 import './RecruiterDetails.scss';
 

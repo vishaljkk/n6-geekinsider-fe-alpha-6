@@ -7,7 +7,7 @@ import { UserOutlined } from '@ant-design/icons';
 
 import RecruiterSkillSearch from './RecruiterSkillSearch';
 import { NavBarPropTypes } from './types';
-import { StateTypes } from '../../redux/types';
+import { StateTypes } from '../../redux';
 import { setLoading, setUserType, getJobDetails } from '../../redux/actions';
 import './Navbar.scss';
 
@@ -101,6 +101,10 @@ const mapStateToProps = (state: StateTypes) => ({
     userType: state.userType,
 });
   
-const mapDispatchToProps = (dispatch: any) => bindActionCreators({ setUserType, setLoading, getJobDetails }, dispatch);
+const mapDispatchToProps = (dispatch: any) => bindActionCreators({ 
+    setUserType, 
+    setLoading, 
+    getJobDetails 
+}, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar);

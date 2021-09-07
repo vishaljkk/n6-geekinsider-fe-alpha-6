@@ -4,8 +4,7 @@ import { connect } from 'react-redux';
 import { useHistory } from 'react-router';
 
 import { JobPostingFormPropTypes } from './types';
-import { StateTypes } from '../../../redux/types';
-import { createJobPost } from '../../../redux/actions';
+import { createJobPost, StateTypes } from '../../../redux';
 import { skills, cities, jobTypes } from '../../../utils';
 
 const { Option } = Select;

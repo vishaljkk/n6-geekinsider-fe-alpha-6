@@ -3,13 +3,13 @@ import { Row, Col } from 'antd';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import RecentChatWidget from '../RecentChatWidget';
-import RecommCandidateWidget from '../RecomendedJobsWidget';
+import RecentChatWidget from '../../LandingPage/RecentChatWidget';
+import RecommCandidateWidget from './components/RecomendedJobsWidget';
 import QuickProfileWidget from '../../../components/QuickProfileWidget/QuickProfileWidget';
-import TopTrending from '../TopTrending';
+import TopTrending from './components/TopTrending';
 import RecruiterPostManager from '../../Recruiter/RecruiterPostManager';
-import { fetchLandingPageData, fetchProfileDetails } from '../../../redux/actions';
-import { StateTypes } from '../../../redux/types';
+import { fetchLandingPageData, fetchProfileDetails, StateTypes } from '../../../redux';
+import './CandidateLandingPage.scss';
 
 const CandidateLandingPage: React.FC<any> = (props) => {
     const { activeJob, handleProfileClick, jobDetailModalVisible, fetchProfileDetails, profileDetails, userType } = props;

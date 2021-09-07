@@ -4,10 +4,9 @@ import { useHistory } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import JobWidget from '../../components/JobWidget';
-import { StateTypes } from '../../redux/types';
-import { fetchTrendingJobs, fetchJobDetail } from '../../redux/actions';
-import './LandingPage.scss';
+import JobWidget from '../../../../components/JobWidget';
+import { fetchTrendingJobs, fetchJobDetail, StateTypes } from '../../../../redux';
+import '../CandidateLandingPage.scss';
 
 const TopTrending: React.FC<any> = (props) => {
     const { trendingJobs, fetchTrendingJobs, fetchJobDetail, setVisible } = props;

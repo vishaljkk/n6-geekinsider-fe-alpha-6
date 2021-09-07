@@ -4,8 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import JobPostDetailWidget from '../../../components/JobPostDetailWidget';
-import { StateTypes } from '../../../redux/types';
-import { setActiveJobModalVisible } from '../../../redux/actions';
+import { setActiveJobModalVisible, StateTypes } from '../../../redux';
 
 const RecruiterPostManager: React.FC<any> = (props) => {
     const { activeJob, jobDetailModalVisible, visible, setVisible } = props;

@@ -4,9 +4,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { useHistory, useLocation } from 'react-router';
 
-import { fetchSkillSearch } from '../../redux/actions';
+import { fetchSkillSearch, StateTypes } from '../../redux';
 import { skills } from '../../utils';
-import { StateTypes } from '../../redux/types';
 import './Navbar.scss';
 
 const { Option } = Select;
@@ -48,6 +47,8 @@ const mapStateToProps = (state: StateTypes) => ({
     skillSearch: state.skillSearch,
 });
   
-const mapDispatchToProps = (dispatch: any) => bindActionCreators({ fetchSkillSearch }, dispatch);
+const mapDispatchToProps = (dispatch: any) => bindActionCreators({ 
+    fetchSkillSearch 
+}, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecruiterSkillSearch);

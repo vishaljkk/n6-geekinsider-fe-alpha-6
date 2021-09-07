@@ -6,8 +6,7 @@ import { connect } from 'react-redux';
 import QuickProfileWidget from '../../../components/QuickProfileWidget';
 import CandidateDetails from './CandidateDetails';
 import Loader from '../../../components/Loader';
-import { fetchProfileDetails } from '../../../redux/actions';
-import { StateTypes } from '../../../redux/types';
+import { fetchProfileDetails, StateTypes } from '../../../redux';
 import { ProfilePropsTypes } from './types';
 import './Profile.scss';
 

@@ -3,33 +3,11 @@ import { Tooltip, Button, Card, Tag, Avatar } from 'antd';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { fetchRecommendedCandidates, setRecruiterCandidateDetails } from '../../redux/actions';
-import { StateTypes } from '../../redux/types';
-import './LandingPage.scss';
+import { fetchRecommendedCandidates, setRecruiterCandidateDetails, StateTypes } from '../../../../redux';
+import { RecommenededCandidatesWidgetTypes, SingleWidgetTypes } from '..';
+import '../RecruiterLanding.scss';
 
-interface SingleWidgetTypes {
-    aboutid: string,
-    ctc: string,
-    exp: string,
-    githubUrl: string,
-    jobTitle: string,
-    location: string,
-    name: string,
-    skills: string[],
-    whatsappNumber: string,
-    __v: number,
-    _id: string,
-    handleClick: (e: SingleWidgetTypes) => void
-}
-
-interface RecommenededCandidatesWidgetTypes {
-    recommendedCandidates: SingleWidgetTypes[], 
-    fetchRecommendedCandidates: () => void,
-    setVisible: (e: boolean) => void,
-    setRecruiterCandidateDetails: (e: SingleWidgetTypes) => any
-}
-
-const SingleWidget = (props: SingleWidgetTypes) => {
+const SingleWidget: React.FC<SingleWidgetTypes> = (props) => {
     const { skills, jobTitle, name, handleClick } = props;
 
     return (
@@ -48,6 +26,7 @@ const SingleWidget = (props: SingleWidgetTypes) => {
 
 const RecommenededCandidatesWidget: React.FC<RecommenededCandidatesWidgetTypes> = (props) => {
     const { recommendedCandidates, fetchRecommendedCandidates, setVisible, setRecruiterCandidateDetails } = props;
+    console.log(recommendedCandidates)
 
     useEffect(() => {
         fetchRecommendedCandidates();

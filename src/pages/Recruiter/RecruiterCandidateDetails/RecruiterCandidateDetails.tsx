@@ -6,9 +6,8 @@ import { MdLocationOn, MdMonetizationOn, MdHistory } from "react-icons/md";
 import { FaGithub } from 'react-icons/fa';
 
 import { iconStyles } from '../../../utils';
-import { setRecruiterCandidateDetails } from '../../../redux/actions';
+import { setRecruiterCandidateDetails, StateTypes } from '../../../redux';
 import { RecruiterCandidateDetailsPropTypes } from './types';
-import { StateTypes } from '../../../redux/types';
 import './RecruiterCandidateDetails.scss';
 
 const RecruiterCandidateDetails: React.FC<RecruiterCandidateDetailsPropTypes> = (props) => {

@@ -5,8 +5,7 @@ import { FaGithub } from 'react-icons/fa';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { StateTypes } from '../../../redux/types';
-import { fetchProfileDetails } from '../../../redux/actions';
+import { StateTypes, fetchProfileDetails } from '../../../redux';
 import { CandidateSubmitTypes } from '../../Onboarding/types';
 import { iconStyles } from '../../../utils';
 import './CandidateDetails.scss';

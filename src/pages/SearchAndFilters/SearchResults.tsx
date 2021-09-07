@@ -6,9 +6,8 @@ import { MdLocationOn, MdMonetizationOn, MdHistory } from "react-icons/md";
 
 import JobPostDetailWidget from '../../components/JobPostDetailWidget';
 import Loader from '../../components/Loader';
-import { setSearchData } from '../../redux/actions';
+import { setSearchData, StateTypes } from '../../redux';
 import { iconStyles } from '../../utils';
-import { StateTypes } from '../../redux/types';
 import './SearchResult.scss';
 
 const SingleWidget: React.FC<any> = (props) => {

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import { applyForJob } from '../../redux/actions';
 import { iconStyles } from '../../utils';
-import { StateTypes } from '../../redux/types';
+import { StateTypes } from '../../redux';
 import { JobPostDetailWidgetPropTypes } from './types';
 import './JobPostDetailWidget.scss';
 

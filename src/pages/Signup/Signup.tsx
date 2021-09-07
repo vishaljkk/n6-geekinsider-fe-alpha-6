@@ -6,12 +6,10 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'; 
 
 import makeRequest from '../../utils/makeRequest';
-import { setUserType } from '../../redux/actions';
-
+import { setUserType, StateTypes } from '../../redux';
 import { SignupTypes, SignupTabsType, ConfirmSignInFormValueTypes, ConfirmSignUpTypes } from './types';
-import { StateTypes } from '../../redux/types';
 import { UserDetailTypes } from './types';
-import { UserTypeTypes } from '../../routes/types';
+import { UserTypeTypes } from '../../routes';
 
 import './Signup.scss';
 

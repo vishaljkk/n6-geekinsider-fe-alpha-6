@@ -5,11 +5,11 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { MdLocationOn, MdMonetizationOn, MdHistory } from "react-icons/md";
 
-import { StateTypes } from '../../../../redux/types';
-import { fetchPostedJobs, fetchJobDetail } from '../../../../redux/actions';
-import { iconStyles } from '../../../../utils';
-import '../../LandingPage.scss';
 import Loader from '../../../../components/Loader';
+import { RecentJobType, RecommCandidateWidgetPropTypes } from '..';
+import { fetchPostedJobs, fetchJobDetail, StateTypes } from '../../../../redux';
+import { iconStyles } from '../../../../utils';
+import '../RecruiterLanding.scss';
 
 const SingleWidget = (props: any) => {
     const { jobTitle, skills, officeLocations, exp, ctc, jobDescription, companyName, onClick, jobslug } = props;
@@ -39,20 +39,6 @@ const SingleWidget = (props: any) => {
     )
 }
 
-interface RecentJobType {
-    companyName: string,
-    jobDescription: string,
-    jobTitle: string,
-    skills: string[]
-}
-
-interface RecommCandidateWidgetPropTypes {
-    recentJobs: RecentJobType[], 
-    fetchPostedJobs: () => void, 
-    setVisible: (e: boolean) => void, 
-    fetchJobDetail: (jobslug: string) => void
-}
-
 const RecommCandidateWidget: React.FC<RecommCandidateWidgetPropTypes> = (props) => {
     const { recentJobs, fetchPostedJobs, setVisible, fetchJobDetail } = props;
     const history = useHistory();
@@ -70,7 +56,7 @@ const RecommCandidateWidget: React.FC<RecommCandidateWidgetPropTypes> = (props) 
         <div className="recommended-job-widget">
             <h2>Jobs posted by you</h2>
             <div className="recommended-job-widget-container">
-                {recentJobs.length>0 ? recentJobs.map((itm: any) => <SingleWidget {...{...itm, onClick: handleJobCardClick}}/>) : <Empty description="Please post a job and manage here!" />}
+                {recentJobs.length>0 ? recentJobs.map((itm: RecentJobType) => <SingleWidget {...{...itm, onClick: handleJobCardClick}}/>) : <Empty description="Please post a job and manage here!" />}
             </div>
             <div className="see-more-container">
                 <Button onClick={() => history.push('/search')}>See more...</Button>
