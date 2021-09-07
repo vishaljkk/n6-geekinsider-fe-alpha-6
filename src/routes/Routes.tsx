@@ -3,11 +3,10 @@ import { Switch, Route, Redirect, useHistory } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'; 
 
-import { setIsAuth, setUserType } from '../redux/actions';
+import { setIsAuth, setUserType, StateTypes } from '../redux';
 import { AppTypes } from './types';
 import { isAuthenticated } from '../utils';
 import Loader from '../components/Loader';
-import { StateTypes } from '../redux/types';
 
 const Signup = lazy(() => import('../pages/Signup'));
 const Login = lazy(() => import('../pages/Login'));
@@ -15,10 +14,10 @@ const LandingPage = lazy(() => import('../pages/LandingPage'));
 const NavBar = lazy(() => import('../components/NavBar'));
 const SearchResult = lazy(() => import('../pages/SearchAndFilters'));
 const Messages = lazy(() => import('../pages/Messages'));
-const CandidateProfile = lazy(() => import('../pages/CandidateProfile'));
-const RecruiterProfile = lazy(() => import('../pages/RecruiterProfile'));
-const RecruiterPostManager = lazy(() => import('../pages/RecruiterPostManager'));
-const JobPostingForm = lazy(() => import('../pages/JobPostingForm'));
+const CandidateProfile = lazy(() => import('../pages/Candidate/CandidateProfile'));
+const RecruiterProfile = lazy(() => import('../pages/Recruiter/RecruiterProfile'));
+const RecruiterPostManager = lazy(() => import('../pages/Recruiter/RecruiterPostManager'));
+const JobPostingForm = lazy(() => import('../pages/Recruiter/JobPostingForm'));
 const CandidateOnboarding = lazy(() => import('../pages/Onboarding/CandidateOnboarding'));
 const RecruiterOnboarding = lazy(() => import('../pages/Onboarding/RecruiterOnboarding'));
 
@@ -94,8 +93,15 @@ const Routes: React.FC<AppTypes> = (props) => {
         isAuthenticated().then(resp => {
             if (resp?.result) {
                 setIsAuth(true);
-                const type = resp.signInUserSession.idToken.payload['cognito:groups'][0] === 'userRecruiter' ? 'recruiter' : 'candidate';
-                setUserType(type);
+                try {
+                    const type = resp.signInUserSession.idToken.payload['cognito:groups'][0] === 'userRecruiter' ? 'recruiter' : 'candidate';
+                    setUserType(type);
+                }
+                catch(e) {
+                    setIsAuth(false);
+                    setUserType('');
+                    history.push('/login');
+                }
                 // redirecting to home is these invalid urls will be requested
                 if (location?.pathname && invalidLocations.includes(location.pathname)) {
                     history.push('/home')
@@ -125,6 +131,9 @@ const Routes: React.FC<AppTypes> = (props) => {
 
     return (
         <>
+            {isAuth && <Suspense fallback={<div/>}>
+                <NavBar history={history} setIsAuth={setIsAuth}/>
+            </Suspense>}
             <Switch>
                 {pages.map((page, index) => 
                     <Route
@@ -132,9 +141,6 @@ const Routes: React.FC<AppTypes> = (props) => {
                         path={page.pageLink}
                         render={(props: any) => 
                             <>
-                                {isAuth && page.showNavbar && <Suspense fallback={<div/>}>
-                                    <NavBar history={history} setIsAuth={setIsAuth}/>
-                                </Suspense>}
                                 {loading && <div className="loader--global">
                                     <Loader />
                                 </div>}

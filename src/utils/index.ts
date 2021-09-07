@@ -25,7 +25,7 @@ export const isAuthenticated = async () => {
 
 export const skills = ['React', 'Angular', 'Vue', 'Ember', 'NodeJS', 'JavaScript', 'HTML', 'CSS', 'SASS'];
 
-export const cities = ['Banglore', 'Pune', 'Chennai', 'Kolkata', 'Mumbai', 'Delhi', 'Indore', 'Vadodara'];
+export const cities = ['Banglore', 'Pune', 'Chennai', 'Hyderabad', 'Kolkata', 'Mumbai', 'Delhi', 'Indore', 'Vadodara', 'Ahemdabad'];
 
 export const jobTypes = ['Full time', 'Part time', 'Contract', 'Internship'];
 

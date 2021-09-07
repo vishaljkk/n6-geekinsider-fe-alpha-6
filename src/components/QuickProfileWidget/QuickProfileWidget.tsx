@@ -13,7 +13,7 @@ const QuickProfileWidget: React.FC<QuickProfilePropTypes> = (props) => {
                 <div className="quick-profile__content">
                     <h3><strong title={title}>{title}</strong></h3>
                     <p>{subtitle}</p>
-                    <a>Update profile</a>
+                    {/* <a>Update profile</a> */}
                 </div>
             </Card>
         </div>

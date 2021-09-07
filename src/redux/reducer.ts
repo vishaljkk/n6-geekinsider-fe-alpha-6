@@ -9,7 +9,13 @@ const initialState: StateTypes = {
     searchData: [],
     loading: false,
     recentJobs: [],
-    skillSearch: []
+    skillSearch: [],
+    trendingJobs: [],
+    recommendedJobs: [],
+    activeJob: {},
+    jobDetailModalVisible: false,
+    recommendedCandidates: [],
+    recruiterCandidateDetails: {}
 };
 
 const rootReducer = (state: StateTypes = initialState, action: actionTypes) => {
@@ -34,6 +40,18 @@ const rootReducer = (state: StateTypes = initialState, action: actionTypes) => {
             return { ...state, recentJobs: action.payload };
         case 'SET_SKILL_SEARCH_RESULT':
             return { ...state, skillSearch: action.payload };
+        case 'SET_TRENDING_JOBS':
+            return { ...state, trendingJobs: action.payload };
+        case 'SET_RECOMMENDED_JOBS':
+            return { ...state, recommendedJobs: action.payload };
+        case 'SET_ACTIVE_JOB':
+            return { ...state, activeJob: action.payload };
+        case 'SET_ACTIVE_JOB_MODAL_VISIBLE':
+            return { ...state, jobDetailModalVisible: action.payload };
+        case 'SET_RECOMMENDED_CANDIDATES':
+            return { ...state, recommendedCandidates: action.payload };
+        case 'SET_RECRUITER_CANDIDATE_DETAILS':
+            return { ...state, recruiterCandidateDetails: action.payload };
         default:
             return { ...state };
     }

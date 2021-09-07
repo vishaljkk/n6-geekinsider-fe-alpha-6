@@ -1,11 +1,11 @@
 export interface JobPostDetailWidgetPropTypes {
-    typeOfPosition: string, 
     jobTitle: string, 
     skills: string, 
-    officeLocations: string, 
-    annualSalary: string, 
-    experienceRange: string, 
-    numberOfApplications: string, 
+    jobLocation: string, 
+    ctc: string, 
+    exp: string, 
     jobDescription: string, 
-    companyName: string
+    companyName: string,
+    numberOfApplications: any,
+    applyForJob: (id: string) => void
 }

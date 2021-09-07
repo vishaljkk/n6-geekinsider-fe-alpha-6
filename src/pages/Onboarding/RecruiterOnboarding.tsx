@@ -4,9 +4,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'; 
 
 import { skills, cities, industryTypes } from '../../utils';
-import { saveRecruiterData } from '../../redux/actions';
+import { saveRecruiterData, StateTypes } from '../../redux';
 import { RecruitereSubmitTypes, RecruiterOnboardingPropTypes } from './types';
-import { StateTypes } from '../../redux/types';
 import './onboarding.scss';
 
 const { Option } = Select;

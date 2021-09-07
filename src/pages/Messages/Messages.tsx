@@ -3,10 +3,9 @@ import { Tabs } from 'antd';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { fetchMessages } from '../../redux/actions';
+import { fetchMessages, StateTypes } from '../../redux';
 import MessageTab from './MessageTab';
 import Loader from '../../components/Loader';
-import { StateTypes } from '../../redux/types';
 import { MessagePropTypes } from './types';
 import './messages.scss';
 

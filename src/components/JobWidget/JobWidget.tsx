@@ -1,43 +1,34 @@
 import React from "react";
-import { Card, Avatar, Tooltip } from "antd";
+import { Card, Avatar } from "antd";
 import { MdLocationOn, MdMonetizationOn, MdHistory } from "react-icons/md";
+
+import { JobWidgetPropTypes } from "./types";
 import { iconStyles } from "../../utils";
-import { JobWidgetPropTypes } from ".";
 import './JobWidget.scss';
 
 const JobWidget: React.FC<JobWidgetPropTypes> = (props) => {
-    const {
-        jobTitle, 
-        typeOfPosition,
-        skills,
-        officeLocations,
-        experienceRange,
-        annualSalary,
-        jobDescription,
-        numberOfApplications,
-        companyName
-    } = props;
-    const mappableSkills = typeof skills === 'string' ? skills.split(',') : skills;
+    const { jobTitle, skills, jobLocation, exp, ctc, companyName, onClick, jobslug } = props;
+    // const mappableSkills = typeof skills === 'string' ? skills.split(',') : skills
 
     return (
         <div className="single-widget">
-            <Card hoverable>
+            <Card hoverable onClick={() => onClick(jobslug)}>
                 <section className="single-widget__each-widget">
                     <Avatar size={55}>{jobTitle[0]}</Avatar>
-                    <div className="single-widget__right-section">
+                    <div className="right-section">
+                        <span>{companyName}</span>
                         <h3>{jobTitle}</h3>
-                        <p>{companyName}</p>
-                        <p>{typeOfPosition}</p>
-                        <section className="single-widget__tags-section">
-                            {mappableSkills.map((itm:string) => <span className="tags">{itm}</span>)}
-                        </section>
                     </div>
                 </section>
-                <section className="footer-section">
-                    <div><MdLocationOn style={iconStyles} />{officeLocations}</div>
-                    <div><MdMonetizationOn style={iconStyles} />{annualSalary}</div>
-                    <div><MdHistory style={iconStyles} />{experienceRange}</div>
-                    {numberOfApplications ? <Tooltip title={`${numberOfApplications} already applied`} placement="topRight"><span className="numbers-applied">{numberOfApplications}+</span></Tooltip> : null}
+                <br/>
+                <section className="single-widget__tag-section">
+                    {skills.map((itm: string) => <span className="tags" key={itm}>{itm}</span>)}
+                </section>
+                <section className="single-widget__footer-section">
+                    <div><MdLocationOn style={iconStyles} />{jobLocation}</div>
+                    <div><MdMonetizationOn style={iconStyles} />{ctc}</div>
+                    <div><MdHistory style={iconStyles} />{exp}</div>
+                    {/* <Tooltip title={`${numberOfApplications} already applied`} placement="topRight"><span className="numbers-applied">{numberOfApplications}+</span></Tooltip> */}
                 </section>
             </Card>
         </div>

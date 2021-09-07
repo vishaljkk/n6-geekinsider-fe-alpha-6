@@ -1,0 +1,61 @@
+.recruiter-candidate-details {
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    .ant-card {
+        // margin: 5px;
+        width: 100%;
+    }
+    .each-widget {
+        display: flex;
+        // justify-content: space-between;
+        flex-wrap: wrap;
+        .action-buttons {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            .ant-btn-primary {
+                max-width: 150px;
+            }
+        }
+        .right-section {
+            flex: 1;
+        }
+    }
+    .tags-section {
+        margin: 20px 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+    .footer-section {
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        gap: 25px;
+        margin: 20px 0;
+        .numbers-applied {
+            position: absolute;
+            right: 10px;
+            bottom: 5px;
+        }
+    }
+    .profile-footer {
+        display: grid;
+        grid-template-columns: 60% 40%;
+        // border: 1px solid lightgrey;
+        // border-radius: 3px;
+        .skills-section {
+            // border: 1px solid lightgrey;
+            // padding: 24px;
+            margin: 0 15px;
+        }
+        .github-repo-section {
+            // border: 1px solid lightgrey;
+            // padding: 24px;
+            margin: 0 15px;
+        }
+    }
+}

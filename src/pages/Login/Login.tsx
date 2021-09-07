@@ -6,8 +6,7 @@ import { connect } from 'react-redux';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { CognitoHostedUIIdentityProvider } from "@aws-amplify/auth/lib/types";
 
-import { setUserType } from '../../redux/actions';
-import { StateTypes } from '../../redux/types';
+import { setUserType, StateTypes } from '../../redux';
 import { LoginPropsTypes, LoginFormSubmitTypes } from './types';
 import './Login.scss';
 
