@@ -10,14 +10,18 @@
 }
 
 .candidate-landing {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin: 20px;
-    .landing-left-column {
+    // display: flex;
+    // flex-wrap: wrap;
+    // margin: 20px;
+    display: grid;
+    grid-template-columns: 30% 70%;
+    gap: 20px;
+    padding: 0 20px;
+    .candidate-landing__left {
         width: 100%;
+        padding-top: 24px;
     }
-    .landing-right-column {
+    .candidate-landing__right {
         // margin-top: 20px;
     }
 }

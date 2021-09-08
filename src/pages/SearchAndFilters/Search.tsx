@@ -42,10 +42,20 @@ const Search: React.FC<SearchPropTypes> = (props) => {
     
     return (
         <div className="search-and-filter-container">
-            {(searchType === 'recommended' || searchType === 'trending') && <Radio.Group defaultValue={searchType} buttonStyle="solid" style={{ display: 'flex', justifyContent: 'center', margin: '10px 0' }} onChange={handleRadioChange}>
+            {(searchType === 'recommended' || searchType === 'trending') && <Radio.Group defaultValue={searchType} buttonStyle="solid" className="toggle" onChange={handleRadioChange}>
                 <Radio.Button value="recommended">Recommended jobs</Radio.Button>
                 <Radio.Button value="trending">Top trending jobs</Radio.Button>
             </Radio.Group>}
+            {searchType === 'skillSearch' &&
+                <div className="search-heading">
+                    <h2>Results based on Skills</h2>
+                </div>
+            }
+            {searchType === 'companySearch' &&
+                <div className="search-heading">
+                    <h2>Results based on Company Name</h2>
+                </div>
+            }
             <SearchResults data={returnData(searchType)} />
             <br/>
             <div className="search-footer">

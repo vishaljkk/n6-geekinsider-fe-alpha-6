@@ -149,12 +149,16 @@ export const fetchSkillSearch = (skills: string[]) => {
     }
 }
 
-export const applyForJob = (id: string) => {
+export const applyForJob = (id: string, callback?: () => void) => {
     return (dispatch: DispatchType) => {
         dispatch({ type: 'SET_LOADING', payload: true });
         makeRequest.post(`/api/users/apply?jobid=${id}`, {})
             .then(data => {
                 dispatch({ type: 'SET_LOADING', payload: false });
+                callback && callback();
+                notification.success({
+                    message: 'Hurray!, applied successfully'
+                })
             })
             .catch((error) => {
                 dispatch({ type: 'SET_LOADING', payload: false });

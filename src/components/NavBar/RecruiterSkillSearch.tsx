@@ -21,9 +21,18 @@ const RecruiterSkillSearch: React.FC<RecruiterSkillSearchPropTypes> = (props) =>
     const location = useLocation();
 
     const handleChange = (values: string[]) => {
-        if (location.pathname !== '/search') history.push('/search');
-        fetchSkillSearch(values);
-        setSearchType('skillSearch');
+        if (location?.pathname !== '/search') history.push('/search');
+        if (values.length) {
+            fetchSkillSearch(values);
+            setSearchType('skillSearch');
+        }
+        else {
+            setSearchType('recommended');
+        }
+    }
+
+    const handleClear = () => {
+        setSearchType('recommended');
     }
 
     const handleClick = () => {
@@ -39,6 +48,7 @@ const RecruiterSkillSearch: React.FC<RecruiterSkillSearchPropTypes> = (props) =>
             onClick={handleClick}
             allowClear
             dropdownMatchSelectWidth={false}
+            onClear={handleClear}
         >
             {skills.map((itm: string) => <Option value={itm} key={itm}>{itm}</Option>)}
         </Select>

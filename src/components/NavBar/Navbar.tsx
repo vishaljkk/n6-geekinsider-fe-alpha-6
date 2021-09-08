@@ -41,9 +41,24 @@ const NavBar: React.FC<NavBarPropTypes> = (props) => {
     }
 
     const handlePressEnter = (e: any) => {
-        const searchString = e.target.value;
-        fetchCompanySearchData(searchString);
-        setSearchType('companySearch');
+        if (e?.target?.value) {
+            const searchString = e.target.value;
+            fetchCompanySearchData(searchString);
+            setSearchType('companySearch');
+        }
+        else {
+            setSearchType('recommended');
+        }
+    }
+
+    const handleSearch = (searchString: string) => {
+        if (searchString) {
+            fetchCompanySearchData(searchString);
+            setSearchType('companySearch');
+        }
+        else {
+            setSearchType('recommended');
+        }
     }
 
     const handleClick = () => {
@@ -66,10 +81,11 @@ const NavBar: React.FC<NavBarPropTypes> = (props) => {
                     placeholder="Search jobs"
                     onSelect={handleSelect}
                 /> */}
-                <Input 
+                <Input.Search
                     style={autoCompleteStyles}
-                    placeholder="Search jobs by company, enter the company name and press enter"
+                    placeholder="Search jobs by company name"
                     onPressEnter={handlePressEnter}
+                    onSearch={handleSearch}
                     onClick={handleClick}
                     allowClear
                 />

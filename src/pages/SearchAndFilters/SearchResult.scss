@@ -6,8 +6,19 @@
     .ant-col {
         height: 100%;
     }
+    .search-heading {
+        margin: 15px 0 0 15px;
+        h2 {
+            margin-bottom: 0;
+        }
+    }
+    .toggle {
+        display: flex;
+        justify-content: center;
+        margin-top: 9px;
+    }
     .search-result {
-        margin: 10px;
+        margin: -10px 10px 10px 10px;
         .search-result-widget-container {
             // display: flex;
             flex-wrap: wrap;
