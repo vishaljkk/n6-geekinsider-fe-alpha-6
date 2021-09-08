@@ -7,18 +7,19 @@ import { MdLocationOn, MdMonetizationOn, MdHistory, MdAccountCircle, MdHome } fr
 import { iconStyles } from '../../../utils';
 
 import { RecruitereSubmitTypes } from '../../Onboarding/types';
-import { fetchPostedJobs, StateTypes } from '../../../redux';
+import { fetchJobDetail, fetchPostedJobs, StateTypes } from '../../../redux';
 import JobWidget from '../../../components/JobWidget';
 import './RecruiterDetails.scss';
 
 interface RecruiterProfilePropTypes extends RecruitereSubmitTypes {
     recentJobs: any,
-    fetchPostedJobs: () => void
+    fetchPostedJobs: () => void,
+    fetchJobDetail: (e: string) => void
 }
 
 const RecruiterDetails: React.FC<RecruiterProfilePropTypes> = (props) => {
     const [mappableSkills, setMappableSkills] = useState<string[]>([]);
-    const { about, empSize, skills, location, name, site, whatsappNumber, preferredIndustry, recentJobs, fetchPostedJobs } = props;
+    const { about, empSize, skills, location, name, site, whatsappNumber, preferredIndustry, recentJobs, fetchPostedJobs, fetchJobDetail } = props;
     const history = useHistory();
 
     useEffect(() => {
@@ -31,6 +32,11 @@ const RecruiterDetails: React.FC<RecruiterProfilePropTypes> = (props) => {
 
     const handleJobPost = () => {
         history.push('/recruiter/postjob')
+    }
+
+    const handleJobCardClick = (jobSlug: string) => {
+        fetchJobDetail(jobSlug);
+        history.push('/recruiter/managepost')
     }
 
     return (
@@ -62,7 +68,7 @@ const RecruiterDetails: React.FC<RecruiterProfilePropTypes> = (props) => {
                 <div className="recommended-job-widget">
                     <h2>Jobs posted by {name}</h2>
                     <div className="recommended-job-widget-container">
-                        {recentJobs.length ? recentJobs.map((itm: any) => <JobWidget {...{...itm}}/>) : <Empty description="Please post a job to manage here"/>}
+                        {recentJobs.length ? recentJobs.map((itm: any) => <JobWidget {...{...itm, onClick: handleJobCardClick}}/>) : <Empty description="Please post a job to manage here"/>}
                     </div>
                     <br/>
                     <div className="see-more-container">
@@ -79,7 +85,8 @@ const mapStateToProps = (state: StateTypes) => ({
 });
 
 const mapDispatchToProps = (dispatch: any) => bindActionCreators({
-    fetchPostedJobs
+    fetchPostedJobs,
+    fetchJobDetail
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecruiterDetails);

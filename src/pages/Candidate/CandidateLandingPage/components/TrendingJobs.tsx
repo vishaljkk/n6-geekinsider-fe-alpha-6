@@ -5,11 +5,12 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import JobWidget from '../../../../components/JobWidget';
-import { fetchTrendingJobs, fetchJobDetail, StateTypes } from '../../../../redux';
+import { fetchTrendingJobs, fetchJobDetail, StateTypes, JobObjectTypes } from '../../../../redux';
+import { TrendingJobsPropTypes } from '..';
 import '../CandidateLandingPage.scss';
 
-const TopTrending: React.FC<any> = (props) => {
-    const { trendingJobs, fetchTrendingJobs, fetchJobDetail, setVisible } = props;
+const TrendingJobs: React.FC<TrendingJobsPropTypes> = (props) => {
+    const { trendingJobs, fetchTrendingJobs, fetchJobDetail } = props;
     const history = useHistory();
 
     useEffect(() => {
@@ -18,7 +19,7 @@ const TopTrending: React.FC<any> = (props) => {
 
     const handleCardClick = (jobslug: string) => {
         fetchJobDetail(jobslug);
-        setVisible(true);
+        history.push('/jobDetail');
     }
 
     return (
@@ -43,4 +44,4 @@ const mapDispatchToProps = (dispatch: any) => bindActionCreators({
     fetchJobDetail
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(TopTrending);
+export default connect(mapStateToProps, mapDispatchToProps)(TrendingJobs);

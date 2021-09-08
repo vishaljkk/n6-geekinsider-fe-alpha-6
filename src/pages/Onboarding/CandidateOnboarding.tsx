@@ -26,7 +26,6 @@ const CandidateOnboarding: React.FC<CandidateOnboardingPropTypes> = (props) => {
     }
 
 	const onFinishFailed = (errorInfo: object) => {
-		// console.log('Failed:', errorInfo);
 	};
 
 	return (

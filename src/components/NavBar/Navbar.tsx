@@ -8,12 +8,12 @@ import { UserOutlined } from '@ant-design/icons';
 import RecruiterSkillSearch from './RecruiterSkillSearch';
 import { NavBarPropTypes } from './types';
 import { StateTypes } from '../../redux';
-import { setLoading, setUserType, getJobDetails } from '../../redux/actions';
+import { setLoading, setUserType, getJobDetails, setSearchType, fetchCompanySearchData } from '../../redux/actions';
 import './Navbar.scss';
 
 const NavBar: React.FC<NavBarPropTypes> = (props) => {
     
-    const { history, setIsAuth, setUserType, setLoading, getJobDetails } = props;
+    const { history, setIsAuth, setUserType, setLoading, fetchCompanySearchData, setSearchType } = props;
     const signOut = async () => {
         setLoading(true);
         await Auth.signOut();
@@ -42,7 +42,8 @@ const NavBar: React.FC<NavBarPropTypes> = (props) => {
 
     const handlePressEnter = (e: any) => {
         const searchString = e.target.value;
-        getJobDetails(searchString);
+        fetchCompanySearchData(searchString);
+        setSearchType('companySearch');
     }
 
     const handleClick = () => {
@@ -104,7 +105,9 @@ const mapStateToProps = (state: StateTypes) => ({
 const mapDispatchToProps = (dispatch: any) => bindActionCreators({ 
     setUserType, 
     setLoading, 
-    getJobDetails 
+    getJobDetails,
+    setSearchType,
+    fetchCompanySearchData 
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar);

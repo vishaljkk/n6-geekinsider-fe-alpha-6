@@ -1,21 +1,22 @@
 import { UserTypeTypes } from "../routes";
 
+export type SearchType = 'recommended' | 'trending' | 'companySearch' | 'skillSearch';
 export interface StateTypes {
     userType: UserTypeTypes | '',
     isAuth: boolean,
-    profileDetails: ProfileDetailsTypes | {},
+    profileDetails: any,
     messages: object,
-    landingData: object,
-    searchData: any,
     loading: boolean,
     recentJobs: any,
-    skillSearch: any,
-    trendingJobs: any,
-    recommendedJobs: any,
+    skillSearch: JobObjectTypes[],
+    trendingJobs: JobObjectTypes[],
+    recommendedJobs: JobObjectTypes[],
     activeJob: any,
     jobDetailModalVisible: boolean,
     recommendedCandidates: any,
-    recruiterCandidateDetails: any
+    recruiterCandidateDetails: any,
+    searchType: SearchType,
+    companySearch: any
 }
 
 export interface actionTypes {
@@ -33,4 +34,37 @@ export interface ProfileDetailsTypes {
     site?: string,
     skills?: string[],
     whatsappNumber?: string
+}
+
+export interface JobObjectTypes {
+    canApplied: any,
+    companyId: string,
+    companyName: string,
+    jobStatus: boolean,
+    jobTitle: string,
+    jobslug: string,
+    skills: string[]
+}
+
+export interface JobdetailObjectTypes {
+    companyName: string,
+    ctc: number,
+    exp: number,
+    jobDescription: string,
+    jobLocation: string,
+    jobTitle: string,
+    jobslug: string,
+    skills: string[]
+}
+
+export interface CandidateProfileDetailsTypes {
+    about: string,
+    ctc: string,
+    exp: string,
+    githubUrl: string,
+    jobtitle: string,
+    location: string,
+    name: string,
+    skills: string[],
+    whatsappNumber: string
 }

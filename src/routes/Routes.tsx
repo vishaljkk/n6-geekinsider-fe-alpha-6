@@ -16,7 +16,8 @@ const SearchResult = lazy(() => import('../pages/SearchAndFilters'));
 const Messages = lazy(() => import('../pages/Messages'));
 const CandidateProfile = lazy(() => import('../pages/Candidate/CandidateProfile'));
 const RecruiterProfile = lazy(() => import('../pages/Recruiter/RecruiterProfile'));
-const RecruiterPostManager = lazy(() => import('../pages/Recruiter/RecruiterPostManager'));
+const CandidateJobDetail = lazy(() => import('../pages/Candidate/CandidateJobDetail'));
+const ApplicationManager = lazy(() => import('../pages/Recruiter/ApplicationManager'));
 const JobPostingForm = lazy(() => import('../pages/Recruiter/JobPostingForm'));
 const CandidateOnboarding = lazy(() => import('../pages/Onboarding/CandidateOnboarding'));
 const RecruiterOnboarding = lazy(() => import('../pages/Onboarding/RecruiterOnboarding'));
@@ -74,7 +75,12 @@ const pages = [
     },
     {
         pageLink: '/recruiter/managepost',
-        view: RecruiterPostManager,
+        view: ApplicationManager,
+        showNavbar: true,
+    },
+    {
+        pageLink: '/jobDetail',
+        view: CandidateJobDetail,
         showNavbar: true,
     }
 ];

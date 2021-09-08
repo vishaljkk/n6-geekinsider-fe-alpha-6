@@ -48,8 +48,8 @@ const RecommCandidateWidget: React.FC<RecommCandidateWidgetPropTypes> = (props) 
     }, [])
 
     const handleJobCardClick = (jobSlug: string) => {
-        setVisible(true);
         fetchJobDetail(jobSlug);
+        history.push('/recruiter/managepost')
     }
 
     return (

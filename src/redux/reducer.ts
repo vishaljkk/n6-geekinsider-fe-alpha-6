@@ -5,8 +5,6 @@ const initialState: StateTypes = {
     isAuth: false,
     profileDetails: {},
     messages: {},
-    landingData: {},
-    searchData: [],
     loading: false,
     recentJobs: [],
     skillSearch: [],
@@ -15,7 +13,9 @@ const initialState: StateTypes = {
     activeJob: {},
     jobDetailModalVisible: false,
     recommendedCandidates: [],
-    recruiterCandidateDetails: {}
+    recruiterCandidateDetails: {},
+    searchType: 'recommended',
+    companySearch: []
 };
 
 const rootReducer = (state: StateTypes = initialState, action: actionTypes) => {
@@ -28,10 +28,6 @@ const rootReducer = (state: StateTypes = initialState, action: actionTypes) => {
             return { ...state, profileDetails: action.payload };
         case 'SET_MESSAGES':
             return { ...state, messages: action.payload };
-        case 'SET_LANDING_DATA':
-            return { ...state, landingData: action.payload };
-        case 'SET_SEARCH_DATA':
-            return { ...state, searchData: action.payload };
         case 'SET_LOADING':
             return { ...state, loading: action.payload };
         case 'ADD_JOB_POST':
@@ -52,6 +48,10 @@ const rootReducer = (state: StateTypes = initialState, action: actionTypes) => {
             return { ...state, recommendedCandidates: action.payload };
         case 'SET_RECRUITER_CANDIDATE_DETAILS':
             return { ...state, recruiterCandidateDetails: action.payload };
+        case 'SET_SEARCH_TYPE':
+            return { ...state, searchType: action.payload };
+        case 'SET_COMPANY_SEARCH':
+            return { ...state, companySearch: action.payload };
         default:
             return { ...state };
     }

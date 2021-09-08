@@ -1,53 +1,41 @@
-import { useState, useEffect } from 'react';
-import { Row, Col } from 'antd';
+import { useEffect } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import RecentChatWidget from '../../LandingPage/RecentChatWidget';
 import RecommCandidateWidget from './components/RecomendedJobsWidget';
 import QuickProfileWidget from '../../../components/QuickProfileWidget/QuickProfileWidget';
-import TopTrending from './components/TopTrending';
-import RecruiterPostManager from '../../Recruiter/RecruiterPostManager';
-import { fetchLandingPageData, fetchProfileDetails, StateTypes } from '../../../redux';
+import TopTrending from './components/TrendingJobs';
+import { fetchProfileDetails, StateTypes } from '../../../redux';
+import { CandidateLandingPagePropTypes } from '.';
 import './CandidateLandingPage.scss';
 
-const CandidateLandingPage: React.FC<any> = (props) => {
-    const { activeJob, handleProfileClick, jobDetailModalVisible, fetchProfileDetails, profileDetails, userType } = props;
-    const [visible, setVisible] = useState(false);
+const CandidateLandingPage: React.FC<CandidateLandingPagePropTypes> = (props) => {
+    const { handleProfileClick, fetchProfileDetails, profileDetails } = props;
 
     useEffect(() => {
         fetchProfileDetails()
     }, [])
     
     return (
-        <div className="landing-page-container">
-            <Row>
-                <Col span={6} offset={1}>
+            <div className="candidate-landing">
+                <div className="candidate-landing__left">
                     <QuickProfileWidget onClick={handleProfileClick} title={profileDetails.name} subtitle={profileDetails.jobtitle}/>
-                </Col>
-                <Col span={15} offset={1} className="landing-right-column">
+                </div>
+                <div className="candidate-landing__right">
                     <RecentChatWidget />
-                    <RecommCandidateWidget setVisible={setVisible}/>
-                    <TopTrending setVisible={setVisible}/>
-                </Col>
-            </Row>
-            {/* {jobDetailModalVisible && <RecruiterPostManager />} */}
-            {/* {visible && <RecruiterPostManager visible={visible} setVisible={setVisible}/>} */}
-            {visible && (<RecruiterPostManager visible={visible} setVisible={setVisible}/>)}
-        </div>
+                    <RecommCandidateWidget />
+                    <TopTrending />
+                </div>
+            </div>
     )
 }
 
 const mapStateToProps = (state: StateTypes) => ({
-    landingData: state.landingData,
-    userType: state.userType,
-    jobDetailModalVisible: state.jobDetailModalVisible,
-    activeJob: state.activeJob,
     profileDetails: state.profileDetails
 });
 
 const mapDispatchToProps = (dispatch: any) => bindActionCreators({
-    fetchLandingPageData,
     fetchProfileDetails
 }, dispatch);
 

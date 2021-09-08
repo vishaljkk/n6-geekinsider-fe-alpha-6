@@ -9,16 +9,9 @@
         width: 100%;
     }
     .each-widget {
-        display: grid;
-        grid-template-columns: 20% 50% 30%;
-        .action-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            .ant-btn-primary {
-                max-width: 150px;
-            }
-        }
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
     }
     .tags-section {
         margin: 20px 0;

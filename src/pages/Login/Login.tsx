@@ -18,7 +18,6 @@ const Login: React.FC<LoginPropsTypes> = (props) => {
 	const [loginLoading, setLoginLoading] = useState<boolean>(false);
 
 	const onFinishFailed = (errorInfo: object) => {
-		// console.log('Failed:', errorInfo);
 	};
 
 	const signInFunc = async (values: LoginFormSubmitTypes) => {

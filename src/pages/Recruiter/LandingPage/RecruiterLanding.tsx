@@ -35,7 +35,6 @@ const RecruiterLanding: React.FC<RecruiterLandingPropTypes> = (props) => {
                     <JobsPosted setVisible={setVisible}/>
                 </Col>
             </Row>
-            {visible && (<ApplicationManager visible={visible} setVisible={setVisible}/>)}
             {candidateProfileVisible && (<RecruiterCandidateDetails visible={candidateProfileVisible} setVisible={setCandidateProfileVisible}/>)}
         </div>
     )

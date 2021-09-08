@@ -1,3 +1,4 @@
+import { SearchType } from "../../redux";
 import { UserTypeTypes } from "../../routes";
 
 export interface NavBarPropTypes { 
@@ -5,5 +6,7 @@ export interface NavBarPropTypes {
     setIsAuth: (e: boolean) => void,
     setUserType: (e: UserTypeTypes) => void,
     setLoading: (e: boolean) => void,
-    getJobDetails: (e: string) => void
+    getJobDetails: (e: string) => void,
+    setSearchType: (e: SearchType) => void,
+    fetchCompanySearchData: (e: string) => void
 }

@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { Modal, Card } from 'antd'
+import React from 'react'
+import { Card } from 'antd'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
@@ -11,15 +11,11 @@ import { StateTypes } from '../../../redux';
 import './ApplicationManager.scss';
 
 const ApplicationManager: React.FC<ApplicationManagerTypes> = (props) => {
-    const { visible, setVisible, activeJob } = props;
-    console.log(activeJob)
+    const { activeJob } = props;
     const { companyName, ctc, exp, jobDescription, jobLocation, jobTitle, skills } = activeJob;
-    const handleCancel = () => {
-        setVisible(false)
-    }
 
     return (
-        <Modal visible={visible} onCancel={handleCancel} footer={null}>
+        <>
             {Object.keys(activeJob).length>0 ? <div className="application-manager">
                 <section className="each-widget">
                     <div className="right-section">
@@ -39,7 +35,7 @@ const ApplicationManager: React.FC<ApplicationManagerTypes> = (props) => {
                     {jobDescription}
                 </Card>
             </div> : <Loader />}
-        </Modal>
+        </>
     )
 }
 

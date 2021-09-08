@@ -30,7 +30,6 @@ const RecruiterCandidateDetails: React.FC<RecruiterCandidateDetailsPropTypes> = 
     const handleCancel = () => setVisible(false);
 
     const handleSelectCandidate = () => {
-        console.log('selected')
     }
 
     return (
