@@ -1,1 +1,2 @@
-export { default } from './Profile';
+export { default } from './CandidateProfile';
+export * from './types';

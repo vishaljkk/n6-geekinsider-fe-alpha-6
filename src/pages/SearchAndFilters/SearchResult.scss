@@ -1,70 +1,53 @@
-.search-and-filter-container {
-    height: 90%;
+.search__results {
+    margin: -10px 10px 10px 10px;
     .ant-row {
         height: 90%;
     }
     .ant-col {
         height: 100%;
     }
-    .search-heading {
-        margin: 15px 0 0 15px;
-        h2 {
-            margin-bottom: 0;
+    .search-result-widget-container {
+        height: 98%;
+        overflow: auto;
+        margin-top: 20px;
+        .ant-card {
+            margin: 5px;
+            .ant-card-body {
+                padding: 12px;
+            }
+            &:first-child {
+                margin: 0 5px 5px 5px;
+            }
         }
-    }
-    .toggle {
-        display: flex;
-        justify-content: center;
-        margin-top: 9px;
-    }
-    .search-result {
-        margin: -10px 10px 10px 10px;
-        .search-result-widget-container {
-            // display: flex;
+        .each-widget {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            .right-section {
+                // flex-grow: 1;
+                width: 75%;
+                h3 {
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+            }
+        }
+        .tags-section {
+            display: flex;
             flex-wrap: wrap;
-            height: 98%;
-            overflow: auto;
-            margin-top: 20px;
-            .ant-card {
-                margin: 5px;
-                // width: 100%;
-                .ant-card-body {
-                    padding: 12px;
-                }
-                &:first-child {
-                    margin: 0 5px 5px 5px;
-                }
-            }
-            .each-widget {
-                // width: auto;
-                // max-width: 250px;
-                display: flex;
-                gap: 10px;
-                .right-section {
-                    flex-grow: 1;
-                }
-            }
-            .tags-section {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 5px;
-            }
-            .footer-section {
-                margin: 15px 0 0 0;
-                display: flex;
-                // justify-content: space-around;
-                flex-wrap: wrap;
-                gap: 15px;
-                .numbers-applied {
-                    position: absolute;
-                    right: 10px;
-                    bottom: 5px;
-                }
+            // gap: 5px;
+        }
+        .footer-section {
+            margin: 15px 0 0 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            .numbers-applied {
+                position: absolute;
+                right: 10px;
+                bottom: 5px;
             }
         }
-    }
-    .search-footer {
-        display: flex;
-        justify-content: center;
     }
 }

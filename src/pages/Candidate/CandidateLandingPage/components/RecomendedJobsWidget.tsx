@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Button } from 'antd';
+import { Button, Empty } from 'antd';
 import { useHistory } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -24,14 +24,18 @@ const RecommCandidateWidget: React.FC<RecommCandidateWidgetPropTypes> = (props) 
 
     const handleCardClick = (jobslug: string) => {
         fetchJobDetail(jobslug);
-        history.push('/jobDetail');
+        history.push('/job-detail');
     }
 
     return (
         <div className="recommended-job-widget">
             <h2>Recommended jobs for you</h2>
             <div className="recommended-job-widget-container">
-                {recommendedJobs.map((itm: any) => <JobWidget key={itm} {...{...itm, onClick: handleCardClick}}/>)}
+                {recommendedJobs.length ? 
+                    recommendedJobs.map((itm: any) => <JobWidget key={itm} {...{...itm, onClick: handleCardClick}}/>) 
+                    : 
+                    <Empty/>
+                }
             </div>
             <div className="see-more-container">
                 <Button onClick={() => history.push('/search?q=recommended')}>See more...</Button>

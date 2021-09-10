@@ -64,18 +64,15 @@ const RecruiterDetails: React.FC<RecruiterProfilePropTypes> = (props) => {
                     {about}
                 </Card>
             </Card>
-            <Card>
-                <div className="recommended-job-widget">
-                    <h2>Jobs posted by {name}</h2>
-                    <div className="recommended-job-widget-container">
+            {/* <Card className="recruiter-profile__footer">
+                <h2>Jobs posted by {name}</h2>
+                <div className="recruiter-profile__jobs-posted">
+                    <div className="job-cards">
                         {recentJobs.length ? recentJobs.map((itm: any) => <JobWidget {...{...itm, onClick: handleJobCardClick}}/>) : <Empty description="Please post a job to manage here"/>}
                     </div>
                     <br/>
-                    <div className="see-more-container">
-                        <Button onClick={() => history.push('/search')}>See more...</Button>
-                    </div>
                 </div>
-            </Card>
+            </Card> */}
         </div>
     )
 }

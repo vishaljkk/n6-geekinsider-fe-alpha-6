@@ -16,7 +16,6 @@ export interface RecentJobType {
 export interface RecommCandidateWidgetPropTypes {
     recentJobs: RecentJobType[], 
     fetchPostedJobs: () => void, 
-    setVisible: (e: boolean) => void, 
     fetchJobDetail: (jobslug: string) => void
 }
 

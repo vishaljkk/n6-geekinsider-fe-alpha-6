@@ -16,7 +16,8 @@ export interface StateTypes {
     recommendedCandidates: any,
     recruiterCandidateDetails: any,
     searchType: SearchType,
-    companySearch: any
+    companySearch: any,
+    appliedCandidates: any
 }
 
 export interface actionTypes {

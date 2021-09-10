@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
-import { Pagination, Radio } from 'antd';
+import { Radio } from 'antd';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import SearchResults from './SearchResults';
 import { StateTypes, setSearchType, SearchType, fetchRecommendedJobs, fetchTrendingJobs } from '../../redux';
-import './SearchResult.scss';
 import { SearchPropTypes } from '.';
+import './Search.scss';
 
 const Search: React.FC<SearchPropTypes> = (props) => {
     const { skillSearch, searchType, trendingJobs, recommendedJobs, companySearch, setSearchType, fetchRecommendedJobs, fetchTrendingJobs } = props;
@@ -41,26 +41,23 @@ const Search: React.FC<SearchPropTypes> = (props) => {
     }, [searchType])
     
     return (
-        <div className="search-and-filter-container">
+        <div className="search">
             {(searchType === 'recommended' || searchType === 'trending') && <Radio.Group defaultValue={searchType} buttonStyle="solid" className="toggle" onChange={handleRadioChange}>
                 <Radio.Button value="recommended">Recommended jobs</Radio.Button>
                 <Radio.Button value="trending">Top trending jobs</Radio.Button>
             </Radio.Group>}
             {searchType === 'skillSearch' &&
-                <div className="search-heading">
+                <div className="search__heading">
                     <h2>Results based on Skills</h2>
                 </div>
             }
             {searchType === 'companySearch' &&
-                <div className="search-heading">
+                <div className="search__heading">
                     <h2>Results based on Company Name</h2>
                 </div>
             }
             <SearchResults data={returnData(searchType)} />
             <br/>
-            <div className="search-footer">
-                <Pagination defaultCurrent={1} total={10} />
-            </div>
         </div>
     )
 }

@@ -1,4 +1,7 @@
 .job-posting-detail-widget {
+    .ant-card-body {
+        padding: 12px;
+    }
     margin: 20px 0;
     display: flex;
     flex-wrap: wrap;
@@ -11,14 +14,15 @@
     }
     .each-widget {
         display: flex;
+        justify-content: space-between;
         flex-wrap: wrap;
-        gap: 20px;
+        // gap: 20px;
     }
     .tags-section {
         margin: 20px 0;
         display: flex;
         flex-wrap: wrap;
-        gap: 5px;
+        // gap: 5px;
     }
     .footer-section {
         display: flex;

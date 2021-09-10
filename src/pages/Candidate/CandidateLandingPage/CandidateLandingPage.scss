@@ -1,18 +1,14 @@
-.ant-card-body {
-    padding: 12px;
-}
-.tags {
-    width: fit-content;
-    background-color: lightgrey;
-    border-radius: 10px;
-    padding: 0 6px;
-    margin: 0 3px;
-}
-
 .candidate-landing {
-    // display: flex;
-    // flex-wrap: wrap;
-    // margin: 20px;
+    .ant-card-body {
+        padding: 12px;
+    }
+    .tags {
+        width: fit-content;
+        background-color: lightgrey;
+        border-radius: 10px;
+        padding: 0 6px;
+        margin: 0 3px;
+    }
     display: grid;
     grid-template-columns: 30% 70%;
     gap: 20px;

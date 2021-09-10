@@ -40,8 +40,8 @@ const JobPostDetailWidget: React.FC<any> = (props) => {
                 </section>
                 <section className="footer-section">
                     <div><MdLocationOn style={iconStyles} />{jobLocation}</div>
-                    <div><MdMonetizationOn style={iconStyles} />{ctc}</div>
-                    <div><MdHistory style={iconStyles} />{exp}</div>
+                    <div title={`${ctc} lacs per annum`}><MdMonetizationOn style={iconStyles} />{ctc} LPA</div>
+                    <div><MdHistory style={iconStyles} />{exp} year</div>
                 </section>
                 <Card>
                     {jobDescription}

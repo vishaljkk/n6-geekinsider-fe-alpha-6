@@ -7,27 +7,26 @@ import { iconStyles } from "../../utils";
 import './JobWidget.scss';
 
 const JobWidget: React.FC<JobWidgetPropTypes> = (props) => {
-    const { jobTitle, skills, jobLocation, exp, ctc, companyName, onClick, jobslug } = props;
-    // const mappableSkills = typeof skills === 'string' ? skills.split(',') : skills
+    const { jobTitle, skills, jobLocation, exp, ctc, companyName, jobslug } = props;
+    const mappableSkills = typeof skills === 'string' ? skills.split(',') : skills
 
     return (
         <div className="single-widget">
-            <Card hoverable onClick={() => onClick(jobslug)}>
+            <Card hoverable onClick={() => props?.onClick(jobslug)}>
                 <section className="single-widget__each-widget">
                     <Avatar size={55}>{jobTitle[0]}</Avatar>
                     <div className="right-section">
                         <span>{companyName}</span>
-                        <h3>{jobTitle}</h3>
+                        <h3 title={jobTitle}>{jobTitle}</h3>
                     </div>
                 </section>
-                <br/>
                 <section className="single-widget__tag-section">
-                    {skills.map((itm: string) => <span className="tags" key={itm}>{itm}</span>)}
+                    {mappableSkills.map((itm: string) => <span className="tags" key={itm}>{itm}</span>)}
                 </section>
                 <section className="single-widget__footer-section">
                     <div><MdLocationOn style={iconStyles} />{jobLocation}</div>
-                    <div><MdMonetizationOn style={iconStyles} />{ctc}</div>
-                    <div><MdHistory style={iconStyles} />{exp}</div>
+                    <div><MdMonetizationOn style={iconStyles} title={`${ctc} Lacs per annum`}/>{ctc} LPA</div>
+                    <div><MdHistory style={iconStyles} />{exp} year</div>
                     {/* <Tooltip title={`${numberOfApplications} already applied`} placement="topRight"><span className="numbers-applied">{numberOfApplications}+</span></Tooltip> */}
                 </section>
             </Card>

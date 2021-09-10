@@ -12,11 +12,12 @@
 
 export interface JobWidgetPropTypes {
     jobTitle: string, 
-    skills: string[], 
+    skills: any, 
     jobLocation: string, 
     exp: number, 
     ctc: number, 
     companyName: string, 
     jobslug: string,
-    onClick: (e?: any) => ((e: string) => void)
+    onClick?: any
+    // onClick?: (e?: any) => ((e: string) => void)
 }

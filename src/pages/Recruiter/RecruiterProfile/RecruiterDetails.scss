@@ -10,9 +10,10 @@
     }
     .each-widget {
         display: flex;
-        // justify-content: space-between;
+        justify-content: space-between;
+        flex-wrap: wrap;
         .action-buttons {
-            flex: 1;
+            // flex-grow: 1;
             display: flex;
             flex-direction: column;
             gap: 10px;
@@ -21,7 +22,7 @@
             }
         }
         .right-section {
-            flex: 2;
+            flex-grow: 1;
         }
     }
     .tags-section {
@@ -57,5 +58,23 @@
             // padding: 24px;
             margin: 0 15px;
         }
+    }
+    .recruiter-profile__footer {
+        h2 {
+            margin-left: 5px;
+        }
+        margin-top: 20px;
+    }
+    .recruiter-profile__jobs-posted {
+        display: flex;
+        flex-wrap: wrap;
+        .job-cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0 10px;
+        }
+    }
+    .see-more-container {
+        text-align: center;
     }
 }

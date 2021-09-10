@@ -4,13 +4,12 @@
     flex-wrap: wrap;
     border: transparent;
     box-shadow: 0 1px 2px -2px #00000029, 0 3px 6px 0 #0000001f, 0 5px 12px 4px #00000017;
+    border-radius: 5px;
     .ant-card {
-        // margin: 5px;
         width: 100%;
     }
     .each-widget {
         display: flex;
-        // justify-content: space-between;
         .action-buttons {
             flex: 1;
             display: flex;
@@ -28,7 +27,6 @@
         margin: 20px 0;
         display: flex;
         flex-wrap: wrap;
-        gap: 5px;
     }
     .footer-section {
         display: flex;
@@ -45,16 +43,10 @@
     .profile-footer {
         display: grid;
         grid-template-columns: 60% 40%;
-        // border: 1px solid lightgrey;
-        // border-radius: 3px;
         .skills-section {
-            // border: 1px solid lightgrey;
-            // padding: 24px;
             margin: 0 15px;
         }
         .github-repo-section {
-            // border: 1px solid lightgrey;
-            // padding: 24px;
             margin: 0 15px;
         }
     }

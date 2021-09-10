@@ -9,6 +9,23 @@
     margin: 0 3px;
 }
 
+.recruiter-landing {
+    // display: flex;
+    // flex-wrap: wrap;
+    // margin: 20px;
+    display: grid;
+    grid-template-columns: 30% 70%;
+    gap: 20px;
+    margin: 20px;
+    .recruiter-landing__left {
+        width: 100%;
+        padding-top: 24px;
+    }
+    .recruiter-landing__right {
+        // margin-top: 20px;
+    }
+}
+
 .landing-page-container {
     .landing-right-column {
         margin-top: 20px;
@@ -54,44 +71,6 @@
     }
 }
 
-.recommended-job-widget {
-    .recommended-job-widget-container {
-        display: flex;
-        flex-wrap: wrap;
-        .ant-card {
-            margin: 5px;
-        }
-        .each-widget {
-            max-width: 250px;
-            width: auto;
-            display: grid;
-            grid-template-columns: 35% 65%;
-        }
-        .footer-section {
-            margin: 15px 0;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-around;
-            .icon {
-                width: 17px;
-                height: 17px;
-                top: 3px;
-                position: relative;
-                margin-right: 5px;
-            }
-            .numbers-applied {
-                position: absolute;
-                right: 10px;
-                bottom: 5px;
-            }
-        }
-        .tag-section {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
-        }
-    }
-}
 
 .see-more-container {
     margin: 7px 0;
@@ -101,34 +80,29 @@
 .recommended-candidates-widget {
     .recommended-candidates-widget-container {
         display: flex;
-        flex-wrap: wrap;
+        gap: 12px;
         .ant-card {
             margin: 5px;
         }
         .each-widget {
-            // width: 250px;
-            display: grid;
-            grid-template-columns: 35% 65%;
+            display: flex;
+            margin-bottom: 12px;
+            span {
+                flex-shrink: 0;
+            }
+            .right-section {
+                margin-left: 12px;
+                flex-grow: 1;
+                h3 {
+                    margin-bottom: 2px;
+                }
+            }
         }
         .tag-section {
             display: flex;
             flex-wrap: wrap;
-            gap: 5px;
-        }
-        .footer-section {
-            margin: 15px 0;
-            .icon {
-                width: 17px;
-                height: 17px;
-                top: 3px;
-                position: relative;
-                margin-right: 5px;
-            }
-            .numbers-applied {
-                position: absolute;
-                right: 10px;
-                bottom: 5px;
-            }
+            gap: 5px 0;
+            margin-bottom: 4px;
         }
     }
 }

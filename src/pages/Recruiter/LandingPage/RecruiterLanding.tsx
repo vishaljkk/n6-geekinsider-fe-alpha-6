@@ -1,14 +1,11 @@
 import { useEffect, useState } from 'react';
-import { Row, Col } from 'antd';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import RecentChatWidget from '../../LandingPage/RecentChatWidget';
 import QuickProfileWidget from '../../../components/QuickProfileWidget/QuickProfileWidget';
 import RecommenededCandidatesWidget from './components/RecommenededCandidatesWidget';
 import JobsPosted from './components/JobsPosted';
 import RecruiterCandidateDetails from '../RecruiterCandidateDetails/RecruiterCandidateDetails';
-import ApplicationManager from '../ApplicationManager';
 import { fetchProfileDetails, setRecruiterCandidateDetails } from '../../../redux/actions';
 import { StateTypes } from '../../../redux';
 import { RecruiterLandingPropTypes } from './types';
@@ -24,17 +21,14 @@ const RecruiterLanding: React.FC<RecruiterLandingPropTypes> = (props) => {
     }, [])
     
     return (
-        <div className="landing-page-container">
-            <Row>
-                <Col span={6} offset={1}>
-                    <QuickProfileWidget onClick={handleProfileClick} title={profileDetails.name} subtitle={profileDetails.location}/>
-                    <RecommenededCandidatesWidget setVisible={setCandidateProfileVisible}/>
-                </Col>
-                <Col span={15} offset={1} className="landing-right-column">
-                    <RecentChatWidget />
-                    <JobsPosted setVisible={setVisible}/>
-                </Col>
-            </Row>
+        <div className="recruiter-landing">
+            <div className="recruiter-landing__left">
+                <QuickProfileWidget onClick={handleProfileClick} title={profileDetails.name} subtitle={profileDetails.location}/>
+                <RecommenededCandidatesWidget setVisible={setCandidateProfileVisible}/>
+            </div>
+            <div className="recruiter-landing__right">
+                <JobsPosted />
+            </div>
             {candidateProfileVisible && (<RecruiterCandidateDetails visible={candidateProfileVisible} setVisible={setCandidateProfileVisible}/>)}
         </div>
     )

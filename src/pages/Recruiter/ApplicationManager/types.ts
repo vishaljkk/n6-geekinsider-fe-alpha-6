@@ -1,3 +1,6 @@
 export interface ApplicationManagerTypes {
-    activeJob: any
+    activeJob: any,
+    appliedCandidates: any,
+    fetchAppliedCandidates: (e: string) => void,
+    loading: boolean
 }

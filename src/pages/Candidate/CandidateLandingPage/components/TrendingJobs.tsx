@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import JobWidget from '../../../../components/JobWidget';
-import { fetchTrendingJobs, fetchJobDetail, StateTypes, JobObjectTypes } from '../../../../redux';
+import { fetchTrendingJobs, fetchJobDetail, StateTypes, JobObjectTypes, setSearchType } from '../../../../redux';
 import { TrendingJobsPropTypes } from '..';
 import '../CandidateLandingPage.scss';
 
@@ -19,7 +19,7 @@ const TrendingJobs: React.FC<TrendingJobsPropTypes> = (props) => {
 
     const handleCardClick = (jobslug: string) => {
         fetchJobDetail(jobslug);
-        history.push('/jobDetail');
+        history.push('/job-detail');
     }
 
     return (
@@ -29,7 +29,7 @@ const TrendingJobs: React.FC<TrendingJobsPropTypes> = (props) => {
                 {trendingJobs.map((itm: any) => <JobWidget {...{...itm, onClick: handleCardClick}} />)}
             </div>
             <div className="see-more-container">
-                <Button onClick={() => history.push('/search?q=trending')}>See more...</Button>
+                <Button onClick={() => { history.push('/search?q=trending'); setSearchType('trending') }}>See more...</Button>
             </div>
         </div>
     )

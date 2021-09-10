@@ -107,7 +107,7 @@ export const createJobPost = (values: RecruitereSubmitTypes, callback: any) => {
         dispatch({ type: 'SET_LOADING', payload: true });
         makeRequest.post('/api/jobs/job', values)
             .then(data => {
-                dispatch({ type: 'ADD_JOB_POST', payload: values })
+                dispatch({ type: 'ADD_JOB_POST', payload: data?.jobDetail?.jobUploaded })
                 notification.success({
                     message: 'Job posted successfully',
                     description: 'Please visit the recent jobs posted section to get updates!'
@@ -185,11 +185,17 @@ export const fetchTrendingJobs = () => {
         dispatch({ type: 'SET_LOADING', payload: true });
         makeRequest.get(`/api/jobs/trend`)
             .then(data => {
-                dispatch({ type: 'SET_TRENDING_JOBS', payload: data.jobRecord });
+                if (data?.jobRecord) {
+                    dispatch({ type: 'SET_TRENDING_JOBS', payload: data.jobRecord });
+                }
+                else {
+                    dispatch({ type: 'SET_TRENDING_JOBS', payload: [] });
+                }
                 dispatch({ type: 'SET_LOADING', payload: false });
             })
             .catch((error) => {
                 dispatch({ type: 'SET_LOADING', payload: false });
+                dispatch({ type: 'SET_TRENDING_JOBS', payload: [] });
             });
     }
 }
@@ -199,11 +205,17 @@ export const fetchRecommendedJobs = () => {
         dispatch({ type: 'SET_LOADING', payload: true });
         makeRequest.get(`/api/jobs/reco`)
             .then(data => {
-                dispatch({ type: 'SET_RECOMMENDED_JOBS', payload: data.jobRecord });
+                if (data?.jobRecord) {
+                    dispatch({ type: 'SET_RECOMMENDED_JOBS', payload: data.jobRecord });
+                }
+                else {
+                    dispatch({ type: 'SET_RECOMMENDED_JOBS', payload: [] });
+                }
                 dispatch({ type: 'SET_LOADING', payload: false });
             })
             .catch((error) => {
                 dispatch({ type: 'SET_LOADING', payload: false });
+                dispatch({ type: 'SET_RECOMMENDED_JOBS', payload: [] });
             });
     }
 }
@@ -258,6 +270,26 @@ export const fetchCompanySearchData = (cname: string) => {
             })
             .catch((error) => {
                 dispatch({ type: 'SET_LOADING', payload: false });
+            });
+    }
+}
+
+export const fetchAppliedCandidates = (jobslug: string) => {
+    return (dispatch: DispatchType) => {
+        dispatch({ type: 'SET_LOADING', payload: true });
+        makeRequest.get(`/api/users/applied?jobid=${jobslug}`)
+            .then(data => {
+                if (data?.enrolledCandidate) {
+                    dispatch({ type: 'SET_APPLIED_CANDIDATES', payload: data.enrolledCandidate });
+                }
+                else {
+                    dispatch({ type: 'SET_APPLIED_CANDIDATES', payload: [] });
+                }
+                dispatch({ type: 'SET_LOADING', payload: false });
+            })
+            .catch((error) => {
+                dispatch({ type: 'SET_LOADING', payload: false });
+                dispatch({ type: 'SET_APPLIED_CANDIDATES', payload: [] });
             });
     }
 }

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Card, Button, Progress } from 'antd';
+import { Card, Progress } from 'antd';
 import { MdLocationOn, MdMonetizationOn, MdHistory } from "react-icons/md";
 import { FaGithub } from 'react-icons/fa';
 import { bindActionCreators } from 'redux';
@@ -12,7 +12,7 @@ import './CandidateDetails.scss';
 
 const CandidateDetails: React.FC<CandidateSubmitTypes> = (props) => {
     const [mappableSkills, setMappableSkills] = useState<string[]>([]);
-    const { about, name, skills, location, ctc, exp, githubUrl, whatsappNumber } = props;
+    const { about, name, skills, location, ctc, exp, githubUrl, whatsappNumber, jobtitle } = props;
 
     useEffect(() => {
         if (skills) setMappableSkills(typeof skills === 'string' ? skills.split(',') : skills);
@@ -24,20 +24,17 @@ const CandidateDetails: React.FC<CandidateSubmitTypes> = (props) => {
                 <section className="each-widget">
                     <div className="right-section">
                         <h2>{name}</h2>
-                        {/* <span>{jobTitle}</span> */}
+                        <span>{jobtitle}</span>
                     </div>
-                    {/* <div className="action-buttons">
-                        <Button type="primary">Update</Button>
-                    </div> */}
                 </section>
                 <section className="tags-section">
                     {mappableSkills.map((itm: string) => <span className="tags" key={itm}>{itm}</span>)}
                 </section>
                 <section className="footer-section">
                     <div><MdLocationOn style={iconStyles} />{location}</div>
-                    <div><MdMonetizationOn style={iconStyles} />{ctc}</div>
-                    <div><MdHistory style={iconStyles} />{exp}</div>
-                    <div><FaGithub style={iconStyles} />{githubUrl}</div>
+                    <div title={`${ctc} lacs per annum`}><MdMonetizationOn style={iconStyles} />{ctc} LPA</div>
+                    <div><MdHistory style={iconStyles} />{exp} year</div>
+                    <div><FaGithub style={iconStyles} /><a href={githubUrl} target="_blank">Github</a></div>
                 </section>
                 <Card>
                     {about}

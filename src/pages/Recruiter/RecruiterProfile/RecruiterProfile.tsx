@@ -3,7 +3,6 @@ import { Row, Col } from 'antd';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import QuickProfileWidget from '../../../components/QuickProfileWidget';
 import RecruiterDetails from './RecruiterDetails';
 import { fetchProfileDetails, StateTypes } from '../../../redux';
 import { ProfilePropsTypes } from './types';
@@ -12,7 +11,7 @@ import './RecruiterProfile.scss';
 
 const RecruiterProfile: React.FC<ProfilePropsTypes> = (props) => {
 
-    const { profileDetails, fetchProfileDetails } = props;
+    const { profileDetails, fetchProfileDetails, loading } = props;
     const { name, preferredIndustry } = profileDetails;
 
     useEffect(() => {
@@ -21,27 +20,28 @@ const RecruiterProfile: React.FC<ProfilePropsTypes> = (props) => {
 
 
     return (
-        <div className="profile">
+        <div className="recruiter-profile">
             {Object.keys(profileDetails).length ? 
-                <Row>
-                    <Col span={6} offset={1}>
+                <>
+                    {/* <div className="recruiter-profile__left">
                         <QuickProfileWidget title={name} subtitle={preferredIndustry}/>
-                    </Col>
-                    <Col span={15} offset={1}>
+                    </div> */}
+                    <div className="recruiter-profile__right">
                         <RecruiterDetails {...{...profileDetails}} />
-                    </Col>
-                </Row>
+                    </div>
+                </>
                 :
-                <div className="loader--global">
+                (!loading && <div className="loader--global">
                     <Loader text="Loading profile..."/>
-                </div>
+                </div>)
             }
         </div>
     )
 }
 
 const mapStateToProps = (state: StateTypes) => ({
-    profileDetails: state.profileDetails
+    profileDetails: state.profileDetails,
+    loading: state.loading
 });
 
 const mapDispatchToProps = (dispatch: any) => bindActionCreators({

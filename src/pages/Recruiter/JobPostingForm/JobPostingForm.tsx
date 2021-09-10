@@ -6,6 +6,7 @@ import { useHistory } from 'react-router';
 import { JobPostingFormPropTypes } from './types';
 import { createJobPost, StateTypes } from '../../../redux';
 import { skills, cities, jobTypes } from '../../../utils';
+import './JobPostingForm.scss';
 
 const { Option } = Select;
 
@@ -35,8 +36,8 @@ const JobPostingForm: React.FC<JobPostingFormPropTypes> = (props) => {
     }
 
 	return (
-        <div className="onboarding">
-            {/* <header>Add a job</header> */}
+        <div className="job-posting-form">
+            <h2 className="job-posting-form__heading">Post a job</h2>
             <br/>
             <Form
                 form={form}
@@ -108,17 +109,37 @@ const JobPostingForm: React.FC<JobPostingFormPropTypes> = (props) => {
                 <Form.Item
                     label="Experience"
                     name="exp"
-                    rules={[{ required: true, message: 'Please enter the experience range!', type: 'number' }]}
+                    rules={[{ 
+                        required: true, 
+                        message: 'Please enter the experience range!',
+                        validator(_, value) {
+                            const regexp = new RegExp(/^[0-9.]+$/gm);
+                            if (value && value.match(regexp)) {
+                                return Promise.resolve();
+                            }
+                            return Promise.reject(new Error('Please select atleast three skills!'));
+                        }
+                    }]}
                 >
-                    <InputNumber placeholder="Please enter the experience range" />
+                    <Input placeholder="Experience range in number like 2.5 or 4" />
                 </Form.Item>
 
                 <Form.Item
                     label="Annual salary"
                     name="ctc"
-                    rules={[{ required: true, message: 'Please enter the annual salary range!', type: 'number' }]}
+                    rules={[{ 
+                        required: true, 
+                        message: 'Please enter the annual salary range!',
+                        validator(_, value) {
+                            const regexp = new RegExp(/^[0-9.]+$/gm);
+                            if (value && value.match(regexp)) {
+                                return Promise.resolve();
+                            }
+                            return Promise.reject(new Error('Please select atleast three skills!'));
+                        }
+                    }]}
                 >
-                    <InputNumber placeholder="Please enter the annual salary range" />
+                    <Input placeholder="Annual salary range in lacs like 5.5 or 7" />
                 </Form.Item>
 
                 <Form.Item

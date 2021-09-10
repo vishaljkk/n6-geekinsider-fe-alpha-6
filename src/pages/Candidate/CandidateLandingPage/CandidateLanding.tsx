@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import RecentChatWidget from '../../LandingPage/RecentChatWidget';
 import RecommCandidateWidget from './components/RecomendedJobsWidget';
 import QuickProfileWidget from '../../../components/QuickProfileWidget/QuickProfileWidget';
 import TopTrending from './components/TrendingJobs';
@@ -23,7 +22,7 @@ const CandidateLandingPage: React.FC<CandidateLandingPagePropTypes> = (props) =>
                     <QuickProfileWidget onClick={handleProfileClick} title={profileDetails.name} subtitle={profileDetails.jobtitle}/>
                 </div>
                 <div className="candidate-landing__right">
-                    <RecentChatWidget />
+                    {/* <RecentChatWidget /> */}
                     <RecommCandidateWidget />
                     <TopTrending />
                 </div>

@@ -7,11 +7,18 @@
     .single-widget__each-widget {
         display: flex;
         gap: 12px;
+        margin-bottom: 15px;
         span {
             flex-shrink: 0;
         }
         .right-section {
-            flex-grow: 1;
+            // flex-grow: 1;
+            width: 75%;
+            h3 {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
         }
     }
     .single-widget__footer-section {
@@ -34,6 +41,7 @@
     .single-widget__tag-section {
         display: flex;
         flex-wrap: wrap;
-        gap: 5px;
+        // gap: 5px;
+        // margin-top: 5px;
     }
 }

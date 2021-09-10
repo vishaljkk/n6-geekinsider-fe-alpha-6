@@ -55,3 +55,16 @@
         }
     }
 }
+
+.recruiter-profile {
+    // display: grid;
+    // grid-template-columns: 30% 70%;
+    // gap: 20px;
+    display: flex;
+    justify-content: center;
+    margin: 0 20px;
+    .recruiter-profile__right {
+        max-width: 1000px;
+        // margin-right: 20px;
+    }
+}

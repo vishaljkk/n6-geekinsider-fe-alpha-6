@@ -21,6 +21,7 @@ const ApplicationManager = lazy(() => import('../pages/Recruiter/ApplicationMana
 const JobPostingForm = lazy(() => import('../pages/Recruiter/JobPostingForm'));
 const CandidateOnboarding = lazy(() => import('../pages/Onboarding/CandidateOnboarding'));
 const RecruiterOnboarding = lazy(() => import('../pages/Onboarding/RecruiterOnboarding'));
+const ManageAppliedCandidates = lazy(() => import('../pages/Recruiter/ManageAppliedCandidates'));
 
 const pages = [
     {
@@ -79,8 +80,13 @@ const pages = [
         showNavbar: true,
     },
     {
-        pageLink: '/jobDetail',
+        pageLink: '/job-detail',
         view: CandidateJobDetail,
+        showNavbar: true,
+    },
+    {
+        pageLink: '/recruiter/applied-candidates',
+        view: ManageAppliedCandidates,
         showNavbar: true,
     }
 ];

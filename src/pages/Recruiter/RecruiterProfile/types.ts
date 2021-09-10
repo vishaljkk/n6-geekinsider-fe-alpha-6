@@ -11,5 +11,6 @@ export interface RecruiterProfilePropTypes {
 
 export interface ProfilePropsTypes {
     profileDetails: any,
-    fetchProfileDetails: any
+    fetchProfileDetails: any,
+    loading: boolean
 }

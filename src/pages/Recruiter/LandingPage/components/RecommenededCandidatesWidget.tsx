@@ -13,13 +13,15 @@ const SingleWidget: React.FC<SingleWidgetTypes> = (props) => {
     return (
         <Card hoverable style={{ width:'100%' }} onClick={() => handleClick(props)}>
             <section className="each-widget">
-                <Avatar size={55}>{}</Avatar>
+                <Avatar size={55}>{name[0]}</Avatar>
                 <div className="right-section">
-                    <span>{jobTitle}</span>
                     <h3>{name}</h3>
-                    <div className="tag-section">{skills.map((itm: string) => <span className="tags" key={itm}>{itm}</span>)}</div>
+                    <span>{jobTitle}</span>
                 </div>
             </section>
+            <div className="tag-section">
+                {skills.map((itm: string) => <span className="tags" key={itm}>{itm}</span>)}
+            </div>
         </Card>
     )
 }
