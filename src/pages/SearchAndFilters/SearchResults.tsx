@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
-import { Row, Card, Col, Avatar, Pagination, Radio, Empty } from 'antd';
+import { Row, Card, Col, Avatar, Empty } from 'antd';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { MdLocationOn, MdMonetizationOn, MdHistory } from "react-icons/md";
 
 import JobPostDetailWidget from '../../components/JobPostDetailWidget';
-import Loader from '../../components/Loader';
-import { setSearchData, StateTypes } from '../../redux';
+import { JobObjectTypes, StateTypes } from '../../redux';
 import { iconStyles } from '../../utils';
+import { SearchResultsTypes } from '.';
 import './SearchResult.scss';
 
 const SingleWidget: React.FC<any> = (props) => {
@@ -21,7 +21,7 @@ const SingleWidget: React.FC<any> = (props) => {
             style={{ backgroundColor: itm?.jobslug === selectedData?.jobslug ? '#dcdcdc' : 'white' }}
         >
             <section className="each-widget">
-                <Avatar size={55}>{jobTitle[0]}</Avatar>
+                <Avatar size={55}>{companyName[0]}</Avatar>
                 <div className="right-section">
                     <span>{companyName}</span>
                     <h3>{jobTitle}</h3>
@@ -41,85 +41,71 @@ const SingleWidget: React.FC<any> = (props) => {
     )
 }
 
-const SearchAndFilters: React.FC<any> = (props) => {
-
-    const { skillSearch, setSearchData, trendingJobs, recommendedJobs } = props;
+const SearchResults: React.FC<SearchResultsTypes> = (props) => {
+    const { data } = props;
     const [selectedData, setSelectedData] = useState({});
-    
-    useEffect(() => {
-        // const searchQuery = props?.location?.search.replaceAll('?q=', '');
-        // console.log(searchQuery)
-        // searchQuery === 'trending' ? setSearchData(trendingJobs) : setSearchData(recommendedJobs);
-
-        // if (skillSearch.length===0) {
-        //     const searchQuery = props?.location?.search.replaceAll('?q=', '');
-        //     console.log(searchQuery)
-        //     searchQuery === 'trending' ? setData(trendingJobs) : setData(recommendedJobs);
-        //     searchQuery === 'trending' ? setSelectedData(trendingJobs[0]) : setSelectedData(recommendedJobs[0]);
-        // }
-        // else {
-        //     setData(skillSearch);
-        //     setSelectedData(skillSearch[0]);
-        // }
-        
-    }, [])
 
     useEffect(() => {
-        setSelectedData(skillSearch[0]);
-    }, [skillSearch])
-
-    const handleRadioChange = (e: any) => {
-        const value = e.target.value;
-        value === 'trending' ? setSearchData(trendingJobs) : setSearchData(recommendedJobs);
-    }
+        setSelectedData(data[0]);
+    }, [data])
     
     return (
-        <div className="search-and-filter-container">
-            {skillSearch.length===0 && <Radio.Group defaultValue={props?.location?.search.replaceAll('?q=', '')} buttonStyle="solid" style={{ display: 'flex', justifyContent: 'center', margin: '10px 0' }} onChange={handleRadioChange}>
-                <Radio.Button value="recommended">Recommended jobs</Radio.Button>
-                <Radio.Button value="trending">Top trending jobs</Radio.Button>
-            </Radio.Group>}
-            {skillSearch.length>0 ?
-                <Row>
-                    <Col span={6} offset={1}>
-                        <div className="search-result-widget-container">
-                            {skillSearch.map((itm: any, index: number) => 
-                                <SingleWidget 
-                                    itm={itm} 
-                                    index={index} 
-                                    selectedData={selectedData}
-                                    setSelectedData={setSelectedData}
-                                />
-                            )}
-                        </div>
-                    </Col>
-                    <Col span={15} offset={1}>
-                        <div className="search-result-selected-widget-container">
-                            {selectedData && Object.keys(selectedData).length>0 ? 
-                                <JobPostDetailWidget {...{...selectedData}} /> 
-                                : 
-                                <Loader />
-                            }
-                        </div>
-                    </Col>
-                </Row>
-                :
-                <Empty />
-            }
-            <br/>
-            <div className="search-footer">
-                <Pagination defaultCurrent={1} total={10} />
-            </div>
+        <div className="search-result">
+            <Row>
+                <Col span={8} xs={{ span: 12 }} sm={{ span: 10 }} md={{ span: 8 }} lg={{ span: 6 }}>
+                    <div className="search-result-widget-container">
+                        {data.map((itm: JobObjectTypes, index: number) => 
+                            <SingleWidget 
+                                itm={itm} 
+                                index={index} 
+                                selectedData={selectedData}
+                                setSelectedData={setSelectedData}
+                            />
+                        )}
+                    </div>
+                </Col>
+                <Col span={16} xs={{ span: 12 }} sm={{ span: 14 }} md={{ span: 16 }} lg={{ span: 18 }}>
+                    <div className="search-result-selected-widget-container">
+                        {selectedData && Object.keys(selectedData).length>0 ? 
+                            <JobPostDetailWidget {...{...selectedData}} /> 
+                            : 
+                            <Empty />
+                        }
+                    </div>
+                </Col>
+            </Row>
         </div>
     )
+
+//     return (
+//         <Row>
+//             <Col span={6} offset={1}>
+//                 <div className="search-result-widget-container">
+//                     {data.map((itm: any, index: number) => 
+//                         <SingleWidget 
+//                             itm={itm} 
+//                             index={index} 
+//                             selectedData={selectedData}
+//                             setSelectedData={setSelectedData}
+//                         />
+//                     )}
+//                 </div>
+//             </Col>
+//             <Col span={15} offset={1}>
+//                 <div className="search-result-selected-widget-container">
+//                     {selectedData && Object.keys(selectedData).length>0 ? 
+//                         <JobPostDetailWidget {...{...selectedData}} /> 
+//                         : 
+//                         <Empty />
+//                     }
+//                 </div>
+//             </Col>
+//         </Row>
+//     )
 }
 
-const mapStateToProps = (state: StateTypes) => ({
-    skillSearch: state.skillSearch,
-    trendingJobs: state.trendingJobs,
-    recommendedJobs: state.recommendedJobs
-});
+const mapStateToProps = (state: StateTypes) => ({});
   
-const mapDispatchToProps = (dispatch: any) => bindActionCreators({ setSearchData }, dispatch);
+const mapDispatchToProps = (dispatch: any) => bindActionCreators({}, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchAndFilters);
+export default connect(mapStateToProps, mapDispatchToProps)(SearchResults);

@@ -8,12 +8,12 @@ import { UserOutlined } from '@ant-design/icons';
 import RecruiterSkillSearch from './RecruiterSkillSearch';
 import { NavBarPropTypes } from './types';
 import { StateTypes } from '../../redux';
-import { setLoading, setUserType, getJobDetails } from '../../redux/actions';
+import { setLoading, setUserType, getJobDetails, setSearchType, fetchCompanySearchData } from '../../redux/actions';
 import './Navbar.scss';
 
 const NavBar: React.FC<NavBarPropTypes> = (props) => {
     
-    const { history, setIsAuth, setUserType, setLoading, getJobDetails } = props;
+    const { history, setIsAuth, setUserType, setLoading, fetchCompanySearchData, setSearchType } = props;
     const signOut = async () => {
         setLoading(true);
         await Auth.signOut();
@@ -41,8 +41,24 @@ const NavBar: React.FC<NavBarPropTypes> = (props) => {
     }
 
     const handlePressEnter = (e: any) => {
-        const searchString = e.target.value;
-        getJobDetails(searchString);
+        if (e?.target?.value) {
+            const searchString = e.target.value;
+            fetchCompanySearchData(searchString);
+            setSearchType('companySearch');
+        }
+        else {
+            setSearchType('recommended');
+        }
+    }
+
+    const handleSearch = (searchString: string) => {
+        if (searchString) {
+            fetchCompanySearchData(searchString);
+            setSearchType('companySearch');
+        }
+        else {
+            setSearchType('recommended');
+        }
     }
 
     const handleClick = () => {
@@ -65,10 +81,11 @@ const NavBar: React.FC<NavBarPropTypes> = (props) => {
                     placeholder="Search jobs"
                     onSelect={handleSelect}
                 /> */}
-                <Input 
+                <Input.Search
                     style={autoCompleteStyles}
-                    placeholder="Search jobs by company, enter the company name and press enter"
+                    placeholder="Search jobs by company name"
                     onPressEnter={handlePressEnter}
+                    onSearch={handleSearch}
                     onClick={handleClick}
                     allowClear
                 />
@@ -104,7 +121,9 @@ const mapStateToProps = (state: StateTypes) => ({
 const mapDispatchToProps = (dispatch: any) => bindActionCreators({ 
     setUserType, 
     setLoading, 
-    getJobDetails 
+    getJobDetails,
+    setSearchType,
+    fetchCompanySearchData 
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar);

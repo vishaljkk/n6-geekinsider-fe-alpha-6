@@ -9,48 +9,20 @@
     margin: 0 3px;
 }
 
-.landing-page-container {
-    .landing-right-column {
-        margin-top: 20px;
+.candidate-landing {
+    // display: flex;
+    // flex-wrap: wrap;
+    // margin: 20px;
+    display: grid;
+    grid-template-columns: 30% 70%;
+    gap: 20px;
+    padding: 0 20px;
+    .candidate-landing__left {
+        width: 100%;
+        padding-top: 24px;
     }
-}
-
-.recent-chat-widget {
-    .recent-chat-widget-container {
-        padding: 5px 20px 0px 15px;
-        margin: 10px 0;
-        border: 1px solid #dcdcdc;
-        border-radius: 5px;
-        .each-chat {
-            cursor: pointer;
-            padding: 10px 0;
-            .each-chat-image {
-                padding: 5px;
-            }
-            .message-glimpse {
-                width: 93%;
-                padding: 0px 4px;
-                border-radius: 2px;
-                background-color: #f4f0ec;
-                border-bottom:2px solid #dcdcdc;
-            }
-            .each-chat-post-desc {
-                h3 {
-                    margin-bottom: 2px;
-                }
-                text-align: center;
-                .each-chat-post-link {
-                    width: 100%;
-                    padding: 0px 4px 6px 4px;
-                    border-radius: 2px;
-                    border-bottom: 2px solid #dcdcdc;
-                    &:hover {
-                        cursor: pointer;
-                        color: #1890ff;
-                    }
-                }
-            }
-        }
+    .candidate-landing__right {
+        // margin-top: 20px;
     }
 }
 
@@ -96,39 +68,4 @@
 .see-more-container {
     margin: 7px 0;
     text-align: center;
-}
-
-.recommended-candidates-widget {
-    .recommended-candidates-widget-container {
-        display: flex;
-        flex-wrap: wrap;
-        .ant-card {
-            margin: 5px;
-        }
-        .each-widget {
-            // width: 250px;
-            display: grid;
-            grid-template-columns: 35% 65%;
-        }
-        .tag-section {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
-        }
-        .footer-section {
-            margin: 15px 0;
-            .icon {
-                width: 17px;
-                height: 17px;
-                top: 3px;
-                position: relative;
-                margin-right: 5px;
-            }
-            .numbers-applied {
-                position: absolute;
-                right: 10px;
-                bottom: 5px;
-            }
-        }
-    }
 }

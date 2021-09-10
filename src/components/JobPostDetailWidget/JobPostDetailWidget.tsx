@@ -6,16 +6,18 @@ import { connect } from 'react-redux';
 import { applyForJob } from '../../redux/actions';
 import { iconStyles } from '../../utils';
 import { StateTypes } from '../../redux';
+import { useHistory } from 'react-router';
 import { JobPostDetailWidgetPropTypes } from './types';
 import './JobPostDetailWidget.scss';
 
 // const JobPostDetailWidget: React.FC<JobPostDetailWidgetPropTypes> = (props) => {
 const JobPostDetailWidget: React.FC<any> = (props) => {
+    const history = useHistory();
     const { jobTitle, skills, jobLocation, ctc, exp, numberOfApplications, jobDescription, companyName, applyForJob, jobslug } = props;
     const mappableSkills = typeof skills === 'string' ? skills.split(',') : skills;
 
     const handleApply = () => {
-        jobslug && applyForJob(jobslug);
+        jobslug && applyForJob(jobslug, () => history.goBack());
     }
     
     return (

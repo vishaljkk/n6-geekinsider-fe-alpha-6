@@ -8,7 +8,6 @@ export const SingleChatWidget: React.FC<SingleChatWidgetPropTypes> = (props) => 
     const { image, messageTitle, message, jobTitle, jobPostId } = itm;
 
     const handlePostVisible = (postId: string) => {
-        // console.log(postId);
     }
 
     return (

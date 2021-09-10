@@ -11,12 +11,11 @@ import '../CandidateLandingPage.scss';
 interface RecommCandidateWidgetPropTypes {
     recommendedJobs: any, 
     fetchRecommendedJobs: () => void, 
-    fetchJobDetail: (id: string) => void, 
-    setVisible: (e: boolean) => void
+    fetchJobDetail: (id: string) => void
 }
 
 const RecommCandidateWidget: React.FC<RecommCandidateWidgetPropTypes> = (props) => {
-    const { recommendedJobs, fetchRecommendedJobs, fetchJobDetail, setVisible } = props;
+    const { recommendedJobs, fetchRecommendedJobs, fetchJobDetail } = props;
     const history = useHistory();
 
     useEffect(() => {
@@ -25,7 +24,7 @@ const RecommCandidateWidget: React.FC<RecommCandidateWidgetPropTypes> = (props) 
 
     const handleCardClick = (jobslug: string) => {
         fetchJobDetail(jobslug);
-        setVisible(true);
+        history.push('/jobDetail');
     }
 
     return (

@@ -26,7 +26,6 @@ const SingleWidget: React.FC<SingleWidgetTypes> = (props) => {
 
 const RecommenededCandidatesWidget: React.FC<RecommenededCandidatesWidgetTypes> = (props) => {
     const { recommendedCandidates, fetchRecommendedCandidates, setVisible, setRecruiterCandidateDetails } = props;
-    console.log(recommendedCandidates)
 
     useEffect(() => {
         fetchRecommendedCandidates();

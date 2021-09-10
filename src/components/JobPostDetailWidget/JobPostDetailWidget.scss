@@ -2,23 +2,17 @@
     margin: 20px 0;
     display: flex;
     flex-wrap: wrap;
-    border: transparent;
+    // border: transparent;
     box-shadow: 0 1px 2px -2px #00000029, 0 3px 6px 0 #0000001f, 0 5px 12px 4px #00000017;
+    border-radius: 5px;
     .ant-card {
         // margin: 5px;
         width: 100%;
     }
     .each-widget {
-        display: grid;
-        grid-template-columns: 20% 50% 30%;
-        .action-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            .ant-btn-primary {
-                max-width: 150px;
-            }
-        }
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
     }
     .tags-section {
         margin: 20px 0;

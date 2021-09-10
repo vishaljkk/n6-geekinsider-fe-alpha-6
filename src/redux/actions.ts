@@ -3,20 +3,12 @@ import { CandidateSubmitTypes, RecruitereSubmitTypes } from '../pages/Onboarding
 import { UserTypeTypes } from '../routes';
 import makeRequest from '../utils/makeRequest';
 import { DispatchType } from './types';
+import { SearchType } from '.';
 
 export const setIsAuth = (data: boolean) => {
     return (dispatch: DispatchType) => {
         dispatch({
             type:"SET_AUTH",
-            payload: data
-        })
-    }
-}
-
-export const setSearchData = (data: any) => {
-    return (dispatch: DispatchType) => {
-        dispatch({
-            type:"SET_SKILL_SEARCH_RESULT",
             payload: data
         })
     }
@@ -70,7 +62,6 @@ export const fetchMessages = (section: string, id: string) => {
     return (dispatch: DispatchType) => {
         makeRequest.get('/api/message')
             .then(resp => {
-                console.log(resp)
                 // dispatch({
                 //     type: 'SET_MESSAGES',
                 //     // payload: userType
@@ -78,38 +69,6 @@ export const fetchMessages = (section: string, id: string) => {
             })
             .catch(err => {
             })
-    }
-}
-
-export const fetchLandingPageData = () => {
-    return (dispatch: DispatchType) => {
-        // makeRequest.post()
-        //     .then(resp => {
-        //         console.log(resp)
-        //     })
-        //     .catch(err => {
-        //         console.error(err)
-        //     })
-        // dispatch({
-        //     type: 'SET_LANDING_DATA',
-        //     payload: data
-        // })
-    }
-}
-
-export const getLandingPageData = () => {
-    return (dispatch: DispatchType) => {
-        // makeRequest.post()
-        //     .then(resp => {
-        //         console.log(resp)
-        //     })
-        //     .catch(err => {
-        //         console.error(err)
-        //     })
-        // dispatch({
-        //     type: 'SET_LANDING_DATA',
-        //     payload: data
-        // })
     }
 }
 
@@ -190,12 +149,16 @@ export const fetchSkillSearch = (skills: string[]) => {
     }
 }
 
-export const applyForJob = (id: string) => {
+export const applyForJob = (id: string, callback?: () => void) => {
     return (dispatch: DispatchType) => {
         dispatch({ type: 'SET_LOADING', payload: true });
         makeRequest.post(`/api/users/apply?jobid=${id}`, {})
             .then(data => {
                 dispatch({ type: 'SET_LOADING', payload: false });
+                callback && callback();
+                notification.success({
+                    message: 'Hurray!, applied successfully'
+                })
             })
             .catch((error) => {
                 dispatch({ type: 'SET_LOADING', payload: false });
@@ -222,7 +185,6 @@ export const fetchTrendingJobs = () => {
         dispatch({ type: 'SET_LOADING', payload: true });
         makeRequest.get(`/api/jobs/trend`)
             .then(data => {
-                // console.log(data)
                 dispatch({ type: 'SET_TRENDING_JOBS', payload: data.jobRecord });
                 dispatch({ type: 'SET_LOADING', payload: false });
             })
@@ -237,7 +199,6 @@ export const fetchRecommendedJobs = () => {
         dispatch({ type: 'SET_LOADING', payload: true });
         makeRequest.get(`/api/jobs/reco`)
             .then(data => {
-                // console.log(data)
                 dispatch({ type: 'SET_RECOMMENDED_JOBS', payload: data.jobRecord });
                 dispatch({ type: 'SET_LOADING', payload: false });
             })
@@ -254,8 +215,6 @@ export const fetchJobDetail = (id: string) => {
             .then(data => {
                 dispatch({ type: 'SET_ACTIVE_JOB', payload: data.jobRecord });
                 dispatch({ type: 'SET_LOADING', payload: false });
-                // dispatch({ type: 'SET_ACTIVE_JOB_MODAL_VISIBLE', payload: true });
-                // setActiveJobModalVisible(true)
             })
             .catch((error) => {
                 dispatch({ type: 'SET_LOADING', payload: false });
@@ -280,5 +239,25 @@ export const fetchRecommendedCandidates = () => {
 export const setRecruiterCandidateDetails = (values: any) => {
     return (dispatch: DispatchType) => {
         dispatch({ type: 'SET_RECRUITER_CANDIDATE_DETAILS', payload: values });
+    }
+}
+
+export const setSearchType = (searchType: SearchType) => {
+    return (dispatch: DispatchType) => {
+        dispatch({ type: 'SET_SEARCH_TYPE', payload: searchType });
+    }
+}
+
+export const fetchCompanySearchData = (cname: string) => {
+    return (dispatch: DispatchType) => {
+        dispatch({ type: 'SET_LOADING', payload: true });
+        makeRequest.get(`/api/jobs/job?cname=${cname}`)
+            .then(data => {
+                dispatch({ type: 'SET_COMPANY_SEARCH', payload: data.jobRecord });
+                dispatch({ type: 'SET_LOADING', payload: false });
+            })
+            .catch((error) => {
+                dispatch({ type: 'SET_LOADING', payload: false });
+            });
     }
 }

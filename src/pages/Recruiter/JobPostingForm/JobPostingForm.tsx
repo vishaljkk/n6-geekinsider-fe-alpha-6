@@ -27,7 +27,6 @@ const JobPostingForm: React.FC<JobPostingFormPropTypes> = (props) => {
     }
 
 	const onFinishFailed = (errorInfo: any) => {
-		// console.log('Failed:', errorInfo);
 	};
 
     const handleCancel = () => {
