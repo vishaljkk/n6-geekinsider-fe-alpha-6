@@ -73,6 +73,32 @@ const SearchResults: React.FC<SearchResultsTypes> = (props) => {
             </Row>
         </div>
     )
+
+//     return (
+//         <Row>
+//             <Col span={6} offset={1}>
+//                 <div className="search-result-widget-container">
+//                     {data.map((itm: any, index: number) => 
+//                         <SingleWidget 
+//                             itm={itm} 
+//                             index={index} 
+//                             selectedData={selectedData}
+//                             setSelectedData={setSelectedData}
+//                         />
+//                     )}
+//                 </div>
+//             </Col>
+//             <Col span={15} offset={1}>
+//                 <div className="search-result-selected-widget-container">
+//                     {selectedData && Object.keys(selectedData).length>0 ? 
+//                         <JobPostDetailWidget {...{...selectedData}} /> 
+//                         : 
+//                         <Empty />
+//                     }
+//                 </div>
+//             </Col>
+//         </Row>
+//     )
 }
 
 const mapStateToProps = (state: StateTypes) => ({});

@@ -14,9 +14,8 @@
     }
     .each-widget {
         display: flex;
-        justify-content: space-between;
         flex-wrap: wrap;
-        // gap: 20px;
+        gap: 20px;
     }
     .tags-section {
         margin: 20px 0;

@@ -22,7 +22,6 @@ const CandidateLandingPage: React.FC<CandidateLandingPagePropTypes> = (props) =>
                     <QuickProfileWidget onClick={handleProfileClick} title={profileDetails.name} subtitle={profileDetails.jobtitle}/>
                 </div>
                 <div className="candidate-landing__right">
-                    {/* <RecentChatWidget /> */}
                     <RecommCandidateWidget />
                     <TopTrending />
                 </div>
