@@ -11,7 +11,7 @@ import './onboarding.scss';
 const { Option } = Select;
 
 const RecruiterOnboarding: React.FC<RecruiterOnboardingPropTypes> = (props) => {
-    const { history, setIsAuth, isAuth, saveRecruiterData } = props;
+    const { history, saveRecruiterData } = props;
     const [form] = Form.useForm();
 
 	const onFinish = (values: RecruitereSubmitTypes) => {

@@ -1,5 +1,5 @@
 export interface RecruiterCandidateDetailsPropTypes {
-    visible: boolean,
-    setVisible: (e: boolean) => void,
-    recruiterCandidateDetails: any
+    match: any,
+    recruiterCandidateDetails: any,
+    fetchCandidateDetails: (e: string) => void
 }

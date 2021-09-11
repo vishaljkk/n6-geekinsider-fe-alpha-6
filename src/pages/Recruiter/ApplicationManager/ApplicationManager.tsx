@@ -8,20 +8,21 @@ import Loader from '../../../components/Loader';
 import { MdLocationOn, MdMonetizationOn, MdHistory } from "react-icons/md";
 import { iconStyles } from '../../../utils';
 import { ApplicationManagerTypes } from './types';
-import { StateTypes, fetchAppliedCandidates } from '../../../redux';
+import { StateTypes, fetchJobDetail } from '../../../redux';
+import About from '../../../components/About';
 import './ApplicationManager.scss';
 
 const ApplicationManager: React.FC<ApplicationManagerTypes> = (props) => {
-    const { activeJob, fetchAppliedCandidates, loading } = props;
+    const { activeJob, loading, match, fetchJobDetail } = props;
     const { companyName, ctc, exp, jobDescription, jobLocation, jobTitle, skills, jobslug } = activeJob;
     const history = useHistory();
 
     useEffect(() => {
-        fetchAppliedCandidates(jobslug);
+        fetchJobDetail(match.params.slug)
     }, [])
 
     const handleManageJobPost = () => {
-        history.push('/recruiter/applied-candidates')
+        history.push(`/recruiter/post/${match.params.slug}/applied-candidates`)
     }
 
     return (
@@ -42,9 +43,7 @@ const ApplicationManager: React.FC<ApplicationManagerTypes> = (props) => {
                     <div><MdHistory style={iconStyles} />{exp} year</div>
                     <div title={`${ctc} lacs per annum`}><MdMonetizationOn style={iconStyles} />{ctc} LPA</div>
                 </section>
-                <Card>
-                    {jobDescription.split('\n').map((itm: string) => <span>{itm}<br/></span>)}
-                </Card>
+                <About>{jobDescription}</About>
             </div> : (!loading && <Loader />)}
         </>
     )
@@ -56,6 +55,6 @@ const mapStateToProps = (state: StateTypes) => ({
     loading: state.loading
 });
 
-const mapDispatchToProps = (dispatch: any) => bindActionCreators({ fetchAppliedCandidates }, dispatch);
+const mapDispatchToProps = (dispatch: any) => bindActionCreators({ fetchJobDetail }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(ApplicationManager);

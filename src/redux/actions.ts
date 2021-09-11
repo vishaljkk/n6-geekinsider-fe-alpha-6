@@ -3,7 +3,7 @@ import { CandidateSubmitTypes, RecruitereSubmitTypes } from '../pages/Onboarding
 import { UserTypeTypes } from '../routes';
 import makeRequest from '../utils/makeRequest';
 import { DispatchType } from './types';
-import { SearchType } from '.';
+import { SearchType, store } from '.';
 
 export const setIsAuth = (data: boolean) => {
     return (dispatch: DispatchType) => {
@@ -152,7 +152,7 @@ export const fetchSkillSearch = (skills: string[]) => {
 export const applyForJob = (id: string, callback?: () => void) => {
     return (dispatch: DispatchType) => {
         dispatch({ type: 'SET_LOADING', payload: true });
-        makeRequest.post(`/api/users/apply?jobid=${id}`, {})
+        makeRequest.post(`/api/users/apply`, { jobid: id })
             .then(data => {
                 dispatch({ type: 'SET_LOADING', payload: false });
                 callback && callback();
@@ -284,6 +284,22 @@ export const fetchAppliedCandidates = (jobslug: string) => {
                 }
                 else {
                     dispatch({ type: 'SET_APPLIED_CANDIDATES', payload: [] });
+                }
+                dispatch({ type: 'SET_LOADING', payload: false });
+            })
+            .catch((error) => {
+                dispatch({ type: 'SET_LOADING', payload: false });
+                dispatch({ type: 'SET_APPLIED_CANDIDATES', payload: [] });
+            });
+    }
+}
+
+export const fetchCandidateDetails = (slugId: string) => {
+    return (dispatch: DispatchType) => {
+        makeRequest.get(`/api/users/getcan?canid=${slugId}`)
+            .then(data => {
+                if (data?.user?.about) {
+                    dispatch({ type: 'SET_RECRUITER_CANDIDATE_DETAILS', payload: { ...store.getState().recruiterCandidateDetails, about: data.user.about } });
                 }
                 dispatch({ type: 'SET_LOADING', payload: false });
             })

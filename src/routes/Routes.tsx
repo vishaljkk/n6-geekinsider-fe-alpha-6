@@ -22,6 +22,7 @@ const JobPostingForm = lazy(() => import('../pages/Recruiter/JobPostingForm'));
 const CandidateOnboarding = lazy(() => import('../pages/Onboarding/CandidateOnboarding'));
 const RecruiterOnboarding = lazy(() => import('../pages/Onboarding/RecruiterOnboarding'));
 const ManageAppliedCandidates = lazy(() => import('../pages/Recruiter/ManageAppliedCandidates'));
+const RecruiterCandidateDetails = lazy(() => import('../pages/Recruiter/RecruiterCandidateDetails'));
 
 const pages = [
     {
@@ -75,31 +76,32 @@ const pages = [
         showNavbar: true,
     },
     {
-        pageLink: '/recruiter/managepost',
+        pageLink: '/recruiter/post/:slug',
         view: ApplicationManager,
         showNavbar: true,
     },
     {
-        pageLink: '/job-detail',
+        pageLink: '/job-detail/:slug',
         view: CandidateJobDetail,
         showNavbar: true,
     },
     {
-        pageLink: '/recruiter/applied-candidates',
+        pageLink: '/recruiter/post/:slug/applied-candidates',
         view: ManageAppliedCandidates,
         showNavbar: true,
-    }
+    },
+    {
+        pageLink: '/candidate/recommended/:slug',
+        view: RecruiterCandidateDetails,
+        showNavbar: true,
+    },
 ];
 
 const Routes: React.FC<AppTypes> = (props) => {
 
-    const { isAuth, userType, location, setIsAuth, loading } = props;
+    const { isAuth, location, setIsAuth, loading } = props;
     const invalidLocations = ['', '/', '/login', '/signup'];
     const history = useHistory();
-
-    // useEffect(() => {
-    //     setAuthListener();
-    // }, [])
     
     useEffect(() => {
         isAuthenticated().then(resp => {
@@ -128,19 +130,6 @@ const Routes: React.FC<AppTypes> = (props) => {
         })
     }, [])
 
-    // function setAuthListener() {
-    //     Hub.listen("auth", (data) => {
-    //         switch (data.payload.event) {
-    //             case "signOut":
-    //                 setIsAuth(false);
-    //                 break;
-    //             case "signIn":
-    //                 setIsAuth(true);
-    //                 break;
-    //         }
-    //     });
-    // };
-
     return (
         <>
             {isAuth && <Suspense fallback={<div/>}>
@@ -162,7 +151,7 @@ const Routes: React.FC<AppTypes> = (props) => {
                         key={index}
                     />
                 )}
-                <Redirect to="/" />
+                <Redirect to="/home" />
             </Switch>
         </>
     )

@@ -1,6 +1,22 @@
-.single-widget {
-    width: 300px;
-    flex-wrap: wrap;
+.applied-jobs {
+    margin: 20px;
+    .ant-card-body {
+        padding: 12px;
+    }
+    .applied-jobs__left {
+        .ant-card {
+            margin: 0;
+        }
+    }
+    .applied-jobs__right {
+        margin-left: 10px;
+        .candidate__profile__right {
+            margin: 0;
+            .ant-card {
+                margin: 0;
+            }
+        }
+    }
     .ant-card {
         margin: 5px;
     }
@@ -12,7 +28,6 @@
             flex-shrink: 0;
         }
         .right-section {
-            // flex-grow: 1;
             width: 75%;
             h3 {
                 white-space: nowrap;
@@ -41,5 +56,6 @@
     .single-widget__tag-section {
         display: flex;
         flex-wrap: wrap;
+        gap: 5px 0;
     }
 }

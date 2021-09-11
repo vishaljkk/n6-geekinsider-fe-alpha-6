@@ -18,8 +18,7 @@ const TrendingJobs: React.FC<TrendingJobsPropTypes> = (props) => {
     }, [])
 
     const handleCardClick = (jobslug: string) => {
-        fetchJobDetail(jobslug);
-        history.push('/job-detail');
+        history.push(`/job-detail/${jobslug}`);
     }
 
     return (

@@ -23,8 +23,7 @@ const RecommCandidateWidget: React.FC<RecommCandidateWidgetPropTypes> = (props) 
     }, [])
 
     const handleCardClick = (jobslug: string) => {
-        fetchJobDetail(jobslug);
-        history.push('/job-detail');
+        history.push(`/job-detail/${jobslug}`);
     }
 
     return (

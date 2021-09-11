@@ -8,11 +8,12 @@ import { connect } from 'react-redux';
 import { StateTypes, fetchProfileDetails } from '../../../redux';
 import { CandidateSubmitTypes } from '../../Onboarding/types';
 import { iconStyles } from '../../../utils';
+import About from '../../../components/About';
 import './CandidateDetails.scss';
 
 const CandidateDetails: React.FC<CandidateSubmitTypes> = (props) => {
     const [mappableSkills, setMappableSkills] = useState<string[]>([]);
-    const { about, name, skills, location, ctc, exp, githubUrl, whatsappNumber, jobtitle } = props;
+    const { about, name, skills, location, ctc, exp, githubUrl, whatsappNumber, jobTitle } = props;
 
     useEffect(() => {
         if (skills) setMappableSkills(typeof skills === 'string' ? skills.split(',') : skills);
@@ -24,7 +25,7 @@ const CandidateDetails: React.FC<CandidateSubmitTypes> = (props) => {
                 <section className="each-widget">
                     <div className="right-section">
                         <h2>{name}</h2>
-                        <span>{jobtitle}</span>
+                        <span>{jobTitle}</span>
                     </div>
                 </section>
                 <section className="tags-section">
@@ -36,9 +37,7 @@ const CandidateDetails: React.FC<CandidateSubmitTypes> = (props) => {
                     <div><MdHistory style={iconStyles} />{exp} year</div>
                     <div><FaGithub style={iconStyles} /><a href={githubUrl} target="_blank">Github</a></div>
                 </section>
-                <Card>
-                    {about}
-                </Card>
+                <About>{about}</About>
                 <br/>
                 <Card>
                     <div className="profile-footer">

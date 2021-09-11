@@ -16,7 +16,6 @@ export interface RecentJobType {
 export interface RecommCandidateWidgetPropTypes {
     recentJobs: RecentJobType[], 
     fetchPostedJobs: () => void, 
-    fetchJobDetail: (jobslug: string) => void
 }
 
 export interface SingleWidgetTypes {
@@ -37,6 +36,5 @@ export interface SingleWidgetTypes {
 export interface RecommenededCandidatesWidgetTypes {
     recommendedCandidates: SingleWidgetTypes[], 
     fetchRecommendedCandidates: () => void,
-    setVisible: (e: boolean) => void,
-    setRecruiterCandidateDetails: (e: SingleWidgetTypes) => any
+    setRecruiterCandidateDetails: (e: any) => void
 }
