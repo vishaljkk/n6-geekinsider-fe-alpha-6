@@ -5,7 +5,7 @@ import { useHistory } from 'react-router';
 
 import { JobPostingFormPropTypes } from './types';
 import { createJobPost, StateTypes } from '../../../redux';
-import { skills, cities, jobTypes } from '../../../utils';
+import { skills, cities } from '../../../utils';
 import './JobPostingForm.scss';
 
 const { Option } = Select;
@@ -55,19 +55,6 @@ const JobPostingForm: React.FC<JobPostingFormPropTypes> = (props) => {
                 >
                     <Input placeholder="Please enter the title of job" />
                 </Form.Item>
-
-                {/* <Form.Item
-                    label="Type of job position"
-                    name="typeOfPosition"
-                    rules={[{ required: true, message: 'Please select the type of position!' }]}
-                >
-                    <Select
-                        allowClear
-                        placeholder="Please select the type of position"
-                    >
-                        {jobTypes.map((itm: string) => <Option value={itm} key={itm}>{itm}</Option>)}
-                    </Select>
-                </Form.Item> */}
 
                 <Form.Item
                     label="Desired skills"

@@ -1,50 +1,74 @@
-import React, { useState } from 'react';
-import { Row, Col, Button } from 'antd';
-import ReactWhatsapp from 'react-whatsapp';
+import React, { useEffect, useState } from 'react';
+import { Row, Col, Card, Avatar, Empty } from 'antd';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-
 import { FaWhatsapp } from 'react-icons/fa';
-import { StateTypes } from '../../../redux';
+import { MdLocationOn, MdMonetizationOn, MdHistory } from "react-icons/md";
+
+import { StateTypes, fetchAppliedCandidates } from '../../../redux';
+import { getWhatsAppUrl, iconStyles } from '../../../utils';
+import CandidateDetails from '../../Candidate/CandidateProfile/CandidateDetails';
+import '../../../components/JobWidget/JobWidget.scss';
+import './ManageAppliedCandidates.scss';
+
+const SingleWidget: React.FC<any> = (props) => {
+    const { exp, jobTitle, location, name, skills, userUd, whatsappNumber } = props;
+    return (
+        <Card hoverable onClick={() => props?.onClick(props)}>
+            <section className="single-widget__each-widget">
+                <Avatar size={55}>{name[0]}</Avatar>
+                <div className="right-section">
+                    <h3 title={name}>{name}</h3>
+                    <span>{jobTitle}</span>
+                </div>
+            </section>
+            <section className="single-widget__tag-section">
+                {skills.map((itm: string) => <span className="tags" key={itm}>{itm}</span>)}
+            </section>
+            <section className="single-widget__footer-section">
+                <div><MdLocationOn style={iconStyles} />{location}</div>
+                {/* <div><MdMonetizationOn style={iconStyles} title={`${ctc} Lacs per annum`}/>{ctc} LPA</div> */}
+                <div><MdHistory style={iconStyles} />{exp} year</div>
+            </section>
+        </Card>
+    )
+}
 
 const ManageAppliedCandidates: React.FC<any> = (props) => {
-    const [selectedData, setSelectedData] = useState({});
-    const { appliedCandidates } = props;
-    const handleCardClick = () => {
-        console.log('s')
+    const { appliedCandidates, match, fetchAppliedCandidates } = props;
+    const [selected, setSelected] = useState(appliedCandidates[0]);
+
+    useEffect(() => {
+        setSelected(appliedCandidates[0])
+    }, [appliedCandidates])
+
+    useEffect(() => {
+        fetchAppliedCandidates(match.params.slug);
+    }, [])
+
+    const handleClick = (itm: any) => {
+        setSelected(itm);
     }
 
     return (
         <div className="applied-jobs">
-            <br/>
-            <h3>Candidates Applied</h3>
-                <ReactWhatsapp number='91-976-903-0229' message="Hello Abhishek, got your profile and found out to be interested">
-                    <Button shape="round">
-                        <FaWhatsapp className="whatsapp-icon" />
-                    </Button>
-                </ReactWhatsapp>
+            <h2>Manage Applied Candidates</h2>
+            {/* <Button type="primary" href={getWhatsAppUrl(whatsappNumber, name)} target="_blank">
+                <FaWhatsapp className="whatsapp-icon" />&nbsp;Connect
+            </Button> */}
             <Row>
                 <Col span={8} xs={{ span: 12 }} sm={{ span: 10 }} md={{ span: 8 }} lg={{ span: 6 }}>
-                    <div className="search-result-widget-container">
-                        {JSON.stringify(appliedCandidates)}
-                        {/* {appliedCandidates.map((itm: any) => <JobWidget key={itm} {...{...itm, onClick: handleCardClick}}/>)} */}
-                        {/* {data.map((itm: JobObjectTypes, index: number) => 
-                            <SingleWidget 
-                                itm={itm} 
-                                index={index} 
-                                selectedData={selectedData}
-                                setSelectedData={setSelectedData}
-                            />
-                        )} */}
+                    <div className="applied-jobs__left">
+                        {appliedCandidates.map((itm: any) => <SingleWidget key={itm} {...{ ...itm, onClick: handleClick }} />)}
                     </div>
                 </Col>
                 <Col span={16} xs={{ span: 12 }} sm={{ span: 14 }} md={{ span: 16 }} lg={{ span: 18 }}>
-                    <div className="search-result-selected-widget-container">
-                        {/* {selectedData && Object.keys(selectedData).length>0 ? 
-                            <CandidateDetails {...{...selectedData}} /> 
-                            : 
+                    <div className="applied-jobs__right">
+                        {selected && Object.keys(selected).length > 0 ?
+                            <CandidateDetails {...{ ...selected }} />
+                            :
                             <Empty />
-                        } */}
+                        }
                     </div>
                 </Col>
             </Row>
@@ -56,6 +80,8 @@ const mapStateToProps = (state: StateTypes) => ({
     appliedCandidates: state.appliedCandidates
 });
 
-const mapDispatchToProps = (dispatch: any) => bindActionCreators({}, dispatch);
+const mapDispatchToProps = (dispatch: any) => bindActionCreators({
+    fetchAppliedCandidates
+}, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(ManageAppliedCandidates);

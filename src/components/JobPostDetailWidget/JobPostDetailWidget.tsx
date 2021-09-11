@@ -9,6 +9,7 @@ import { StateTypes } from '../../redux';
 import { useHistory } from 'react-router';
 import { JobPostDetailWidgetPropTypes } from './types';
 import './JobPostDetailWidget.scss';
+import About from '../About';
 
 // const JobPostDetailWidget: React.FC<JobPostDetailWidgetPropTypes> = (props) => {
 const JobPostDetailWidget: React.FC<any> = (props) => {
@@ -43,9 +44,7 @@ const JobPostDetailWidget: React.FC<any> = (props) => {
                     <div title={`${ctc} lacs per annum`}><MdMonetizationOn style={iconStyles} />{ctc} LPA</div>
                     <div><MdHistory style={iconStyles} />{exp} year</div>
                 </section>
-                <Card>
-                    {jobDescription}
-                </Card>
+                <About>{jobDescription}</About>
             </Card>
         </div>
     )

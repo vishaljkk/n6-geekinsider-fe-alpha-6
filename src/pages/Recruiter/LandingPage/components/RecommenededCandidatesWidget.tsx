@@ -3,9 +3,10 @@ import { Tooltip, Button, Card, Tag, Avatar } from 'antd';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { fetchRecommendedCandidates, setRecruiterCandidateDetails, StateTypes } from '../../../../redux';
+import { fetchRecommendedCandidates, StateTypes, setRecruiterCandidateDetails } from '../../../../redux';
 import { RecommenededCandidatesWidgetTypes, SingleWidgetTypes } from '..';
 import '../RecruiterLanding.scss';
+import { useHistory } from 'react-router';
 
 const SingleWidget: React.FC<SingleWidgetTypes> = (props) => {
     const { skills, jobTitle, name, handleClick } = props;
@@ -27,7 +28,8 @@ const SingleWidget: React.FC<SingleWidgetTypes> = (props) => {
 }
 
 const RecommenededCandidatesWidget: React.FC<RecommenededCandidatesWidgetTypes> = (props) => {
-    const { recommendedCandidates, fetchRecommendedCandidates, setVisible, setRecruiterCandidateDetails } = props;
+    const { recommendedCandidates, fetchRecommendedCandidates, setRecruiterCandidateDetails } = props;
+    const history = useHistory();
 
     useEffect(() => {
         fetchRecommendedCandidates();
@@ -35,7 +37,7 @@ const RecommenededCandidatesWidget: React.FC<RecommenededCandidatesWidgetTypes> 
 
     const handleClick = (values: SingleWidgetTypes) => {
         setRecruiterCandidateDetails(values);
-        setVisible(true);
+        history.push(`/candidate/recommended/${values.aboutid}`);
     }
 
     return (

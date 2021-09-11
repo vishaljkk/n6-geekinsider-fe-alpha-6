@@ -9,7 +9,7 @@ export interface CandidateSubmitTypes {
     email: string,
     exp: string,
     githubUrl: string,
-    jobtitle: string,
+    jobTitle: string,
     location: string,
     name: string,
     skills?: string[] | string,

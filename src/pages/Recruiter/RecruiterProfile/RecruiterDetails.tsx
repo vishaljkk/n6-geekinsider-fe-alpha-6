@@ -36,7 +36,7 @@ const RecruiterDetails: React.FC<RecruiterProfilePropTypes> = (props) => {
 
     const handleJobCardClick = (jobSlug: string) => {
         fetchJobDetail(jobSlug);
-        history.push('/recruiter/managepost')
+        history.push('/recruiter/post')
     }
 
     return (
