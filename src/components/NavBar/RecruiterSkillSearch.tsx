@@ -4,26 +4,22 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { useHistory, useLocation } from 'react-router';
 
-import { fetchSkillSearch, SearchType, StateTypes, setSearchType } from '../../redux';
+import { fetchSkillSearch, StateTypes, setSearchType, fetchRecruiterSkillSearch } from '../../redux';
+import { RecruiterSkillSearchPropTypes } from './types';
 import { skills } from '../../utils';
 import './Navbar.scss';
 
 const { Option } = Select;
 
-interface RecruiterSkillSearchPropTypes {
-    fetchSkillSearch: (e: string[]) => void,
-    setSearchType: (e: SearchType) => void
-}
-
 const RecruiterSkillSearch: React.FC<RecruiterSkillSearchPropTypes> = (props) => {
-    const { fetchSkillSearch, setSearchType } = props;
+    const { fetchSkillSearch, setSearchType, userType, fetchRecruiterSkillSearch } = props;
     const history = useHistory();
     const location = useLocation();
 
     const handleChange = (values: string[]) => {
-        if (location?.pathname !== '/search') history.push('/search');
+        if (location?.pathname !== '/candidate/search') history.push('/candidate/search');
         if (values.length) {
-            fetchSkillSearch(values);
+            userType === 'candidate' ? fetchSkillSearch(values) : fetchRecruiterSkillSearch(values);
             setSearchType('skillSearch');
         }
         else {
@@ -36,7 +32,7 @@ const RecruiterSkillSearch: React.FC<RecruiterSkillSearchPropTypes> = (props) =>
     }
 
     const handleClick = () => {
-        history.push('/search');
+        history.push('/recruiter/search');
     }
 
     return (
@@ -57,11 +53,13 @@ const RecruiterSkillSearch: React.FC<RecruiterSkillSearchPropTypes> = (props) =>
 
 const mapStateToProps = (state: StateTypes) => ({
     skillSearch: state.skillSearch,
+    userType: state.userType
 });
   
 const mapDispatchToProps = (dispatch: any) => bindActionCreators({ 
     fetchSkillSearch,
-    setSearchType
+    setSearchType,
+    fetchRecruiterSkillSearch
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecruiterSkillSearch);

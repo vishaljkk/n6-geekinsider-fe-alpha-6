@@ -42,7 +42,7 @@ const RecruiterCandidateDetails: React.FC<RecruiterCandidateDetailsPropTypes> = 
     }, [])
 
     return (
-        <Modal visible={true} onCancel={handleCancel} footer={null} destroyOnClose>
+        // <Modal visible={true} onCancel={handleCancel} footer={null} destroyOnClose>
             <div className="recruiter-candidate-details">
                 <section className="each-widget">
                     <div className="right-section">
@@ -83,7 +83,7 @@ const RecruiterCandidateDetails: React.FC<RecruiterCandidateDetailsPropTypes> = 
                 </Card>
                 {/* </Card> */}
             </div>
-        </Modal>
+        // </Modal>
     )
 }
 

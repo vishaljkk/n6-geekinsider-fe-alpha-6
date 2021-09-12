@@ -309,3 +309,17 @@ export const fetchCandidateDetails = (slugId: string) => {
             });
     }
 }
+
+export const fetchRecruiterSkillSearch = (skills: string[]) => {
+    return (dispatch: DispatchType) => {
+        dispatch({ type: 'SET_LOADING', payload: true });
+        makeRequest.get(`/api/users/search-can?skills=${skills.join(',')}`)
+            .then(data => {
+                dispatch({ type: 'SET_SKILL_SEARCH_RESULT', payload: data?.user });
+                dispatch({ type: 'SET_LOADING', payload: false });
+            })
+            .catch((error) => {
+                dispatch({ type: 'SET_LOADING', payload: false });
+            });
+    }
+}
