@@ -151,7 +151,9 @@ const Routes: React.FC<AppTypes> = (props) => {
                                 {loading && <div className="loader--global">
                                     <Loader />
                                 </div>}
-                                <page.view {...{...props}} setIsAuth={setIsAuth} isAuth={isAuth}/>
+                                <div className="app">
+                                    <page.view {...{...props}} setIsAuth={setIsAuth} isAuth={isAuth}/>
+                                </div>
                             </>
                         }
                         key={index}

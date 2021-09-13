@@ -1,18 +1,18 @@
 import { useEffect } from 'react';
-import { Tooltip, Button, Card, Tag, Avatar } from 'antd';
+import { Button, Card, Avatar, Empty } from 'antd';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { useHistory } from 'react-router';
 
 import { fetchRecommendedCandidates, StateTypes, setRecruiterCandidateDetails } from '../../../../redux';
 import { RecommenededCandidatesWidgetTypes, SingleWidgetTypes } from '..';
 import '../RecruiterLanding.scss';
-import { useHistory } from 'react-router';
 
 const SingleWidget: React.FC<SingleWidgetTypes> = (props) => {
     const { skills, jobTitle, name, handleClick } = props;
 
     return (
-        <Card hoverable style={{ width:'100%' }} onClick={() => handleClick(props)}>
+        <Card hoverable onClick={() => handleClick(props)}>
             <section className="each-widget">
                 <Avatar size={55}>{name[0]}</Avatar>
                 <div className="right-section">
@@ -43,12 +43,18 @@ const RecommenededCandidatesWidget: React.FC<RecommenededCandidatesWidgetTypes> 
     return (
         <div className="recommended-candidates-widget">
             <h2>Recommended candidates</h2>
-            <div className="recommended-candidates-widget-container">
-                {recommendedCandidates.slice(0, 3).map((itm: any) => <SingleWidget key={itm} {...{...itm, handleClick}}/>)}
-            </div>
-            <div className="see-more-container">
-                <Button>See more...</Button>
-            </div>
+            {recommendedCandidates.length ?
+                <>
+                    <div className="recommended-candidates-widget-container">
+                        {recommendedCandidates.slice(0, 3).map((itm: any) => <SingleWidget key={itm} {...{...itm, handleClick}}/>)}
+                    </div>
+                    <div className="see-more-container">
+                        <Button>See more...</Button>
+                    </div>
+                </>
+                :
+                <div><Empty /></div>
+            }
         </div>
     )
 }

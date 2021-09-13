@@ -43,7 +43,7 @@ const ApplicationManager: React.FC<ApplicationManagerTypes> = (props) => {
                     <div><MdHistory style={iconStyles} />{exp} year</div>
                     <div title={`${ctc} lacs per annum`}><MdMonetizationOn style={iconStyles} />{ctc} LPA</div>
                 </section>
-                <About>{jobDescription}</About>
+                <About title="About the job">{jobDescription}</About>
             </div> : (!loading && <Loader />)}
         </>
     )

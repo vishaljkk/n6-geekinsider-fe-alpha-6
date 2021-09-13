@@ -2,11 +2,12 @@ import React from 'react';
 import { Card } from 'antd';
 import { AboutPropTypes } from '.';
 
-const About: React.FC<AboutPropTypes> = ({ children }) => {
+const About: React.FC<AboutPropTypes> = ({ children, title }) => {
     return (
-        <Card>
+        <>
+            <h3><b>{title}</b></h3>
             {children?.split('\n').map((itm: string) => <span>{itm}<br/></span>)}
-        </Card>
+        </>
     )
 }
 

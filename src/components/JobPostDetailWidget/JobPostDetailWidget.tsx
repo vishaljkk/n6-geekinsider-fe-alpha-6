@@ -18,7 +18,7 @@ const JobPostDetailWidget: React.FC<any> = (props) => {
     const mappableSkills = typeof skills === 'string' ? skills.split(',') : skills;
 
     const handleApply = () => {
-        jobslug && applyForJob(jobslug, () => history.goBack());
+        jobslug && applyForJob(jobslug, () => {});
     }
     
     return (
@@ -44,7 +44,7 @@ const JobPostDetailWidget: React.FC<any> = (props) => {
                     <div title={`${ctc} lacs per annum`}><MdMonetizationOn style={iconStyles} />{ctc} LPA</div>
                     <div><MdHistory style={iconStyles} />{exp} year</div>
                 </section>
-                <About>{jobDescription}</About>
+                <About title="About the job">{jobDescription}</About>
             </Card>
         </div>
     )

@@ -30,15 +30,15 @@ const RecommCandidateWidget: React.FC<RecommCandidateWidgetPropTypes> = (props) 
         <div className="recommended-job-widget">
             <h2>Recommended jobs for you</h2>
             <div className="recommended-job-widget-container">
-                {recommendedJobs.length ? 
+                {recommendedJobs.length>0 ? 
                     recommendedJobs.map((itm: any) => <JobWidget key={itm} {...{...itm, onClick: handleCardClick}}/>) 
                     : 
-                    <Empty/>
+                    <div className="recommended-job-widget__empty"><Empty/></div>
                 }
             </div>
-            <div className="see-more-container">
+            {recommendedJobs.length>0 && <div className="see-more-container">
                 <Button onClick={() => history.push('/search?q=recommended')}>See more...</Button>
-            </div>
+            </div>}
         </div>
     )
 }

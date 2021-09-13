@@ -8,6 +8,5 @@ export interface CandidateLandingPagePropTypes {
 
 export interface TrendingJobsPropTypes {
     trendingJobs: JobObjectTypes[], 
-    fetchTrendingJobs: () => void, 
-    fetchJobDetail: (jobslug: string) => void
+    fetchTrendingJobs: () => void
 }
