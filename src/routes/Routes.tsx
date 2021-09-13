@@ -52,7 +52,7 @@ const pages = [
         showNavbar: false,
     },
     {
-        pageLink: '/search',
+        pageLink: 'candidate/search',
         view: SearchResult,
         showNavbar: true,
     },

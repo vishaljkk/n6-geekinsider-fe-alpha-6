@@ -1,4 +1,4 @@
-# Geekinsider
+# Geekinsider UI
 
 Geekinsider is a recruiter-focused job website, lets candidates create their own profiles and attach websites like GitHub, LinkedIn, etc, and then Geekinsider creates a uniques insight that lets the recruiter find more relevant candidates.
 
