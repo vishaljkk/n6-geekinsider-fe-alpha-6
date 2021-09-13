@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Button, Card, Avatar, Empty } from 'antd';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';

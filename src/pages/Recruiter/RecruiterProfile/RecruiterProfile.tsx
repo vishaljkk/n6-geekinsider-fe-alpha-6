@@ -1,5 +1,4 @@
-import { useEffect } from 'react';
-import { Row, Col } from 'antd';
+import React, { useEffect } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
@@ -12,7 +11,6 @@ import './RecruiterProfile.scss';
 const RecruiterProfile: React.FC<ProfilePropsTypes> = (props) => {
 
     const { profileDetails, fetchProfileDetails, loading } = props;
-    const { name, preferredIndustry } = profileDetails;
 
     useEffect(() => {
         fetchProfileDetails();

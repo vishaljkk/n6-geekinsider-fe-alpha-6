@@ -1,14 +1,13 @@
-import { useState, useEffect } from 'react';
-import { Card, Button, Avatar, Tooltip, Empty } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { Card, Button } from 'antd';
 import { useHistory } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { MdLocationOn, MdMonetizationOn, MdHistory, MdAccountCircle, MdHome } from "react-icons/md";
+import { MdLocationOn, MdAccountCircle, MdHome } from "react-icons/md";
 import { iconStyles } from '../../../utils';
 
 import { RecruitereSubmitTypes } from '../../Onboarding/types';
 import { fetchJobDetail, fetchPostedJobs, StateTypes } from '../../../redux';
-import JobWidget from '../../../components/JobWidget';
 import './RecruiterDetails.scss';
 
 interface RecruiterProfilePropTypes extends RecruitereSubmitTypes {
@@ -58,7 +57,7 @@ const RecruiterDetails: React.FC<RecruiterProfilePropTypes> = (props) => {
                 <section className="footer-section">
                     <div><MdLocationOn style={iconStyles} />{location}</div>
                     <div><MdAccountCircle style={iconStyles} />{empSize}</div>
-                    <div><MdHome style={iconStyles} /><a href={site} target="_blank">Website</a></div>
+                    <div><MdHome style={iconStyles} /><a href={site} target="_blank" rel="noreferrer">Website</a></div>
                 </section>
                 <Card>
                     {about}

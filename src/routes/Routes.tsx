@@ -1,4 +1,4 @@
-import { Suspense, lazy, useEffect } from 'react';
+import React, { Suspense, lazy, useEffect } from 'react';
 import { Switch, Route, Redirect, useHistory } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'; 

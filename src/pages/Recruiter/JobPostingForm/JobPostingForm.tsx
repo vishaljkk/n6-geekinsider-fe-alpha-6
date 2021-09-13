@@ -1,3 +1,4 @@
+import React from 'react';
 import { Form, Input, Button, Select } from 'antd';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'; 
