@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Button, Card, Avatar } from 'antd';
+import { Button, Card, Avatar, Empty } from 'antd';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router';
@@ -43,12 +43,18 @@ const RecommenededCandidatesWidget: React.FC<RecommenededCandidatesWidgetTypes> 
     return (
         <div className="recommended-candidates-widget">
             <h2>Recommended candidates</h2>
-            <div className="recommended-candidates-widget-container">
-                {recommendedCandidates.slice(0, 3).map((itm: any) => <SingleWidget key={itm} {...{...itm, handleClick}}/>)}
-            </div>
-            <div className="see-more-container">
-                <Button>See more...</Button>
-            </div>
+            {recommendedCandidates.length ?
+                <>
+                    <div className="recommended-candidates-widget-container">
+                        {recommendedCandidates.slice(0, 3).map((itm: any) => <SingleWidget key={itm} {...{...itm, handleClick}}/>)}
+                    </div>
+                    <div className="see-more-container">
+                        <Button>See more...</Button>
+                    </div>
+                </>
+                :
+                <div><Empty /></div>
+            }
         </div>
     )
 }

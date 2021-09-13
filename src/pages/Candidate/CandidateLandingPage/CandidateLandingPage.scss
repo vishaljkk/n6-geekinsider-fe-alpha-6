@@ -51,6 +51,11 @@
             flex-wrap: wrap;
             gap: 5px;
         }
+        .recommended-job-widget__empty {
+            display: flex;
+            flex-grow: 1;
+            justify-content: center;
+        }
     }
 }
 

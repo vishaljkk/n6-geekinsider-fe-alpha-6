@@ -50,7 +50,7 @@ const SearchResults: React.FC<SearchResultsTypes> = (props) => {
     
     return (
         <div className="search__results">
-            <Row>
+            {data.length ? <Row>
                 <Col span={8} xs={{ span: 12 }} sm={{ span: 10 }} md={{ span: 8 }} lg={{ span: 6 }}>
                     <div className="search-result-widget-container">
                         {data.map((itm: JobObjectTypes, index: number) => 
@@ -70,35 +70,9 @@ const SearchResults: React.FC<SearchResultsTypes> = (props) => {
                         <Empty />
                     }
                 </Col>
-            </Row>
+            </Row>: <div className="search__results__empty"><br/><Empty /></div>}
         </div>
     )
-
-//     return (
-//         <Row>
-//             <Col span={6} offset={1}>
-//                 <div className="search-result-widget-container">
-//                     {data.map((itm: any, index: number) => 
-//                         <SingleWidget 
-//                             itm={itm} 
-//                             index={index} 
-//                             selectedData={selectedData}
-//                             setSelectedData={setSelectedData}
-//                         />
-//                     )}
-//                 </div>
-//             </Col>
-//             <Col span={15} offset={1}>
-//                 <div className="search-result-selected-widget-container">
-//                     {selectedData && Object.keys(selectedData).length>0 ? 
-//                         <JobPostDetailWidget {...{...selectedData}} /> 
-//                         : 
-//                         <Empty />
-//                     }
-//                 </div>
-//             </Col>
-//         </Row>
-//     )
 }
 
 const mapStateToProps = (state: StateTypes) => ({});
