@@ -18,7 +18,7 @@ const SingleWidget: React.FC<any> = (props) => {
         <Card 
             hoverable
             onClick={() => setSelectedData(itm)}
-            style={{ backgroundColor: itm?.jobslug === selectedData?.jobslug ? '#dcdcdc' : 'white' }}
+            className={ itm?.jobslug === selectedData?.jobslug ? 'active-card' : '' }
         >
             <section className="each-widget">
                 <Avatar size={55}>{companyName[0]}</Avatar>

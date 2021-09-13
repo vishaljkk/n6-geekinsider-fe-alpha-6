@@ -63,7 +63,7 @@ export interface CandidateProfileDetailsTypes {
     ctc: string,
     exp: string,
     githubUrl: string,
-    jobtitle: string,
+    jobTitle: string,
     location: string,
     name: string,
     skills: string[],

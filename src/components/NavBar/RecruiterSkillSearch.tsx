@@ -17,7 +17,9 @@ const RecruiterSkillSearch: React.FC<RecruiterSkillSearchPropTypes> = (props) =>
     const location = useLocation();
 
     const handleChange = (values: string[]) => {
-        if (location?.pathname !== '/candidate/search') history.push('/candidate/search');
+        if (location?.pathname !== '/search') {
+            userType === 'candidate' ? history.push('/search') : history.push('/recruiter/search')
+        }
         if (values.length) {
             userType === 'candidate' ? fetchSkillSearch(values) : fetchRecruiterSkillSearch(values);
             setSearchType('skillSearch');
@@ -32,14 +34,14 @@ const RecruiterSkillSearch: React.FC<RecruiterSkillSearchPropTypes> = (props) =>
     }
 
     const handleClick = () => {
-        history.push('/recruiter/search');
+        userType === 'candidate' ? history.push('/search') : history.push('/recruiter/search')
     }
 
     return (
         <Select 
             mode="multiple"
-            placeholder="Search jobs via skills"
-            style={{ width: '50%' }} 
+            placeholder={userType === 'candidate' ? 'Search jobs via skills' : 'Search candidates via skills'}
+            style={{ width: userType === 'candidate' ? '50%' : '100%' }} 
             onChange={handleChange}
             onClick={handleClick}
             allowClear

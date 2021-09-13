@@ -11,14 +11,13 @@ import './RecruiterSearchResult.scss';
 
 const SingleWidget: React.FC<any> = (props) => {
     const { itm, setSelectedData, selectedData } = props;
-    console.log(props.itm)
     const { jobTitle, skills, location, ctc, exp, aboutid, githubUrl, name, whatsappNumber, _id } = itm;
 
     return (
         <Card 
             hoverable
             onClick={() => setSelectedData(itm)}
-            style={{ backgroundColor: itm?.aboutid === selectedData?.aboutid ? '#dcdcdc' : 'white' }}
+            className={ itm?.aboutid === selectedData?.aboutid ? 'active-card' : '' }
         >
             <section className="each-widget">
                 <Avatar size={55}>{name[0]}</Avatar>

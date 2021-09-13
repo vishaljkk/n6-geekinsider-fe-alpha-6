@@ -1,4 +1,4 @@
-import { Form, Input, Button, Select, InputNumber } from 'antd';
+import { Form, Input, Button, Select } from 'antd';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'; 
 import { useHistory } from 'react-router';
@@ -53,7 +53,7 @@ const JobPostingForm: React.FC<JobPostingFormPropTypes> = (props) => {
                     name="jobTitle"
                     rules={[{ required: true, message: 'Please enter the title of job!' }]}
                 >
-                    <Input placeholder="Please enter the title of job" />
+                    <Input placeholder="Please enter the title of job" autoComplete="off" />
                 </Form.Item>
 
                 <Form.Item
@@ -98,17 +98,17 @@ const JobPostingForm: React.FC<JobPostingFormPropTypes> = (props) => {
                     name="exp"
                     rules={[{ 
                         required: true, 
-                        message: 'Please enter the experience range!',
+                        message: 'Please enter the experience!',
                         validator(_, value) {
                             const regexp = new RegExp(/^[0-9.]+$/gm);
                             if (value && value.match(regexp)) {
                                 return Promise.resolve();
                             }
-                            return Promise.reject(new Error('Please select atleast three skills!'));
+                            return Promise.reject(new Error('Experience in number like 2.5 or 4!'));
                         }
                     }]}
                 >
-                    <Input placeholder="Experience range in number like 2.5 or 4" />
+                    <Input placeholder="Experience in number like 2.5 or 4" autoComplete="off" />
                 </Form.Item>
 
                 <Form.Item
@@ -116,7 +116,7 @@ const JobPostingForm: React.FC<JobPostingFormPropTypes> = (props) => {
                     name="ctc"
                     rules={[{ 
                         required: true, 
-                        message: 'Please enter the annual salary range!',
+                        message: 'Please enter the annual salary!',
                         validator(_, value) {
                             const regexp = new RegExp(/^[0-9.]+$/gm);
                             if (value && value.match(regexp)) {
@@ -126,7 +126,7 @@ const JobPostingForm: React.FC<JobPostingFormPropTypes> = (props) => {
                         }
                     }]}
                 >
-                    <Input placeholder="Annual salary range in lacs like 5.5 or 7" />
+                    <Input placeholder="Annual salary in lacs like 5.5 or 7" autoComplete="off" />
                 </Form.Item>
 
                 <Form.Item
@@ -138,14 +138,13 @@ const JobPostingForm: React.FC<JobPostingFormPropTypes> = (props) => {
                 </Form.Item>
 
                 <Form.Item wrapperCol={{ offset: 8, span: 12 }}>
-                    <>
-                        <Button type="primary" htmlType="submit">
-                            Create job
-                        </Button>
-                        <Button style={{ marginLeft: '10px' }} onClick={handleCancel}>
-                            Cancel
-                        </Button>
-                    </>
+                    <Button type="primary" htmlType="submit">
+                        Create job
+                    </Button>
+                    &nbsp;&nbsp;
+                    <Button onClick={handleCancel}>
+                        Cancel
+                    </Button>
                 </Form.Item>
             </Form>
 		</div>

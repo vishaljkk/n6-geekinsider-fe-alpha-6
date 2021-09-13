@@ -30,7 +30,7 @@ const CandidateOnboarding: React.FC<CandidateOnboardingPropTypes> = (props) => {
 
 	return (
         <div className="onboarding">
-            {/* <header className="App-header">Create your Candidate profile</header> */}
+            <h2>Create your Candidate profile</h2>
             <Form
                 form={form}
                 name="Candidate onboarding"
@@ -69,7 +69,7 @@ const CandidateOnboarding: React.FC<CandidateOnboardingPropTypes> = (props) => {
                             option?.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                         }
                     >
-                        {cities.map(itm => <Option value={itm} key={itm}>{itm}</Option>)}
+                        {cities.map((itm: string) => <Option value={itm} key={itm}>{itm}</Option>)}
                     </Select>
                 </Form.Item>
 
@@ -93,19 +93,21 @@ const CandidateOnboarding: React.FC<CandidateOnboardingPropTypes> = (props) => {
                 </Form.Item>
 
                 <Form.Item
-                    label="Email"
-                    name="email"
-                    rules={[{ required: true, message: 'Please enter an email address!' }]}
-                >
-                    <Input placeholder="Please enter an email address" />
-                </Form.Item>
-
-                <Form.Item
                     label="Years of experience"
                     name="exp"
-                    rules={[{ required: true, message: 'Please select years of experience!' }]}
+                    rules={[{ 
+                        required: true, 
+                        message: 'Please select years of experience!',
+                        validator(_, value) {
+                            const regexp = new RegExp(/^[0-9.]+$/gm);
+                            if (value && value.match(regexp)) {
+                                return Promise.resolve();
+                            }
+                            return Promise.reject(new Error('Experience in number like 2.5 or 4!'));
+                        }
+                    }]}
                 >
-                    <Input placeholder="i.e 3.5 years" />
+                    <Input placeholder="Experience in number like 2.5 or 4!" />
                 </Form.Item>
 
                 <Form.Item
@@ -152,7 +154,7 @@ const CandidateOnboarding: React.FC<CandidateOnboardingPropTypes> = (props) => {
                 <Form.Item
                     label="Github"
                     name="githubUrl"
-                    rules={[{ required: false, message: 'Please enter your github profile link!', type: 'url' }]}
+                    rules={[{ required: false, message: 'Please enter your github profile link!' }]}
                 >
                     <Input placeholder="Github profile link" />
                 </Form.Item>

@@ -27,10 +27,6 @@ const NavBar: React.FC<NavBarPropTypes> = (props) => {
         marginRight: '20px'
     })
 
-    // const handleSelect = (val: string) => {
-    //     history.push(`/search?query=${val}`)
-    // }
-
     const handleGeekInsiderIconClick = () => history.push('/home');
 
     const handleProfileClick = async () => {
@@ -62,55 +58,47 @@ const NavBar: React.FC<NavBarPropTypes> = (props) => {
     }
 
     const handleClick = () => {
-        userType === 'candidate' ? history.push('candidate/search') : history.push('/recruiter/search')
+        userType === 'candidate' ? history.push('/search') : history.push('/recruiter/search')
     }
 
     return (
-        <header className="navbar">
-            <div className="navbar__logo" onClick={handleGeekInsiderIconClick}>
-                <h2>Geekinsider</h2>
-            </div>
-            <div className="navbar__center">
-                {/* <AutoComplete
-                    style={autoCompleteStyles}   
-                    options={[
-                        { value: 'React' },
-                        { value: 'JavaScript' },
-                        { value: 'TypeScript' },
-                    ]}
-                    placeholder="Search jobs"
-                    onSelect={handleSelect}
-                /> */}
-                <Input.Search
-                    style={autoCompleteStyles}
-                    placeholder="Search jobs by company name"
-                    onPressEnter={handlePressEnter}
-                    onSearch={handleSearch}
-                    onClick={handleClick}
-                    allowClear
-                />
-                <RecruiterSkillSearch />
-            </div>
-            <div className="navbar__right">
-                <Dropdown 
-                    trigger={['click']}
-                    overlay={
-                        <Menu>
-                            <Menu.Item onClick={handleProfileClick}>
-                                Profile
-                            </Menu.Item>
-                            <Menu.Item onClick={signOut}>
-                                Logout
-                            </Menu.Item>
-                        </Menu>
-                    } 
-                    placement="bottomRight" 
-                    arrow
-                >
-                    <Button shape="circle" size="large" icon={<UserOutlined />} />
-                </Dropdown>
-            </div>
-        </header>
+        <div className="navbar">
+            <header className="navbar__container">
+                <div className="navbar__logo" onClick={handleGeekInsiderIconClick}>
+                    <h2>Geekinsider</h2>
+                </div>
+                <div className="navbar__center">
+                    {userType === 'candidate' && <Input.Search
+                        style={autoCompleteStyles}
+                        placeholder="Search jobs by company name"
+                        onPressEnter={handlePressEnter}
+                        onSearch={handleSearch}
+                        onClick={handleClick}
+                        allowClear
+                    />}
+                    <RecruiterSkillSearch />
+                </div>
+                <div className="navbar__right">
+                    <Dropdown 
+                        trigger={['click']}
+                        overlay={
+                            <Menu>
+                                <Menu.Item onClick={handleProfileClick}>
+                                    Profile
+                                </Menu.Item>
+                                <Menu.Item onClick={signOut}>
+                                    Logout
+                                </Menu.Item>
+                            </Menu>
+                        } 
+                        placement="bottomRight" 
+                        arrow
+                    >
+                        <Button shape="circle" size="large" icon={<UserOutlined />} />
+                    </Dropdown>
+                </div>
+            </header>
+        </div>
     )
 }
 

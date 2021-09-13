@@ -12,9 +12,13 @@ import '../../../components/JobWidget/JobWidget.scss';
 import './ManageAppliedCandidates.scss';
 
 const SingleWidget: React.FC<any> = (props) => {
-    const { exp, jobTitle, location, name, skills, userUd, whatsappNumber } = props;
+    const { exp, jobTitle, location, name, skills, userId, whatsappNumber, selected } = props;
     return (
-        <Card hoverable onClick={() => props?.onClick(props)}>
+        <Card 
+            hoverable 
+            className={props?.userId === selected?.userId ? 'active-card' : ''}
+            onClick={() => props?.onClick(props)}
+        >
             <section className="single-widget__each-widget">
                 <Avatar size={55}>{name[0]}</Avatar>
                 <div className="right-section">
@@ -35,7 +39,8 @@ const SingleWidget: React.FC<any> = (props) => {
 }
 
 const ManageAppliedCandidates: React.FC<any> = (props) => {
-    const { appliedCandidates, match, fetchAppliedCandidates } = props;
+    const { appliedCandidates, match, fetchAppliedCandidates, activeJob } = props;
+    const { jobTitle, jobLocation, ctc } = activeJob;
     const [selected, setSelected] = useState(appliedCandidates[0]);
 
     useEffect(() => {
@@ -52,32 +57,39 @@ const ManageAppliedCandidates: React.FC<any> = (props) => {
 
     return (
         <div className="applied-jobs">
-            <h2>Manage Applied Candidates</h2>
+            <div className="applied-jobs__heading">
+                <div><Avatar size={25}>{jobTitle[0]}</Avatar><span className="applied-jobs__job-title">{jobTitle}</span></div>
+                <div><MdLocationOn style={iconStyles} />{jobLocation}</div>
+                <div title={`${ctc} lacs per annum`}><MdMonetizationOn style={iconStyles} />{ctc} LPA</div>
+            </div>
             {/* <Button type="primary" href={getWhatsAppUrl(whatsappNumber, name)} target="_blank">
                 <FaWhatsapp className="whatsapp-icon" />&nbsp;Connect
             </Button> */}
-            <Row>
-                <Col span={8} xs={{ span: 12 }} sm={{ span: 10 }} md={{ span: 8 }} lg={{ span: 6 }}>
-                    <div className="applied-jobs__left">
-                        {appliedCandidates.map((itm: any) => <SingleWidget key={itm} {...{ ...itm, onClick: handleClick }} />)}
-                    </div>
-                </Col>
-                <Col span={16} xs={{ span: 12 }} sm={{ span: 14 }} md={{ span: 16 }} lg={{ span: 18 }}>
-                    <div className="applied-jobs__right">
-                        {selected && Object.keys(selected).length > 0 ?
-                            <CandidateDetails {...{ ...selected }} />
-                            :
-                            <Empty />
-                        }
-                    </div>
-                </Col>
-            </Row>
+            {appliedCandidates?.length>0 ? 
+                <Row>
+                    <Col span={8} xs={{ span: 12 }} sm={{ span: 10 }} md={{ span: 8 }} lg={{ span: 6 }}>
+                        <div className="applied-jobs__left">
+                            {appliedCandidates.map((itm: any) => <SingleWidget key={itm} {...{ ...itm, onClick: handleClick, selected: selected }} />)}
+                        </div>
+                    </Col>
+                    <Col span={16} xs={{ span: 12 }} sm={{ span: 14 }} md={{ span: 16 }} lg={{ span: 18 }}>
+                        <div className="applied-jobs__right">
+                            {selected && Object.keys(selected).length > 0 ?
+                                <CandidateDetails {...{ ...selected }} />
+                                :
+                                <Empty />
+                            }
+                        </div>
+                    </Col>
+                </Row> : <Empty description="No applicants"/>
+            }
         </div>
     )
 }
 
 const mapStateToProps = (state: StateTypes) => ({
-    appliedCandidates: state.appliedCandidates
+    appliedCandidates: state.appliedCandidates,
+    activeJob: state.activeJob
 });
 
 const mapDispatchToProps = (dispatch: any) => bindActionCreators({

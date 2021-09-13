@@ -1,13 +1,6 @@
 .ant-card-body {
     padding: 12px;
 }
-.tags {
-    width: fit-content;
-    background-color: lightgrey;
-    border-radius: 10px;
-    padding: 0 6px;
-    margin: 0 3px;
-}
 
 .recruiter-landing {
     // display: flex;
@@ -15,7 +8,7 @@
     // margin: 20px;
     display: grid;
     grid-template-columns: 30% 70%;
-    gap: 20px;
+    gap: 50px;
     margin: 20px;
     .recruiter-landing__left {
         width: 100%;
@@ -80,7 +73,7 @@
 .recommended-candidates-widget {
     .recommended-candidates-widget-container {
         display: flex;
-        gap: 12px;
+        flex-wrap: wrap;
         .ant-card {
             margin: 5px;
         }

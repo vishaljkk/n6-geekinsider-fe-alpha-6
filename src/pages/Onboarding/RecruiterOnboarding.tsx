@@ -31,10 +31,10 @@ const RecruiterOnboarding: React.FC<RecruiterOnboardingPropTypes> = (props) => {
 
 	return (
         <div className="onboarding">
-            <header className="App-header">Create your Recruiter profile</header>
+            <h2>Create your Recruiter profile</h2>
             <Form
                 form={form}
-                name="Candidate onboarding"
+                name="Recruiter onboarding"
                 labelCol={{ span: 8 }}
                 wrapperCol={{ span: 12 }}
                 initialValues={{ remember: true }}

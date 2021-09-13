@@ -296,10 +296,11 @@ export const fetchAppliedCandidates = (jobslug: string) => {
 
 export const fetchCandidateDetails = (slugId: string) => {
     return (dispatch: DispatchType) => {
+        dispatch({ type: 'SET_LOADING', payload: true });
         makeRequest.get(`/api/users/getcan?canid=${slugId}`)
             .then(data => {
                 if (data?.user?.about) {
-                    dispatch({ type: 'SET_RECRUITER_CANDIDATE_DETAILS', payload: { ...store.getState().recruiterCandidateDetails, about: data.user.about } });
+                    dispatch({ type: 'SET_RECRUITER_CANDIDATE_DETAILS', payload: { ...store.getState().recruiterCandidateDetails, ...data.user } });
                 }
                 dispatch({ type: 'SET_LOADING', payload: false });
             })

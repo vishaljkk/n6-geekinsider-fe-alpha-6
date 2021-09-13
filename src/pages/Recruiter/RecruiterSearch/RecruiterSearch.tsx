@@ -38,9 +38,11 @@ const RecruiterSearch: React.FC<any> = (props) => {
     
     return (
         <div className="search">
-            {(searchType === 'recommended') && <Radio.Group defaultValue={searchType} buttonStyle="solid" className="toggle" onChange={handleRadioChange}>
-                <Radio.Button value="recommended">Recommended Candidates</Radio.Button>
-            </Radio.Group>}
+            {(searchType === 'recommended') && 
+                <div className="search__heading">
+                    <h2>Recommended Candidates</h2>
+                </div>
+            }
             {searchType === 'skillSearch' &&
                 <div className="search__heading">
                     <h2>Results based on Skills</h2>

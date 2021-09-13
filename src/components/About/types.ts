@@ -1,3 +1,4 @@
 export interface AboutPropTypes {
-    children: string
+    children: string,
+    title?: string
 }

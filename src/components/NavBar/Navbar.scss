@@ -1,27 +1,31 @@
 .navbar {
     background-color: #282c34;
-    height: 60px;
-    gap: 30px;
-    display: flex;
-    align-items: center;
-    color: white;
-    
-    h2 {
-        color: white;
-    }
-    .navbar__logo {
-        flex-grow: 0;
-        cursor: pointer;
-        h2 {
-            margin: 0 0 0 30px;
-        }
-    }
-    .navbar__center {
+    .navbar__container {
+        margin: auto;
+        max-width: 1000px;
+        height: 60px;
+        gap: 30px;
         display: flex;
-        gap: 30;
-        flex-grow: 1;
-    }
-    .navbar__right {
-        margin-right: 20px;
+        align-items: center;
+        color: white;
+        
+        h2 {
+            color: white;
+        }
+        .navbar__logo {
+            flex-grow: 0;
+            cursor: pointer;
+            h2 {
+                margin: 0 0 0 30px;
+            }
+        }
+        .navbar__center {
+            display: flex;
+            gap: 30;
+            flex-grow: 1;
+        }
+        .navbar__right {
+            margin-right: 20px;
+        }
     }
 }

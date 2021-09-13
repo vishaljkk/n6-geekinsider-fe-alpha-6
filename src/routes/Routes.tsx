@@ -52,7 +52,7 @@ const pages = [
         showNavbar: false,
     },
     {
-        pageLink: 'candidate/search',
+        pageLink: '/search',
         view: SearchResult,
         showNavbar: true,
     },
@@ -151,7 +151,9 @@ const Routes: React.FC<AppTypes> = (props) => {
                                 {loading && <div className="loader--global">
                                     <Loader />
                                 </div>}
-                                <page.view {...{...props}} setIsAuth={setIsAuth} isAuth={isAuth}/>
+                                <div className="app">
+                                    <page.view {...{...props}} setIsAuth={setIsAuth} isAuth={isAuth}/>
+                                </div>
                             </>
                         }
                         key={index}

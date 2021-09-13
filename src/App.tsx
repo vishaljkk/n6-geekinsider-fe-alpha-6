@@ -7,6 +7,7 @@ import ErrorBoundary from './components/ErrorBoundary';
 import Loader from './components/Loader';
 import './configureAmplify';
 import './App.scss';
+
 const Routes = lazy(() => import('./routes'));
  
 const App: React.FC = () => {

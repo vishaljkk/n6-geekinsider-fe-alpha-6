@@ -2,16 +2,9 @@
     .ant-card-body {
         padding: 12px;
     }
-    .tags {
-        width: fit-content;
-        background-color: lightgrey;
-        border-radius: 10px;
-        padding: 0 6px;
-        margin: 0 3px;
-    }
     display: grid;
     grid-template-columns: 30% 70%;
-    gap: 20px;
+    gap: 50px;
     padding: 0 20px;
     .candidate-landing__left {
         width: 100%;
