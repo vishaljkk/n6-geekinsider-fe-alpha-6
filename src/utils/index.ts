@@ -31,7 +31,7 @@ export const whatsAppBaseUrl = 'https://wa.me';
 
 export const getWhatsAppUrl = (whatsappNumber: string, name: string) => {
     let number = whatsappNumber;
-    number = number.replace(/[^\w\s]/gi, '').replace(/ /g, '');
+    number = number?.replace(/[^\w\s]/gi, '').replace(/ /g, '');
     const url = `${whatsAppBaseUrl}/${number}?text=${encodeURI(`Hello ${name}!!`)}`;
     return url;
 }

@@ -1,0 +1,59 @@
+.search__results {
+    margin: -10px 10px 10px 10px;
+    .ant-row {
+        height: 90%;
+    }
+    .ant-col {
+        height: 100%;
+    }
+    .search-result-widget-container {
+        height: 98%;
+        overflow: auto;
+        margin-top: 15px;
+        .ant-card {
+            margin: 5px;
+            .ant-card-body {
+                padding: 12px;
+            }
+            .each-widget {
+                // width: auto;
+                // max-width: 250px;
+                display: flex;
+                gap: 10px;
+                .right-section {
+                    flex-grow: 1;
+                }
+            }
+        }
+        .each-widget {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            .right-section {
+                // flex-grow: 1;
+                width: 75%;
+                h3 {
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+            }
+        }
+        .tags-section {
+            display: flex;
+            flex-wrap: wrap;
+            // gap: 5px;
+        }
+        .footer-section {
+            margin: 15px 0 0 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            .numbers-applied {
+                position: absolute;
+                right: 10px;
+                bottom: 5px;
+            }
+        }
+    }
+}

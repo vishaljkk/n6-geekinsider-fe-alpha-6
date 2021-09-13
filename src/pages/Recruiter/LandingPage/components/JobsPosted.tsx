@@ -28,7 +28,7 @@ const RecommCandidateWidget: React.FC<RecommCandidateWidgetPropTypes> = (props) 
                 {recentJobs.length>0 ? recentJobs.map((itm: any) => <JobWidget key={JSON.stringify(itm)} {...{...itm, onClick: handleJobCardClick}}/>) : <Empty description="Please post a job and manage here!" />}
             </div>
             <div className="see-more-container">
-                <Button onClick={() => history.push('/search')}>See more...</Button>
+                <Button onClick={() => history.push('/recruiter/search')}>See more...</Button>
             </div>
         </div>
     )

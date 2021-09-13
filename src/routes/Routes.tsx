@@ -13,6 +13,7 @@ const Login = lazy(() => import('../pages/Login'));
 const LandingPage = lazy(() => import('../pages/LandingPage'));
 const NavBar = lazy(() => import('../components/NavBar'));
 const SearchResult = lazy(() => import('../pages/SearchAndFilters'));
+const RecruiterSearch = lazy(() => import('../pages/Recruiter/RecruiterSearch'));
 const Messages = lazy(() => import('../pages/Messages'));
 const CandidateProfile = lazy(() => import('../pages/Candidate/CandidateProfile'));
 const RecruiterProfile = lazy(() => import('../pages/Recruiter/RecruiterProfile'));
@@ -51,7 +52,7 @@ const pages = [
         showNavbar: false,
     },
     {
-        pageLink: '/search',
+        pageLink: 'candidate/search',
         view: SearchResult,
         showNavbar: true,
     },
@@ -95,6 +96,11 @@ const pages = [
         view: RecruiterCandidateDetails,
         showNavbar: true,
     },
+    {
+        pageLink: '/recruiter/search',
+        view: RecruiterSearch,
+        showNavbar: true,
+    }
 ];
 
 const Routes: React.FC<AppTypes> = (props) => {

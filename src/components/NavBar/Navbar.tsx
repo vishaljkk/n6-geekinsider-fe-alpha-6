@@ -13,7 +13,7 @@ import './Navbar.scss';
 
 const NavBar: React.FC<NavBarPropTypes> = (props) => {
     
-    const { history, setIsAuth, setUserType, setLoading, fetchCompanySearchData, setSearchType } = props;
+    const { history, setIsAuth, setUserType, setLoading, fetchCompanySearchData, setSearchType, userType } = props;
     const signOut = async () => {
         setLoading(true);
         await Auth.signOut();
@@ -62,7 +62,7 @@ const NavBar: React.FC<NavBarPropTypes> = (props) => {
     }
 
     const handleClick = () => {
-        history.push('/search');
+        userType === 'candidate' ? history.push('candidate/search') : history.push('/recruiter/search')
     }
 
     return (
