@@ -140,11 +140,19 @@ export const applyForJob = (id: string, callback?: () => void) => {
         dispatch({ type: 'SET_LOADING', payload: true });
         makeRequest.post(`/api/users/apply`, { jobid: id })
             .then(data => {
-                dispatch({ type: 'SET_LOADING', payload: false });
-                callback && callback();
-                notification.success({
-                    message: 'Hurray!, applied successfully'
-                })
+                if (data?.success) {
+                    dispatch({ type: 'SET_LOADING', payload: false });
+                    callback && callback();
+                    notification.success({
+                        message: 'Hurray!, applied successfully'
+                    })
+                }
+                else if (data?.message) {
+                    notification.error({
+                        message: 'Already applied!'
+                    })
+                    dispatch({ type: 'SET_LOADING', payload: false });
+                }
             })
             .catch((error) => {
                 dispatch({ type: 'SET_LOADING', payload: false });
@@ -286,7 +294,16 @@ export const fetchCandidateDetails = (slugId: string) => {
         makeRequest.get(`/api/users/getcan?canid=${slugId}`)
             .then(data => {
                 if (data?.user?.about) {
-                    dispatch({ type: 'SET_RECRUITER_CANDIDATE_DETAILS', payload: { ...store.getState().recruiterCandidateDetails, ...data.user } });
+                    const tempRecommendedCandidates = Object.assign([], store.getState().recommendedCandidates);
+                    tempRecommendedCandidates.map((itm: any) => {
+                        if (itm.aboutid === slugId) {
+                            itm['about'] = data.user.about;
+                            itm['gitInfo'] = data.user.gitInfo;
+                            dispatch({ type: 'SET_RECRUITER_CANDIDATE_DETAILS', payload: itm });
+                        }
+                        return itm;
+                    })
+                    dispatch({ type: 'SET_RECOMMENDED_CANDIDATES', payload: [...tempRecommendedCandidates] });
                 }
                 dispatch({ type: 'SET_LOADING', payload: false });
             })
@@ -336,5 +353,11 @@ export const fetchSkills = () => {
             .catch((error) => {
                 dispatch({ type: 'SET_LOADING', payload: false });
             });
+    }
+}
+
+export const clearStates = () => {
+    return (dispatch: DispatchType) => {
+        dispatch({ type: 'CLEAR_STATE', payload: {} });
     }
 }

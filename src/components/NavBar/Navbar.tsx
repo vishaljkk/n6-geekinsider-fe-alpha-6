@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Auth } from 'aws-amplify';
 import { Input, Dropdown, Menu, Button } from 'antd';
 import { connect } from 'react-redux';
@@ -7,19 +7,25 @@ import { UserOutlined } from '@ant-design/icons';
 
 import RecruiterSkillSearch from './RecruiterSkillSearch';
 import { NavBarPropTypes } from './types';
-import { StateTypes } from '../../redux';
-import { setLoading, setUserType, getJobDetails, setSearchType, fetchCompanySearchData } from '../../redux/actions';
+import { setLoading, setUserType, getJobDetails, setSearchType, fetchCompanySearchData, clearStates, StateTypes, fetchCities, fetchSkills } from '../../redux';
 import './Navbar.scss';
 
 const NavBar: React.FC<NavBarPropTypes> = (props) => {
     
-    const { history, setIsAuth, setUserType, setLoading, fetchCompanySearchData, setSearchType, userType } = props;
+    const { history, setIsAuth, setUserType, setLoading, fetchCompanySearchData, setSearchType, userType, fetchCities, fetchSkills, cities, skills, clearStates } = props;
+
+    useEffect(() => {
+        cities.length === 0 && fetchCities();
+        skills.length === 0 && fetchSkills();
+    }, [])
+
     const signOut = async () => {
         setLoading(true);
         await Auth.signOut();
         setIsAuth(false);
         history.push('/login');
         setLoading(false);
+        clearStates();
     }
 
     const autoCompleteStyles = ({
@@ -104,6 +110,8 @@ const NavBar: React.FC<NavBarPropTypes> = (props) => {
 
 const mapStateToProps = (state: StateTypes) => ({
     userType: state.userType,
+    cities: state.cities, 
+    skills: state.skills
 });
   
 const mapDispatchToProps = (dispatch: any) => bindActionCreators({ 
@@ -111,7 +119,10 @@ const mapDispatchToProps = (dispatch: any) => bindActionCreators({
     setLoading, 
     getJobDetails,
     setSearchType,
-    fetchCompanySearchData 
+    fetchCompanySearchData,
+    fetchCities,
+    fetchSkills,
+    clearStates
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar);

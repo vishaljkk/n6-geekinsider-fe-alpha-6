@@ -39,7 +39,7 @@ const SingleWidget: React.FC<any> = (props) => {
     )
 }
 
-const SearchResults: React.FC<any> = (props) => {
+const SearchResults: React.FC<{ data: JobObjectTypes[] }> = (props) => {
     const { data } = props;
     const [selectedData, setSelectedData] = useState({});
 
@@ -52,9 +52,9 @@ const SearchResults: React.FC<any> = (props) => {
             {data.length ? <Row>
                 <Col span={8} xs={{ span: 12 }} sm={{ span: 10 }} md={{ span: 8 }} lg={{ span: 6 }}>
                     <div className="search-result-widget-container">
-                        {data?.map((itm: JobObjectTypes, index: number) => 
+                        {data?.map((itm: any, index: number) => 
                             <SingleWidget 
-                                key={JSON.stringify(data)}
+                                key={itm}
                                 itm={itm} 
                                 index={index} 
                                 selectedData={selectedData}

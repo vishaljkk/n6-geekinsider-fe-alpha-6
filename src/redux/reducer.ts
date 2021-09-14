@@ -60,6 +60,8 @@ const rootReducer = (state: StateTypes = initialState, action: actionTypes) => {
             return { ...state, cities: action.payload };
         case 'SET_SKILLS':
             return { ...state, skills: action.payload };
+        case 'CLEAR_STATE':
+            return { ...initialState };
         default:
             return { ...state };
     }

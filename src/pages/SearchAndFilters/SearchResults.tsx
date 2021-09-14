@@ -55,7 +55,7 @@ const SearchResults: React.FC<SearchResultsTypes> = (props) => {
                     <div className="search-result-widget-container">
                         {data.map((itm: JobObjectTypes, index: number) => 
                             <SingleWidget 
-                                key={JSON.stringify(data)}
+                                key={itm?.jobslug}
                                 itm={itm} 
                                 index={index} 
                                 selectedData={selectedData}

@@ -19,7 +19,7 @@ const RecommCandidateWidget: React.FC<RecommCandidateWidgetPropTypes> = (props) 
     const history = useHistory();
 
     useEffect(() => {
-        fetchRecommendedJobs();
+        if (recommendedJobs.length === 0) fetchRecommendedJobs();
     }, [])
 
     const handleCardClick = (jobslug: string) => {

@@ -72,6 +72,10 @@
 
 .recommended-candidates-widget {
     .recommended-candidates-widget-container {
+        .recommended-candidate__widget__card {
+            width: 300px;
+            flex-wrap: wrap;
+        }
         display: flex;
         flex-wrap: wrap;
         .ant-card {

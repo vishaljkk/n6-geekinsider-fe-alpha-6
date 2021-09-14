@@ -1,5 +1,5 @@
 .single-widget {
-    width: 300px;
+    width: 336px;
     flex-wrap: wrap;
     .ant-card {
         margin: 5px;
@@ -24,7 +24,7 @@
     .single-widget__footer-section {
         margin: 15px 0 0 0;
         display: flex;
-        gap: 15px;
+        justify-content: space-around;
         .icon {
             width: 17px;
             height: 17px;
@@ -37,9 +37,15 @@
             right: 10px;
             bottom: 5px;
         }
+        div {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
     }
     .single-widget__tag-section {
         display: flex;
         flex-wrap: wrap;
+        gap: 5px 0;
     }
 }

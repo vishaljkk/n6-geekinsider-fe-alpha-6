@@ -14,7 +14,7 @@ const TrendingJobs: React.FC<TrendingJobsPropTypes> = (props) => {
     const history = useHistory();
 
     useEffect(() => {
-        fetchTrendingJobs();
+        if (trendingJobs.length === 0) fetchTrendingJobs();
     }, [])
 
     const handleCardClick = (jobslug: string) => {

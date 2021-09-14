@@ -99,7 +99,7 @@ const pages = [
 
 const Routes: React.FC<AppTypes> = (props) => {
 
-    const { isAuth, location, setIsAuth, loading, fetchSkills, fetchCities } = props;
+    const { isAuth, location, setIsAuth, loading, fetchSkills, fetchCities, cities, skills } = props;
     const invalidLocations = ['', '/', '/login', '/signup'];
     const history = useHistory();
     
@@ -110,8 +110,8 @@ const Routes: React.FC<AppTypes> = (props) => {
                 try {
                     const type = resp.signInUserSession.idToken.payload['cognito:groups'][0] === 'userRecruiter' ? 'recruiter' : 'candidate';
                     setUserType(type);
-                    fetchCities();
-                    fetchSkills();
+                    cities.length === 0 && fetchCities();
+                    skills.length === 0 && fetchSkills();
                 }
                 catch(e) {
                     setIsAuth(false);
@@ -164,7 +164,9 @@ const Routes: React.FC<AppTypes> = (props) => {
 const mapStateToProps = (state: StateTypes) => ({
     userType: state.userType,
     isAuth: state.isAuth,
-    loading: state.loading
+    loading: state.loading,
+    skills: state.skills,
+    cities: state.cities
 });
   
 const mapDispatchToProps = (dispatch: any) => bindActionCreators({

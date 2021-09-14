@@ -47,6 +47,11 @@
                 text-overflow: ellipsis;
             }
         }
+        div {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
     }
     .single-widget__footer-section {
         margin: 15px 0 0 0;
