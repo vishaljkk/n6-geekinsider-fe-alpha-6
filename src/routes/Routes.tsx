@@ -14,7 +14,6 @@ const LandingPage = lazy(() => import('../pages/LandingPage'));
 const NavBar = lazy(() => import('../components/NavBar'));
 const SearchResult = lazy(() => import('../pages/SearchAndFilters'));
 const RecruiterSearch = lazy(() => import('../pages/Recruiter/RecruiterSearch'));
-const Messages = lazy(() => import('../pages/Messages'));
 const CandidateProfile = lazy(() => import('../pages/Candidate/CandidateProfile'));
 const RecruiterProfile = lazy(() => import('../pages/Recruiter/RecruiterProfile'));
 const CandidateJobDetail = lazy(() => import('../pages/Candidate/CandidateJobDetail'));
@@ -29,11 +28,6 @@ const pages = [
     {
         pageLink: '/home',
         view: LandingPage,
-        showNavbar: true,
-    },
-    {
-        pageLink: '/messages',
-        view: Messages,
         showNavbar: true,
     },
     {

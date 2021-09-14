@@ -1,3 +1,4 @@
+import React from 'react';
 import { Card, Avatar } from 'antd';
 import { QuickProfilePropTypes } from './types';
 import './QuickProfileWidget.scss';

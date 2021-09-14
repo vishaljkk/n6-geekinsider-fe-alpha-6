@@ -33,12 +33,6 @@ const RecruiterCandidateDetails: React.FC<RecruiterCandidateDetailsPropTypes> = 
         gitInfo
     } = recruiterCandidateDetails;
 
-    const handleCancel = () => history.goBack();
-
-    const handleRejectCandidate = () => {
-
-    }
-
     useEffect(() => {
         fetchCandidateDetails(match.params.slug);
     }, [])
@@ -54,7 +48,6 @@ const RecruiterCandidateDetails: React.FC<RecruiterCandidateDetailsPropTypes> = 
                     <Button type="primary" href={getWhatsAppUrl(whatsappNumber, name)} target="_blank">
                         <FaWhatsapp className="whatsapp-icon" />&nbsp;Connect
                     </Button>
-                    {/* <Button onClick={handleRejectCandidate}>Reject</Button> */}
                 </div>
             </section>
             <section className="tags-section">

@@ -28,9 +28,6 @@ const JobPostingForm: React.FC<JobPostingFormPropTypes> = (props) => {
         history.push('/recruiter/profile');
     }
 
-	const onFinishFailed = (errorInfo: any) => {
-	};
-
     const handleCancel = () => {
         form.resetFields();
         history.push('/recruiter/profile');
@@ -47,7 +44,6 @@ const JobPostingForm: React.FC<JobPostingFormPropTypes> = (props) => {
                 wrapperCol={{ span: 12 }}
                 initialValues={{ remember: true }}
                 onFinish={onFinish}
-                onFinishFailed={onFinishFailed}
             >
                 <Form.Item
                     label="Job title"

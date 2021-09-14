@@ -28,7 +28,7 @@ const SingleWidget: React.FC<any> = (props) => {
                 </div>
             </section>
             <section className="tags-section">
-                {skills.map((itm: string) => <span className="tags">{itm}</span>)}
+                {skills.map((itm: string) => <span key={itm} className="tags">{itm}</span>)}
             </section>
             <section className="footer-section">
                 <div><MdLocationOn style={iconStyles} />{jobLocation}</div>
@@ -55,6 +55,7 @@ const SearchResults: React.FC<SearchResultsTypes> = (props) => {
                     <div className="search-result-widget-container">
                         {data.map((itm: JobObjectTypes, index: number) => 
                             <SingleWidget 
+                                key={JSON.stringify(data)}
                                 itm={itm} 
                                 index={index} 
                                 selectedData={selectedData}

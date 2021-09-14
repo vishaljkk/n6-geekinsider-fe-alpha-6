@@ -26,9 +26,6 @@ const CandidateOnboarding: React.FC<CandidateOnboardingPropTypes> = (props) => {
         form.resetFields();
     }
 
-	const onFinishFailed = (errorInfo: object) => {
-	};
-
 	return (
         <div className="onboarding">
             <h2>Create your Candidate profile</h2>
@@ -39,7 +36,6 @@ const CandidateOnboarding: React.FC<CandidateOnboardingPropTypes> = (props) => {
                 wrapperCol={{ span: 12 }}
                 initialValues={{ remember: true }}
                 onFinish={onFinish}
-                onFinishFailed={onFinishFailed}
             >
                 <Form.Item
                     label="Full name"

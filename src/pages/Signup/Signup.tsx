@@ -68,10 +68,6 @@ const Signup: React.FC<SignupTypes> = (props) => {
 		}
 	};
 
-	const onFinishFailed = (errorInfo: object) => {
-		// console.error('Failed:', errorInfo);
-	};
-
 	const onActiveKeyChange = (val: any) => setActiveTab(val)
 
 	const openSignInModal = () => history.push('/login');
@@ -110,7 +106,6 @@ const Signup: React.FC<SignupTypes> = (props) => {
 							setUserDetail({ ...val });
 							setUserType('candidate');
 						}}
-						onFinishFailed={onFinishFailed}
 					>
 						<Form.Item
 							name="email"
@@ -148,7 +143,6 @@ const Signup: React.FC<SignupTypes> = (props) => {
 							setUserDetail({ ...val });
 							setUserType('recruiter');
 						}}
-						onFinishFailed={onFinishFailed}
 					>
 						<Form.Item
 							name="email"
@@ -182,7 +176,6 @@ const Signup: React.FC<SignupTypes> = (props) => {
 					<Form
 						name="Email verification"
 						onFinish={handleConfirmSignup}
-						onFinishFailed={onFinishFailed}
 					>
 						<Form.Item>
 							<Alert message="Verification pin successfully sent to your email" type="success" showIcon />

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router';
@@ -19,7 +19,9 @@ const LandingPage: React.FC<LandingPagePropTypes> = (props) => {
         Auth.currentAuthenticatedUser().then(resp => {
             const type = resp.signInUserSession.idToken.payload["cognito:groups"][0] === 'userCandidate' ? 'candidate' : 'recruiter';
             setUserType(type);
-        }).catch(error => {})
+        }).catch(error => {
+            // 
+        })
     }, [])
 
     const handleProfileClick = async () => {

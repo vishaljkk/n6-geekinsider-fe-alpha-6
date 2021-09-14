@@ -58,20 +58,6 @@ export const fetchProfileDetails = () => {
     }
 }
 
-export const fetchMessages = (section: string, id: string) => {
-    return (dispatch: DispatchType) => {
-        makeRequest.get('/api/message')
-            .then(resp => {
-                // dispatch({
-                //     type: 'SET_MESSAGES',
-                //     // payload: userType
-                // })
-            })
-            .catch(err => {
-            })
-    }
-}
-
 export const saveCandidateData = (values: CandidateSubmitTypes, callback: any) => {
     return (dispatch: DispatchType) => {
         dispatch({ type: 'SET_LOADING', payload: true })
