@@ -12,7 +12,7 @@ const SingleWidget: React.FC<SingleWidgetTypes> = (props) => {
     const { skills, jobTitle, name, handleClick } = props;
 
     return (
-        <Card hoverable onClick={() => handleClick(props)}>
+        <Card hoverable onClick={() => handleClick(props)} className="recommended-candidate__widget__card">
             <section className="each-widget">
                 <Avatar size={55}>{name[0]}</Avatar>
                 <div className="right-section">
@@ -32,12 +32,16 @@ const RecommenededCandidatesWidget: React.FC<RecommenededCandidatesWidgetTypes> 
     const history = useHistory();
 
     useEffect(() => {
-        fetchRecommendedCandidates();
+        if (recommendedCandidates.length === 0) fetchRecommendedCandidates();
     }, [])
 
     const handleClick = (values: SingleWidgetTypes) => {
         setRecruiterCandidateDetails(values);
         history.push(`/candidate/recommended/${values.aboutid}`);
+    }
+
+    const handleSeeMore = () => {
+        history.push('/recruiter/search')
     }
 
     return (
@@ -49,7 +53,7 @@ const RecommenededCandidatesWidget: React.FC<RecommenededCandidatesWidgetTypes> 
                         {recommendedCandidates.slice(0, 3).map((itm: any) => <SingleWidget key={itm} {...{...itm, handleClick}}/>)}
                     </div>
                     <div className="see-more-container">
-                        <Button>See more...</Button>
+                        <Button onClick={handleSeeMore}>See more...</Button>
                     </div>
                 </>
                 :

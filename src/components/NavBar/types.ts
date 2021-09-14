@@ -9,7 +9,12 @@ export interface NavBarPropTypes {
     setLoading: (e: boolean) => void,
     getJobDetails: (e: string) => void,
     setSearchType: (e: SearchType) => void,
-    fetchCompanySearchData: (e: string) => void
+    fetchCompanySearchData: (e: string) => void,
+    cities: string[],
+    skills: string[],
+    fetchCities: () => void,
+    fetchSkills: () => void,
+    clearStates: () => void
 }
 
 export interface RecruiterSkillSearchPropTypes {

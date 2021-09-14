@@ -53,7 +53,7 @@ const RecruiterSearchDetails: React.FC<any> = (props) => {
                 <div><MdHistory style={iconStyles} />{exp} year</div>
                 <div><FaGithub style={iconStyles} /><a href={generateGithubUrl(githubUrl)} target="_blank" rel="noreferrer">Github</a></div>
             </section>
-            <About>{about}</About>
+            <About title="About">{about}</About>
             <br/>
             <Card>
                 <div className="profile-footer">

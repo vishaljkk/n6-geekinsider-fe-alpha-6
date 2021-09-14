@@ -13,7 +13,7 @@ const CandidateLandingPage: React.FC<CandidateLandingPagePropTypes> = (props) =>
     const { handleProfileClick, fetchProfileDetails, profileDetails } = props;
 
     useEffect(() => {
-        fetchProfileDetails()
+        if (Object.keys(profileDetails).length === 0) fetchProfileDetails()
     }, [])
     
     return (

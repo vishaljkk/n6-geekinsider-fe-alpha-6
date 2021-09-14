@@ -15,7 +15,8 @@ export interface CandidateSubmitTypes {
     location: string,
     name: string,
     skills?: string[] | string,
-    whatsappNumber: string
+    whatsappNumber: string,
+    fetchCandidateDetails: (e: string) => void
 }
 
 export interface RecruiterOnboardingPropTypes {

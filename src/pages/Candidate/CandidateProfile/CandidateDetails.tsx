@@ -5,15 +5,16 @@ import { FaGithub } from 'react-icons/fa';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { StateTypes, fetchProfileDetails } from '../../../redux';
+import { StateTypes, fetchProfileDetails, fetchCandidateDetails } from '../../../redux';
 import { CandidateSubmitTypes } from '../../Onboarding/types';
 import { generateGithubUrl, iconStyles } from '../../../utils';
 import About from '../../../components/About';
 import './CandidateDetails.scss';
+import SkillSection from '../../../components/SkillSection';
 
 const CandidateDetails: React.FC<CandidateSubmitTypes> = (props) => {
     const [mappableSkills, setMappableSkills] = useState<string[]>([]);
-    const { about, name, skills, location, ctc, exp, githubUrl, whatsappNumber, jobTitle } = props;
+    const { about, name, skills, location, ctc, exp, githubUrl, whatsappNumber, jobTitle, fetchCandidateDetails } = props;
 
     useEffect(() => {
         if (skills) setMappableSkills(typeof skills === 'string' ? skills.split(',') : skills);
@@ -63,7 +64,8 @@ const mapStateToProps = (state: StateTypes) => ({
 });
 
 const mapDispatchToProps = (dispatch: any) => bindActionCreators({
-    fetchProfileDetails
+    fetchProfileDetails,
+    fetchCandidateDetails
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(CandidateDetails);
