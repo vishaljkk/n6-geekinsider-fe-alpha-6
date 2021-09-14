@@ -9,10 +9,16 @@ import './configureAmplify';
 import './App.scss';
 
 const Routes = lazy(() => import('./routes'));
- 
+
 const App: React.FC = () => {
   return (
-    <Suspense fallback={<div className="loader--global"><Loader className="loader--global" /></div>}>
+    <Suspense
+      fallback={
+        <div className="loader--global">
+          <Loader className="loader--global" />
+        </div>
+      }
+    >
       <ErrorBoundary>
         <Provider store={store}>
           <BrowserRouter>
@@ -22,6 +28,6 @@ const App: React.FC = () => {
       </ErrorBoundary>
     </Suspense>
   );
-}
+};
 
 export default App;

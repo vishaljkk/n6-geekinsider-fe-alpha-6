@@ -1,5 +1,5 @@
 // export interface JobWidgetPropTypes {
-//     jobTitle: string, 
+//     jobTitle: string,
 //     typeOfPosition: string,
 //     skills: any,
 //     officeLocations: string,
@@ -11,13 +11,13 @@
 // }
 
 export interface JobWidgetPropTypes {
-    jobTitle: string, 
-    skills: any, 
-    jobLocation: string, 
-    exp: number, 
-    ctc: number, 
-    companyName: string, 
-    jobslug: string,
-    onClick?: any
-    // onClick?: (e?: any) => ((e: string) => void)
+  jobTitle: string;
+  skills: any;
+  jobLocation: string;
+  exp: number;
+  ctc: number;
+  companyName: string;
+  jobslug: string;
+  onClick?: any;
+  // onClick?: (e?: any) => ((e: string) => void)
 }

@@ -1,73 +1,73 @@
 .applied-jobs {
-    margin: 20px;
-    .applied-jobs__heading {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        border: 1px solid #d6d6d6;
-        border-radius: 5px;
-        height: 50px;
-        margin-bottom: 10px;
-        .applied-jobs__job-title {
-            margin-left: 10px;
-        }
+  margin: 20px;
+  .applied-jobs__heading {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border: 1px solid #d6d6d6;
+    border-radius: 5px;
+    height: 50px;
+    margin-bottom: 10px;
+    .applied-jobs__job-title {
+      margin-left: 10px;
     }
-    .ant-card-body {
-        padding: 12px;
-    }
-    .applied-jobs__left {
-        .ant-card {
-            margin: 0;
-        }
-    }
-    .applied-jobs__right {
-        margin-left: 10px;
-        .candidate__profile__right {
-            margin: 0;
-            .ant-card {
-                margin: 0;
-            }
-        }
-    }
+  }
+  .ant-card-body {
+    padding: 12px;
+  }
+  .applied-jobs__left {
     .ant-card {
-        margin: 5px;
+      margin: 0;
     }
-    .single-widget__each-widget {
-        display: flex;
-        gap: 12px;
-        margin-bottom: 15px;
-        span {
-            flex-shrink: 0;
-        }
-        .right-section {
-            width: 75%;
-            h3 {
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-        }
+  }
+  .applied-jobs__right {
+    margin-left: 10px;
+    .candidate__profile__right {
+      margin: 0;
+      .ant-card {
+        margin: 0;
+      }
     }
-    .single-widget__footer-section {
-        margin: 15px 0 0 0;
-        display: flex;
-        gap: 15px;
-        .icon {
-            width: 17px;
-            height: 17px;
-            top: 3px;
-            position: relative;
-            margin-right: 5px;
-        }
-        .numbers-applied {
-            position: absolute;
-            right: 10px;
-            bottom: 5px;
-        }
+  }
+  .ant-card {
+    margin: 5px;
+  }
+  .single-widget__each-widget {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 15px;
+    span {
+      flex-shrink: 0;
     }
-    .single-widget__tag-section {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 5px 0;
+    .right-section {
+      width: 75%;
+      h3 {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
     }
+  }
+  .single-widget__footer-section {
+    margin: 15px 0 0 0;
+    display: flex;
+    gap: 15px;
+    .icon {
+      width: 17px;
+      height: 17px;
+      top: 3px;
+      position: relative;
+      margin-right: 5px;
+    }
+    .numbers-applied {
+      position: absolute;
+      right: 10px;
+      bottom: 5px;
+    }
+  }
+  .single-widget__tag-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px 0;
+  }
 }

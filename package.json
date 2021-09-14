@@ -30,19 +30,25 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint '**/*.{js,ts,tsx}'",
     "lint:fix": "npm run lint -- --fix",
-    "format": "prettier-eslint \"src/**/*.js\""
+    "lint": "eslint --ext js,jsx,ts,tsx --max-warnings 0 -f codeframe --cache --color src",
+    "format": "npm run prettier -- --write",
+    "prettier": "prettier \"**/*.+(json|yml|yaml|css|scss|ts|tsx|md|mdx)\"",
+    "validate": "npm run lint && npm run prettier -- --list-different && tsc",
+    "precommit": "lint-staged && tsc",
+    "typecheck": "tsc",
+    "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged npm run test -- --watchAll=false"
     }
   },
   "lint-staged": {
     "*.{js,ts,tsx}": [
       "npm run lint:fix",
-      "npm run test:staged"
+      "npm run test:staged",
+      "npm run format"
     ]
   },
   "browserslist": {
@@ -69,8 +75,13 @@
     "@typescript-eslint/eslint-plugin": "^4.31.1",
     "@typescript-eslint/parser": "^4.31.1",
     "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.25.1",
-    "husky": "^7.0.2",
-    "lint-staged": "^11.1.2"
+    "husky": "^4.3.8",
+    "lint-staged": "^11.1.2",
+    "prettier": "^2.4.0",
+    "prettier-eslint": "^13.0.0",
+    "prettier-eslint-cli": "^5.0.1"
   }
 }

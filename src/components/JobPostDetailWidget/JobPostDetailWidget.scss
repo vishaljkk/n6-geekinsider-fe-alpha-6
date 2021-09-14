@@ -1,41 +1,42 @@
 .job-posting-detail-widget {
-    .ant-card-body {
-        padding: 12px;
+  .ant-card-body {
+    padding: 12px;
+  }
+  margin: 20px 0;
+  display: flex;
+  flex-wrap: wrap;
+  // border: transparent;
+  box-shadow: 0 1px 2px -2px #00000029, 0 3px 6px 0 #0000001f,
+    0 5px 12px 4px #00000017;
+  border-radius: 5px;
+  .ant-card {
+    // margin: 5px;
+    width: 100%;
+  }
+  .each-widget {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    .right-section {
+      flex-grow: 1;
     }
+  }
+  .tags-section {
     margin: 20px 0;
     display: flex;
     flex-wrap: wrap;
-    // border: transparent;
-    box-shadow: 0 1px 2px -2px #00000029, 0 3px 6px 0 #0000001f, 0 5px 12px 4px #00000017;
-    border-radius: 5px;
-    .ant-card {
-        // margin: 5px;
-        width: 100%;
+    // gap: 5px;
+  }
+  .footer-section {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 25px;
+    margin: 20px 0;
+    .numbers-applied {
+      position: absolute;
+      right: 10px;
+      bottom: 5px;
     }
-    .each-widget {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
-        .right-section {
-            flex-grow: 1;
-        }
-    }
-    .tags-section {
-        margin: 20px 0;
-        display: flex;
-        flex-wrap: wrap;
-        // gap: 5px;
-    }
-    .footer-section {
-        display: flex;
-        justify-content: flex-start;
-        flex-wrap: wrap;
-        gap: 25px;
-        margin: 20px 0;
-        .numbers-applied {
-            position: absolute;
-            right: 10px;
-            bottom: 5px;
-        }
-    }
+  }
 }

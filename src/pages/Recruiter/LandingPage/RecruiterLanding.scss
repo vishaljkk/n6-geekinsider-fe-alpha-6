@@ -1,101 +1,100 @@
 .ant-card-body {
-    padding: 12px;
+  padding: 12px;
 }
 
 .recruiter-landing {
-    // display: flex;
-    // flex-wrap: wrap;
-    // margin: 20px;
-    display: grid;
-    grid-template-columns: 30% 70%;
-    gap: 50px;
-    margin: 20px;
-    .recruiter-landing__left {
-        width: 100%;
-        padding-top: 24px;
-    }
-    .recruiter-landing__right {
-        // margin-top: 20px;
-    }
+  // display: flex;
+  // flex-wrap: wrap;
+  // margin: 20px;
+  display: grid;
+  grid-template-columns: 30% 70%;
+  gap: 50px;
+  margin: 20px;
+  .recruiter-landing__left {
+    width: 100%;
+    padding-top: 24px;
+  }
+  .recruiter-landing__right {
+    // margin-top: 20px;
+  }
 }
 
 .landing-page-container {
-    .landing-right-column {
-        margin-top: 20px;
-    }
+  .landing-right-column {
+    margin-top: 20px;
+  }
 }
 
 .recent-chat-widget {
-    .recent-chat-widget-container {
-        padding: 5px 20px 0px 15px;
-        margin: 10px 0;
-        border: 1px solid #dcdcdc;
-        border-radius: 5px;
-        .each-chat {
-            cursor: pointer;
-            padding: 10px 0;
-            .each-chat-image {
-                padding: 5px;
-            }
-            .message-glimpse {
-                width: 93%;
-                padding: 0px 4px;
-                border-radius: 2px;
-                background-color: #f4f0ec;
-                border-bottom:2px solid #dcdcdc;
-            }
-            .each-chat-post-desc {
-                h3 {
-                    margin-bottom: 2px;
-                }
-                text-align: center;
-                .each-chat-post-link {
-                    width: 100%;
-                    padding: 0px 4px 6px 4px;
-                    border-radius: 2px;
-                    border-bottom: 2px solid #dcdcdc;
-                    &:hover {
-                        cursor: pointer;
-                        color: #1890ff;
-                    }
-                }
-            }
+  .recent-chat-widget-container {
+    padding: 5px 20px 0px 15px;
+    margin: 10px 0;
+    border: 1px solid #dcdcdc;
+    border-radius: 5px;
+    .each-chat {
+      cursor: pointer;
+      padding: 10px 0;
+      .each-chat-image {
+        padding: 5px;
+      }
+      .message-glimpse {
+        width: 93%;
+        padding: 0px 4px;
+        border-radius: 2px;
+        background-color: #f4f0ec;
+        border-bottom: 2px solid #dcdcdc;
+      }
+      .each-chat-post-desc {
+        h3 {
+          margin-bottom: 2px;
         }
+        text-align: center;
+        .each-chat-post-link {
+          width: 100%;
+          padding: 0px 4px 6px 4px;
+          border-radius: 2px;
+          border-bottom: 2px solid #dcdcdc;
+          &:hover {
+            cursor: pointer;
+            color: #1890ff;
+          }
+        }
+      }
     }
+  }
 }
 
-
 .see-more-container {
-    margin: 7px 0;
-    text-align: center;
+  margin: 7px 0;
+  text-align: center;
 }
 
 .recommended-candidates-widget {
-    .recommended-candidates-widget-container {
-        display: flex;
-        flex-wrap: wrap;
-        .ant-card {
-            margin: 5px;
-        }
-        .each-widget {
-            display: flex;
-            margin-bottom: 12px;
-            span {
-                flex-shrink: 0;
-            }
-            .right-section {
-                margin-left: 12px;
-                flex-grow: 1;
-                h3 {
-                    margin-bottom: 2px;
-                }
-            }
-        }
-        .tag-section {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px 0;
-            margin-bottom: 4px;
-        }
+  .recommended-candidates-widget-container {
+    display: flex;
+    flex-wrap: wrap;
+    .ant-card {
+      margin: 5px;
     }
+    .each-widget {
+      display: flex;
+      margin-bottom: 12px;
+      span {
+        flex-shrink: 0;
+      }
+      .right-section {
+        margin-left: 12px;
+        flex-grow: 1;
+        h3 {
+          margin-bottom: 2px;
+        }
+      }
+    }
+    .tag-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px 0;
+      margin-bottom: 4px;
+    }
+  }
 }

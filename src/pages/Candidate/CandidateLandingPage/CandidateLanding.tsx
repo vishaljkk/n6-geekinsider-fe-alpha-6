@@ -9,32 +9,45 @@ import { fetchProfileDetails, StateTypes } from '../../../redux';
 import { CandidateLandingPagePropTypes } from '.';
 import './CandidateLandingPage.scss';
 
-const CandidateLandingPage: React.FC<CandidateLandingPagePropTypes> = (props) => {
-    const { handleProfileClick, fetchProfileDetails, profileDetails } = props;
+const CandidateLandingPage: React.FC<CandidateLandingPagePropTypes> = (
+  props
+) => {
+  const { handleProfileClick, fetchProfileDetails, profileDetails } = props;
 
-    useEffect(() => {
-        fetchProfileDetails()
-    }, [])
-    
-    return (
-            <div className="candidate-landing">
-                <div className="candidate-landing__left">
-                    <QuickProfileWidget onClick={handleProfileClick} title={profileDetails.name} subtitle={profileDetails.jobTitle}/>
-                </div>
-                <div className="candidate-landing__right">
-                    <RecommCandidateWidget />
-                    <TopTrending />
-                </div>
-            </div>
-    )
-}
+  useEffect(() => {
+    fetchProfileDetails();
+  }, []);
+
+  return (
+    <div className="candidate-landing">
+      <div className="candidate-landing__left">
+        <QuickProfileWidget
+          onClick={handleProfileClick}
+          title={profileDetails.name}
+          subtitle={profileDetails.jobTitle}
+        />
+      </div>
+      <div className="candidate-landing__right">
+        <RecommCandidateWidget />
+        <TopTrending />
+      </div>
+    </div>
+  );
+};
 
 const mapStateToProps = (state: StateTypes) => ({
-    profileDetails: state.profileDetails
+  profileDetails: state.profileDetails
 });
 
-const mapDispatchToProps = (dispatch: any) => bindActionCreators({
-    fetchProfileDetails
-}, dispatch);
+const mapDispatchToProps = (dispatch: any) =>
+  bindActionCreators(
+    {
+      fetchProfileDetails
+    },
+    dispatch
+  );
 
-export default connect(mapStateToProps, mapDispatchToProps)(CandidateLandingPage);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CandidateLandingPage);

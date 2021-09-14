@@ -1,12 +1,12 @@
-import { CandidateProfileDetailsTypes, JobObjectTypes } from "../../../redux";
+import { CandidateProfileDetailsTypes, JobObjectTypes } from '../../../redux';
 
 export interface CandidateLandingPagePropTypes {
-    handleProfileClick: () => void, 
-    fetchProfileDetails: () => void, 
-    profileDetails: CandidateProfileDetailsTypes
+  handleProfileClick: () => void;
+  fetchProfileDetails: () => void;
+  profileDetails: CandidateProfileDetailsTypes;
 }
 
 export interface TrendingJobsPropTypes {
-    trendingJobs: JobObjectTypes[], 
-    fetchTrendingJobs: () => void
+  trendingJobs: JobObjectTypes[];
+  fetchTrendingJobs: () => void;
 }

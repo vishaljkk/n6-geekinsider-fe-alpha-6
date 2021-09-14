@@ -1,5 +1,5 @@
 export interface QuickProfilePropTypes {
-    title?: string, 
-    subtitle?: string
-    onClick?: any
+  title?: string;
+  subtitle?: string;
+  onClick?: any;
 }

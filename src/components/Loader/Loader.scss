@@ -1,9 +1,9 @@
-.loader--generic { 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: calc(100vh - 58px);
-    .loader__font {
-        font-size: 24; 
-    }
+.loader--generic {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 58px);
+  .loader__font {
+    font-size: 24;
+  }
 }

@@ -1,2 +1,2 @@
-export {default} from './LandingPage';
+export { default } from './LandingPage';
 export * from './types';

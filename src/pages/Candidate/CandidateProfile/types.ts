@@ -1,5 +1,5 @@
 export interface ProfilePropsTypes {
-    profileDetails: any,
-    fetchProfileDetails: any,
-    loading: boolean
+  profileDetails: any;
+  fetchProfileDetails: any;
+  loading: boolean;
 }

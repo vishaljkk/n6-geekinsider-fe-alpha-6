@@ -1,56 +1,57 @@
 .recruiter-search-details {
-    margin: 20px 0 0 10px;
-    padding: 12px;
-    border: 1px solid #dcdcdc;
-    border-radius: 5px;
-    border: transparent;
-    box-shadow: 0 1px 2px -2px #00000029, 0 3px 6px 0 #0000001f, 0 5px 12px 4px #00000017;
-    .each-widget {
-        display: flex;
-        flex-wrap: wrap;
-        .action-buttons {
-            display: flex;
-            gap: 10px;
-            .ant-btn-primary {
-                max-width: 150px;
-            }
-            .whatsapp-icon {
-                position: relative;
-                top: 2px;
-                height: 15px;
-                width: 15px;
-            }
-        }
-        .right-section {
-            flex-grow: 1;
-        }
+  margin: 20px 0 0 10px;
+  padding: 12px;
+  border: 1px solid #dcdcdc;
+  border-radius: 5px;
+  border: transparent;
+  box-shadow: 0 1px 2px -2px #00000029, 0 3px 6px 0 #0000001f,
+    0 5px 12px 4px #00000017;
+  .each-widget {
+    display: flex;
+    flex-wrap: wrap;
+    .action-buttons {
+      display: flex;
+      gap: 10px;
+      .ant-btn-primary {
+        max-width: 150px;
+      }
+      .whatsapp-icon {
+        position: relative;
+        top: 2px;
+        height: 15px;
+        width: 15px;
+      }
     }
-    .tags-section {
-        margin: 20px 0;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 5px 0;
+    .right-section {
+      flex-grow: 1;
     }
-    .footer-section {
-        display: flex;
-        justify-content: flex-start;
-        flex-wrap: wrap;
-        gap: 25px;
-        margin: 20px 0;
-        .numbers-applied {
-            position: absolute;
-            right: 10px;
-            bottom: 5px;
-        }
+  }
+  .tags-section {
+    margin: 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px 0;
+  }
+  .footer-section {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 25px;
+    margin: 20px 0;
+    .numbers-applied {
+      position: absolute;
+      right: 10px;
+      bottom: 5px;
     }
-    .profile-footer {
-        display: grid;
-        grid-template-columns: 60% 40%;
-        .skills-section {
-            margin: 0 15px;
-        }
-        .github-repo-section {
-            margin: 0 15px;
-        }
+  }
+  .profile-footer {
+    display: grid;
+    grid-template-columns: 60% 40%;
+    .skills-section {
+      margin: 0 15px;
     }
+    .github-repo-section {
+      margin: 0 15px;
+    }
+  }
 }
