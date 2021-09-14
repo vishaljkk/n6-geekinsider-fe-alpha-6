@@ -6,13 +6,12 @@ import { useHistory, useLocation } from 'react-router';
 
 import { fetchSkillSearch, StateTypes, setSearchType, fetchRecruiterSkillSearch } from '../../redux';
 import { RecruiterSkillSearchPropTypes } from './types';
-import { skills } from '../../utils';
 import './Navbar.scss';
 
 const { Option } = Select;
 
 const RecruiterSkillSearch: React.FC<RecruiterSkillSearchPropTypes> = (props) => {
-    const { fetchSkillSearch, setSearchType, userType, fetchRecruiterSkillSearch } = props;
+    const { fetchSkillSearch, setSearchType, userType, fetchRecruiterSkillSearch, skills } = props;
     const history = useHistory();
     const location = useLocation();
 
@@ -55,7 +54,8 @@ const RecruiterSkillSearch: React.FC<RecruiterSkillSearchPropTypes> = (props) =>
 
 const mapStateToProps = (state: StateTypes) => ({
     skillSearch: state.skillSearch,
-    userType: state.userType
+    userType: state.userType,
+    skills: state.skills
 });
   
 const mapDispatchToProps = (dispatch: any) => bindActionCreators({ 

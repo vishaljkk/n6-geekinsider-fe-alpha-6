@@ -3,7 +3,7 @@ import { Switch, Route, Redirect, useHistory } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'; 
 
-import { setIsAuth, setUserType, StateTypes } from '../redux';
+import { fetchCities, fetchSkills, setIsAuth, setUserType, StateTypes } from '../redux';
 import { AppTypes } from './types';
 import { isAuthenticated } from '../utils';
 import Loader from '../components/Loader';
@@ -46,7 +46,7 @@ const pages = [
         showNavbar: false,
     },
     {
-        pageLink: 'candidate/search',
+        pageLink: '/search',
         view: SearchResult,
         showNavbar: true,
     },
@@ -99,7 +99,7 @@ const pages = [
 
 const Routes: React.FC<AppTypes> = (props) => {
 
-    const { isAuth, location, setIsAuth, loading } = props;
+    const { isAuth, location, setIsAuth, loading, fetchSkills, fetchCities } = props;
     const invalidLocations = ['', '/', '/login', '/signup'];
     const history = useHistory();
     
@@ -110,6 +110,8 @@ const Routes: React.FC<AppTypes> = (props) => {
                 try {
                     const type = resp.signInUserSession.idToken.payload['cognito:groups'][0] === 'userRecruiter' ? 'recruiter' : 'candidate';
                     setUserType(type);
+                    fetchCities();
+                    fetchSkills();
                 }
                 catch(e) {
                     setIsAuth(false);
@@ -167,7 +169,9 @@ const mapStateToProps = (state: StateTypes) => ({
   
 const mapDispatchToProps = (dispatch: any) => bindActionCreators({
     setIsAuth, 
-    setUserType
+    setUserType,
+    fetchCities,
+    fetchSkills
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Routes);

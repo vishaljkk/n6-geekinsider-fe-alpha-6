@@ -310,3 +310,31 @@ export const fetchRecruiterSkillSearch = (skills: string[]) => {
             });
     }
 }
+
+export const fetchCities = () => {
+    return (dispatch: DispatchType) => {
+        dispatch({ type: 'SET_LOADING', payload: true });
+        makeRequest.get('/api/users/cities')
+            .then(data => {
+                dispatch({ type: 'SET_CITIES', payload: data?.cities });
+                dispatch({ type: 'SET_LOADING', payload: false });
+            })
+            .catch((error) => {
+                dispatch({ type: 'SET_LOADING', payload: false });
+            });
+    }
+}
+
+export const fetchSkills = () => {
+    return (dispatch: DispatchType) => {
+        dispatch({ type: 'SET_LOADING', payload: true });
+        makeRequest.get('/api/users/skills')
+            .then(data => {
+                dispatch({ type: 'SET_SKILLS', payload: data?.skills });
+                dispatch({ type: 'SET_LOADING', payload: false });
+            })
+            .catch((error) => {
+                dispatch({ type: 'SET_LOADING', payload: false });
+            });
+    }
+}

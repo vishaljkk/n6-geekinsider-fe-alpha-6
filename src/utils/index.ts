@@ -1,8 +1,6 @@
 import * as CSS from 'csstype';
 import { Auth } from 'aws-amplify';
 
-export const skills = ['React', 'Angular', 'Vue', 'Ember', 'NodeJS', 'JavaScript', 'HTML', 'CSS', 'SASS'];
-export const cities = ['Banglore', 'Pune', 'Chennai', 'Hyderabad', 'Kolkata', 'Mumbai', 'Delhi', 'Indore', 'Vadodara', 'Ahemdabad'];
 export const industryTypes = ['Information Technology & Services', 'Hospital & Health Care', 'Construction', 'Retail', 'Education Management', 'Financial Services', 'Accounting', 'Computer Software', 'Higher Education', 'Automotive'];
 
 export const iconStyles: CSS.Properties<string | number> = {
@@ -26,6 +24,8 @@ export const isAuthenticated = async () => {
             }
         })
 }
+
+export const generateGithubUrl = (userName: string) => (`https://github.com/${userName}`)
 
 export const whatsAppBaseUrl = 'https://wa.me';
 

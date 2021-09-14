@@ -3,7 +3,6 @@ import { Form, Input, Button, Select } from 'antd';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'; 
 
-import { skills, cities } from '../../utils';
 import { saveCandidateData, StateTypes } from '../../redux';
 import { CandidateOnboardingPropTypes, CandidateSubmitTypes } from './types';
 import './onboarding.scss';
@@ -11,7 +10,7 @@ import './onboarding.scss';
 const { Option } = Select;
 
 const CandidateOnboarding: React.FC<CandidateOnboardingPropTypes> = (props) => {
-    const { history, saveCandidateData } = props;
+    const { history, saveCandidateData, skills, cities } = props;
     const [form] = Form.useForm();
 
 	const onFinish = (values: CandidateSubmitTypes) => {
@@ -167,7 +166,9 @@ const CandidateOnboarding: React.FC<CandidateOnboardingPropTypes> = (props) => {
 }
 
 const mapStateToProps = (state: StateTypes) => ({
-    userType: state.userType
+    userType: state.userType,
+    skills: state.skills,
+    cities: state.cities
 });
 
 const mapDispatchToProps = (dispatch: any) => bindActionCreators({

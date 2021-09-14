@@ -16,5 +16,6 @@ export interface RecruiterSkillSearchPropTypes {
     userType: UserTypeTypes, 
     fetchSkillSearch: (e: string[]) => void,
     setSearchType: (e: SearchType) => void,
-    fetchRecruiterSkillSearch: (e: string[]) => void
+    fetchRecruiterSkillSearch: (e: string[]) => void,
+    skills: string[]
 }

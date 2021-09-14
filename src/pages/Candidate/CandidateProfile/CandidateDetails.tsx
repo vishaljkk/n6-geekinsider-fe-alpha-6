@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 
 import { StateTypes, fetchProfileDetails } from '../../../redux';
 import { CandidateSubmitTypes } from '../../Onboarding/types';
-import { iconStyles } from '../../../utils';
+import { generateGithubUrl, iconStyles } from '../../../utils';
 import About from '../../../components/About';
 import './CandidateDetails.scss';
 
@@ -35,7 +35,7 @@ const CandidateDetails: React.FC<CandidateSubmitTypes> = (props) => {
                     <div><MdLocationOn style={iconStyles} />{location}</div>
                     <div title={`${ctc} lacs per annum`}><MdMonetizationOn style={iconStyles} />{ctc} LPA</div>
                     <div><MdHistory style={iconStyles} />{exp} year</div>
-                    <div><FaGithub style={iconStyles} /><a href={githubUrl} target="_blank" rel="noreferrer">Github</a></div>
+                    <div><FaGithub style={iconStyles} /><a href={generateGithubUrl(githubUrl)} target="_blank" rel="noreferrer">Github</a></div>
                 </section>
                 <About title="About">{about}</About>
                 <br/>

@@ -5,7 +5,7 @@ import { FaGithub, FaWhatsapp } from 'react-icons/fa';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { getWhatsAppUrl, iconStyles } from '../../../../utils';
+import { generateGithubUrl, getWhatsAppUrl, iconStyles } from '../../../../utils';
 import About from '../../../../components/About';
 import { StateTypes, fetchCandidateDetails } from '../../../../redux';
 import './RecruiterSearchDetails.scss';
@@ -51,7 +51,7 @@ const RecruiterSearchDetails: React.FC<any> = (props) => {
                 <div><MdLocationOn style={iconStyles} />{location}</div>
                 <div title={`${ctc} lacs per annum`}><MdMonetizationOn style={iconStyles} />{ctc} LPA</div>
                 <div><MdHistory style={iconStyles} />{exp} year</div>
-                <div><FaGithub style={iconStyles} /><a href={githubUrl} target="_blank" rel="noreferrer">Github</a></div>
+                <div><FaGithub style={iconStyles} /><a href={generateGithubUrl(githubUrl)} target="_blank" rel="noreferrer">Github</a></div>
             </section>
             <About>{about}</About>
             <br/>
