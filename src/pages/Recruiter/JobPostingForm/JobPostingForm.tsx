@@ -1,3 +1,4 @@
+import React from 'react';
 import { Form, Input, Button, Select } from 'antd';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'; 
@@ -27,9 +28,6 @@ const JobPostingForm: React.FC<JobPostingFormPropTypes> = (props) => {
         history.push('/recruiter/profile');
     }
 
-	const onFinishFailed = (errorInfo: any) => {
-	};
-
     const handleCancel = () => {
         form.resetFields();
         history.push('/recruiter/profile');
@@ -46,7 +44,6 @@ const JobPostingForm: React.FC<JobPostingFormPropTypes> = (props) => {
                 wrapperCol={{ span: 12 }}
                 initialValues={{ remember: true }}
                 onFinish={onFinish}
-                onFinishFailed={onFinishFailed}
             >
                 <Form.Item
                     label="Job title"

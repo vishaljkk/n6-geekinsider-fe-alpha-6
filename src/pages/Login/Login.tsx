@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Form, Input, Button, Modal, Tabs, notification } from 'antd';
 import { Auth } from 'aws-amplify'
 import { bindActionCreators } from 'redux';
@@ -16,9 +16,6 @@ const Login: React.FC<LoginPropsTypes> = (props) => {
 
 	const { setUserType, history, setIsAuth } = props;
 	const [loginLoading, setLoginLoading] = useState<boolean>(false);
-
-	const onFinishFailed = (errorInfo: object) => {
-	};
 
 	const signInFunc = async (values: LoginFormSubmitTypes) => {
 		const { username, password } = values;
@@ -73,7 +70,6 @@ const Login: React.FC<LoginPropsTypes> = (props) => {
 					<Form
 						name="basic"
 						onFinish={handleCandidateSubmit}
-						onFinishFailed={onFinishFailed}
 					>
 						<Form.Item
 							name="username"
@@ -112,7 +108,6 @@ const Login: React.FC<LoginPropsTypes> = (props) => {
 					<Form
 						name="basic"
 						onFinish={handleRecruiterSubmit}
-						onFinishFailed={onFinishFailed}
 					>
 						<Form.Item
 							name="username"

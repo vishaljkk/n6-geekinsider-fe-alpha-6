@@ -1,5 +1,4 @@
-import { useEffect } from 'react';
-import { Radio } from 'antd';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -10,21 +9,12 @@ import './RecruiterSearch.scss';
 const RecruiterSearch: React.FC<any> = (props) => {
     const { skillSearch, searchType, recommendedCandidates, setSearchType, fetchRecommendedCandidates } = props;
 
-    const handleRadioChange = (e: any) => {
-        const value = e.target.value;
-        setSearchType(value);
-    }
-
     const returnData = (type: SearchType) => {
         switch (type) {
-            // case 'companySearch':
-            //     return companySearch;
             case 'skillSearch':
                 return skillSearch;
             case 'recommended':
                 return recommendedCandidates;
-            // case 'trending':
-            //     return trendingJobs;
             default:
                 return recommendedCandidates;
         }

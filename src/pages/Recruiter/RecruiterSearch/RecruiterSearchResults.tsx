@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Row, Card, Col, Avatar, Empty } from 'antd';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -27,7 +27,7 @@ const SingleWidget: React.FC<any> = (props) => {
                 </div>
             </section>
             <section className="tags-section">
-                {skills.map((itm: string) => <span className="tags">{itm}</span>)}
+                {skills.map((itm: string) => <span key={itm} className="tags">{itm}</span>)}
             </section>
             <section className="footer-section">
                 <div><MdLocationOn style={iconStyles} />{location}</div>
@@ -54,6 +54,7 @@ const SearchResults: React.FC<any> = (props) => {
                     <div className="search-result-widget-container">
                         {data?.map((itm: JobObjectTypes, index: number) => 
                             <SingleWidget 
+                                key={JSON.stringify(data)}
                                 itm={itm} 
                                 index={index} 
                                 selectedData={selectedData}

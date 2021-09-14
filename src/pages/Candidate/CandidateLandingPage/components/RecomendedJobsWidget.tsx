@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Button, Empty } from 'antd';
 import { useHistory } from 'react-router-dom';
 import { bindActionCreators } from 'redux';

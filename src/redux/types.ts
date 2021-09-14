@@ -5,7 +5,6 @@ export interface StateTypes {
     userType: UserTypeTypes | '',
     isAuth: boolean,
     profileDetails: any,
-    messages: object,
     loading: boolean,
     recentJobs: any,
     skillSearch: JobObjectTypes[],

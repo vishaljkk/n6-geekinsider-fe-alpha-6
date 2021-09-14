@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, Progress } from 'antd';
 import { MdLocationOn, MdMonetizationOn, MdHistory } from "react-icons/md";
 import { FaGithub } from 'react-icons/fa';
@@ -35,7 +35,7 @@ const CandidateDetails: React.FC<CandidateSubmitTypes> = (props) => {
                     <div><MdLocationOn style={iconStyles} />{location}</div>
                     <div title={`${ctc} lacs per annum`}><MdMonetizationOn style={iconStyles} />{ctc} LPA</div>
                     <div><MdHistory style={iconStyles} />{exp} year</div>
-                    <div><FaGithub style={iconStyles} /><a href={githubUrl} target="_blank">Github</a></div>
+                    <div><FaGithub style={iconStyles} /><a href={githubUrl} target="_blank" rel="noreferrer">Github</a></div>
                 </section>
                 <About title="About">{about}</About>
                 <br/>

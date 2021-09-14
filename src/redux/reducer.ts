@@ -4,7 +4,6 @@ const initialState: StateTypes = {
     userType: '',
     isAuth: false,
     profileDetails: {},
-    messages: {},
     loading: false,
     recentJobs: [],
     skillSearch: [],

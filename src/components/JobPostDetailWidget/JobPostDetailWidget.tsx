@@ -1,3 +1,4 @@
+import React from 'react';
 import { Card, Button, Avatar } from 'antd';
 import { MdLocationOn, MdMonetizationOn, MdHistory } from "react-icons/md";
 import { bindActionCreators } from 'redux';
@@ -18,7 +19,7 @@ const JobPostDetailWidget: React.FC<any> = (props) => {
     const mappableSkills = typeof skills === 'string' ? skills.split(',') : skills;
 
     const handleApply = () => {
-        jobslug && applyForJob(jobslug, () => {});
+        jobslug && applyForJob(jobslug);
     }
     
     return (
@@ -37,7 +38,7 @@ const JobPostDetailWidget: React.FC<any> = (props) => {
                     </div>
                 </section>  
                 <section className="tags-section">
-                    {mappableSkills.map((itm: string) => <span className="tags">{itm}</span>)}
+                    {mappableSkills.map((itm: string) => <span className="tags" key={itm}>{itm}</span>)}
                 </section>
                 <section className="footer-section">
                     <div><MdLocationOn style={iconStyles} />{jobLocation}</div>

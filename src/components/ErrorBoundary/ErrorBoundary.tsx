@@ -1,4 +1,4 @@
-import { Component, ErrorInfo } from "react";
+import React, { Component, ErrorInfo } from "react";
 import { Result, Button } from 'antd';
 import { StateTypes, PropsTypes } from '.';
 
