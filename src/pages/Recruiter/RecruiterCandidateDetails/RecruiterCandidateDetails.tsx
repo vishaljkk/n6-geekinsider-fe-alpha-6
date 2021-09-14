@@ -6,7 +6,7 @@ import { useHistory } from 'react-router';
 import { MdLocationOn, MdMonetizationOn, MdHistory } from "react-icons/md";
 import { FaGithub, FaWhatsapp } from 'react-icons/fa';
 
-import { getWhatsAppUrl, iconStyles } from '../../../utils';
+import { generateGithubUrl, getWhatsAppUrl, iconStyles } from '../../../utils';
 import { fetchCandidateDetails, StateTypes } from '../../../redux';
 import { RecruiterCandidateDetailsPropTypes } from './types';
 import About from '../../../components/About';
@@ -57,7 +57,7 @@ const RecruiterCandidateDetails: React.FC<RecruiterCandidateDetailsPropTypes> = 
                 <div><MdLocationOn style={iconStyles} />{location}</div>
                 <div title={`${ctc} lacs per annum`}><MdMonetizationOn style={iconStyles} />{ctc} LPA</div>
                 <div><MdHistory style={iconStyles} />{exp} year</div>
-                <div><FaGithub style={iconStyles} /><a href={githubUrl} target="_blank" rel="noreferrer">Github</a></div>
+                <div><FaGithub style={iconStyles} /><a href={generateGithubUrl(githubUrl)} target="_blank" rel="noreferrer">Github</a></div>
             </section>
             <About>{about}</About>
             <br/>

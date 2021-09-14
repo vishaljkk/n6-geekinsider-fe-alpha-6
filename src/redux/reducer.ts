@@ -15,7 +15,9 @@ const initialState: StateTypes = {
     recruiterCandidateDetails: {},
     searchType: 'recommended',
     companySearch: [],
-    appliedCandidates: []
+    appliedCandidates: [],
+    skills: [],
+    cities: []
 };
 
 const rootReducer = (state: StateTypes = initialState, action: actionTypes) => {
@@ -54,6 +56,10 @@ const rootReducer = (state: StateTypes = initialState, action: actionTypes) => {
             return { ...state, companySearch: action.payload };
         case 'SET_APPLIED_CANDIDATES':
             return { ...state, appliedCandidates: action.payload };
+        case 'SET_CITIES':
+            return { ...state, cities: action.payload };
+        case 'SET_SKILLS':
+            return { ...state, skills: action.payload };
         default:
             return { ...state };
     }

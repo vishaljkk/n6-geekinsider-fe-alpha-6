@@ -1,6 +1,8 @@
 export interface CandidateOnboardingPropTypes {
     history: any,
-    saveCandidateData: (e: CandidateSubmitTypes, history: any) => void
+    saveCandidateData: (e: CandidateSubmitTypes, history: any) => void,
+    skills: string[], 
+    cities: string[]
 }
 
 export interface CandidateSubmitTypes {
@@ -20,7 +22,9 @@ export interface RecruiterOnboardingPropTypes {
     history: any,
     isAuth: boolean,
     setIsAuth: (e: boolean) => void,
-    saveRecruiterData: (e: RecruitereSubmitTypes, history: any) => void
+    saveRecruiterData: (e: RecruitereSubmitTypes, history: any) => void,
+    skills: string[],
+    cities: string[]
 }
 
 export interface RecruitereSubmitTypes {

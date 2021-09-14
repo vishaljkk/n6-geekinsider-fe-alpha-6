@@ -6,13 +6,12 @@ import { useHistory } from 'react-router';
 
 import { JobPostingFormPropTypes } from './types';
 import { createJobPost, StateTypes } from '../../../redux';
-import { skills, cities } from '../../../utils';
 import './JobPostingForm.scss';
 
 const { Option } = Select;
 
 const JobPostingForm: React.FC<JobPostingFormPropTypes> = (props) => {
-    const { createJobPost } = props;
+    const { createJobPost, skills, cities } = props;
     const history = useHistory();
     const [form] = Form.useForm();
 
@@ -149,7 +148,9 @@ const JobPostingForm: React.FC<JobPostingFormPropTypes> = (props) => {
 }
 
 const mapStateToProps = (state: StateTypes) => ({
-    recentJobs: state.recentJobs
+    recentJobs: state.recentJobs,
+    skills: state.skills,
+    cities: state.cities
 });
   
 const mapDispatchToProps = (dispatch: any) => bindActionCreators({
