@@ -1,1 +1,0 @@
-{"version":3,"sources":["webpack://src/pages/Onboarding/onboarding.scss"],"names":[],"mappings":"AAAA,YACI,YAAa,CADjB,mBAGQ,kBAAmB,CAH3B,eAMQ,iBAAkB","file":"22.ee4678df.chunk.css","sourcesContent":[".onboarding {\n    padding: 10px;\n    header {\n        margin-bottom: 25px;\n    }\n    h2 {\n        text-align: center;\n    }\n}"]}

@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/pages/Signup/Signup.scss"],"names":[],"mappings":"AAAA,oBACI,YAAa,CACb,wBAAyB","file":"16.d179b5e3.chunk.css","sourcesContent":[".signup__otherlinks {\n    display: flex;\n    justify-content: flex-end;\n}"]}

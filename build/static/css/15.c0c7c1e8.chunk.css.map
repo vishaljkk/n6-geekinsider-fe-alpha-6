@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/pages/Login/Login.scss"],"names":[],"mappings":"AAAA,mBACI,YAAa,CACb,wBAAyB","file":"15.c0c7c1e8.chunk.css","sourcesContent":[".login__otherlinks {\n    display: flex;\n    justify-content: flex-end;\n}"]}
