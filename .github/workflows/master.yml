@@ -1,35 +1,22 @@
-# This is a basic workflow to help you get started with Actions
-
-name: Deploy to AWS
-
-on:
-  # Triggers the workflow on push or pull request events but only for the main branch
-  push:
-    branches: [ deploy ]
-  pull_request:
-    branches: [ deploy ]
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
+name: S3 Sync
+on [push]
 
 jobs:
-  run:
+  deploy:
     runs-on: ubuntu-latest
-    env:
-      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
     steps:
-        - uses: actions/checkout@v2
+      - uses: actions/checkout@master
 
-        - name: Deploy
-          uses: reggionick/s3-deploy@v3
-          with:
-            folder: build
-            bucket: ${{ secrets.AWS_S3_BUCKET }}
-            bucket-region: ${{ secrets.REGION }}
-            dist-id: ${{ secrets.DISTRIBUTION }}
-            invalidation: /
-            delete-removed: true
-            no-cache: true
-            private: true
+      - name: Sync to S3
+        uses: raulanatol/aws-s3-docker-action@master
+        env:
+          AWS_ACCESS_KEY_ID:
+          AWS_SECRET_ACCESS_KEY:
+          AWS_REGION: 
+          AWS_BUCKET_NAME: 
+          SOURCE: 
+          TARGET: 
+          WITH_DELETE: 
+          WITH_CLOUD_FRONT_INVALIDATION: 
+          AWS_CLOUDFRONT_DISTRIBUTION_ID: 
+          AWS_CLOUDFRONT_INVALIDATION_PATH:
