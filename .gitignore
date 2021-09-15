@@ -7,7 +7,7 @@
 /amplify
 # environment files
 .env
-
+package-lock.json
 # testing
 /coverage
 
