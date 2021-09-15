@@ -30,7 +30,7 @@ const Signup: React.FC<SignupTypes> = (props) => {
 			setActiveTab('emailVerification');
 			setLoading(false);
 		}
-		catch(error){
+		catch(error: any){
 			setLoading(false);
 			if (error?.code === 'UsernameExistsException') {
 				notification.error({
@@ -57,7 +57,7 @@ const Signup: React.FC<SignupTypes> = (props) => {
 			history.push(`/${userType}/onboarding`);
 			setLoading(false);
 		}
-		catch(e) {
+		catch(e: any) {
 			if (e?.code === 'CodeMismatchException') {
 				notification.error({
 					message: e?.message
