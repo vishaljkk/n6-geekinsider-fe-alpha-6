@@ -3,9 +3,7 @@ import { Progress } from 'antd';
 
 const SkillSection: React.FC<any> = (props) => {
     const { gitInfo } = props;
-    const { repoCount, repoName, skills, skillsOrder,__v, _id } = gitInfo;
-    const percentDivision = 100/Math.max(...skillsOrder);
-
+    const { repoCount, repoName, skills, skillsOrder } = gitInfo;
     return (
         <>
             <section className="skills-section">
@@ -13,7 +11,7 @@ const SkillSection: React.FC<any> = (props) => {
                 {skills.map((itm: string, index: number) => {
                     return (<>
                         <span>{itm}</span>
-                        <Progress percent={percentDivision*skillsOrder[index]} showInfo={false} strokeColor="#F2EE8B" />
+                        <Progress percent={skillsOrder[index]} showInfo={false} strokeColor="#F2EE8B" />
                     </>)
                 })}
             </section>

@@ -17,7 +17,9 @@ export interface CandidateSubmitTypes {
     skills?: string[] | string,
     whatsappNumber: string,
     fetchCandidateDetails: (e: string) => void,
-    gitInfo: any
+    gitskills: any,
+    skillsOrder: any,
+    repoCount: any
 }
 
 export interface RecruiterOnboardingPropTypes {
