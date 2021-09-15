@@ -9,6 +9,7 @@ import { generateGithubUrl, getWhatsAppUrl, iconStyles } from '../../../../utils
 import About from '../../../../components/About';
 import { StateTypes, fetchCandidateDetails } from '../../../../redux';
 import './RecruiterSearchDetails.scss';
+import SkillSection from '../../../../components/SkillSection';
 
 const RecruiterSearchDetails: React.FC<any> = (props) => {
     const {
@@ -24,7 +25,8 @@ const RecruiterSearchDetails: React.FC<any> = (props) => {
         about,
         __v,
         _id,
-        fetchCandidateDetails
+        fetchCandidateDetails,
+        gitInfo
     } = props;
 
     useEffect(() => {
@@ -55,20 +57,11 @@ const RecruiterSearchDetails: React.FC<any> = (props) => {
             </section>
             <About title="About">{about}</About>
             <br/>
-            <Card>
+            {gitInfo && Object.keys(gitInfo)?.length>0 && <Card>
                 <div className="profile-footer">
-                    <section className="skills-section">
-                        <h3><b>Skills</b></h3>
-                        <span>React</span><Progress percent={90} showInfo={false} strokeColor="#F2EE8B"/>
-                        <span>JavaScript</span><Progress percent={80} showInfo={false} strokeColor="#F2EE8B" />
-                        <span>HTML/CSS</span><Progress percent={70} showInfo={false} strokeColor="#F2EE8B" />
-                    </section>
-                    <section className="github-repo-section">
-                        <h3><b>Github repo</b></h3>
-                        <h2>20+</h2>
-                    </section>
+                    <SkillSection gitInfo={gitInfo} />
                 </div>
-            </Card>
+            </Card>}
         </div>
     )
 }

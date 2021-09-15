@@ -14,7 +14,7 @@ import SkillSection from '../../../components/SkillSection';
 
 const CandidateDetails: React.FC<CandidateSubmitTypes> = (props) => {
     const [mappableSkills, setMappableSkills] = useState<string[]>([]);
-    const { about, name, skills, location, ctc, exp, githubUrl, whatsappNumber, jobTitle, fetchCandidateDetails } = props;
+    const { about, name, skills, location, ctc, exp, githubUrl, whatsappNumber, jobTitle, fetchCandidateDetails, gitInfo } = props;
 
     useEffect(() => {
         if (skills) setMappableSkills(typeof skills === 'string' ? skills.split(',') : skills);
@@ -40,20 +40,11 @@ const CandidateDetails: React.FC<CandidateSubmitTypes> = (props) => {
                 </section>
                 <About title="About">{about}</About>
                 <br/>
-                <Card>
+                {gitInfo && Object.keys(gitInfo)?.length>0 && <Card>
                     <div className="profile-footer">
-                        <section className="skills-section">
-                            <h3><b>Skills</b></h3>
-                            <span>React</span><Progress percent={90} showInfo={false} strokeColor="#F2EE8B"/>
-                            <span>JavaScript</span><Progress percent={80} showInfo={false} strokeColor="#F2EE8B" />
-                            <span>HTML/CSS</span><Progress percent={70} showInfo={false} strokeColor="#F2EE8B" />
-                        </section>
-                        <section className="github-repo-section">
-                            <h3><b>Github repo</b></h3>
-                            <h2>20+</h2>
-                        </section>
+                        <SkillSection gitInfo={gitInfo} />
                     </div>
-                </Card>
+                </Card>}
             </Card>
         </div>
     )

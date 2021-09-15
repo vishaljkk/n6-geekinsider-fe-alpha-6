@@ -11,10 +11,11 @@ import { ApplicationManagerTypes } from './types';
 import { StateTypes, fetchJobDetail } from '../../../redux';
 import About from '../../../components/About';
 import './ApplicationManager.scss';
+import SkillSection from '../../../components/SkillSection';
 
 const ApplicationManager: React.FC<ApplicationManagerTypes> = (props) => {
     const { activeJob, loading, match, fetchJobDetail } = props;
-    const { companyName, ctc, exp, jobDescription, jobLocation, jobTitle, skills, jobslug } = activeJob;
+    const { companyName, ctc, exp, jobDescription, jobLocation, jobTitle, skills, jobslug, gitInfo } = activeJob;
     const history = useHistory();
 
     useEffect(() => {
@@ -44,6 +45,11 @@ const ApplicationManager: React.FC<ApplicationManagerTypes> = (props) => {
                     <div title={`${ctc} lacs per annum`}><MdMonetizationOn style={iconStyles} />{ctc} LPA</div>
                 </section>
                 <About title="About the job">{jobDescription}</About>
+                {gitInfo && Object.keys(gitInfo)?.length>0 && <Card>
+                    <div className="profile-footer">
+                        <SkillSection gitInfo={gitInfo} />
+                    </div>
+                </Card>}
             </div> : (!loading && <Loader />)}
         </>
     )

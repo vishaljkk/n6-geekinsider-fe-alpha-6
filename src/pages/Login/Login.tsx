@@ -62,85 +62,41 @@ const Login: React.FC<LoginPropsTypes> = (props) => {
 			footer={null}
 			centered
 		>
-			<Tabs 
-				defaultActiveKey="Candidate" 
-				centered
+			<Form
+				onFinish={handleCandidateSubmit}
 			>
-				<TabPane tab="Candidate" key="Candidate">
-					<Form
-						name="basic"
-						onFinish={handleCandidateSubmit}
-					>
-						<Form.Item
-							name="username"
-							rules={[
-								{ required: true, message: 'Please input your username!', type: 'email' }
-							]}
-						>
-							<Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Email" />
-						</Form.Item>
-						<Form.Item
-							name="password"
-							rules={[{ required: true, message: 'Please input your password!' }]}
-						>
-							<Input.Password prefix={<LockOutlined className="site-form-item-icon" />} placeholder="Password" />
-						</Form.Item>
-						<Form.Item>
-							<Button type="primary" htmlType="submit" block loading={loginLoading}>
-								Login
-							</Button>
-						</Form.Item>
-						<Form.Item>
-							<Button htmlType="submit" block onClick={signInWithGoogle}>
-								Sign in with Google
-							</Button>
-						</Form.Item>
-						<Form.Item>
-							<div className="login__otherlinks">
-								<Button type="link" onClick={setSignUpModalVisible}>
-									Register
-								</Button>
-							</div>
-						</Form.Item>
-					</Form>
-				</TabPane>
-				<TabPane tab="Recruiter" key="Recruiter">
-					<Form
-						name="basic"
-						onFinish={handleRecruiterSubmit}
-					>
-						<Form.Item
-							name="username"
-							rules={[{ required: true, message: 'Please input your username!', type: 'email' }]}
-						>
-							<Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Email" />
-						</Form.Item>
-						<Form.Item
-							name="password"
-							rules={[{ required: true, message: 'Please input your password!' }]}
-						>
-							<Input.Password prefix={<LockOutlined className="site-form-item-icon" />} placeholder="Password" />
-						</Form.Item>
-						<Form.Item>
-							<Button type="primary" htmlType="submit" block loading={loginLoading}>
-								Login
-							</Button>
-						</Form.Item>
-						<Form.Item>
-							<Button htmlType="submit" block onClick={signInWithGoogle}>
-								Sign in with Google
-							</Button>
-						</Form.Item>
-						<Form.Item>
-							<div className="login__otherlinks">
-								<Button type="link" onClick={setSignUpModalVisible}>
-									Register
-								</Button>
-							</div>
-						</Form.Item>
-					</Form>
-				</TabPane>
-			</Tabs>
+				<Form.Item
+					name="username"
+					rules={[
+						{ required: true, message: 'Please input your username!', type: 'email' }
+					]}
+				>
+					<Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Email" />
+				</Form.Item>
+				<Form.Item
+					name="password"
+					rules={[{ required: true, message: 'Please input your password!' }]}
+				>
+					<Input.Password prefix={<LockOutlined className="site-form-item-icon" />} placeholder="Password" />
+				</Form.Item>
+				<Form.Item>
+					<Button type="primary" htmlType="submit" block loading={loginLoading}>
+						Login
+					</Button>
+				</Form.Item>
+				<Form.Item>
+					<Button htmlType="submit" block onClick={signInWithGoogle}>
+						Sign in with Google
+					</Button>
+				</Form.Item>
+				<Form.Item>
+					<div className="login__otherlinks">
+						<Button type="link" onClick={setSignUpModalVisible}>
+							Register
+						</Button>
+					</div>
+				</Form.Item>
+			</Form>
 		</Modal>
 	);
 }

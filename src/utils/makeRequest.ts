@@ -3,7 +3,7 @@ import { Auth } from 'aws-amplify';
 let baseUrl = process.env.REACT_APP_BASE_URL || 'http://localhost:3005';
 
 if (process.env.NODE_ENV === 'production') {
-    baseUrl = "https://api.geekinsider.click/api"
+    baseUrl = "https://api.geekinsider.click"
 }
 
 export default {

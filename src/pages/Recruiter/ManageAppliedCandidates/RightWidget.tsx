@@ -1,43 +1,23 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, Button } from 'antd';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { useHistory } from 'react-router';
-import { MdLocationOn, MdMonetizationOn, MdHistory } from "react-icons/md";
 import { FaGithub, FaWhatsapp } from 'react-icons/fa';
+import { MdLocationOn, MdMonetizationOn, MdHistory } from "react-icons/md";
 
 import { generateGithubUrl, getWhatsAppUrl, iconStyles } from '../../../utils';
-import { fetchCandidateDetails, StateTypes } from '../../../redux';
-import { RecruiterCandidateDetailsPropTypes } from './types';
 import About from '../../../components/About';
 import SkillSection from '../../../components/SkillSection';
-import './RecruiterCandidateDetails.scss';
+import './RightWidget.scss'
 
-const RecruiterCandidateDetails: React.FC<RecruiterCandidateDetailsPropTypes> = (props) => {
-    const { recruiterCandidateDetails, match, fetchCandidateDetails } = props;
-    const {
-        aboutid,
-        ctc,
-        exp,
-        githubUrl,
-        handleClick,
-        jobTitle,
-        location,
-        name,
-        skills,
-        whatsappNumber,
-        about,
-        __v,
-        _id,
-        gitInfo
-    } = recruiterCandidateDetails;
+const RightWidget: React.FC<any> = (props) => {
+    const [mappableSkills, setMappableSkills] = useState<string[]>([]);
+    const { about, name, skills, location, ctc, exp, githubUrl, whatsappNumber, jobTitle, fetchCandidateDetails, gitInfo } = props;
 
     useEffect(() => {
-        fetchCandidateDetails(match.params.slug);
-    }, [])
+        if (skills) setMappableSkills(typeof skills === 'string' ? skills.split(',') : skills);
+    }, [skills])
 
     return (
-        <div className="recruiter-candidate-details">
+        <div className="manage__applicants">
             <section className="each-widget">
                 <div className="right-section">
                     <h2>{name}</h2>
@@ -69,12 +49,4 @@ const RecruiterCandidateDetails: React.FC<RecruiterCandidateDetailsPropTypes> = 
     )
 }
 
-const mapStateToProps = (state: StateTypes) => ({
-    recruiterCandidateDetails: state.recruiterCandidateDetails
-});
-
-const mapDispatchToProps = (dispatch: any) => bindActionCreators({
-    fetchCandidateDetails
-}, dispatch);
-
-export default connect(mapStateToProps, mapDispatchToProps)(RecruiterCandidateDetails);
+export default RightWidget;

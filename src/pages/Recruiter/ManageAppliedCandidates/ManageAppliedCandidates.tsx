@@ -2,12 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { Row, Col, Card, Avatar, Empty } from 'antd';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { FaWhatsapp } from 'react-icons/fa';
 import { MdLocationOn, MdMonetizationOn, MdHistory } from "react-icons/md";
 
 import { StateTypes, fetchAppliedCandidates } from '../../../redux';
-import { getWhatsAppUrl, iconStyles } from '../../../utils';
-import CandidateDetails from '../../Candidate/CandidateProfile/CandidateDetails';
+import { iconStyles } from '../../../utils';
+import RightWidget from './RightWidget';
 import '../../../components/JobWidget/JobWidget.scss';
 import './ManageAppliedCandidates.scss';
 
@@ -39,7 +38,7 @@ const SingleWidget: React.FC<any> = (props) => {
 }
 
 const ManageAppliedCandidates: React.FC<any> = (props) => {
-    const { appliedCandidates, match, fetchAppliedCandidates, activeJob } = props;
+    const { appliedCandidates, match, fetchAppliedCandidates, activeJob, fetchAppliedCandidateDetails } = props;
     const { jobTitle, jobLocation, ctc } = activeJob;
     const [selected, setSelected] = useState(appliedCandidates[0]);
 
@@ -75,7 +74,7 @@ const ManageAppliedCandidates: React.FC<any> = (props) => {
                     <Col span={16} xs={{ span: 12 }} sm={{ span: 14 }} md={{ span: 16 }} lg={{ span: 18 }}>
                         <div className="applied-jobs__right">
                             {selected && Object.keys(selected).length > 0 ?
-                                <CandidateDetails {...{ ...selected }} />
+                                <RightWidget {...{ ...selected }} />
                                 :
                                 <Empty />
                             }
